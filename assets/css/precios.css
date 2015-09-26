@@ -1,0 +1,104 @@
+.precios{
+	background-color: white;
+}
+
+.precios-Titulo{
+	font-weight: bold;
+	margin-left: 15px;
+}
+
+.precios-Descripcion{
+	font-style: italic;
+	margin-left: 15px;
+}
+
+.columna-Precio{
+	background: #fff;
+    display: block;
+    list-style-type: none;
+    color: #666;
+    margin: 0 0 40px 0;
+    padding: 0;
+    text-align: center;
+    box-shadow: none;
+    border: 1px solid #ddd; 
+    margin:0 0 40px 0;
+    -webkit-box-shadow:0px 1px 3px rgba(0,0,0,.15);
+    -moz-box-shadow:0px 1px 3px rgba(0,0,0,.15);
+    box-shadow:0px 1px 3px rgba(0,0,0,.15);
+    -webkit-transition:all .2s ease-out;
+    -moz-transition:all .2s ease-out;
+    -o-transition:all .2s ease-out;
+    transition:all .2s ease-out
+}
+
+.columna-Precio:hover{
+	-webkit-box-shadow:0px 5px 20px rgba(0,0,0,.3);
+    -moz-box-shadow:0px 5px 20px rgba(0,0,0,.3);
+    box-shadow:0px 5px 20px rgba(0,0,0,.3);
+    margin-top:-5px
+}
+
+.columna-Titulo{
+	padding: 20px;
+    border-bottom: none;
+}
+
+.columna-Titulo h3{
+	margin: 0;
+    font-size: 1.15em;
+    text-transform: uppercase;
+}
+
+.columna-Detalle{
+	font-size: 5em;
+    font-weight: normal;
+    line-height: 1em;
+    padding: 20px;
+    background: #32425a;
+    color: #fff;
+    border-bottom: none;
+    position: relative;   
+}
+
+.columna-Detalle:before {
+    content: '';
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 0;
+    left: 50%;
+    margin-left: -8px;
+    background: none;
+    border-width: 8px;
+    border-top-color: #f5f5f5;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    border-style: solid;
+}
+
+.simbolo{
+	font-size: .5em;
+    font-weight: normal;
+    top: -.7em;
+    position: relative;
+    line-height: 1em;
+    opacity: .4;
+    left: -0.5em;
+}
+
+.detalle-texto{
+	font-family: 'Open Sans',sans-serif;
+	font-size: .3em;
+    font-weight: normal;
+    line-height: 1.8em;
+    clear: both;
+    display: block;
+    opacity: .4;
+}
+
+.sombra{
+	background: url(../img/billboard-shadow.png) repeat-x left top;
+    padding-top: 15px;
+}

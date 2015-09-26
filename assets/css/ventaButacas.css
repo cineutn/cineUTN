@@ -1,0 +1,15 @@
+.butacas{
+	background-color: white;
+}
+
+.path{
+	margin-left: 15px;
+	font-size: 15px;
+    font-family: HelveticaNeueLtCond, 'Arial Narrow', Arial;
+    padding: 16px 0;
+    color: #2B6CAF;
+}
+
+.path div{
+	display:  inline;
+}

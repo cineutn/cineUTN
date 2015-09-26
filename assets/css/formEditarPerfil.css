@@ -1,0 +1,125 @@
+img.imgFondo {
+  	background: #C0DEED;
+	-webkit-animation-name: fondo;
+	animation-name: fondo;
+}	
+
+.fondo{
+	background: url("../img/fondoNubes.png") no-repeat;
+	background-position: center center;
+	height: 190px;
+	position: relative;
+}
+
+.contenedorPrincipal{
+	position: absolute;
+	width: 100%;
+	margin-top: -170px;
+}
+
+.avatar{
+	background: #fff;
+  	border: 5px solid #fff;
+  	border-radius: 12px;
+  	height: 200px;
+  	width: 200px;
+  	margin-left: 50px;
+  	display: block;
+  	cursor: pointer;
+}
+
+.avatar-content{
+	background-color: #0084B4;
+  	border-radius: 12px;
+  	height: 190px;
+  	width: 190px;
+}
+
+.imagen-avatar{
+  	border-radius: 12px;
+  	height: 190px;
+  	width: 190px;  	
+  	opacity: 0;
+  	display: block;
+  	transition: 2.5s;
+  	border: .1em lightgray solid;
+  	box-shadow: 0 .5em .5em;
+}
+
+.file-imagen{
+	margin-left: 50px;
+	position: relative;
+	margin-top: 40px;
+	cursor: pointer;
+}
+
+.btn-imagen{
+	margin-left: 50px;
+	position: relative;
+	cursor: pointer;
+}
+
+.icon{
+	margin: 55px 70px auto;
+	color: white;
+	font-size: 70px;
+	text-align: center;
+}
+
+p{
+	margin-left: 30px;
+	text-align: center;
+	width: 130px;
+	font-weight: bold;
+	line-height: 24px;
+}
+
+.contenedor{
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 5px;
+	background-color: #fff;
+	position: relative;
+  	width: auto;
+  	max-width: 700px;
+  	margin-left: 10%;
+}
+
+.hide{
+	display: none;
+}
+
+.centrar{
+  padding: 5%;
+}
+
+.tituloForm{
+	color: #292f33;
+	font-size: 44px;
+  	line-height: .8;
+	text-rendering: optimizeLegibility;
+	font-weight: normal;
+	margin-top: 50px;
+	margin-left: 80px;
+}
+
+.columna{
+	margin-left: 80px;
+}
+
+.col-margen{
+	margin-top: 20px;
+}
+
+.registro {
+	background:  #f4f4f4;
+	position: relative;
+	color: #8899a6;
+}
+
+.userName{
+	color: #0084B4;
+}
+.icon{
+
+	right: 10px;
+}

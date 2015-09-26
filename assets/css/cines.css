@@ -1,0 +1,32 @@
+.cines{
+	background-color: white;
+}
+
+.sombra{
+	background: url(../img/billboard-shadow.png) repeat-x left top;
+    padding-top: 15px;
+}
+
+.complejo{
+	display: inline-block;
+    width: 186px;
+    height: 140px;
+    margin-left: 20px;
+    margin-top: -50px;
+    margin-bottom: 10px;
+}
+
+.cine-titulo{
+	color: #296caf;
+}
+
+.salas{
+	width: 40px;
+	display: inline-block;
+	margin-left: 10px;
+	margin-top: 5px;
+}
+ .sala{
+	width: 32px;
+	height: 32px;
+}

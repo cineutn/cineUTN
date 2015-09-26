@@ -1,0 +1,237 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+body{
+  color: #292f33;
+}
+
+#fondo{
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  left: -50%;
+  background: #000;
+}
+
+.imgFondo { 
+   position: absolute;
+  margin: auto;
+  min-width: 100%;
+  min-height: 100%;
+  top: 0; 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  -webkit-animation-name: fondoFadeInOut;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 33s;
+  -webkit-animation-direction: alternate;
+  
+  animation-name: fondoFadeInOut;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 33s;
+  animation-direction: alternate;
+}
+
+ @-webkit-keyframes fondoFadeInOut {
+  0% {opacity:1;}
+  17% {opacity:1;}
+  25% {opacity:0;}
+  92% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@keyframes fondoFadeInOut {
+  0% {opacity:1;}
+  17% {opacity:1;}
+  25% {opacity:0;}
+  92% {opacity:0;}
+  100% {opacity:1;}
+}
+
+#fondo img:nth-of-type(1) {
+  -webkit-animation-delay: 27.5s;
+  animation-delay: 27.5s;
+}
+#fondo img:nth-of-type(2) {
+  -webkit-animation-delay: 22s;
+  animation-delay: 22s;
+}
+#fondo img:nth-of-type(3) {
+ -webkit-animation-delay: 16.5s;
+  animation-delay: 16.5s;
+}
+#fondo img:nth-of-type(4) {
+  -webkit-animation-delay: 11s;
+  animation-delay: 11s;
+}
+#fondo img:nth-of-type(5) {
+  -webkit-animation-delay: 5.5;
+   animation-delay: 5.5;
+}
+#fondo img:nth-of-type(6) {
+  -webkit-animation-delay: 0;
+  animation-delay: 0;
+}
+
+.fondo1{
+    background: url("../img/fondo1.jpg") no-repeat fixed 0 0  / cover rgba(0, 0, 0, 0);
+}
+.fondo2{
+    background: url("../img/fondo2.jpg") no-repeat fixed 0 0  / cover rgba(0, 0, 0, 0);
+}
+.fondo3{
+    background: url("../img/fondo3.jpg") no-repeat fixed 0 0  / cover rgba(0, 0, 0, 0);
+}
+.fondo4{
+    background: url("../img/fondo4.jpg") no-repeat fixed 0 0  / cover rgba(0, 0, 0, 0);
+}
+.fondo5{
+    background: url("../img/fondo5.jpg") no-repeat fixed 0 0  / cover rgba(0, 0, 0, 0);
+}
+.fondo6{
+    background: url("../img/fondo6.jpg") no-repeat fixed 0 0  / cover rgba(0, 0, 0, 0);
+}
+
+.login{
+    min-height: 690px;
+}
+
+.section {
+    min-height: 500px;
+}
+
+.footer {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    margin-right: 0px;
+    margin-left: 10px;
+    position: absolute;
+}
+
+.footer span {
+    margin: 5px;
+}
+
+.section-body h1{
+    font-size: 1.2em;
+}
+
+.section-body form{
+    padding: 30px;
+    text-align: right;
+    background-color: #eee;
+}
+
+table .form-inline{
+    padding: 0px;
+    text-align: center;
+    background-color: white;
+}
+
+.formIngresar{
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;        
+}
+
+.formRegistrarse{
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;        
+}
+
+tbody{
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.flex-table-primary {
+  width: 99%;
+  padding-right: 5px;
+}
+
+.front-signin .password {
+  width: 100%;
+}
+.signin .password, .signin {
+  width: 150px;
+  font-size: 13px;
+}
+
+.front-signin .forgot {
+  color: #0084b4;
+}
+
+.remember {
+  
+  margin-bottom: 0px;
+  font-size: 12px;
+}
+
+h1{
+  margin: 0;
+  color: #fff;
+  font-size: 38px;
+  line-height: 44px;
+  margin-bottom: 30px;
+  text-shadow: none;
+}
+
+p{
+    color: #fff;
+  font-size: 21px;
+  line-height: 31px;
+  text-shadow: none;
+}
+
+h2 {
+  width: 100%;
+  border-bottom: 1px solid #e1e8ed;
+  box-shadow: 0 1px 0 #fff;
+  color: #66757f;
+  display: block;
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: 10px;
+  margin-bottom: 12px;
+  position: relative;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.divTexto{
+  padding: 80px;
+}
+
+.divForm{
+  margin-top: 50px;
+ 
+}
+
+.margenTextbox{
+  margin-top: 10px;
+}
+
+button.margenTexbox{
+  color: #292f33;
+}
+
+.btn-cerrar{
+  background-color: #0084B4;
+  background: rgba(0,132,180,.8);
+  border: 1px solid transparent;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
+  margin-right: 10px;
+  margin-top: 7px;
+}

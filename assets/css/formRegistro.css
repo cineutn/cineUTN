@@ -1,0 +1,57 @@
+img.imgFondo {
+	background: #1c6399 ;
+	-webkit-animation-name: fondo;
+	animation-name: fondo;
+}
+
+.contenedor{
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 5px;
+	background-color: #fff;
+	position: relative;
+  	width: auto;
+	max-width:  800px;
+  	margin-top: 60px;
+}
+
+.centrar{
+  padding: 50px;
+}
+
+.tituloForm{
+	color: #292f33;
+	font-size: 44px;
+  	line-height: .8;
+	text-rendering: optimizeLegibility;
+	font-weight: normal;
+	margin-top: 50px;
+	margin-left: 95px;
+}
+
+.columna{
+	margin-left: 100px;
+}
+
+.col-margen{
+	margin-top: 20px;
+}
+
+.registro {
+	background:  #f4f4f4;
+	position: relative;
+	color: #8899a6;
+}
+
+p{
+	color: #8899a6;
+  	font-size: 15px;
+  	line-height: 31px;
+  	text-shadow: none;
+  	text-align: center;
+  	margin-top: 5px;
+}
+
+.icon{
+
+	right: 10px;
+}

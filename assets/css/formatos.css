@@ -1,0 +1,49 @@
+.formatos{
+	background-color: white;
+}
+
+.sombra{
+	background: url(../img/billboard-shadow.png) repeat-x left top;
+    padding-top: 15px;
+}
+
+.complejo{
+	display: inline-block;
+    width: 186px;
+    height: 140px;
+    margin-left: 20px;
+    margin-top: -50px;
+    margin-bottom: 10px;
+}
+
+.titulo{
+	color: #296caf;
+	margin-left: 10px;
+}
+
+.formato-titulo{
+	font-weight: bold;
+	
+}
+
+.texto{
+	font-size: 16px;
+    margin-bottom: 4px;
+    text-align: justify;
+    line-height: 18px;
+}
+
+.contenedor-Peliculas{
+	margin-top: 40px;
+	border: 1px solid;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+
+.pelicula{
+	height: 307px;
+    width: 203px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}

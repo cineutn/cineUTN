@@ -1,0 +1,158 @@
+.paginaCompra{
+	background-color: white;
+	margin-bottom: 20px;	
+	margin-top: 15px;
+    margin-bottom: 20px;
+    
+}
+
+.path{
+	margin-left: 15px;
+	font-size: 15px;
+    font-family: HelveticaNeueLtCond, 'Arial Narrow', Arial;
+    padding: 16px 0;
+    color: #2B6CAF;
+}
+
+.path div{
+	display:  inline;
+}
+
+.poster{
+	margin-bottom: 20px;
+	padding: 0;
+	background-color: white;
+}
+
+.datosPelicula{
+	background-color: #ECECEC;
+	color: #565655;	
+	margin-top: 30px;	
+}
+
+.tituloDato{
+	display: block;
+	margin-top: 10px;
+}
+
+.datos{
+	margin-bottom: 10px;
+	display: inline-block;
+}
+
+.sombra{
+	background: url(../img/billboard-shadow.png) repeat-x left top;
+    padding-top: 15px;
+}
+
+.tablaTitulo{
+    color: #2B6CAF;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+.columnaEntradas{
+	width: 40%;
+}	
+
+.columnaEntradas img{
+	margin-left: 5%;
+	margin-right: 10px;
+}	
+
+thead tr th{
+	text-align:  center;
+}
+
+.comboCantidad{
+	width: 70px;
+	margin-left: 35%;
+}
+
+.columnaCantidad{
+	width: 20%;
+}
+
+.columnaPrecio{
+	width: 10%;
+	text-align: center;
+}
+
+.filaImpar{
+	background-color: #E8E8E8;
+}
+
+.filaPar{
+	background-color: white;
+}
+
+.dato-PrecioTotal{
+	background-color: #86bc26;
+    font-weight: bold;
+    color: #fff;
+}
+
+.datos-Compra{
+	padding-left: 30%;
+	margin-bottom: 10px;
+}
+
+.btn-opcion{
+	display: inline-block;
+	background-color: #86bc26;
+    font-weight: bold;
+    color: #fff;
+    width: 156px;
+    height: 36px;
+    text-align: center;
+    vertical-align: center;
+    margin-right: 10px;
+}
+
+.btn-opcion span{
+	line-height: 36px;
+}
+
+.confirmarOperacion{
+	background-color: white;
+	
+}
+
+.confirmarOperacion form{
+	margin-top: 10px;
+}
+
+.precioTotal{
+	font-family: HelveticaNeueBoldCond, 'Arial narrow', Arial;
+    font-size: 20px;
+    color: #565655;
+    line-height: 36px;
+    padding-left: 30%;
+    font-weight: bold;
+    display: inline-block;
+	margin-right: 10px;
+}
+
+.btn-Confirmar{
+	background-color: #86bc26;
+	border-color: #86bc26;
+	margin-bottom: 10px;
+	margin-right: 20px;
+}
+
+.select-Fecha{
+	width: 30%;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+.input-datosCompra{
+	width: 70%;
+	display: inline-block;
+}
+
+.centrar{
+	text-align: center;
+}
