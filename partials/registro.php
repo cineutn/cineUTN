@@ -10,59 +10,59 @@
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 					<div class="col-sm-10">
-					  <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+					  <input type="email" class="form-control" id="email" placeholder="Email" required>
 					</div>
 			    </div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Nombre</label>
 					<div class="col-sm-10">
-					  <input type="email" class="form-control" id="inputEmail3" placeholder="Nombre">
+					  <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
 					</div>
 			    </div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Apellido</label>
 					<div class="col-sm-10">
-					  <input type="email" class="form-control" id="inputEmail3" placeholder="Apellido">
+					  <input type="text" class="form-control" id="apellido" placeholder="Apellido" required>
 					</div>
 			    </div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Fecha de nacimiento</label>
 					<div class="col-sm-10">
-					  <input type="date" name="date" id="date" class="form-control" placeholder="Fecha de nacimiento">
+					  <input type="date" name="date" id="fechaNacimiento" class="form-control" placeholder="Fecha de nacimiento" required>
 					</div>
 			    </div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Usuario</label>
 					<div class="col-sm-10">
-					  <input type="text" name="text" id="text" class="form-control" placeholder="Usuario">
+					  <input type="text" name="text" id="usuario" class="form-control" placeholder="Usuario" required>
 					</div>
 			    </div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Password</label>
 					<div class="col-sm-10">
-					  <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+					  <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
 					</div>
 			    </div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Confirme password</label>
 					<div class="col-sm-10">
-					  <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirma el Password">
+					  <input type="password" name="passwordConfirmation" id="passwordConfirmation" class="form-control" placeholder="Confirma el Password" required>
 					</div>
 			    </div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Telefono</label>
 					<div class="col-sm-10">
-					  <input type="text" name="text" id="text" class="form-control" placeholder="+54 9 11 33333333">
+					  <input type="text" name="text" id="telefono" class="form-control" placeholder="+54 9 11 33333333" required>
 					</div>
 			    </div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Genero</label>
 					<div class="col-sm-10">
 						<label class="radio-inline">
-						  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Masculino
+						  <input type="radio" name="genero" id="generoMasculino" value="masculino" required> Masculino
 						</label>
 						<label class="radio-inline">
-						  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Femenino
+						  <input type="radio" name="genero" id="generoFemenino" value="femenino" required> Femenino
 						</label>
 					</div>	
 			    </div>			
@@ -75,3 +75,4 @@
 		</div>
 	  </div>
 	</div>
+	
