@@ -47,8 +47,8 @@
 							</div>
 					</div>
 			</div>
-			<div class="col-md-1"  >
-			   <div class="row">
+			<div class="col-md-1"  >			   
+			   <div class="row" style="margin-top:100%;">
 					<input class="btn btn-success btn-Confirmar" "id="Button3" type="button" value="Guardar" />
 				</div> 
 			</div>

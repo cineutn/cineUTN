@@ -1,0 +1,12 @@
+
+.detallesPelicula{
+	    padding-left: 33px;
+}
+.detallesPelicula .col-md-9{
+	    max-width: 72%;
+}
+
+.imagenTrailer {
+	width:250px;
+	height:250px;
+ }
