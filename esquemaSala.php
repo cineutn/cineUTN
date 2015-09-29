@@ -1,6 +1,5 @@
 <?php require("partials/header.php"); ?>
 
-	
 <div class="col-md-12">
 	<div class="col-md-7"  >
 		<div  class="row divButacas">
