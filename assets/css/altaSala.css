@@ -1,0 +1,43 @@
+.tituloLarge {
+	font-size:large;
+
+}
+
+.tituloMediano{
+  font-size:medium;
+}
+
+.botonAzul {
+	width:30px; 
+	height:30px; 
+	text-align:center;
+	padding:6px 0; 
+	font-size:12px; 
+	border-radius:15px; 
+	background-color:darkslateblue;
+}
+
+.botonRojo {
+	 width:30px; 
+	 height:30px; 
+	 text-align:center;
+	 padding:6px 0; 
+	 font-size:12px; 
+	 border-radius:15px; 
+	 background-color:red;
+}
+
+.botonVerde {
+     width:30px; 
+	 height:30px; 
+	 text-align:center;
+	 padding:6px 0; 
+	 font-size:12px; 
+	 border-radius:15px; 
+	 background-color:green;
+}
+
+.textoBoton {
+  color:white;
+
+}
