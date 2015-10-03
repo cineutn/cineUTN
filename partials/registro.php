@@ -6,7 +6,7 @@
 			<h4 class="modal-title" id="myModalLabel">Registrate</h4>
 		  </div>
 		  <div class="modal-body">
-			<form role="form" class="form-horizontal">
+			<form role="form" method="post" class="form-horizontal">
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 					<div class="col-sm-10">

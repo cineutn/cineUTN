@@ -6,7 +6,7 @@ class Usuario
     private $connection;
     
     public function __construct(){
-        $this->connection = ConnectionTwitter::getInstance();
+        $this->connection = ConnectionCine::getInstance();
     }
     
     public function getCantidad(){  
@@ -22,11 +22,7 @@ class Usuario
     }
 
     public function validateUser($id,$password){
-        /*$userName = $this->connection->real_escape_string($user['userName']);
-        $password = $this->connection->real_escape_string($user['password']);  */    
-        $query = "SELECT * FROM usuarios WHERE mail = '".$id."' AND password = '". $password . "'
-                    OR telefono = '".$id."' AND password = '". $password ."'
-                    OR userName = '".$id."' AND password = '". $password ."'";
+        $query = "SELECT U.idUsuario, U.nombre, U.apellido, U.tipoUsuario, E.perfil FROM usuario U LEFT JOIN empleado E ON U.idUsuario = E.idUsuario WHERE  U.usuario = '".$id."' AND U.contraseña = '". $password . "'";  
         $r = $this->connection->query($query);
         return $r->fetch_assoc();
     }

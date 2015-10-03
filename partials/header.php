@@ -22,13 +22,25 @@
             <div class="logo">
                 <img src="assets/img/UTNCineLogo.png">
                 <div class="cuentaUser pull-right">
-                    <a data-toggle="modal" href="#modalLogin">
+                    <div id="login-registro">
+                        <a data-toggle="modal" href="#modalLogin">
                         ENTRAR A MI CUENTA
-                      <img src="assets/img/Next-64.png"><br>
-                    </a>
-                     <span data-toggle="modal" href="#modalSignup">
+                        <img src="assets/img/Next-64.png"><br>
+                        </a>
+                        <span data-toggle="modal" href="#modalSignup">
                         <a>¿No tenes usuario? | Crear Usuario </a>
-                    </span>
+                        </span>    
+                    </div>
+                    <div id="userLogueado" class="hide">
+                        <a id="saludoUsuario">
+                          Bienvenido
+                        </a>    
+                        <a class="pull-right">
+                        MI CUENTA
+                        <img src="assets/img/Next-64.png">
+                        </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -47,4 +59,7 @@
                 </li>
             </ul>
         </div>
-         
+
+<script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
+<script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="assets/js/header.js"></script>

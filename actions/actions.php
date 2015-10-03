@@ -3,6 +3,10 @@ session_start();
 
 require("../utils/request.php");
 
+function sendResponse($response){
+    echo json_encode($response);
+}
+
 function redirect($url){
    header('Location: ' . $url, true, 303);
    die();
@@ -14,11 +18,17 @@ function validateUser($request){
     $id = $request->idLogin;
     $password = $request->passwordLogin;
     if($c = $user->validateUser($id,$password)){
-      $usuarioid = $c['usuarioID'];
-      setcookie('usuarioid',$usuarioid,time() + 3600);     
-       redirect("../menuInicio.php?id=".$usuarioid);
+     /* setcookie('usuarioid',$usuarioid,time() + 3600);  */
+       sendResponse(array(
+            "error" => false,
+            "mensaje" => "Usuario logueado.",
+            "data"=> $c
+        ));
     }else{
-       redirect("../errorLogin.php");
+         sendResponse(array(
+            "error" => true,
+            "mensaje" => "El nombre de Usuario o Contraseña son incorrectos. "
+        ));
     }
 }
 
