@@ -1,4 +1,11 @@
+.peliculas{
+	background-color: white;	
+}
 
+.sombra{
+	background: url(../img/billboard-shadow.png) repeat-x left top;
+    padding-top: 15px;
+}
 .detallesPelicula{
 	    padding-left: 33px;
 }
@@ -10,3 +17,114 @@
 	width:250px;
 	height:250px;
  }
+
+ .addPelicula{
+	margin-right: 25px;
+	margin-bottom: 10px;
+	background-color: #21CE5C;
+	color: white;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	border-radius: 20px;
+	border: #0DAB43 2px solid;
+	cursor: pointer;
+}
+
+.addPelicula span{
+	margin-top: 6px;
+	margin-left: 1px;
+	font-size: 20px;
+}
+
+.hide{
+	display: none;
+}
+.btn-AltaModificacion{
+	cursor: pointer;
+	display: inline;
+}
+
+.contenedorPelicula{
+    margin:1%;
+}
+
+.avatar{
+	background: #fff;  	
+  	margin-left: 1%;
+  	display: inline-block;
+  	cursor: pointer;
+}
+
+.avatar-content{
+	display: inline-block;
+	background-color: #0084B4;
+  	border-radius: 12px;
+  	width: 186px;
+    height: 140px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    vertical-align: top;
+}
+
+.imagen-avatar{
+  	border-radius: 12px;
+ 	width: 186px;
+    height: 140px; 	
+  	opacity: 0;
+  	display: block;
+  	transition: 2.5s;
+  	border: .1em lightgray solid;
+  	box-shadow: 0 .5em .5em;
+}
+
+.file-imagen{
+	margin-left: 5px;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+.uploadImagen{
+	margin-right: 15px;
+}
+
+.btn-imagen{
+	margin-top: 5px;
+	display: inline;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+
+.btn-AltaModificacion{
+	cursor: pointer;
+	display: inline;
+}
+
+.icon{
+	margin-left: 55px;
+	margin-top: 25px;
+	color: white;
+	font-size: 70px;
+	text-align: center;
+}
+
+.avatar-content p{
+	margin-left: 30px;
+	text-align: center;
+	width: 130px;
+	font-weight: bold;
+	line-height:18px;
+}
+
+.text-descripcion{
+	resize: none;
+}
+
+.iconCerrar{
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+	color: silver;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}

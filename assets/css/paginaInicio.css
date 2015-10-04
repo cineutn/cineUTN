@@ -96,7 +96,7 @@ button.margenTextbox{
 	    max-width: 72%;
 }
 .imagenPelicula img{
-   
+   display:block;
 }
 .titulo{
 	
