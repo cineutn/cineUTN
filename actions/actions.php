@@ -36,15 +36,23 @@ function nuevoUser($request){
     require("../models/usuarios.php");
     $c = new Usuario();
     $user = array();
-    $user["nombreCompleto"] = $request->nombreCompleto;
-    $user["mail"] = $request->mail;
+       
+    $user["perfil"] = $request->perfil;
+    $user["email"] = $request->email;
+    $user["nombre"] = $request->nombre;
+    $user["apellido"] = $request->apellido;
+    $user["fechaNacimiento"] = $request->fechaNacimiento;
+    $user["usuario"] = $request->usuario;
     $user["password"] = $request->password;
     $user["telefono"] = $request->telefono;
-    $user["userName"] = $request->userName;
+    $user["genero"] = $request->genero;
+    $user["dni"] = $request->dni;
+    
+    
     if($usuario = $c->createUser($user)){
       $usuarioid = $usuario['usuarioID'];
       setcookie('usuarioid',$usuarioid,time() + 3600);     
-      redirect("../menuInicio.php?id=".$usuarioid);
+      redirect("../index.php?id=".$usuarioid);
     }else{
         echo "Error al registrar el usuario. " ;
     }
@@ -61,7 +69,7 @@ function updateUser($request){
     $user["telefono"] = $request->telefono;
     $usuarioid = $request->usuarioID;
     if($c->updateUser($user)){
-      redirect("../menuInicio.php?id=".$usuarioid);
+      //redirect("../INDEX.php?id=".$usuarioid);
     }else{
         echo "Error al actualizar el usuario. " ;
     }

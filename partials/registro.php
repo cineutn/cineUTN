@@ -6,7 +6,8 @@
 			<h4 class="modal-title" id="myModalLabel">Registrate</h4>
 		  </div>
 		  <div class="modal-body">
-			<form role="form" method="post" class="form-horizontal">
+			<form id="signupform" role="form" class="form-horizontal">
+                <input type="hidden" id="perfil">
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 					<div class="col-sm-10">
@@ -23,6 +24,12 @@
 					<label for="inputEmail3" class="col-sm-2 control-label">Apellido</label>
 					<div class="col-sm-10">
 					  <input type="text" class="form-control" id="apellido" placeholder="Apellido" required>
+					</div>
+			    </div>
+                <div class="form-group">
+					<label for="inputDni" class="col-sm-2 control-label">DNI</label>
+					<div class="col-sm-10">
+					  <input type="number" class="form-control" id="dni" placeholder="DNI" required>
 					</div>
 			    </div>
 				<div class="form-group">
@@ -46,13 +53,13 @@
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Confirme password</label>
 					<div class="col-sm-10">
-					  <input type="password" name="passwordConfirmation" id="passwordConfirmation" class="form-control" placeholder="Confirma el Password" required>
+					  <input type="password" name="passwordConfirmation" id="passwordConfirmation" class="form-control" placeholder="Confirma el Password"  data-toggle="tooltip" data-placement="right" title="Los passwords no coinciden" >
 					</div>
 			    </div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Telefono</label>
 					<div class="col-sm-10">
-					  <input type="text" name="text" id="telefono" class="form-control" placeholder="+54 9 11 33333333" required>
+					  <input type="number" maxlength="10" name="text" id="telefono" class="form-control" placeholder="Cod area + numero sin 11" required>
 					</div>
 			    </div>
 				<div class="form-group">
@@ -65,8 +72,10 @@
 						  <input type="radio" name="genero" id="generoFemenino" value="femenino" required> Femenino
 						</label>
 					</div>	
-			    </div>			
-			    <input type="submit" value="Registrar" class="btn btn-info btn-block">		
+			    </div>	
+                
+			   <input type="submit" value="Registrar" class="btn btn-info btn-block">
+                
 			</form>
 		  </div>
 		  <div class="modal-footer">
@@ -75,4 +84,5 @@
 		</div>
 	  </div>
 	</div>
+<script src="assets/js/formRegistro.js"></script>
 	

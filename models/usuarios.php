@@ -40,20 +40,24 @@ class Usuario
     }
 
     public function createUser($user){
-        $nombreCompleto = $this->connection->real_escape_string($user['nombreCompleto']);
-        $mail = $this->connection->real_escape_string($user['mail']);
-        $password = $this->connection->real_escape_string($user['password']);
-        $telefono = $this->connection->real_escape_string($user['telefono']);
-        $userName = $this->connection->real_escape_string($user['userName']);
        
-        $query = "INSERT INTO usuarios VALUES (
-                    DEFAULT,
-                    '$nombreCompleto',
-                    '$mail',
-                    '$password',
-                    '$telefono',
-                    '$userName',
-                    '')";
+         $perfil =  $this->connection->real_escape_string($user['perfil']);
+        $email =  $this->connection->real_escape_string($user['email']);
+        $nombre =  $this->connection->real_escape_string($user['nombre']);
+        $apellido =  $this->connection->real_escape_string($user['apellido']);
+        $fechaNacimiento =  $this->connection->real_escape_string($user['fechaNacimiento']);
+        $usuario =  $this->connection->real_escape_string($user['usuario']);
+        $password =  $this->connection->real_escape_string($user['password']);
+        $telefono =  $this->connection->real_escape_string($user['telefono']);
+        $genero = $this->connection->real_escape_string($user['genero']);
+         $dni = $this->connection->real_escape_string($user['dni']);
+
+            
+        $query = " INSERT INTO `utncine`.`usuario` 
+            (`idUsuario`, `nombre`, `apellido`, `dni`, `sexo`, `fechaNacimiento`, `email`, `usuario`, `contraseña`, `telefono`, `estado`, `tipoUsuario`)              VALUES (NULL, '$nombre', '$apellido', '$dni', '$genero', '$fechaNacimiento', '$email', '$usuario', '$password', '$telefono', 'online', '$perfil')";
+        
+        print $query;
+        exit();
 
         if($this->connection->query($query)){
             $user['usuarioID'] = $this->connection->insert_id;
