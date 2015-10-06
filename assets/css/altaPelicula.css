@@ -128,3 +128,22 @@
 	margin-right: 5px;
 	margin-bottom: 5px;
 }
+
+.lapiz{
+	margin-right: 10px;
+	margin-bottom: 10px;
+	background-color: #28B1D2;
+	color: white;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	vertical-align: center;
+	border-radius: 20px;
+	border: #0981B7 2px solid;
+	cursor: pointer;
+}
+
+.lapiz span{
+	margin-top: 5px;
+	font-size: 20px;
+}

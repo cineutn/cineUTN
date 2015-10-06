@@ -11,6 +11,25 @@ function sendResponse($response){
     echo json_encode($response);
 }
 
+
+function obtenerPeliculas($request){
+    require("../models/peliculas.php");
+    $p = new Peliculas();
+    if($peliculas = $p->getPeliculas()){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $peliculas
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener peliculas. "
+        ));
+    }
+}
+
+
 function nuevaPelicaula($request){
 	require("../models/peliculas.php");
     $p = new Peliculas();
@@ -94,4 +113,6 @@ switch($action){
     case "nueva":
         nuevaPelicaula($request);
         break;
+    case "obtener":
+        obtenerPeliculas($request);
 }

@@ -26,6 +26,23 @@ class Peliculas
         }
     }
 	
+	
+	    public function getPeliculas(){
+        $query = "SELECT * FROM pelicula";  
+       
+        $peliculas = array();
+        if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $peliculas[] = $fila;
+            }
+            $result->free();
+        }
+        return $peliculas;
+    }   
+
+	
+	
+	
     public function createPelicula($pelicula){        
 		$id = $this->connection->real_escape_string($pelicula['idPelicula']);
         $tituloPelicula = $this->connection->real_escape_string($pelicula['tituloPelicula']);

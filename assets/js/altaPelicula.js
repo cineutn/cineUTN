@@ -1,6 +1,7 @@
 (function($){
     var URI = {        
         ADD : 'actions/actionPeliculas.php?action=nueva',
+		PELICULAS : 'actions/actionPeliculas.php?action=obtener',
         UPLOAD: 'actions/actionPeliculas.php?action=subir',
     };
 	
@@ -20,30 +21,42 @@
 	$form =  $('#uploadForm');
 	$formPelicula=$("#form-nuevaPelicula");
 	$btnText =$("#btnText");
-	$btnCerrar = $(".iconCerrar");
+	$btnCerrar = $("#iconCerrar");
+	$contenedorPeliculas=$("#contenedorPeliculas");
+	
+	   $( document ).ready(function(){	   
+        obtenerPeliculas();
+    });
+	
+	
 	
 	  $botonAddPelicula.on("click",function(){
-        $formPelicula.removeClass("hide");
-        // $nombreComplejo.val("");
-        // $direccionComplejo.val("");
-        // $descripcionComplejo.val("");
-        // $idComplejo.val("0");
+       $formPelicula.removeClass("hide");          
+       $("#idPelicula").val("0");
+	   $("#tituloPelicula").val("");
+	   $("#duracionPelicula").val("");
+	   $("#clasificacionPelicula").val("");
+	   $("#generoPelicula").val("");		
+	   $("#sinopsisPelicula").val("");
+	   $("#imagenPelicula").val("");
+	   $("#trailerPelicula").val("");	
+	   $("#actoresPelicula").val("");	
+	   $("#directorPelicula").val("");	
+	   $("#fechaEstrenoPelicula").val("");
+          
         $("#vistaPrevia").addClass('hide');
         $("#vistaPrevia").css('opacity', '0.0');
         $("#iconAvatar").removeClass("hide");
         $("#textoAvatar").removeClass("hide");
 
         $btnText.text("Crear");
-        $iconButton.removeClass('glyphicon glyphicon-pencil');
-        $iconButton.addClass('glyphicon glyphicon-plus');
+        //$iconButton.removeClass('glyphicon glyphicon-pencil');
+        //$iconButton.addClass('glyphicon glyphicon-plus');
     });
 	
 	  $btnCerrar.on("click",function(){
         $formPelicula.addClass("hide");   
     });
-	
-	
-	
 	
 	
 	
@@ -56,8 +69,7 @@
 	
 	    function uploadFiles(event){			
 			event.stopPropagation();
-			event.preventDefault();
-			console.log($idPelicula.val());
+			event.preventDefault();			
 			id = $idPelicula.val();
 			 if (id > 0 ){
 				var data = new FormData();
@@ -122,6 +134,84 @@
 		 	reader.readAsDataURL(file);
 		 }, false);
 	
+	
+	
+	
+	
+	   function obtenerPeliculas()
+		{   
+			var obtener = $.ajax({
+				url : URI.PELICULAS,
+				method : "GET",
+				dataType : 'json',
+			});
+		   
+			obtener.done(function(res){
+				if(!res.error){				
+                    $peliculas = '';
+                    $contenedorPeliculas.html("");
+                    res.data.forEach(function(item){
+                        $peliculas=$peliculas+                    
+                        '<div class="app"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sombra"></div>'+	
+                        '<div class="col-xs-9 col-sm-9 col-md-4 col-lg-4 uploadImagen">'+
+                        '<div class="avatar"><div class="avatar-content"><img src="assets/img/persona.png" id="vistaPrevia" class="imagen-avatar ">'+
+                        '</div></div></div>'+
+                        '<div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 datos"><span id="idPelicula" class="hide">'+item.idPelicula+'</span>'+
+                        '<div class="form-group"><h2 id="tituloPelicula">'+item.titulo+'</h2>'+
+                        '</div><div class="form-group"><label id="lblSinopsisPelicula">'+item.sinopsis+'</label></div>'+
+                        '<table class="table"><span>Ficha técnica </span>'+
+                        '<tr><td style="width:25%"><span>Genero: </span></td><td><label id="lblGeneroPelicula">'+item.actores+'</label></td></tr>'+
+                        '<tr><td><span>Duracion: </span></td><td><label id="lblDuracionPelicula">'+item.duracion+'<label></td></tr>'+
+                        '<tr><td><span>Actores: </span></td><td><label id="lblActoresPelicula">'+item.actores+'</label></td></tr>'+
+                        '<tr><td><span>Director: </span></td><td><label id="lblDirector">'+item.director+'</label></td></tr>'+
+                        '<tr><td><span>Clasificación: </span></td><td><label id="lblDirectorPelicula">'+item.clasificacion+'</label></td></tr>'+
+                        '<tr><td><span>Fecha de Estreno: </span></td><td><label id="lblFechaEstrenoPelicula">'+item.estreno+'</label></td></tr>'+
+                        '</table></div>'+                            
+                        '<div class="col-xs-12 col-sm-9 col-md-8 col-lg-1"><div class="pull-right lapiz"><span class="glyphicon glyphicon-pencil"></span>'+
+                        '</div></div></div>';
+                    });
+                    $contenedorPeliculas.append($peliculas);
+				}else{
+					event.preventDefault();
+					alert(res.mensaje);
+				}
+			});
+
+			obtener.fail(function(res){
+				alert(res.responseText)
+			});
+				   
+		};    
+    
+    $contenedorPeliculas.on("click",".lapiz",function(event){
+        event.preventDefault();
+        $formPelicula.removeClass("hide");  
+
+        $divPadre = $(this).closest('.app');
+        $peliculaID =  $divPadre.children('#idPelicula').text();
+        console.log($peliculaID);
+        $peliculaTitulo =  $divPadre.children('.datos').children('#tituloPelicula').text();
+        console.log($peliculaTitulo);
+        /*$complejoDireccion =  $divPadre.children('.datos').children('#direccionComplejo').text();
+        $complejoDescripcion =  $divPadre.children('.datos').children('#descripcionComplejo').text();
+        $path = $divPadre.children('.imagenes').children('#imgComplejo').attr('src');
+
+        $idComplejo.val($complejoID); 
+        $nombreComplejo.val( $complejoTitulo);
+        $direccionComplejo.val($complejoDireccion);
+        $descripcionComplejo.val($complejoDescripcion);
+        $("#vistaPrevia").removeClass('hide');
+        $("#vistaPrevia").attr('src',$path);
+        $("#vistaPrevia").css('opacity', '1.0');
+        $("#iconAvatar").addClass("hide");
+        $("#textoAvatar").addClass("hide");
+
+        $btnText.text("Modificar");
+        $iconButton.removeClass('glyphicon glyphicon-plus');
+        $iconButton.addClass('glyphicon glyphicon-pencil'); */      
+    });
+	
+	
     $btnAltaModificacion.on("click",function(){
 			$id=$idPelicula.val();
 			$titulo =$tituloPelicula.val();
@@ -155,9 +245,11 @@
                
             })
             addPelicula.done(function(response){
-		    	console.log(response);  							
-				alert('guardo');
+		    	console.log(response);  	
+                $formPelicula.addClass("hide");
+                obtenerPeliculas();
             }); 		
     });
 
 })(jQuery)
+
