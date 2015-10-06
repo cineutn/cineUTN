@@ -24,24 +24,9 @@
    
     $('#signupform').submit(function(e) { 
          $('#signupform [data-toggle="tooltip"]').tooltip('hide');
-        e.preventDefault();
-        
-         var data = {
-                        perfil : $perfil.val(),
-                        email : $email.val(),
-                        nombre : $nombre.val(),
-                        apellido :  $apellido.val(),
-                        fechaNacimiento :  $fechaNacimiento.val(),
-                        usuario  : $usuario.val(),
-                        password :  $password.val(), 
-                        telefono  : $telefono.val(), 
-                        genero : $('input:radio[name=genero]:checked').val(),
-                        dni : $dni.val()
-                    
-                    };
-        
-        
-     //se traen todos los inputs del formulario
+        //e.preventDefault();
+    
+        //se traen todos los inputs del formulario
         var $inputs = $('#signupform :input');
         var error=false;
         debugger;
@@ -56,15 +41,29 @@
         }); 
         if(!error){
             debugger;
-            $.ajax({
-					url: URI.SIGNIN,
-					type: 'POST',
-					data: data,
-					cache: false,
-					dataType: 'json',
-					processData: false,
-					contentType: false
-				});
+            var loginSignup = $.ajax({
+                url: URI.SIGNIN,
+                method: "POST",
+                data: $('#signupform').serialize(),
+                dataType: 'json'
+            });
+            loginSignup.done(function(res){
+            if(!res.error){
+                sessionStorage.setItem('idUser', res.data.idUsuario);
+                sessionStorage.setItem('tipoUsuario', res.data.tipoUsuario);
+                sessionStorage.setItem('nombre', res.data.nombre);
+                sessionStorage.setItem('apellido', res.data.apellido);              
+                
+                /*alert(res.mensaje);*/
+            }else{
+                alert(res.mensaje);
+
+            }
+        });
+            
+            
+            
+            
         }
     });
     

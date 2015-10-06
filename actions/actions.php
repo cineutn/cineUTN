@@ -50,9 +50,12 @@ function nuevoUser($request){
     
     
     if($usuario = $c->createUser($user)){
-      $usuarioid = $usuario['usuarioID'];
-      setcookie('usuarioid',$usuarioid,time() + 3600);     
-      redirect("../index.php?id=".$usuarioid);
+      $c = $user->validateUser($user["usuario"],$user["password"]);
+      sendResponse(array(
+            "error" => false,
+            "mensaje" => "Usuario Creado.",
+            "data"=> $c
+        ));
     }else{
         echo "Error al registrar el usuario. " ;
     }

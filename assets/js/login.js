@@ -8,7 +8,7 @@
    
     $form.on("submit",function(e){
         
-        e.preventDefault();
+        //e.preventDefault();
        
         var loginUser = $.ajax({
             url : URI.LOGIN,
@@ -23,6 +23,9 @@
                 sessionStorage.setItem('tipoUsuario', res.data.tipoUsuario);
                 sessionStorage.setItem('nombre', res.data.nombre);
                 sessionStorage.setItem('apellido', res.data.apellido);
+                debugger;
+                $('#modalLogin').modal('hide');
+                
                 /*alert(res.mensaje);*/
             }else{
                 alert(res.mensaje);

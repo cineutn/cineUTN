@@ -56,9 +56,6 @@ class Usuario
         $query = " INSERT INTO `utncine`.`usuario` 
             (`idUsuario`, `nombre`, `apellido`, `dni`, `sexo`, `fechaNacimiento`, `email`, `usuario`, `contraseña`, `telefono`, `estado`, `tipoUsuario`)              VALUES (NULL, '$nombre', '$apellido', '$dni', '$genero', '$fechaNacimiento', '$email', '$usuario', '$password', '$telefono', 'online', '$perfil')";
         
-        print $query;
-        exit();
-
         if($this->connection->query($query)){
             $user['usuarioID'] = $this->connection->insert_id;
             return $user;

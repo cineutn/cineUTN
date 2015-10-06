@@ -15,16 +15,18 @@
 						<img src="assets/img/persona.png" id="vistaPrevia" class="imagen-avatar hide">
 							<span id="iconAvatar" class="glyphicon  glyphicon-camera icon"/></span>
 							<p id="textoAvatar">Añadir foto <Br> del Complejo</p>
-							</div>						
-							<input id="idPelicula" name="idPelicula" type="hidden" class="hide" value="">
-								<input id="archivo" class="file-imagen" name="imagen" type="file" value="seleccionar imagen" />
-								<br/>
-								<button class="btn btn-primary btn-imagen" type="submit" name="action" value="Upload" >
-									<span class="glyphicon glyphicon-open"/></span>
-									<span class="">Upload</span>
-								</button> 
-							</div>                                                       
-						</div>
+					</div>						
+							<input id="idPelicula" name="idPelicula" type="hidden" class="hide" value=""/>
+							<input id="archivo" class="file-imagen" name="imagen" type="file" value="seleccionar imagen" />
+							<br/>
+							<button class="btn btn-primary btn-imagen" type="submit" name="action" value="Upload" >
+								<span class="glyphicon glyphicon-open"/></span>
+								<span class="">Upload</span>
+							</button> 
+				</div>                                                       
+			</div>			
+						
+						
 						<div class="col-xs-12 col-sm-9 col-md-8 col-lg-7">
 							<div class="form-group">
 								<input  name="tituloPelicula" id="tituloPelicula" type="text" placeholder="Titulo Pelicula" class="form-control">    
