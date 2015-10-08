@@ -2,34 +2,35 @@
 
        <div class="row paginaCompra">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 path">
-               <div>EL CLAN CASTELLANO (P16)</div>
+               <div id="detalleCompra">EL CLAN CASTELLANO (P16)</div>
                > DETALLE DE COMPRA >
                <b>1. ENTRADAS</b>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 ">
-               <img src="assets/img/pelicula3.jpg" class="img-responsive" alt="Responsive image">
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" id="imagenPelicula">
+               <!--<img id="imagenPelicula" src="" class="img-responsive" alt="Responsive image">-->
             </div>
             <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 datosPelicula">
+                <input id="idTipoFuncion" name="idPelicula" type="hidden" class="hide" value="">
                 <div class="row">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <label class="tituloDato">PELICULA</label>
-                        <span class="datos">EL CLAN CASTELLANO (P16)</span>
+                        <label class="tituloDato" >PELICULA</label>
+                        <span class="datos" id="tituloPelicula"></span>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                        <label class="tituloDato">CINE</label>
-                       <span class="datos">UTN FRA</span>
+                       <span class="datos" id="complejo"></span>
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <label class="tituloDato">DIA</label>
-                        <span class="datos">Lunes 14 Septiembre</span>
+                        <span class="datos" id="diaFuncion"></span>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <label class="tituloDato">HORARIO</label>
-                        <span class="datos">14:00</span>                      
+                        <label class="tituloDato" >HORARIO</label>
+                        <span class="datos" id="horarioFuncion"></span>   
                     </div>
                     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                        <label class="tituloDato">SALA</label>
-                       <span class="datos">Pantalla 10</span>
+                       <span class="datos" id="sala"></span>
                     </div>
                 </div>
            </div>
@@ -121,4 +122,5 @@
 <link rel="stylesheet" href="assets/css/paginaCompra.css"> 
 <script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="assets/js/peliculaCompra.js"></script>
 

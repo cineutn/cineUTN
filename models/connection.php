@@ -2,9 +2,9 @@
 class Connection extends MySQLi {
      private static $instance = null ;
      const HOST = 'localhost';
-     const USER = 'root';
-     const PASSWORD = 'admin';       
-     const DATABASE = 'cms';
+     const USER = 'admin';
+     const PASSWORD = '';       
+     const DATABASE = 'cineutn';
          
      private function __construct($host, $user, $password, $database){ 
          parent::__construct($host, $user, $password, $database);
@@ -23,7 +23,7 @@ class ConnectionCine extends MySQLi {
      private static $instance = null ;
      const HOST = 'localhost';
      const USER = 'root';
-     const PASSWORD = 'admin';       
+     const PASSWORD = '';       
      const DATABASE = 'utncine';
          
      private function __construct($host, $user, $password, $database){ 
