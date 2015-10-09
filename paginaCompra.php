@@ -11,6 +11,7 @@
             </div>
             <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 datosPelicula">
                 <input id="idTipoFuncion" name="idPelicula" type="hidden" class="hide" value="">
+                <input id="cantidadEntradas" name="cantidadEntradas" type="hidden" class="hide" value="0">
                 <div class="row">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <label class="tituloDato" >PELICULA</label>
@@ -57,7 +58,9 @@
                 </table>
             </div>
            <div class="sombra ">
-                <button type="button" onclick="location.href='ventaButacas.php';" class="btn btn-success btn-Confirmar pull-right">SIGUIENTE</button> 
+                <!--<button type="button" onclick="location.href='ventaButacas.php';" class="btn btn-success btn-Confirmar pull-right">SIGUIENTE</button> -->
+               <button type="button" onclick="validarCompra()" class="btn btn-success btn-Confirmar pull-right">SIGUIENTE</button>
+               
            </div>
 		</div>
 

@@ -1,4 +1,3 @@
-(function($){
     var URI = {        
         FUNCION : 'actions/actionPeliculaCompra.php?action=obtener',
 		PRECIOS : 'actions/actionPeliculaCompra.php?action=obtenerPrecios',
@@ -13,16 +12,16 @@
     $imagenPelicula=$("#imagenPelicula");
     $idTipoFuncion=$("#idTipoFuncion").val();
     $precios=$("#precios");
-    
-    $( document ).ready(function(){	   
-        obtenerDetalleFuncion();
+    $cantidadEntradas=$("#cantidadEntradas").val();
+    $(document ).ready(function(){	   
+        obtenerDetalleFuncion();  
     });
 	
     
     function obtenerDetalleFuncion()
     {   
          //$id = $idFuncion.val();
-        $funcionID=1;
+        $funcionID=1;//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior
         var obtener = $.ajax({
             url : URI.FUNCION,
             method : "GET",
@@ -40,10 +39,8 @@
                 $("#detalleCompra").text(res.data[0].titulo+' '+res.data[0].idioma+' ('+res.data[0].clasificacion+')');                
                 $("#idTipoFuncion").val(res.data[0].idTipoFuncion);
                  $imagen = '<img id="imagenPelicula" src='+res.data[0].imagen+' class="img-responsive" alt="Responsive image">';                
-                $imagenPelicula.append($imagen);
-                idTipoFuncion
-                console.log(res.data[0]);
-                obtenerPrecioFuncion();       
+                $imagenPelicula.append($imagen);                
+                obtenerPrecioFuncion();                
             }else{
                 
                 alert(res.mensaje);
@@ -56,10 +53,8 @@
 
     };    
     
-      function obtenerPrecioFuncion(){   
-        
-         $TipoFuncionid = $("#idTipoFuncion").val();
-        console.log($TipoFuncionid);
+      function obtenerPrecioFuncion(){           
+        $TipoFuncionid = $("#idTipoFuncion").val();        
         var obtener = $.ajax({
             url : URI.PRECIOS,
             method : "GET",
@@ -69,12 +64,11 @@
 
         obtener.done(function(res){
             if(!res.error){		
-                $precio='';
-                console.log(res);
+                $precio='';                
                 res.data.forEach(function(item){
                 $precio =$precio +
                      '<tr><td class="columnaEntradaDescripcion"><SPAN>'+item.descripcion +'<SPAN></td >'+
-                      '<th class="columnaCantidad"><select name="" id="" class="form-control comboCantidad">'+
+                      '<th class="columnaCantidad"><select name="" onchange="cantidad(this)"class="form-control comboCantidad">'+
                                 '<option value="0">0</option>'+
                                 '<option value="1">1</option>'+
                                 '<option value="2">2</option>'+
@@ -86,6 +80,8 @@
                 
                 });
                 $precios.append($precio);
+                
+                
             }else{
                 
                 alert(res.mensaje);
@@ -96,8 +92,28 @@
             alert(res.responseText)
         });
 
-    }; 
+    };
+
+function validarCompra(){
+    console.log($("#cantidadEntradas").val());
+    if($("#cantidadEntradas").val()>6){
+    alert('Debe elejir menos de 6 entradas');
+        return;
+    }
+    else if($("#cantidadEntradas").val()>0){
+    alert('adasd');
+        location.href='ventaButacas.php';
+    }
+}
 
 
-})(jQuery)
+    //aca obtengo el valor seleccionado del combo
+    function cantidad(combo){ 
+        var cantidad=parseInt($("#cantidadEntradas").val());
+        cantidad=cantidad+parseInt(combo.value);
+        $("#cantidadEntradas").val(cantidad)
+        
+       
+        
+    }
 
