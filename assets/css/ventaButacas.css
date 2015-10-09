@@ -13,3 +13,19 @@
 .path div{
 	display:  inline;
 }
+
+.oculta{
+    visibility:hidden;
+}
+
+.esquema{
+
+    margin:5%;
+    width: auto;
+}
+
+.esquema.tr.td{
+
+    margin:5%;
+    width: 10px;
+}

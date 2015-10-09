@@ -9,7 +9,7 @@
 			           <b>2. BUTACAS</b>
 			</div>
 			<div class="col-md-6">
-				<div  class="row compraPelicula"style="background-color:white;" >					
+				<!--<div  class="row compraPelicula"style="background-color:white;" >					
 					<div>
 						<img style="width:95%; margin:5%;" src="assets/img/SeatScreen.png" />
 					</div>
@@ -143,7 +143,10 @@
 						<div style="font-size:large;">F</div> 
 						<div style="font-size:large;">G</div> 
 					</div>
-				</div>
+				</div>-->
+                <table class="esquema" id="esquemaSala">                    
+                    
+                </table>
 			</div>
 			<div class="col-md-6 compraPelicula" style="background-color:white;">
 				<br /><br />
@@ -168,4 +171,4 @@
 <link rel="stylesheet" href="assets/css/ventaButacas.css">     
 <script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
-
+<script src="assets/js/ventaButaca.js"></script>
