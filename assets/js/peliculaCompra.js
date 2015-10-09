@@ -100,8 +100,7 @@ function validarCompra(){
     alert('Debe elejir menos de 6 entradas');
         return;
     }
-    else if($("#cantidadEntradas").val()>0){
-    alert('adasd');
+    else if($("#cantidadEntradas").val()>0){    
         location.href='ventaButacas.php';
     }
 }
