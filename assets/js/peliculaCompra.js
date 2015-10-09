@@ -1,7 +1,7 @@
 (function($){
     var URI = {        
         FUNCION : 'actions/actionPeliculaCompra.php?action=obtener',
-		PRECIOS : 'actions/actionPeliculaCompra.php?action=obtener',
+		PRECIOS : 'actions/actionPeliculaCompra.php?action=obtenerPrecios',
     };
     
 	//$idFuncion = $("#idFuncion");
@@ -12,6 +12,7 @@
     $sala =$("#sala");
     $imagenPelicula=$("#imagenPelicula");
     $idTipoFuncion=$("#idTipoFuncion").val();
+    $precios=$("#precios");
     
     $( document ).ready(function(){	   
         obtenerDetalleFuncion();
@@ -55,22 +56,36 @@
 
     };    
     
-      function obtenerPrecioFuncion()
-    {   
-         //$id = $idFuncion.val();
+      function obtenerPrecioFuncion(){   
         
+         $TipoFuncionid = $("#idTipoFuncion").val();
+        console.log($TipoFuncionid);
         var obtener = $.ajax({
             url : URI.PRECIOS,
             method : "GET",
-             data: {idFuncion:$idTipoFuncion},
+             data: {tipoFuncionID:$TipoFuncionid},
             dataType : 'json',
         });        
 
         obtener.done(function(res){
             if(!res.error){		
+                $precio='';
+                console.log(res);
+                res.data.forEach(function(item){
+                $precio =$precio +
+                     '<tr><td class="columnaEntradaDescripcion"><SPAN>'+item.descripcion +'<SPAN></td >'+
+                      '<th class="columnaCantidad"><select name="" id="" class="form-control comboCantidad">'+
+                                '<option value="0">0</option>'+
+                                '<option value="1">1</option>'+
+                                '<option value="2">2</option>'+
+                                '<option value="3">3</option>'+
+                                '<option value="4">4</option>'+
+                                '<option value="5">5</option>'+
+                                '<option value="6">6</option>'+
+                            '</select></th><th class="columnaPrecio">'+item.valor+'$</th></tr>';               
                 
-                console.log(res.data[0]);
-                               
+                });
+                $precios.append($precio);
             }else{
                 
                 alert(res.mensaje);

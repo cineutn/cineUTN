@@ -49,8 +49,7 @@ class PeliculaCompra
                     P.descripcion, 
                     P.valor 
                     FROM precios P 
-                    where P.idFormato = $id
-                    ORDER BY Formato";  
+                    where P.idFormato = $id";                    
        
         $precioFormato = array();
         if( $result = $this->connection->query($query) ){

@@ -52,63 +52,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="filaImpar">
-                            <th class="columnaEntradas">
-                                <img src="assets/img/Adultos.png">
-                                ADULTO
-                            </th class="columnaCantidad">
-                            <th>
-                                <select name="" id="" class="form-control comboCantidad">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                </select>
-                            </th>
-                            <th class="columnaPrecio">
-                                $100.00
-                            </th>
-                        </tr>
-                        <tr class="filaPar">
-                            <th class="columnaEntradas">
-                                <img src="assets/img/Jubilados.png" alt="">
-                                JUBILADO WEB
-                            </th>
-                            <th class="columnaCantidad">
-                                <select name="" id="" class="form-control comboCantidad">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                </select>
-                            </th class="columnaPrecio">
-                            <th class="columnaPrecio">$64.00</th>
-                        </tr>
-                        <tr class="filaImpar">
-                            <th class="columnaEntradas">
-                                 <img src="assets/img/menores.png" alt="">
-                                MENOR WEB
-                            </th>
-                            <th class="columnaCantidad">
-                                <select name="" id="" class="form-control comboCantidad">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                </select>
-                            </th class="columnaPrecio">
-                            <th class="columnaPrecio">$64.00</th>
-                        </tr>
+                    <tbody id="precios">                      
                     </tbody>
                 </table>
             </div>

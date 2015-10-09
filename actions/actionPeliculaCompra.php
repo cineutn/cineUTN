@@ -34,7 +34,7 @@ function obtenerFuncionDetalle($request){
 function obtenerPrecioFuncion($request){
     require("../models/peliculaCompra.php");
     $p = new PeliculaCompra();
-    $idFormato=$request->idFormato;
+    $idFormato=$request->tipoFuncionID;
     if($pagina = $p->getPreciosPorFormato($idFormato)){
         sendResponse(array(
             "error" => false,

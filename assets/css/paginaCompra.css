@@ -61,6 +61,9 @@
 	margin-left: 5%;
 	margin-right: 10px;
 }	
+.columnaEntradaDescripcion{
+  text-align:  center;
+}	
 
 thead tr th{
 	text-align:  center;
