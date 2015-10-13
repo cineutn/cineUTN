@@ -30,6 +30,24 @@ function obtenerPeliculas($request){
 }
 
 
+function obtenerPeliculasCartelera($request){
+    require("../models/peliculas.php");
+    $p = new Peliculas();
+    if($peliculas = $p->getPeliculasCartelera()){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $peliculas
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener peliculas. "
+        ));
+    }
+}
+
+
 function nuevaPelicaula($request){
 	require("../models/peliculas.php");
     $p = new Peliculas();
@@ -103,6 +121,29 @@ function subir($request){
     }
 }
 
+function obtenerPeliculaById($request){
+    require("../models/peliculas.php");
+    $p = new Peliculas();
+    try{
+        if($pelicula = $p->getPeliculaByID($request->id)){
+            sendResponse(array(
+                "error" => false,
+                "mensaje" => "",
+                "data" => $pelicula
+            ));
+        }
+    
+    }
+    catch(Exception $e){
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => 'Error al obtener la pelicula. ' . $e->getMessage()
+        ));
+    }
+
+
+}
+
 
 $request = new Request();
 $action = $request->action;
@@ -115,4 +156,13 @@ switch($action){
         break;
     case "obtener":
         obtenerPeliculas($request);
+        break;
+    case "obtenerCartelera":
+        obtenerPeliculasCartelera($request);
+        break;
+    case "obtenerPeliculaById":
+        obtenerPeliculaById($request);
+        break;
+        
+    
 }

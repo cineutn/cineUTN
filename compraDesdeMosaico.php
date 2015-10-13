@@ -3,26 +3,20 @@
         <div class="row detallesPelicula">
 			<div class="col-md-3">
 				<div class="titulo">
-					EL CLAN 
 				</div>
 				<div class="imagenPelicula">
-					<img src="assets/img/pelicula3.jpg">
+					<img src="">
 				</div>
 				<div>
 					<div class="descripcionPelicula">
-						El Clan es la nueva película de Pablo Trapero protagonizada por Guillermo Francella y Peter Lanzani. Ellos serán Arquímedes y Alejandro Puccio, dos hombres que en la década de los 80 conmocionaron a la Argentina. 
+						 
 					</div>
 					<div class="fichaTecnica">
 						<div>
 							<ins>Ficha técnica</ins>
 						</div>
 						<p>
-							Genero: Drama <br>
-							Duración: 110min <br>
-							Actores: Peter Lanzani,Guillermo Francella<br>
-							Director: Pablo Trapero<br>
-							Clasificación: P16<br> 
-							  <br>
+							
 						</p>
 					</div>
 				</div>
@@ -31,7 +25,7 @@
 				
 				<!-- 16:9 aspect ratio -->
 				<div class="embed-responsive embed-responsive-16by9">
-				  <iframe class="embed-responsive-item" src="http://www.youtube.com/embed/n7kpI79cPBk"></iframe>
+				  <iframe class="embed-responsive-item" src=""></iframe>
 				</div> 
 				
 			</div>
@@ -118,4 +112,5 @@
 <link rel="stylesheet" href="assets/css/paginaInicio.css"> 
 <script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="assets/js/compraDesdeMosaico.js"></script>
 

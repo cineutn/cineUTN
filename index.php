@@ -29,8 +29,8 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12 contenedorPeliculas">
-                <img class="pelicula" src="assets/img/pelicula1.jpg">
+            <div id="contenedorPeliculas" class="col-md-12 contenedorPeliculas">
+                <!--<img class="pelicula" src="assets/img/pelicula1.jpg">
                 <img class="pelicula" src="assets/img/pelicula2.jpg">
 				<a href="compraDesdeMosaico.php">
 					<img class="pelicula" src="assets/img/pelicula3.jpg">
@@ -43,7 +43,7 @@
                 <img class="pelicula" src="assets/img/pelicula8.jpg">
                 <img class="pelicula" src="assets/img/pelicula9.jpg">
                 <img class="pelicula" src="assets/img/pelicula10.jpg">
-                <img class="pelicula" src="assets/img/pelicula11.jpg">
+                <img class="pelicula" src="assets/img/pelicula11.jpg">-->
             </div>
         </div>
 	

@@ -25,9 +25,7 @@ class Peliculas
             return false;
         }
     }
-	
-	
-	    public function getPeliculas(){
+    public function getPeliculas(){
         $query = "SELECT * FROM pelicula";  
        
         $peliculas = array();
@@ -38,11 +36,39 @@ class Peliculas
             $result->free();
         }
         return $peliculas;
-    }   
-
-	
-	
-	
+    }  
+    public function getPeliculasCartelera(){
+        $query = "SELECT idPelicula,titulo,imagen FROM `pelicula` WHERE `fechaBaja`='0000-00-00 00:00:00' order by fechaAlta";  
+       
+        $peliculas = array();
+        if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $peliculas[] = $fila;
+            }
+            $result->free();
+        }
+        return $peliculas;
+    } 
+    public function getPeliculaByID($id){
+        $query = "SELECT * FROM pelicula where idPelicula='$id'";  
+       
+        $peliculas = array();
+        
+        try{
+            if( $result = $this->connection->query($query) ){
+                while($fila = $result->fetch_assoc()){
+                    $peliculas[] = $fila;
+                }
+                $result->free();
+            }
+        }
+        catch(Exception $e) {
+            throw new Exception ($e->getMessage());
+        }
+       
+        return $peliculas;
+    
+    }
     public function createPelicula($pelicula){        
 		$id = $this->connection->real_escape_string($pelicula['idPelicula']);
         $tituloPelicula = $this->connection->real_escape_string($pelicula['tituloPelicula']);
