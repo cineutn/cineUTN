@@ -5,6 +5,9 @@
     
     $( document ).ready(function(){  
             otenerPeliculabyID();   
+        
+            $('#tree').treeview({data: getTree()});
+        
     });
     
 
@@ -44,6 +47,139 @@
         });
     
     };
-
+    function getTree() {
+      // Some logic to retrieve, or generate tree structure
+        
+        var tree = [
+              {
+                text: "UTN Avellaneda",
+                nodes: [
+                  {
+                    text: "Lunes",
+                    nodes: [
+                      {
+                        text: "2D",
+                        nodes: [
+                            {
+                                text: "15:15 HS"
+                            },
+                            {
+                                text: "17:00 HS"
+                            },
+                            {
+                                text: "19:10 HS",
+                            }
+                        ]
+                      },
+                      {
+                        text: "3D"
+                      }
+                    ]
+                  },
+                  {
+                    text: "Martes"
+                  }
+                ]
+              },
+              {
+                text: "UTN Medrano",
+                nodes: [
+                  {
+                    text: "Lunes",
+                    nodes: [
+                      {
+                        text: "2D",
+                        node: [
+                            {
+                                text: "15:15 HS"
+                            }
+                        ]
+                      },
+                      {
+                        text: "3D"
+                      }
+                    ]
+                  },
+                  {
+                    text: "Martes"
+                  }
+                ]
+              },
+              {
+                text: "UTN Lugano",
+                nodes: [
+                  {
+                    text: "Lunes",
+                    nodes: [
+                      {
+                        text: "2D",
+                        nodes: [
+                            {
+                                text: "15:15 HS"
+                            }
+                        ]
+                      },
+                      {
+                        text: "3D"
+                      }
+                    ]
+                  },
+                  {
+                    text: "Martes"
+                  }
+                ]
+              },
+              {
+                text: "UTN otra",
+                nodes: [
+                  {
+                    text: "Lunes",
+                    nodes: [
+                      {
+                        text: "2D",
+                        node: [
+                            {
+                                text: "15:15 HS"
+                            }
+                        ]
+                      },
+                      {
+                        text: "3D"
+                      }
+                    ]
+                  },
+                  {
+                    text: "Martes"
+                  }
+                ]  
+              },
+              {
+                text: "UTN otra mas",
+                nodes: [
+                  {
+                    text: "Lunes",
+                    nodes: [
+                      {
+                        text: "2D",
+                        node: [
+                            {
+                                text: "15:15 HS"
+                            }
+                        ]
+                      },
+                      {
+                        text: "3D"
+                      }
+                    ]
+                  },
+                  {
+                    text: "Martes"
+                  }
+                ]  
+              }
+            ];
+        
+          return tree;
+    }
 
 })(jQuery)

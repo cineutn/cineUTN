@@ -1,7 +1,7 @@
 <?php require("partials/header.php"); ?>
 
         <div class="row detallesPelicula">
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<div class="titulo">
 				</div>
 				<div class="imagenPelicula">
@@ -21,7 +21,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-9">
+            
+			<div class="col-md-8">
 				
 				<!-- 16:9 aspect ratio -->
 				<div class="embed-responsive embed-responsive-16by9">
@@ -30,8 +31,61 @@
 				
 			</div>
 		</div>
-		<div class="row compraPelicula">
-			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="row">
+        
+        <div class="col-md-12">
+			<ul class="list-group">
+                <li class="list-group-item" data-nodeid="0" style="color:undefined;background-color:red;">FUNCIONES</li>	
+            </ul>
+				
+        </div>
+    </div>
+    <div class="row">
+        
+        <div class="col-md-12" id="tree">
+				
+				
+        </div>
+    </div>
+
+		<!--<div class="row compraPelicula">
+            <div id="listComplejo" class="list-group col-md-3">
+              <a class="cabeceraLista">
+                Complejo
+              </a>
+              <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+              <a href="#" class="list-group-item">Morbi leo risus</a>
+              <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+              <a href="#" class="list-group-item">Vestibulum at eros</a>
+            </div>
+            <div id="listDias" class="list-group col-md-3">
+              <a href="#" class="list-group-item cabeceraLista">
+                Día
+              </a>
+              <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+              <a href="#" class="list-group-item">Morbi leo risus</a>
+              <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+              <a href="#" class="list-group-item">Vestibulum at eros</a>
+            </div>
+            <div id="listDias" class="list-group col-md-3">
+              <a href="#" class="list-group-item cabeceraLista">
+                Formato
+              </a>
+              <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+              <a href="#" class="list-group-item">Morbi leo risus</a>
+              <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+              <a href="#" class="list-group-item">Vestibulum at eros</a>
+            </div>
+            <div id="listDias" class="list-group col-md-3">
+              <a href="#" class="list-group-item cabeceraLista">
+                Horario
+              </a>
+              <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+              <a href="#" class="list-group-item">Morbi leo risus</a>
+              <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+              <a href="#" class="list-group-item">Vestibulum at eros</a>
+            </div>-->
+			<!--<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 			   <div class="panel panel-default col-md-3">
 					<ul class="nav nav-pills nav-stacked">
 					  <li role="presentation" class="active"><a>Complejo</a></li>
@@ -71,50 +125,17 @@
 						
 				      </li>
 					</ul>
-			  </div>
-			</div>
-		</div>
+			  </div>-->
 		
-<?php require("partials/footer.php"); ?>
+		
+
      
-	<!-- Modal de login-->
-	
-	<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<h4 class="modal-title" id="myModalLabel">Ingresar a tu Cuenta</h4>
-		  </div>
-		  <div class="modal-body">
-			<form method="post" action='' name="login_form">
-				<div style="margin-bottom: 25px" class="input-group">
-					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-					<input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Usuario">                                        
-				</div>            
-				<div style="margin-bottom: 25px" class="input-group">
-					<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-					<input id="login-password" type="password" class="form-control" name="password" placeholder="password">
-				</div>
-			 
-			  
-			  <p>
-				<button type="button"  onclick="location.href='paginaCompra.html';" class="btn btn-primary">
-					Entrar
-				</button>
-				<a href="#">Olvidaste tu Contraseña?</a>
-			  </p>
-			</form>
-		  </div>
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		  </div>
-		</div>
-	  </div>
-	</div>	
+<?php require("partials/footer.php"); ?>
 
 <link rel="stylesheet" href="assets/css/paginaInicio.css"> 
 <script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="assets/js/vendor/bootstrap-treeview.js"></script>
 <script src="assets/js/compraDesdeMosaico.js"></script>
+
 

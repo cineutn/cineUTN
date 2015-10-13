@@ -157,6 +157,18 @@ button.margenTextbox{
 	margin: auto;
 	text-align:center;
 }
+.col-md-3 .cabeceraLista{
+        background: linear-gradient(to bottom, #212020 0%,#D00809 100%);
+    color: #fff;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    
+    border: 1px solid #ddd;
+}
 
 
 
