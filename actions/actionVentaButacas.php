@@ -33,7 +33,7 @@ function obtenerFuncionSala($request){
 
 function reservarButaca($request){
 	require("../models/ventaButacas.php");
-    $b = new Butaca();
+    $b = new ventaButacas();
       
 	$salaFuncionID = $request->idSalaFuncion;	
 						  

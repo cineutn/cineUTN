@@ -89,8 +89,7 @@
         return $imagen;
     } 
 
-    function seleccionButaca(item){
-            console.log(item);      
+    function seleccionButaca(item){               
            var reservar = $.ajax({
                 url : URI.BUTACA,
                 method : "POST",
@@ -100,13 +99,11 @@
 
             reservar.done(function(res){
             if(!res.error){
-                alert('');
+                
             }
                 else{
                 alert(res.error);
                 };
           
             });
-        //alert('fila: '+ item.fila +'columna: '+ item.columna);
-        
     }
