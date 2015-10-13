@@ -31,11 +31,36 @@ function obtenerFuncionSala($request){
 }
 
 
+function reservarButaca($request){
+	require("../models/ventaButacas.php");
+    $b = new Butaca();
+      
+	$salaFuncionID = $request->idSalaFuncion;	
+						  
+    if($nuevo = $b->updateButaca($salaFuncionID)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "pelicula creado con exito. ",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al crear  el pelicula"
+        ));
+    }
+}
+
+
+
 $request = new Request();
 $action = $request->action;
 switch($action){       
     case "obtener":
         obtenerFuncionSala($request);
+        break;
+    case "reservar":
+        reservarButaca($request);
         break;
    
 }

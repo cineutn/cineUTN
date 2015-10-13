@@ -50,8 +50,7 @@
         $("#textoAvatar").removeClass("hide");
 
         $btnText.text("Crear");
-        //$iconButton.removeClass('glyphicon glyphicon-pencil');
-        //$iconButton.addClass('glyphicon glyphicon-plus');
+        
     });
 	
 	  $btnCerrar.on("click",function(){
@@ -94,8 +93,7 @@
 				});
 
 				uploadImage.always(function(response){
-					$form-nuevaPelicula.addClass("hide");
-					//obtenerComplejos();
+					$form-nuevaPelicula.addClass("hide");					
 				});
 
 			}else{
@@ -192,23 +190,7 @@
         console.log($peliculaID);
         $peliculaTitulo =  $divPadre.children('.datos').children('#tituloPelicula').text();
         console.log($peliculaTitulo);
-        /*$complejoDireccion =  $divPadre.children('.datos').children('#direccionComplejo').text();
-        $complejoDescripcion =  $divPadre.children('.datos').children('#descripcionComplejo').text();
-        $path = $divPadre.children('.imagenes').children('#imgComplejo').attr('src');
-
-        $idComplejo.val($complejoID); 
-        $nombreComplejo.val( $complejoTitulo);
-        $direccionComplejo.val($complejoDireccion);
-        $descripcionComplejo.val($complejoDescripcion);
-        $("#vistaPrevia").removeClass('hide');
-        $("#vistaPrevia").attr('src',$path);
-        $("#vistaPrevia").css('opacity', '1.0');
-        $("#iconAvatar").addClass("hide");
-        $("#textoAvatar").addClass("hide");
-
-        $btnText.text("Modificar");
-        $iconButton.removeClass('glyphicon glyphicon-plus');
-        $iconButton.addClass('glyphicon glyphicon-pencil'); */      
+      
     });
 	
 	
@@ -244,8 +226,7 @@
                 dataType: 'json',
                
             })
-            addPelicula.done(function(response){
-		    	console.log(response);  	
+            addPelicula.done(function(response){		    	 	
                 $formPelicula.addClass("hide");
                 obtenerPeliculas();
             }); 		

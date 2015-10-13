@@ -94,8 +94,7 @@
 
     };
 
-function validarCompra(){
-    console.log($("#cantidadEntradas").val());
+function validarCompra(){    
     if($("#cantidadEntradas").val()>6){
     alert('Debe elejir menos de 6 entradas');
         return;
