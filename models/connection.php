@@ -23,7 +23,7 @@ class ConnectionCine extends MySQLi {
      private static $instance = null ;
      const HOST = 'localhost';
      const USER = 'root';
-     const PASSWORD = '';       
+     const PASSWORD = 'admin';       
      const DATABASE = 'utncine';
          
      private function __construct($host, $user, $password, $database){ 

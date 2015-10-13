@@ -61,6 +61,10 @@
                 <!--<button type="button" onclick="location.href='ventaButacas.php';" class="btn btn-success btn-Confirmar pull-right">SIGUIENTE</button> -->
                <button type="button" onclick="validarCompra()" class="btn btn-success btn-Confirmar pull-right">SIGUIENTE</button>
                
+              <form method="POST" action="pagoEntradas.php" id="form-registro">
+                <input id="var1" type="hidden" name="var1" value="12">  
+              <button id="btnComprar" type="submit" class="btn btn-default btn-sm pull-right btn-seleccionado" >Comprar</button>
+            </form>
            </div>
 		</div>
 

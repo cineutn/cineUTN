@@ -1,5 +1,9 @@
 <?php require("partials/header.php"); ?>
 
+<?php 
+     $var = isset($_POST['var1']) ? $_POST['var1'] : null;
+ ?>
+
        <div class="row paginaCompra">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 path">
                	<div>EL CLAN CASTELLANO (P16)</div>
@@ -20,7 +24,7 @@
                         <span class="datos">EL CLAN CASTELLANO (P16)</span>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                       <label class="tituloDato">CINE</label>
+                       <label class="tituloDato"> CINE</label>
                        <span class="datos">UTN FRA</span>
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -89,7 +93,7 @@
                                 <span>EMAIL :</span>  
                             </div>
                             <div class="col-xs-7 col-md-7 col-lg-7">         
-                                <input value=""  name="email" id="nombreCompleto" placeholder="Email" type="text" class="form-control input-datosCompra">
+                                <input value=<?php echo $var; ?>  name="email" id="nombreCompleto" placeholder="Email" type="text" class="form-control input-datosCompra">
                                 <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
                                 <span class="help-block"></span>                        
                             </div>
