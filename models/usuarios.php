@@ -22,7 +22,8 @@ class Usuario
     }
 
     public function validateUser($id,$password){
-        $query = "SELECT U.idUsuario, U.nombre, U.apellido, U.tipoUsuario, E.perfil FROM usuario U LEFT JOIN empleado E ON U.idUsuario = E.idUsuario WHERE  U.usuario = '".$id."' AND U.contraseña = '". $password . "'";  
+        $query = "SELECT U.idUsuario, U.nombre, U.apellido, U.tipoUsuario, E.perfil, U.email FROM usuario U LEFT JOIN empleado E ON U.idUsuario = E.idUsuario 
+        WHERE  U.usuario = '".$id."' AND U.contraseña = '". $password . "'";  
         $r = $this->connection->query($query);
         return $r->fetch_assoc();
     }
@@ -41,7 +42,7 @@ class Usuario
 
     public function createUser($user){
        
-         $perfil =  $this->connection->real_escape_string($user['perfil']);
+        $perfil =  $this->connection->real_escape_string($user['perfil']);
         $email =  $this->connection->real_escape_string($user['email']);
         $nombre =  $this->connection->real_escape_string($user['nombre']);
         $apellido =  $this->connection->real_escape_string($user['apellido']);

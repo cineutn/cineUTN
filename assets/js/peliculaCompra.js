@@ -31,8 +31,8 @@
 
         obtener.done(function(res){
             if(!res.error){		
-                 $("#tituloPelicula").text(res.data[0].titulo+'('+res.data[0].clasificacion+')');
-                $("#complejo").text(res.data[0].descripcion);
+                $("#tituloPelicula").text(res.data[0].titulo+'('+res.data[0].clasificacion+')');
+                $("#complejo").text(res.data[0].nombre);
                 $("#diaFuncion").text(res.data[0].dia);
                 $("#horarioFuncion").text(res.data[0].horario);
                 $("#sala").text(res.data[0].sala);               
@@ -96,7 +96,7 @@
 
 function validarCompra(){    
     if($("#cantidadEntradas").val()>6){
-    alert('Debe elejir menos de 6 entradas');
+    alert('Debe elegir menos de 6 entradas');
         return;
     }
     else if($("#cantidadEntradas").val()>0){    

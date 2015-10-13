@@ -8,6 +8,7 @@
 
     $cmbComplejos = $("#cmbComplejos");
 
+    $cmbComplejos = $("#cmbComplejos");
     $( document ).ready(function(){
             obtenerComplejos();
             otenerPeliculasCartelera();

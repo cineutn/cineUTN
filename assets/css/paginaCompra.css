@@ -145,8 +145,14 @@ thead tr th{
 	margin-right: 20px;
 }
 
-.select-Fecha{
-	width: 30%;
+.select-Mes{
+	width: 66px;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+.select-Anio{
+	width: 82px;
 	margin-right: 10px;
 	display: inline-block;
 }
@@ -158,4 +164,9 @@ thead tr th{
 
 .centrar{
 	text-align: center;
+}
+
+.icon{
+
+	right: 20%;
 }

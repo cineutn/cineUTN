@@ -153,19 +153,12 @@
         $descripcionPrecio.val($precioDescripcion);
         $valorPrecio.val($precioValor);
 
-        $formato = $precioFormato.substring(5,$precioFormato.length);
+        $formato = $precioFormato.substring(5,$precioFormato.length);  
         
-        /*$cmbFormatos.filter(function() {
-            //may want to use $.trim in here
-            return $(this).text() == $formato; 
-        }).attr('selected', true);*/
-
-        $cmbFormatos.filter(function() {
-            if ( $(this).val() == $formato ) {                
-                return true;
-            }
-        }).prop('selected', true);
-
+        idFormato = $("#comboFormato option:contains('"+$formato+"')").val();
+      
+        $cmbFormatos.val(idFormato);
+        
         $btnText.text("Modificar");
         $iconButton.removeClass('glyphicon glyphicon-plus');
         $iconButton.addClass('glyphicon glyphicon-pencil');       

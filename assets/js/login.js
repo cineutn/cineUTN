@@ -23,6 +23,7 @@
                 sessionStorage.setItem('tipoUsuario', res.data.tipoUsuario);
                 sessionStorage.setItem('nombre', res.data.nombre);
                 sessionStorage.setItem('apellido', res.data.apellido);
+                sessionStorage.setItem('email', res.data.email);
                 debugger;
                 $('#modalLogin').modal('hide');
                 

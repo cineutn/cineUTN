@@ -21,15 +21,15 @@ class PeliculaCompra
                     fo.descripcion tipoFuncion,
                     fo.subtitulada,
                     fo.idTipoFuncion,
-                    cm.descripcion
-                    from funcion as fn inner join funcionhorario fh
-                    on fn.idFuncion =fh.idFuncion
-                    inner join sala as sl on fn.idSala=sl.idSala
-                    inner join pelicula pl on fn.idPelicula=pl.idPelicula
-                    inner join idioma il on fn.idIdioma =il.idIdioma
-                    inner join formato fo on fn.idTipoFuncion=fo.idTipoFuncion
-                        inner join complejo cm on cm.idComplejo=fn.idComplejo
-                    where fn.idFuncion=$id";  
+                    cm.nombre
+                    from funcion as fn 
+                    inner join funcionhorario fh on fn.idFuncion = fh.idFuncion
+                    inner join sala as sl on fn.idSala = sl.idSala
+                    inner join pelicula pl on fn.idPelicula = pl.idPelicula
+                    inner join idioma il on fn.idIdioma = il.idIdioma
+                    inner join formato fo on fn.idTipoFuncion = fo.idTipoFuncion
+                    inner join complejo cm on cm.idComplejo = fn.idComplejo
+                    where fn.idFuncion = $id";  
        
         $funcionDetalle = array();
         if( $result = $this->connection->query($query) ){
