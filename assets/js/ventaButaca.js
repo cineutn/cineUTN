@@ -1,10 +1,11 @@
-    var URI = {        
+(function($){
+var URI = {        
         SALA : 'actions/actionVentaButacas.php?action=obtener',
         BUTACA :'actions/actionVentaButacas.php?action=reservar',
     };
     
     $esquemaSala=$("#esquemaSala");     
-    
+    $pathSeleccionada="assets/img/butacaSeleccionada.png";
 
     $(document ).ready(function(){	   
         obtenerDetalleSala();  
@@ -23,7 +24,7 @@
 
         obtener.done(function(res){
             if(!res.error){		
-                console.log(res); 
+                
                 $esquemaSala.html("");     
                 $fila=''; 
                 $filaActual='';
@@ -37,13 +38,13 @@
                     res.data.forEach(function(item){                 
                         if($filaActual===item.fila)
                         {
-                            $fila=$fila +  '<td id="'+item.idSalaFuncion+'" onclick="seleccionButaca('+item.idSalaFuncion+')">'+traerButaca(item.habilitada)+'</td>';
+                            $fila=$fila + '<td id="'+item.idSalaFuncion+'" class="esbirro">'+traerButaca(item.habilitada)+'</td>';
                             $totalcolumna=item.columna;
                         }
                         else{
                         
                             $fila= $fila+'<td >'+$filaActual+'</td></tr>'+
-                            '<td>'+item.fila+'</td><td id="'+item.idSalaFuncion+'" onclick="seleccionButaca('+item.idSalaFuncion+')">'+traerButaca(item.habilitada)+'</td>';
+                            '<td>'+item.fila+'</td><td id="'+item.idSalaFuncion+'" class="esbirro">'+traerButaca(item.habilitada)+'</td>';
                             $filaActual=item.fila;
                             
                         }
@@ -81,16 +82,28 @@
             $imagen='<span class="oculta" ><img src="assets/img/butacaLibre.png" /></span>';
         }
         if(item==1){
-            $imagen='<span><img src="assets/img/butacaLibre.png" ></span>';        
+            $imagen='<input type="hidden" value="libre"><img src="assets/img/butacaLibre.png" />';        
         }
         if(item==2){
-            $imagen='<span><img src="assets/img/butacaOcupada.png"></span>';        
+            $imagen='<input type="hidden" value="ocupada"><img src="assets/img/butacaOcupada.png" />';        
         }
         return $imagen;
     } 
 
-    function seleccionButaca(item){               
-           var reservar = $.ajax({
+    $("#esquemaSala").on("click",".esbirro",function(){   
+        event.stopPropagation();
+       $idButaca = $(this)[0].id; 
+        $estadoButaca = $(this).children('input').val();
+         $(this).children('img').attr('src',$pathSeleccionada);
+        console.log($pathSeleccionada);
+        
+          
+    });
+
+function reservarButaca(){
+
+    
+ var reservar = $.ajax({
                 url : URI.BUTACA,
                 method : "POST",
                  data: {idSalaFuncion:item},
@@ -100,10 +113,13 @@
             reservar.done(function(res){
             if(!res.error){
                 
+                
             }
                 else{
                 alert(res.error);
                 };
           
             });
-    }
+}
+})(jQuery)    
+    
