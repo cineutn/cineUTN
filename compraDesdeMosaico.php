@@ -63,7 +63,11 @@
 					  <li role="presentation" class="active"><a>Horario</a></li>
 					  <li role="presentation"><a href="#">15:00</a></li>
 					  <li class="opcionSeleccionada">
-						<a data-toggle="modal" href="#modalLogin">17:00 <button class="btn btn-default btn-sm pull-right btn-seleccionado" >Comprar</button></a>
+						<a data-toggle="modal">17:00 
+						
+							<button id="btnComprar" class="btn btn-default btn-sm pull-right btn-seleccionado" >Comprar</button>
+						
+						</a>
 						
 				      </li>
 					</ul>
