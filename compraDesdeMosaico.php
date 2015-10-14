@@ -1,4 +1,13 @@
-<?php require("partials/header.php"); ?>
+<?php
+
+    require("utils/request.php");
+    $request = new Request();
+    $idPelicula = $request->idPelicula;
+
+    require("partials/header.php"); 
+?>
+
+    <input type='hidden' id='idPelicula' value=<?php echo $idPelicula ?>></input>
 
         <div class="row detallesPelicula">
 			<div class="col-md-4">

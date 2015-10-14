@@ -19,7 +19,7 @@
             method : "GET",
             dataType : 'json',
             data  :   {
-                'id' : '1'
+                'id' :  $('#idPelicula').val()
             }
         });
         

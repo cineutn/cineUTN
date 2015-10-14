@@ -1,0 +1,7 @@
+select * 
+from peliculacomplejo
+inner join complejo on complejo.idComplejo=peliculacomplejo.idComplejo
+inner join pelicula 
+on peliculacomplejo.idPelicula=pelicula.idPelicula
+inner join funcion on funcion.idPelicula=pelicula.idPelicula and funcion.idComplejo=peliculacomplejo.idComplejo
+where peliculacomplejo.idPelicula=1
