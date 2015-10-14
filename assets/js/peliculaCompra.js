@@ -94,7 +94,8 @@
 
     };
 
-function validarCompra(){    
+function validarCompra(){
+
     if($("#cantidadEntradas").val()>6){
     alert('Debe elegir menos de 6 entradas');
         return;
@@ -102,16 +103,16 @@ function validarCompra(){
     else if($("#cantidadEntradas").val()>0){    
         location.href='ventaButacas.php';
     }
+    
 }
 
 
     //aca obtengo el valor seleccionado del combo
     function cantidad(combo){ 
+
         var cantidad=parseInt($("#cantidadEntradas").val());
         cantidad=cantidad+parseInt(combo.value);
         $("#cantidadEntradas").val(cantidad)
-        
-       
         
     }
 

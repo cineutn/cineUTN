@@ -1,9 +1,5 @@
 <?php require("partials/header.php"); ?>
 
-<?php 
-     $var = isset($_POST['var1']) ? $_POST['var1'] : '';
- ?>
-
        <div class="row paginaCompra">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 path">
                	<div>EL CLAN CASTELLANO (P16)</div>
@@ -14,8 +10,8 @@
                	>
                <b>3. PAGOS</b>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 " id="imagenPelicula">               
-               <!--<img id="imagenPelicula" src="assets/img/pelicula3.jpg" class="img-responsive" alt="Responsive image">-->
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 ">               
+               <img id="imagenPelicula" src="" class="img-responsive" alt="Responsive image">
             </div>
             <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 datosPelicula">
                 <div class="row">
@@ -152,16 +148,7 @@
                                 <span class="help-block"></span>                           
                             </div>
                         </div>
-                        <div class="form-group hide" id="divTelefono">
-                            <div class="col-xs-3 col-md-3 col-lg-3">
-                                <span>TELÉFONO :</span>
-                            </div>
-                            <div class="col-xs-7 col-md-7 col-lg-7">                                
-                                <input value="" name="telefonoCliente" id="telefonoCliente" placeholder="Teléfono" class="form-control input-datosCompra" type="tel">
-                                <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
-                                <span class="help-block"></span>
-                            </div>
-                        </div>                    
+                                         
                     </div>                      
             </form>            
         </div>

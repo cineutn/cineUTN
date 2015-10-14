@@ -13,7 +13,6 @@
   $rbReserva = $("#rbReserva");
   $inputNombre = $("#nombreTitular");
   $inputEmail = $("#emailCliente");
-  $inputTel = $("#telefonoCliente");
   $cmbMes = $("#cmbMes");
   $cmbAño = $("#cmbAño");
   $numeroTarjeta = $("#numeroTarjeta");
@@ -24,7 +23,7 @@
   $divNumeroTarjeta = $("#divNumeroTarjeta");
   $divCodigoSeguridad = $("#divCodigoSeguridad");
   $divFechaVencimiento = $("#divFechaVencimiento");
-  $divTelefono = $("#divTelefono");
+
 
   $( document ).ready(function(){
         obtenerDetalleFuncion();
@@ -62,9 +61,8 @@
                 $("#horarioFuncion").text(res.data[0].horario);
                 $("#sala").text(res.data[0].sala);               
                 $("#detalleCompra").text(res.data[0].titulo+' '+res.data[0].idioma+' ('+res.data[0].clasificacion+')');                
-                $("#idTipoFuncion").val(res.data[0].idTipoFuncion);
-                $imagen = '<img id="imagenPelicula" src='+res.data[0].imagen+' class="img-responsive" alt="Responsive image">';                
-                $imagenPelicula.append($imagen);                
+                $("#idTipoFuncion").val(res.data[0].idTipoFuncion);                
+                $imagenPelicula.attr("src" , res.data[0].imagen);                
                                
             }else{
                 
@@ -229,18 +227,6 @@
     }else{
       $tipoCompra = "Reserva";
 
-     var tel = $inputTel.val();
-     if(tel.length == 0){
-          $inputTel.closest(".form-group").addClass("has-error");
-          $inputTel.siblings(".glyphicon-remove").removeClass("hide");
-          $inputTel.siblings(".help-block").html("Debe completar este campo");
-          bRetorno = false;
-        }else{
-          $inputTel.closest(".form-group").removeClass("has-error");
-          $inputTel.siblings(".glyphicon-remove").addClass("hide");
-          $inputTel.siblings(".help-block").html("");
-          
-        }
     }
 
      var mail = $inputEmail.val();
@@ -280,7 +266,6 @@
       $divNumeroTarjeta.removeClass("hide");
       $divCodigoSeguridad.removeClass("hide");
       $divFechaVencimiento.removeClass("hide");
-      $divTelefono.addClass("hide");
     }
   });
 
@@ -293,7 +278,6 @@
       $divNumeroTarjeta.addClass("hide");
       $divCodigoSeguridad.addClass("hide");
       $divFechaVencimiento.addClass("hide");
-      $divTelefono.removeClass("hide");
     }
   });
   
