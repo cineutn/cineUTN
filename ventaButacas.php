@@ -8,142 +8,7 @@
 			           	>               
 			           <b>2. BUTACAS</b>
 			</div>
-			<div class="col-md-6">
-				<!--<div  class="row compraPelicula"style="background-color:white;" >					
-					<div>
-						<img style="width:95%; margin:5%;" src="assets/img/SeatScreen.png" />
-					</div>
-					<div style="display:inline-block; margin:3px;">        
-						<div><p></p></div>
-						<div style="font-size:large;">A</div> 
-						<div style="font-size:large;">B</div> 
-						<div style="font-size:large;">C</div> 
-						<div style="font-size:large;">D</div> 
-						<div style="font-size:large;">E</div> 
-						<div style="font-size:large;">F</div> 
-						<div style="font-size:large;">G</div> 
-					</div>
-					<div style="display:inline-block; margin:3px;"  >  
-						<div style="font-size:large; ">1</div>
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div>
-					</div>
-					<div style="display:inline-block; margin:3px;" >    
-						<div style="font-size:large; visibility:hidden;">2</div>
-						<div style="visibility:hidden;"><img src="assets/img/butacaOcupada.png" /></div> 
-						<div style="visibility:hidden;"><img src="assets/img/butacaOcupada.png" /></div> 
-						<div style="visibility:hidden;"><img src="assets/img/butacaOcupada.png" /></div> 
-						<div style="visibility:hidden;"><img src="assets/img/butacaOcupada.png" /></div> 
-						<div style="visibility:hidden;"><img src="assets/img/butacaOcupada.png" /></div> 
-						<div style="visibility:hidden;"><img src="assets/img/butacaOcupada.png" /></div> 
-						<div style="visibility:hidden;"><img src="assets/img/butacaOcupada.png" /></div>         
-					</div>
-					<div style="display:inline-block; margin:3px;" >    
-						<div style="font-size:large;">2</div>
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaSeleccionada.png" /></div>
-					</div>    
-					<div style="display:inline-block; margin:3px;">    
-						<div style="font-size:large;">3</div>
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaSeleccionada.png" /></div>
-					</div>
-					<div style="display:inline-block; margin:3px;" >    
-						<div style="font-size:large;">4</div>
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div>
-					</div>
-					<div style="display:inline-block; margin:3px;">  
-						<div style="font-size:large;">5</div>  
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaOcupada.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div>
-					</div>
-					<div style="display:inline-block; margin:3px;" >    
-						<div style="font-size:large;">6</div>
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaOcupada.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div>
-					</div>
-					<div style="display:inline-block; margin:3px;">    
-						<div style="font-size:large;">7</div>
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaOcupada.png" /></div> 
-						<div><img src="assets/img/butacaOcupada.png" /></div>
-					</div>
-					<div style="display:inline-block; margin:3px;" >    
-						<div style="font-size:large;">8</div>
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaOcupada.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaOcupada.png" /></div>
-					</div>
-					<div style="display:inline-block; margin:3px;" >    
-						 <div style="font-size:large; visibility:hidden;">9</div>
-						<div style="visibility:hidden;"><img src="assets/img/butacaOcupada.png" /></div> 
-						<div style="visibility:hidden;"><img src="assets/img/butacaOcupada.png" /></div> 
-						<div style="visibility:hidden;"><img src="assets/img/butacaOcupada.png" /></div> 
-						<div style="visibility:hidden;"><img src="assets/img/butacaOcupada.png" /></div> 
-						<div style="visibility:hidden;"><img src="assets/img/butacaOcupada.png" /></div> 
-						<div style="visibility:hidden;"><img src="assets/img/butacaOcupada.png" /></div> 
-						<div style="visibility:hidden;"><img src="assets/img/butacaOcupada.png" /></div>         
-					</div>
-					<div style="display:inline-block; margin:3px;">  
-						<div style="font-size:large;">10</div>  
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaLibre.png" /></div> 
-						<div><img src="assets/img/butacaOcupada.png" /></div> 
-						<div><img src="assets/img/butacaOcupada.png" /></div>
-					</div>
-					<div style="display:inline-block; margin:3px;">            
-					   <div><p></p></div>
-						<div style="font-size:large;">A</div> 
-						<div style="font-size:large;">B</div> 
-						<div style="font-size:large;">C</div> 
-						<div style="font-size:large;">D</div> 
-						<div style="font-size:large;">E</div> 
-						<div style="font-size:large;">F</div> 
-						<div style="font-size:large;">G</div> 
-					</div>
-				</div>-->
+			<div class="col-md-5">	               
                 <table class="esquema" id="esquemaSala">                    
                     
                 </table>
@@ -161,7 +26,8 @@
 				</div>
 				<div class="divBotonButacas">
 					
-					<button type="button" onclick="location.href='pagoEntradas.php';" class="btn btn-success btn-Confirmar pull-left">SIGUIENTE</button>
+					<!--<button type="button" onclick="location.href='pagoEntradas.php';" class="btn btn-success btn-Confirmar pull-left">SIGUIENTE</button>-->
+                    <button type="button" onclick="reservarButaca()" class="btn btn-success btn-Confirmar pull-left">SIGUIENTE</button>
 				</div>
 			</div>
 		</div> 

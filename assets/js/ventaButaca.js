@@ -1,4 +1,3 @@
-(function($){
 var URI = {        
         SALA : 'actions/actionVentaButacas.php?action=obtener',
         BUTACA :'actions/actionVentaButacas.php?action=reservar',
@@ -6,7 +5,10 @@ var URI = {
     
     $esquemaSala=$("#esquemaSala");     
     $pathSeleccionada="assets/img/butacaSeleccionada.png";
-
+    $pathLibre="assets/img/butacaLibre.png";
+    $cantidadEntradas=3;//cambiar este parametro lo tiene que obtener de la pagina anterior
+    $precioEntradas=25;//cambiar este parametro lo tiene que obtener de la pagina anterior
+    $idSalaFuncion=0;
     $(document ).ready(function(){	   
         obtenerDetalleSala();  
     });
@@ -32,7 +34,7 @@ var URI = {
                 if(res.data[0].fila>0){
                     
                     $filaActual=res.data[0].fila;
-                    $totalcolumna=0;
+                    $totalcolumna=0;                 
                     $fila ='<tr><td>'+$filaActual+'</td>';
                     
                     res.data.forEach(function(item){                 
@@ -48,23 +50,21 @@ var URI = {
                             $filaActual=item.fila;
                             
                         }
-                    });
+                    });                    
+                    
                     $fila =$fila +('<td>'+$filaActual+'</td></tr><tr><td></td>');
                     for(i=1;i<=$totalcolumna;i++){
                         $fila =$fila +('<td>'+i+'</td>');                    
                     }
                     $fila =$fila +('</tr>');
                     
-                    $pantalla= '<tr><td colspan="'+$totalcolumna+'"><img style="width:100%; " src="assets/img/SeatScreen.png" /></td></tr>';
+                    $pantalla= '<tr><td></td><td colspan='+$totalcolumna+'><img style="width:100%; height:25%;" src="assets/img/SeatScreen.png" /></td><td></td></tr>';
                     $pantalla=$pantalla+ $fila;
                     $esquemaSala.append($pantalla);
                 }
                 else{
                 alert('No hay sala');
                 }
-
-                
-                
             }else{
                 
                 alert(res.mensaje);
@@ -92,34 +92,53 @@ var URI = {
 
     $("#esquemaSala").on("click",".esbirro",function(){   
         event.stopPropagation();
-       $idButaca = $(this)[0].id; 
+        $idButaca = $(this)[0].id; 
         $estadoButaca = $(this).children('input').val();
-         $(this).children('img').attr('src',$pathSeleccionada);
-        console.log($pathSeleccionada);
         
-          
+            if($estadoButaca==='libre' && $cantidadEntradas>0){
+                $(this).children('img').attr('src',$pathSeleccionada);
+                $(this).children('input').attr('value','seleccionada');
+                $cantidadEntradas--;
+            }
+            if($estadoButaca==='seleccionada'){
+                $(this).children('img').attr('src',$pathLibre);
+                $(this).children('input').attr('value','libre');
+                $cantidadEntradas++;
+            }        
+        
     });
 
 function reservarButaca(){
 
-    
- var reservar = $.ajax({
-                url : URI.BUTACA,
-                method : "POST",
-                 data: {idSalaFuncion:item},
-                dataType : 'json',
-            });        
+    if($cantidadEntradas===0){
+        $( ".esbirro" ).each(function() {
+        if($(this).children('input').val() ==='seleccionada'){
+            console.log($(this)[0].id);
+        }
+    });
+     /*var reservar = $.ajax({
+                    url : URI.BUTACA,
+                    method : "POST",
+                     data: {idSalaFuncion:item},
+                    dataType : 'json',
+                });        
 
-            reservar.done(function(res){
-            if(!res.error){
-                
-                
-            }
-                else{
-                alert(res.error);
-                };
-          
-            });
+                reservar.done(function(res){
+                if(!res.error){
+
+
+                }
+                    else{
+                    alert(res.error);
+                    };
+
+                });*/
+    
+    }
+    else{    
+        alert('Aun debe elegir '+$cantidadEntradas+' entradas');
+    }
+    
 }
-})(jQuery)    
+
     
