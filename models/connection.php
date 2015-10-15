@@ -1,10 +1,10 @@
 <?php
 class ConnectionCine extends MySQLi {
      private static $instance = null ;
-     const HOST = 'db4free.net';
-     const USER = 'utncine';
-     const PASSWORD = 'cineutn2015';       
-     const DATABASE = 'utncine';
+     const HOST = 'sql3.freesqldatabase.com';
+     const USER = 'sql393132';
+     const PASSWORD = 'uW2!nJ9!';       
+     const DATABASE = 'sql393132';
          
      private function __construct($host, $user, $password, $database){ 
          parent::__construct($host, $user, $password, $database);

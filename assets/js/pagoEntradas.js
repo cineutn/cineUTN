@@ -154,7 +154,7 @@
 
   function validarDatos()
   {
-    bRetorno = true;
+    var bRetorno = true;
     $bCompra = $rbCompra.prop("checked");
     $tipoCompra = "";
 
@@ -185,7 +185,7 @@
           $numeroTarjeta.closest(".form-group").addClass("has-error");
           $numeroTarjeta.siblings(".glyphicon-remove").removeClass("hide");
           $numeroTarjeta.siblings(".help-block").html("Cantidad de digitos ingresados erroneos");
-          
+          bRetorno = false;
         }else{
           $numeroTarjeta.closest(".form-group").removeClass("has-error");
           $numeroTarjeta.siblings(".glyphicon-remove").addClass("hide");
@@ -203,7 +203,7 @@
           $codigoSeguridad.closest(".form-group").addClass("has-error");
           $codigoSeguridad.siblings(".glyphicon-remove").removeClass("hide");
           $codigoSeguridad.siblings(".help-block").html("Cantidad de digitos ingresados erroneos");
-          
+           bRetorno = false;
         }else{
           $codigoSeguridad.closest(".form-group").removeClass("has-error");
           $codigoSeguridad.siblings(".glyphicon-remove").addClass("hide");
@@ -218,6 +218,7 @@
         $cmbAño.closest(".form-group").addClass("has-error");
         $cmbAño.siblings(".glyphicon-remove").removeClass("hide");
         $cmbAño.siblings(".help-block").html("La fecha ingresada ha caducado");
+        bRetorno = false;
       }else{
         $cmbAño.closest(".form-group").removeClass("has-error");
         $cmbAño.siblings(".glyphicon-remove").addClass("hide");
@@ -226,7 +227,6 @@
 
     }else{
       $tipoCompra = "Reserva";
-
     }
 
      var mail = $inputEmail.val();
@@ -247,7 +247,7 @@
           $inputNombre.closest(".form-group").addClass("has-error");
           $inputNombre.siblings(".glyphicon-remove").removeClass("hide");
           $inputNombre.siblings(".help-block").html("Debe completar este campo");
-           bRetorno = false;
+          bRetorno = false;
         }else{
           $inputNombre.closest(".form-group").removeClass("has-error");
           $inputNombre.siblings(".glyphicon-remove").addClass("hide");
@@ -326,6 +326,8 @@
           idVendedor = sessionStorage.getItem('idUser');
         }
 
+        var fecha = returnFormatfecha();
+
         monto = parseFloat($("#precioTotal").text());
         
         var comprar = $.ajax({
@@ -337,7 +339,8 @@
                     monto:monto,
                     tipoVenta:tipoCompra,
                     idVendedor:idVendedor,
-                    idCliente:idCliente
+                    idCliente:idCliente,
+                    fecha:fecha
                   } 
         });
        
@@ -351,6 +354,26 @@
         });  
 
       } 
-        
+  
   });
+
+  function returnFormatfecha()
+  {
+    var dfecha = new Date();
+
+    var dMes = dfecha.getMonth() + 1;
+    dMes = ("0" + dMes).slice(-2);
+    var dDia = dfecha.getUTCDate();
+    dDia = ("0" + dDia).slice(-2);
+    var dHora = dfecha.getHours();
+    dHora = ("0" + dHora).slice(-2);
+    var dMinutos = dfecha.getMinutes();
+    dMinutos = ("0" + dMinutos).slice(-2);
+    var dSegundos = dfecha.getSeconds();
+    dSegundos = ("0" + dSegundos).slice(-2);
+    var dFechaEnvio = dfecha.getFullYear() +'-'+  dMes +'-'+ dDia + ' ' + dHora + ':' + dMinutos + ':' + dSegundos;
+      
+    return dFechaEnvio;
+  };  
+
 })(jQuery);
