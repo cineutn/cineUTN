@@ -131,11 +131,11 @@ function reservarButaca(){
 
 
         }
-            else{
+        else{
             alert(res.error);
             };
-
         });
+        
     });
     }
     else{    
