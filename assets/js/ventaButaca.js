@@ -40,13 +40,13 @@ var URI = {
                     res.data.forEach(function(item){                 
                         if($filaActual===item.fila)
                         {
-                            $fila=$fila + '<td id="'+item.idSalaFuncion+'" class="esbirro">'+traerButaca(item.habilitada)+'</td>';
+                            $fila=$fila + '<td id="'+item.idSalaFuncion+'" class=" centrar esbirro">'+traerButaca(item.habilitada)+'</td>';
                             $totalcolumna=item.columna;
                         }
                         else{
                         
-                            $fila= $fila+'<td >'+$filaActual+'</td></tr>'+
-                            '<td>'+item.fila+'</td><td id="'+item.idSalaFuncion+'" class="esbirro">'+traerButaca(item.habilitada)+'</td>';
+                            $fila= $fila+'<td class="centrar" >'+$filaActual+'</td></tr>'+
+                            '<td>'+item.fila+'</td><td id="'+item.idSalaFuncion+'" class="centrar esbirro">'+traerButaca(item.habilitada)+'</td>';
                             $filaActual=item.fila;
                             
                         }
@@ -54,7 +54,7 @@ var URI = {
                     
                     $fila =$fila +('<td>'+$filaActual+'</td></tr><tr><td></td>');
                     for(i=1;i<=$totalcolumna;i++){
-                        $fila =$fila +('<td>'+i+'</td>');                    
+                        $fila =$fila +('<td class="centrar">'+i+'</td>');                    
                     }
                     $fila =$fila +('</tr>');
                     

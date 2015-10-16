@@ -329,7 +329,8 @@
         var fecha = returnFormatfecha();
 
         monto = parseFloat($("#precioTotal").text());
-        
+        codigo = rand_code();
+
         var comprar = $.ajax({
             url : URI.VENDER,
             method : "POST",
@@ -340,7 +341,8 @@
                     tipoVenta:tipoCompra,
                     idVendedor:idVendedor,
                     idCliente:idCliente,
-                    fecha:fecha
+                    fecha:fecha,
+                    codigo:codigo
                   } 
         });
        
@@ -374,6 +376,21 @@
     var dFechaEnvio = dfecha.getFullYear() +'-'+  dMes +'-'+ dDia + ' ' + dHora + ':' + dMinutos + ':' + dSegundos;
       
     return dFechaEnvio;
-  };  
+  };
+
+  function rand_code(){
+    caracteres = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    longitud = 10;
+    code = "";
+
+      for (x=0; x < longitud; x++){
+
+        rand = Math.floor(Math.random()*caracteres.length);      
+        code += caracteres.substr(rand, 1);
+
+      }
+
+    return code;
+}
 
 })(jQuery);

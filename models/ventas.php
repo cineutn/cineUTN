@@ -16,13 +16,15 @@ class Ventas
         $idVendedor = $this->connection->real_escape_string($venta['idVendedor']);
         $idCliente = $this->connection->real_escape_string($venta['idCliente']);
         $fecha = $this->connection->real_escape_string($venta['fecha']);
+        $codigo = $this->connection->real_escape_string($venta['codigo']);
         $query = "INSERT INTO venta VALUES (
                     DEFAULT,
                     '$monto',
                     '$tipoVenta',
                     '$idVendedor',
                     '$idCliente',
-                    '$fecha')";
+                    '$fecha',
+                    '$codigo')";
 
         if($this->connection->query($query)){
             $venta['idVenta'] = $this->connection->insert_id;

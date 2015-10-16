@@ -21,6 +21,7 @@ function realizarVenta($request){
     $venta["idVendedor"] = $request->idVendedor;   
     $venta["idCliente"] = $request->idCliente;
     $venta["fecha"] = $request->fecha;   
+    $venta["codigo"] = $request->codigo;   
     if($nuevo = $c->createVenta($venta)){
         sendResponse(array(
             "error" => false,
