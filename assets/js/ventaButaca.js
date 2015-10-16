@@ -110,35 +110,40 @@ var URI = {
 
 function reservarButaca(){
 
+    var $idSalaFuncion=[];
     if($cantidadEntradas===0){
         $( ".esbirro" ).each(function() {
-        if($(this).children('input').val() ==='seleccionada'){
-            console.log($(this)[0].id);
-        }
+        if($(this).children('input').val() ==='seleccionada'){            
+            $idSalaFuncion.push($(this)[0].id);
+        }            
     });
-     /*var reservar = $.ajax({
-                    url : URI.BUTACA,
-                    method : "POST",
-                     data: {idSalaFuncion:item},
-                    dataType : 'json',
-                });        
-
-                reservar.done(function(res){
-                if(!res.error){
-
-
-                }
-                    else{
-                    alert(res.error);
-                    };
-
-                });*/
     
+    $.each( $idSalaFuncion, function( index, value ){
+        var reservar = $.ajax({
+                        url : URI.BUTACA,
+                        method : "POST",
+                         data: {idSalaFuncion:value},
+                        dataType : 'json',
+                    });        
+
+        reservar.done(function(res){
+        if(!res.error){
+
+
+        }
+            else{
+            alert(res.error);
+            };
+
+        });
+    });
     }
     else{    
         alert('Aun debe elegir '+$cantidadEntradas+' entradas');
     }
     
 }
+
+
 
     
