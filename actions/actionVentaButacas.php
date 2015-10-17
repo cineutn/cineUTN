@@ -36,8 +36,9 @@ function reservarButaca($request){
     $b = new ventaButacas();
       
 	$salaFuncionID = $request->idSalaFuncion;	
+    $habilitada = $request->hanilitada;	
 						  
-    if($nuevo = $b->updateButaca($salaFuncionID)){
+    if($nuevo = $b->updateButaca($salaFuncionID,$habilitada)){
         sendResponse(array(
             "error" => false,
             "mensaje" => "pelicula creado con exito. ",

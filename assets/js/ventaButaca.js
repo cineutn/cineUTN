@@ -6,12 +6,13 @@ var URI = {
     $esquemaSala=$("#esquemaSala");     
     $pathSeleccionada="assets/img/butacaSeleccionada.png";
     $pathLibre="assets/img/butacaLibre.png";
-    $cantidadEntradas=$('#idCantidadEntradas').val();
-    $precioEntradas=25;//cambiar este parametro lo tiene que obtener de la pagina anterior
-    $idSalaFuncion=0;
+    $cantidadEntradas=$('#idCantidadEntradas').val();    
+    
     $(document ).ready(function(){	   
-        obtenerDetalleSala();  
+        obtenerDetalleSala(); 
+         console.log($cantidadEntradas);
     });
+
 	
     function obtenerDetalleSala()
     {   
@@ -40,13 +41,13 @@ var URI = {
                     res.data.forEach(function(item){                 
                         if($filaActual===item.fila)
                         {
-                            $fila=$fila + '<td id="'+item.idSalaFuncion+'" class=" centrar esbirro">'+traerButaca(item.habilitada)+'</td>';
+                            $fila=$fila + '<td id="'+item.idSalaFuncion+'" class=" centrar esbirro">'+traerButaca(item.habilitada,item.idSalaFuncion)+'</td>';
                             $totalcolumna=item.columna;
                         }
                         else{
                         
                             $fila= $fila+'<td class="centrar" >'+$filaActual+'</td></tr>'+
-                            '<td>'+item.fila+'</td><td id="'+item.idSalaFuncion+'" class="centrar esbirro">'+traerButaca(item.habilitada)+'</td>';
+                            '<td>'+item.fila+'</td><td id="'+item.idSalaFuncion+'" class="centrar esbirro">'+traerButaca(item.habilitada,item.idSalaFuncion)+'</td>';
                             $filaActual=item.fila;
                             
                         }
@@ -76,60 +77,107 @@ var URI = {
         });
     };     
 
-    function traerButaca(item){
-        $imagen='';        
-        if(item==0){
+    function traerButaca(estado,id){
+        $imagen='';   
+         
+        if(estado==0){
             $imagen='<span class="oculta" ><img src="assets/img/butacaLibre.png" /></span>';
         }
-        if(item==1){
+        if(estado==1){
             $imagen='<input type="hidden" value="libre"><img src="assets/img/butacaLibre.png" />';        
         }
-        if(item==2){
+        if(estado==2){
             $imagen='<input type="hidden" value="ocupada"><img src="assets/img/butacaOcupada.png" />';        
+        }
+        if(estado==3){
+            butacas = sessionStorage.getItem('butacas');  
+            if(butacas!=null){
+                var arrayButaca = butacas.split(',');        
+                $.each(arrayButaca, function( index, value ){
+
+                    if(jQuery.inArray(id,value) ===-1){
+                        $imagen='<input type="hidden" value="seleccionada"><img src="assets/img/butacaSeleccionada.png" />';
+                    }
+                    else{
+                      $imagen='<input type="hidden" value="ocupada"><img src="assets/img/butacaOcupada.png" />'; 
+                    }
+                });
+            }else{
+                $imagen='<input type="hidden" value="ocupada"><img src="assets/img/butacaOcupada.png" />'; 
+            }                       
         }
         return $imagen;
     } 
 
-    $("#esquemaSala").on("click",".esbirro",function(){   
+    $("#esquemaSala").on("click",".esbirro",function(){       
         event.stopPropagation();
         $idButaca = $(this)[0].id; 
-        $estadoButaca = $(this).children('input').val();
-        
+        $estadoButaca = $(this).children('input').val();        
             if($estadoButaca==='libre' && $cantidadEntradas>0){
                 $(this).children('img').attr('src',$pathSeleccionada);
                 $(this).children('input').attr('value','seleccionada');
                 $cantidadEntradas--;
+                 
             }
             if($estadoButaca==='seleccionada'){
                 $(this).children('img').attr('src',$pathLibre);
                 $(this).children('input').attr('value','libre');
-                $cantidadEntradas++;
+                $cantidadEntradas++;    
+                 
             }        
-        
+       
     });
 
 function reservarButaca(){
 
     var $idSalaFuncion=[];
+    butacas = sessionStorage.getItem('butacas'); 
+    
     if($cantidadEntradas===0){
         $( ".esbirro" ).each(function() {
         if($(this).children('input').val() ==='seleccionada'){            
-            $idSalaFuncion.push($(this)[0].id);
+            $idSalaFuncion.push($(this)[0].id);            
         }            
     });
+        
     
-    $.each( $idSalaFuncion, function( index, value ){
+    //en caso de reelejir butacas libero las butacas en sesion
+    if(butacas!==null){
+        var arrayButaca = butacas.split(',')
+        
+        $.each(arrayButaca, function( index, value ){        
+            var reservar = $.ajax({
+                            url : URI.BUTACA,
+                            method : "POST",
+                             data: {idSalaFuncion:value,hanilitada:1},
+                            dataType : 'json',
+                        });        
+
+            reservar.done(function(res){
+            if(!res.error){            
+                
+            }
+            else{
+                alert(res.error);
+                };
+            });
+
+        });
+    } 
+        
+        
+    //guardo las butacas seleccionadas        
+    $.each($idSalaFuncion, function( index, value ){        
         var reservar = $.ajax({
                         url : URI.BUTACA,
                         method : "POST",
-                         data: {idSalaFuncion:value},
+                         data: {idSalaFuncion:value,hanilitada:3},
                         dataType : 'json',
                     });        
 
         reservar.done(function(res){
-        if(!res.error){
-
-
+        if(!res.error){            
+            sessionStorage.setItem('butacas',$idSalaFuncion);
         }
         else{
             alert(res.error);
