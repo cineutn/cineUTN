@@ -128,6 +128,9 @@ function validarCompra(){
         return;
     }
     else if(cantidad>0){    
+        
+        sessionStorage.setItem('cantidadEntradas',cantidades);
+        sessionStorage.setItem('preciosEntradas',precios);
         location.href='ventaButacas.php?cantidadEntradas='+cantidad+'&precio='+precioTotal;        
     }
     
