@@ -10,8 +10,7 @@
                <!--<img id="imagenPelicula" src="" class="img-responsive" alt="Responsive image">-->
             </div>
             <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 datosPelicula">
-                <input id="idTipoFuncion" name="idPelicula" type="hidden" class="hide" value="">
-                <input id="cantidadEntradas" name="cantidadEntradas" type="hidden" class="hide" value="0">
+                <input id="idTipoFuncion" name="idPelicula" type="hidden" class="hide" value="">                
                 <div class="row">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <label class="tituloDato" >PELICULA</label>

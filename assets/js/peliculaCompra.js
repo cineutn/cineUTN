@@ -12,15 +12,15 @@
     $imagenPelicula=$("#imagenPelicula");
     $idTipoFuncion=$("#idTipoFuncion").val();
     $precios=$("#precios");
-    $cantidadEntradas=$("#cantidadEntradas").val();
+
     $(document ).ready(function(){	   
         obtenerDetalleFuncion();  
     });
 	
     
     function obtenerDetalleFuncion()
-    {   
-         //$id = $idFuncion.val();
+    {
+        //$id = $idFuncion.val();
         $funcionID=1;//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior
         var obtener = $.ajax({
             url : URI.FUNCION,
@@ -68,7 +68,7 @@
                 res.data.forEach(function(item){
                 $precio =$precio +
                      '<tr><td class="columnaEntradaDescripcion"><SPAN>'+item.descripcion +'<SPAN></td >'+
-                      '<th class="columnaCantidad"><select name="" onchange="cantidad(this)"class="form-control comboCantidad">'+
+                      '<th class="columnaCantidad"><select name="" class="form-control comboCantidad">'+
                                 '<option value="0">0</option>'+
                                 '<option value="1">1</option>'+
                                 '<option value="2">2</option>'+
@@ -96,23 +96,40 @@
 
 function validarCompra(){
 
-    if($("#cantidadEntradas").val()>6){
+    var cantidades=[];
+    var precios=[];
+    var cantidad= 0;
+    var precioTotal=0;
+    $( ".comboCantidad option:selected" ).each(function() {        
+        cantidad=cantidad+parseInt($(this).text());
+        cantidades.push($(this).text());
+    });   
+    
+    
+    $('#precios tr').each(function() {        
+        precios.push($(this).find(".columnaPrecio").html());
+    });
+    
+    
+    for(var i=0;i<cantidades.length;i++){
+        console.log(cantidades[i]);
+        console.log(precios[i]);
+        var sinMoneda = precios[i].split('$');
+        precioTotal= precioTotal +(cantidades[i] *sinMoneda[0]);
+    console.log(precioTotal);
+    }
+
+        
+    
+    
+    
+    if(cantidad>6){
     alert('Debe elegir menos de 6 entradas');
         return;
     }
-    else if($("#cantidadEntradas").val()>0){    
-        location.href='ventaButacas.php';
+    else if(cantidad>0){    
+        location.href='ventaButacas.php?cantidadEntradas='+cantidad+'&precio='+precioTotal;        
     }
     
 }
-
-
-    //aca obtengo el valor seleccionado del combo
-    function cantidad(combo){ 
-
-        var cantidad=parseInt($("#cantidadEntradas").val());
-        cantidad=cantidad+parseInt(combo.value);
-        $("#cantidadEntradas").val(cantidad)
-        
-    }
 

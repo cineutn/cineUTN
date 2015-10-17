@@ -1,6 +1,15 @@
-<?php require("partials/header.php"); ?>
+<?php 
+    require("utils/request.php");    
+    $request = new Request();
+    $cantidadEntradas = $request->cantidadEntradas;
+    $precio=$request->precio;
+
+    require("partials/header.php");
+?>
 
 		<div class="row butacas">
+            <input type='hidden' id='idCantidadEntradas' value=<?php echo $cantidadEntradas ?>></input>
+            <input type='hidden' id='precio' value=<?php echo $precio ?>></input>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 path">
 			           	<div>EL CLAN CASTELLANO (P16)</div>
 			           	> DETALLE DE COMPRA >

@@ -6,7 +6,7 @@ var URI = {
     $esquemaSala=$("#esquemaSala");     
     $pathSeleccionada="assets/img/butacaSeleccionada.png";
     $pathLibre="assets/img/butacaLibre.png";
-    $cantidadEntradas=3;//cambiar este parametro lo tiene que obtener de la pagina anterior
+    $cantidadEntradas=$('#idCantidadEntradas').val();
     $precioEntradas=25;//cambiar este parametro lo tiene que obtener de la pagina anterior
     $idSalaFuncion=0;
     $(document ).ready(function(){	   
