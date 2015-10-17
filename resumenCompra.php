@@ -15,10 +15,10 @@
        <div class="confirmarOperacion">
             <div class="container">
 				<div class="row">
+													
 					<div id="qrCode" >
-						<img src="assets/img/subheaderbuy-all.jpg"	width="350" height="117" />
-						<img src="assets/img/a8dc6177fb875981e046e62bd56f8e9e.png" width="180" border="none" />
-								
+						<img id="imgCodigo" src="assets/img/subheaderbuy-all.jpg"	width="350" height="117" />						
+						<div id="contenedorQR"></div>
 					</div>
 				</div>
 				<div class="row">
@@ -68,7 +68,7 @@
 						  </tbody>
 						</table>
 				</div>
-				<div class="row">
+				<div class="row">				
 					<table width="96%" align="center" border="0" cellpadding="0" cellspacing="0" style="color:#575756;font-size:14px;border-collapse:collapse;font-family:'Arial Narrow', Lucida Sans Unicode, Lucida Grande, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, 'Helvetica Neue', Helvetica, Arial, sans-serif;">
 						<tbody>
 									  <tr>
@@ -143,6 +143,8 @@
 <?php require("partials/footer.php"); ?>
     
  	<link rel="stylesheet" href="assets/css/paginaInicio.css">
-    <link rel="stylesheet" href="assets/css/paginaCompra.css">
+    <link rel="stylesheet" href="assets/css/paginaCompra.css">   
     <script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
     <script src="assets/js/vendor/bootstrap.min.js"></script>
+	<script src="assets/js/vendor/jquery.qrcode-0.12.0.js"></script>
+	<script src="assets/js/resumenCompra.js"></script>

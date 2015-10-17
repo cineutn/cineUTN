@@ -170,3 +170,19 @@ thead tr th{
 
 	right: 20%;
 }
+
+#contenedorQR > * {
+    display: block;
+}
+
+#contenedorQR {
+    display: inline-block;
+   	vertical-align: middle;
+   	margin-left: 10px;
+   	margin-bottom: 10px;
+    box-shadow: 0 0 16px rgba(0,0,0,0.5);
+}
+
+#imgCodigo{
+	margin-bottom: 10px;
+}
