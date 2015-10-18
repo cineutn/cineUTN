@@ -111,17 +111,10 @@ function validarCompra(){
     });
     
     
-    for(var i=0;i<cantidades.length;i++){
-        console.log(cantidades[i]);
-        console.log(precios[i]);
+    for(var i=0;i<cantidades.length;i++){        
         var sinMoneda = precios[i].split('$');
-        precioTotal= precioTotal +(cantidades[i] *sinMoneda[0]);
-    console.log(precioTotal);
+        precioTotal= precioTotal +(cantidades[i] *sinMoneda[0]);    
     }
-
-        
-    
-    
     
     if(cantidad>6){
     alert('Debe elegir menos de 6 entradas');

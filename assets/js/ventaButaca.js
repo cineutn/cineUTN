@@ -6,11 +6,19 @@ var URI = {
     $esquemaSala=$("#esquemaSala");     
     $pathSeleccionada="assets/img/butacaSeleccionada.png";
     $pathLibre="assets/img/butacaLibre.png";
-    $cantidadEntradas=$('#idCantidadEntradas').val();    
+    $cantidadEntradas=$('#idCantidadEntradas').val(); 
+    $butacasSeleccionadas=0;
     
     $(document ).ready(function(){	   
         obtenerDetalleSala(); 
-         console.log($cantidadEntradas);
+        
+        butacas = sessionStorage.getItem('butacas'); 
+        if(butacas!=null){
+         var arrayButaca = butacas.split(',');     
+         $butacasSeleccionadas = arrayButaca.length;
+         console.log($butacasSeleccionadas);
+        }
+        
     });
 
 	
@@ -78,8 +86,7 @@ var URI = {
     };     
 
     function traerButaca(estado,id){
-        $imagen='';   
-         
+        $imagen='';         
         if(estado==0){
             $imagen='<span class="oculta" ><img src="assets/img/butacaLibre.png" /></span>';
         }
@@ -92,16 +99,13 @@ var URI = {
         if(estado==3){
             butacas = sessionStorage.getItem('butacas');  
             if(butacas!=null){
-                var arrayButaca = butacas.split(',');        
-                $.each(arrayButaca, function( index, value ){
-
-                    if(jQuery.inArray(id,value) ===-1){
-                        $imagen='<input type="hidden" value="seleccionada"><img src="assets/img/butacaSeleccionada.png" />';
-                    }
-                    else{
-                      $imagen='<input type="hidden" value="ocupada"><img src="assets/img/butacaOcupada.png" />'; 
-                    }
-                });
+                var arrayButaca = butacas.split(',');                
+                if(jQuery.inArray(id,arrayButaca)===-1){
+                    $imagen='<input type="hidden" value="ocupada"><img src="assets/img/butacaOcupada.png" />'; 
+                }
+                else{
+                    $imagen='<input type="hidden" value="seleccionada"><img src="assets/img/butacaSeleccionada.png" />';                                                                 
+                }
             }else{
                 $imagen='<input type="hidden" value="ocupada"><img src="assets/img/butacaOcupada.png" />'; 
             }                       
@@ -111,9 +115,9 @@ var URI = {
 
     $("#esquemaSala").on("click",".esbirro",function(){       
         event.stopPropagation();
-        $idButaca = $(this)[0].id; 
+        $idButaca = $(this)[0].id;         
         $estadoButaca = $(this).children('input').val();        
-            if($estadoButaca==='libre' && $cantidadEntradas>0){
+            if($estadoButaca==='libre' && $cantidadEntradas>$butacasSeleccionadas){
                 $(this).children('img').attr('src',$pathSeleccionada);
                 $(this).children('input').attr('value','seleccionada');
                 $cantidadEntradas--;
@@ -129,17 +133,14 @@ var URI = {
     });
 
 function reservarButaca(){
-
     var $idSalaFuncion=[];
-    butacas = sessionStorage.getItem('butacas'); 
-    
-    if($cantidadEntradas===0){
+    butacas = sessionStorage.getItem('butacas');     
+    if($cantidadEntradas===$butacasSeleccionadas){
         $( ".esbirro" ).each(function() {
         if($(this).children('input').val() ==='seleccionada'){            
             $idSalaFuncion.push($(this)[0].id);            
         }            
-    });
-        
+    });        
     
     //en caso de reelejir butacas libero las butacas en sesion
     if(butacas!==null){
