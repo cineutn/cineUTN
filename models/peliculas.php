@@ -69,6 +69,35 @@ class Peliculas
         return $peliculas;
     
     }
+    public function getPeliculaFuncionByID($id){
+        $query = "select a.idComplejo,nombre as nombreComplejo, f.idTipoFuncion,dia,horario,f.descripcion as formato, subtitulada   
+from peliculacomplejo a
+inner join complejo b on b.idComplejo=a.idComplejo
+inner join pelicula c on a.idPelicula=c.idPelicula
+inner join funcion  d on d.idPelicula=c.idPelicula and d.idComplejo=a.idComplejo
+inner join funcionhorario e on e.idFuncion=d.idFuncion
+inner join formato f on f.idTipoFuncion=d.idTipoFuncion where a.idPelicula='$id'";  
+       
+        $peliculas = array();
+        
+        try{
+            if( $result = $this->connection->query($query) ){
+                while($fila = $result->fetch_assoc()){
+                    $peliculas[] = $fila;
+                }
+                $result->free();
+            }
+            else {
+                    throw new Exception ($e->getMessage());
+           }
+        }
+        catch(Exception $e) {
+            throw new Exception ($e->getMessage());
+        }
+       
+        return $peliculas;
+    
+    }
     public function createPelicula($pelicula){        
 		$id = $this->connection->real_escape_string($pelicula['idPelicula']);
         $tituloPelicula = $this->connection->real_escape_string($pelicula['tituloPelicula']);

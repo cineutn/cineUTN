@@ -144,6 +144,28 @@ function obtenerPeliculaById($request){
 
 }
 
+function obtenerPeliculaFuncionById($request){
+    require("../models/peliculas.php");
+    $p = new Peliculas();
+    try{
+        if($pelicula = $p->getPeliculaFuncionByID($request->id)){
+            sendResponse(array(
+                "error" => false,
+                "mensaje" => "",
+                "data" => $pelicula
+            ));
+        }
+    
+    }
+    catch(Exception $e){
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => 'Error al obtener la pelicula. ' . $e->getMessage()
+        ));
+    }
+
+
+}
 
 $request = new Request();
 $action = $request->action;
@@ -162,6 +184,9 @@ switch($action){
         break;
     case "obtenerPeliculaById":
         obtenerPeliculaById($request);
+        break;
+    case "obtenerPeliculaFuncionById":
+        obtenerPeliculaFuncionById($request);
         break;
         
     
