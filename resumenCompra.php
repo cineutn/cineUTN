@@ -1,5 +1,11 @@
 <?php require("partials/header.php"); ?>
 
+<?php 
+
+	$varCodigo = isset($_POST["codigoVenta"]) ? $_POST["codigoVenta"] : ' ';
+	
+ ?>
+
        <div class="row paginaCompra">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 path">
                <div>EL CLAN CASTELLANO (P16)</div>
@@ -34,8 +40,7 @@
 						<tbody>
 							<tr>
 							  <td>C&#243;digo de Retiro:</td>
-							  <td style="font-weight:bold;color:#BC1818;">
-							  WJJJD9K</td>
+							  <td id="codigo" style="font-weight:bold;color:#BC1818;"><?php echo $varCodigo; ?></td>
 							</tr>
 							<tr>
 							  <td>Cine:</td>

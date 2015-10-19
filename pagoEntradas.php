@@ -161,6 +161,9 @@
             <button type="button" id="btnComprar" class="btn btn-success btn-Confirmar">CONFIRMAR OPERACION</button>           
             <div class="sombra"></div>        
         </div>
+        <form method="Post" action="resumenCompra.php" id="formCodigo">
+            <input name="codigoVenta" id="codigoVenta" type="hidden">
+        </form>
 		
 <?php require("partials/footer.php"); ?>
 

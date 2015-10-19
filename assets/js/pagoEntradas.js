@@ -24,6 +24,7 @@
   $divCodigoSeguridad = $("#divCodigoSeguridad");
   $divFechaVencimiento = $("#divFechaVencimiento");
 
+  $frmResumenCompra = $("#formCodigo");
 
   $( document ).ready(function(){
         obtenerDetalleFuncion();
@@ -330,7 +331,8 @@
 
         monto = parseFloat($("#precioTotal").text());
         codigo = rand_code();
-
+        $("#codigoVenta").val(codigo);
+        
         var comprar = $.ajax({
             url : URI.VENDER,
             method : "POST",
@@ -348,7 +350,8 @@
        
         comprar.done(function(res){
             if(!res.error){
-                alert(res.mensaje);
+                $frmResumenCompra.submit();
+
             }else{
                 event.preventDefault();
                 alert(res.mensaje);
