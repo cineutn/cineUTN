@@ -161,7 +161,10 @@
         });
 
         obtener.fail(function(res){
-            alert(res.responseText);
+            //alert(res.responseText);
+			$('#modalLoading .modal-body .progress' ).hide();
+			$('#modalLoading .modal-body' ).append('<span>Error cargando las funciones, intente mas tarde.</span>');
+			
         });
     
     }
