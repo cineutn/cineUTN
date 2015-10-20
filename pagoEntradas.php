@@ -1,5 +1,14 @@
 <?php require("partials/header.php"); ?>
 
+<?php 
+
+     require("utils/request.php");    
+    $request = new Request();
+   
+    $varIdFuncionDetalle=$request->idFuncionDetalle;
+
+ ?>
+
        <div class="row paginaCompra">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 path">
                	<div>EL CLAN CASTELLANO (P16)</div>
@@ -15,6 +24,7 @@
             </div>
             <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 datosPelicula">
                 <div class="row">
+                    <input name="idFuncionDetalle" id="idFuncionDetalle"  type="hidden" value=<?php echo $varIdFuncionDetalle; ?> >
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <label class="tituloDato">PELICULA</label>
                         <span class="datos" id="tituloPelicula">EL CLAN CASTELLANO (P16)</span>

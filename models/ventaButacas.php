@@ -9,9 +9,9 @@ class VentaButacas
         $this->connection = ConnectionCine::getInstance();
     }  
     
-     public function getFuncionSala($idFuncion){
-        $id = (int) $this->connection->real_escape_string($idFuncion);
-        $query = "SELECT * FROM sala_funcion WHERE idFuncion= $id  order by fila,columna";                    
+     public function getFuncionSala($idFuncionDetalle){
+        $id = (int) $this->connection->real_escape_string($idFuncionDetalle);
+        $query = "SELECT * FROM sala_funcion WHERE idFuncionDetalle= $id  order by fila,columna";                    
        
         $sala = array();
         if( $result = $this->connection->query($query) ){

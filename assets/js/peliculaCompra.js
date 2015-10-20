@@ -3,7 +3,7 @@
 		PRECIOS : 'actions/actionPeliculaCompra.php?action=obtenerPrecios',
     };
     
-	$idFuncion = $("#idFuncionDetalle").val();
+	$idFuncionDetalle = $("#idFuncionDetalle").val();
     $tituloPelicula =$("#tituloPelicula");
     $complejo =$("#complejo");
     $diaFuncion =$("#diaFuncion");
@@ -15,13 +15,14 @@
 
     $(document ).ready(function(){	   
         obtenerDetalleFuncion();  
+      
     });
 	
     
     function obtenerDetalleFuncion()
     {
         //$id = $idFuncion.val();
-        $funcionDetalleID=$idFuncion;//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior---cambio nombre variable,pato
+        $funcionDetalleID=$idFuncionDetalle;//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior---cambio nombre variable,pato
         var obtener = $.ajax({
             url : URI.FUNCION,
             method : "GET",
@@ -133,7 +134,7 @@ function validarCompra(){
         sessionStorage.setItem('idPrecios',ids);
         sessionStorage.setItem('cantidadEntradas',cantidades);
         sessionStorage.setItem('preciosEntradas',precios);
-        location.href='ventaButacas.php?cantidadEntradas='+cantidad+'&precio='+precioTotal;        
+        location.href='ventaButacas.php?cantidadEntradas='+cantidad+'&precio='+precioTotal+',&idFuncionDetalle='+$idFuncionDetalle;        
     }
     
 }

@@ -7,6 +7,7 @@ var URI = {
     $pathSeleccionada="assets/img/butacaSeleccionada.png";
     $pathLibre="assets/img/butacaLibre.png";
     $cantidadEntradas=$('#idCantidadEntradas').val(); 
+    $idFuncionDetalle=$('#idFuncionDetalle').val(); 
     $butacasSeleccionadas=0;
     
     $(document ).ready(function(){	   
@@ -25,7 +26,7 @@ var URI = {
     function obtenerDetalleSala()
     {   
          //$id = $idFuncion.val();
-        $funcionID=1;//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior
+        $funcionID= $idFuncionDetalle;//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior
         var obtener = $.ajax({
             url : URI.SALA,
             method : "GET",
@@ -179,6 +180,10 @@ function reservarButaca(){
         reservar.done(function(res){
         if(!res.error){            
             sessionStorage.setItem('butacas',$idSalaFuncion);
+            
+            location.href='pagoEntradas.php?idFuncionDetalle='+$idFuncionDetalle;
+            
+            
         }
         else{
             alert(res.error);

@@ -141,7 +141,7 @@ function obtenerEntradas(){
   function obtenerDetalleFuncion()
   {   
         //$id = $idFuncion.val();
-        $funcionID=1;//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior
+        $funcionID=$("#idFuncionDetalle").val();//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior
         var obtener = $.ajax({
             url : URI.FUNCION,
             method : "GET",
