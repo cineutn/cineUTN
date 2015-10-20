@@ -76,7 +76,7 @@
                                 '<option value="4">4</option>'+
                                 '<option value="5">5</option>'+
                                 '<option value="6">6</option>'+
-                            '</select></th><th class="columnaPrecio">'+item.valor+'$</th></tr>';               
+                            '</select></th><input type="hidden" value="'+item.idPrecio+'"><th class="columnaPrecio">'+item.valor+'$</th></tr>';               
                 
                 });
                 $precios.append($precio);
@@ -100,28 +100,37 @@ function validarCompra(){
     var precios=[];
     var cantidad= 0;
     var precioTotal=0;
-    $( ".comboCantidad option:selected" ).each(function() {        
+    var idPrecio=[];
+    var ids=[];
+    $( ".comboCantidad option:selected" ).each(function() {   
+        
         cantidad=cantidad+parseInt($(this).text());
         cantidades.push($(this).text());
     });   
     
     
-    $('#precios tr').each(function() {        
+    $('#precios tr').each(function() {  
+        idPrecio.push($(this).children('input').val());        
         precios.push($(this).find(".columnaPrecio").html());
     });
     
     
     for(var i=0;i<cantidades.length;i++){        
         var sinMoneda = precios[i].split('$');
-        precioTotal= precioTotal +(cantidades[i] *sinMoneda[0]);    
+        precioTotal= precioTotal +(cantidades[i] *sinMoneda[0]);
+        console.log(cantidades[i]);
+        if(cantidades[i]>0){
+            ids.push(idPrecio[i])
+        }
+        
     }
     
     if(cantidad>6){
     alert('Debe elegir menos de 6 entradas');
         return;
     }
-    else if(cantidad>0){    
-        
+    else if(cantidad>0){            
+        sessionStorage.setItem('idPrecios',ids);
         sessionStorage.setItem('cantidadEntradas',cantidades);
         sessionStorage.setItem('preciosEntradas',precios);
         location.href='ventaButacas.php?cantidadEntradas='+cantidad+'&precio='+precioTotal;        
