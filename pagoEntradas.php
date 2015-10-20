@@ -39,7 +39,7 @@
            	</div>
             <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 datosPelicula">
                 <div class="row">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         <label class="tituloDato">TIPO</label>
                         <span class="datos" id="cantidadEntradas">2 X ADULTOS</span>
                     </div>
@@ -68,6 +68,19 @@
             </div>
             <form class="form-horizontal" method="post" action="actions/actions.php" id="form-Registro">        
             <div class="row datos-Compra">
+                        <div class="form-group" id="divTipoPago">
+                            <div class="col-xs-3 col-md-3 col-lg-3">
+                                <span>TIPO DE PAGO :</span>
+                            </div>
+                            <div class="col-xs-7 col-md-7 col-lg-7">                                
+                                <select name="comboTipo" id="comboTipo" class="form-control input-datosCompra">
+                                    <option value="Tarjeta">Tarjeta</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                </select>
+                                <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
+                                <span class="help-block"></span>                             
+                            </div>
+                        </div>   
                         <div class="form-group" id="divMedioPago">
                             <div class="col-xs-3 col-md-3 col-lg-3">
                                 <span>MEDIO DE PAGO :</span>

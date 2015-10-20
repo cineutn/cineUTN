@@ -92,8 +92,8 @@
             var pelicula= $pelicula.text();
             var fecha= $fecha.text();
             var horario= $horario.text();
-            var entradas= $entradas.text;
-            var pagoTotal= $precioTotal.text;
+            var entradas= $entradas.text();
+            var pagoTotal= $precioTotal.text();
 
             codigoQR = codigoQR.substring(22, codigoQR.length - 1 );
             

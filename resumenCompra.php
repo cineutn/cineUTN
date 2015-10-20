@@ -3,7 +3,6 @@
 <?php 
 
 	$varCodigo = isset($_POST["codigoVenta"]) ? $_POST["codigoVenta"] : ' ';
-	$varCodigo = 's80rUU7Na0';
  ?>
 
        <div class="row paginaCompra">

@@ -88,6 +88,24 @@ function obtenerPrecios($request){
     }
 }
 
+function obtenerDetallePrecio($request){
+    require("../models/precios.php");
+    $c = new Precios();
+    $idPrecio = $request->idPrecio;
+    if($precio = $c->getDetallePrecio($idPrecio )){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $precio
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener detalle del precio. "
+        ));
+    }
+}
+
 function obtenerFormatos($request){
     require("../models/precios.php");
     $c = new Precios();
@@ -122,6 +140,9 @@ switch($action){
         break;
     case "obtenerFormatos":
         obtenerFormatos($request);
+        break;
+    case "detalle":
+        obtenerDetallePrecio($request);
         break;
     default:
         obtenerPrecios($request);

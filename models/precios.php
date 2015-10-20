@@ -29,6 +29,22 @@ class Precios
         return $precios;
     }   
 
+    public function getDetallePrecio($idPrecio){
+        $query = "SELECT 
+                    P.descripcion AS detalle 
+                    FROM precios P 
+                    WHERE idPrecio =  '$idPrecio'";  
+       
+        $precios = array();
+        if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $precios[] = $fila;
+            }
+            $result->free();
+        }
+        return $precios;
+    }   
+
     public function getFormatos(){
         $query = "SELECT DISTINCT descripcion, idFormato FROM formato";  
        

@@ -30,6 +30,23 @@ function obtenerFuncionSala($request){
     }
 }
 
+function obtenerButaca($request){
+    require("../models/ventaButacas.php");
+    $p = new VentaButacas();
+    $idSalaFuncion=$request->idSalaFuncion;
+    if($butaca = $p->getButaca($idSalaFuncion)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $butaca
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener la butaca. "
+        ));
+    }
+}
 
 function reservarButaca($request){
 	require("../models/ventaButacas.php");
@@ -59,6 +76,9 @@ $action = $request->action;
 switch($action){       
     case "obtener":
         obtenerFuncionSala($request);
+        break;
+     case "butaca":
+        obtenerButaca($request);
         break;
     case "reservar":
         reservarButaca($request);

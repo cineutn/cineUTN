@@ -23,6 +23,20 @@ class VentaButacas
         return $sala;
     }
     
+     public function getButaca($idSalaFuncion){
+        $id = (int) $this->connection->real_escape_string($idSalaFuncion);
+        $query = "SELECT CONCAT(fila, '-', `columna`) AS butaca
+                  FROM sala_funcion WHERE idSalaFuncion = $id ";                    
+       
+        $butaca = array();
+        if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $butaca[] = $fila;
+            }
+            $result->free();
+        }
+        return $butaca;
+    }
     
     
     public function updateButaca($salaFuncionID,$habilitada){

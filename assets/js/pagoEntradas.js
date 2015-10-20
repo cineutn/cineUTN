@@ -4,7 +4,10 @@
         TARJETAS : 'actions/actionTarjetas.php?action=obtener',
         DATOSTARJETA :  'actions/actionTarjetas.php?action=obtenerDatos',
         FUNCION : 'actions/actionPeliculaCompra.php?action=obtener',
-        VENDER : 'actions/actionVenta.php?action=vender'
+        VENDER : 'actions/actionVenta.php?action=vender',
+        BUTACA : 'actions/actionVentaButacas.php?action=butaca',
+        UPDATEBUTACA : 'actions/actionVentaButacas.php?action=reservar',
+        DETALLEPRECIO: 'actions/actionPrecios.php?action=detalle'
     };
 
   $imagenPelicula  = $("#imagenPelicula");
@@ -18,22 +21,33 @@
   $numeroTarjeta = $("#numeroTarjeta");
   $codigoSeguridad =  $("#codigoSeguridad");
   $btnComprar = $("#btnComprar");
+  $cantidadEntradas = $("#cantidadEntradas");
+  $butacas = $("#butacas");
+  $precioTotal = $("#precioTotal");
 
   $divMedioPago = $("#divMedioPago");
   $divNumeroTarjeta = $("#divNumeroTarjeta");
   $divCodigoSeguridad = $("#divCodigoSeguridad");
   $divFechaVencimiento = $("#divFechaVencimiento");
+  $divTipoPago = $("#divTipoPago");
 
   $frmResumenCompra = $("#formCodigo");
 
   $( document ).ready(function(){
         obtenerDetalleFuncion();
+        obtenerEntradas();
+        obtenerButacas();
         cargarComboAño();
         obtenerTarjetas();
         $rbCompra.prop("checked", true);
 
         $nombreCompleto = sessionStorage.getItem('nombre') + ' ' + sessionStorage.getItem('apellido');
         $email = sessionStorage.getItem('email');
+        var tipoUsuario =  sessionStorage.getItem('tipoUsuario');
+
+        if (tipoUsuario == "cliente"){
+          $divTipoPago.addClass("hide");
+        }
 
         if ($nombreCompleto == 'null null'){
           $nombreCompleto ='';
@@ -43,8 +57,89 @@
         $inputEmail.val($email);
   });
 
-   function obtenerDetalleFuncion()
-    {   
+  function obtenerButacas(){
+
+    var idButacas = sessionStorage.getItem('butacas');
+    var arrayButacas = idButacas.split(",");
+    var butacas = '';
+
+    for (var i = 0; i < arrayButacas.length ; i++) {
+        var idButaca = parseInt(arrayButacas[i]);
+
+          var obtenerButaca = $.ajax({
+              url : URI.BUTACA,
+              async: false,
+              method : "GET",
+              data: {idSalaFuncion:idButaca},
+              dataType : 'json',
+          });
+
+          obtenerButaca.done(function(res){
+            if(!res.error){   
+              butacas = butacas + ' ' + res.data[0].butaca;
+                
+            }else{
+                
+                alert(res.mensaje);
+            }
+        });
+
+  };
+
+  $butacas.text(butacas);  
+};
+
+function obtenerEntradas(){
+
+    var cantidadEntradas = sessionStorage.getItem('cantidadEntradas');
+    var arrayEntradas = cantidadEntradas.split(",");
+    var entradas = '';
+
+    var idPrecios = sessionStorage.getItem('idPrecios');
+    var arrayPrecios = idPrecios.split(",");
+
+    var preciosEntradas = sessionStorage.getItem('preciosEntradas');
+    preciosEntradas = preciosEntradas.replace("$","");
+    var arrayPreciosEntradas = preciosEntradas.split(",");
+    var precioTotal = '0';
+
+    for (var i = 0; i < arrayEntradas.length ; i++) {
+        var idPrecio = parseInt(arrayPrecios[i]);
+        var cantidad = parseInt(arrayEntradas[i]);
+        var monto =  parseInt(arrayPreciosEntradas[i]);
+
+        precioTotal = parseInt(precioTotal) + parseInt(monto);
+
+        if (cantidad > 0) {
+
+            var obtenerDetalle = $.ajax({
+              url : URI.DETALLEPRECIO,
+              async: false,
+              method : "GET",
+              data: {idPrecio:idPrecio},
+              dataType : 'json',
+          });
+
+          obtenerDetalle.done(function(res){
+            if(!res.error){   
+              entradas = entradas + ' ' + cantidad + ' X ' + res.data[0].detalle + '<br>';
+                
+            }else{
+                
+                alert(res.mensaje);
+            }
+        });
+        }
+          
+
+  };
+  $("#montoTotal").text('$' + precioTotal);
+  $precioTotal.text(precioTotal);
+  $cantidadEntradas.html(entradas);  
+};
+
+  function obtenerDetalleFuncion()
+  {   
         //$id = $idFuncion.val();
         $funcionID=1;//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior
         var obtener = $.ajax({
@@ -75,7 +170,7 @@
             alert(res.responseText)
         });
 
-    };
+  };
 
 
   function obtenerTarjetas()
@@ -158,8 +253,9 @@
     var bRetorno = true;
     $bCompra = $rbCompra.prop("checked");
     $tipoCompra = "";
+    var tipoPago = $("#comboTipo").val();
 
-    if ($bCompra){
+    if ($bCompra == true && tipoPago == "Tarjeta"){
       $tipoCompra = "Compra";
 
       var idTarjeta = $cmbTarjetas.val();
@@ -258,11 +354,33 @@
     return bRetorno;
   };
 
+  $("#comboTipo").on("change", function(){
+    $bCompra = $rbCompra.prop("checked");
+    var tipo = $("#comboTipo").val();
+
+    if (tipo == "Efectivo" && $bCompra == true ){
+
+      $divMedioPago.addClass("hide");
+      $divNumeroTarjeta.addClass("hide");
+      $divCodigoSeguridad.addClass("hide");
+      $divFechaVencimiento.addClass("hide");
+
+    }else if(tipo == "Tarjeta" && $bCompra == true){
+
+      $divMedioPago.removeClass("hide");
+      $divNumeroTarjeta.removeClass("hide");
+      $divCodigoSeguridad.removeClass("hide");
+      $divFechaVencimiento.removeClass("hide");
+    }
+
+  });
+
   $rbCompra.on("change", function(){
     $bCompra = $rbCompra.prop("checked");
     if ($bCompra){
       $rbReserva.prop("checked", false);
 
+      $divTipoPago.removeClass("hide");
       $divMedioPago.removeClass("hide");
       $divNumeroTarjeta.removeClass("hide");
       $divCodigoSeguridad.removeClass("hide");
@@ -275,6 +393,7 @@
     if ($bReserva){
       $rbCompra.prop("checked", false);
       
+      $divTipoPago.addClass("hide");
       $divMedioPago.addClass("hide");
       $divNumeroTarjeta.addClass("hide");
       $divCodigoSeguridad.addClass("hide");
@@ -350,6 +469,8 @@
        
         comprar.done(function(res){
             if(!res.error){
+
+
                 $frmResumenCompra.submit();
 
             }else{
@@ -361,6 +482,38 @@
       } 
   
   });
+  
+  function actualizarButacas(){
+
+    var idButacas = sessionStorage.getItem('butacas');
+    var arrayButacas = idButacas.split(",");
+    var butacas = '';
+
+    for (var i = 0; i < arrayButacas.length ; i++) {
+        var idButaca = parseInt(arrayButacas[i]);
+
+          var obtenerButaca = $.ajax({
+              url : URI.UPDATEBUTACA,
+              async: false,
+              method : "GET",
+              data: {idSalaFuncion:idButaca,
+                     hanilitada:3},
+              dataType : 'json',
+          });
+
+          obtenerButaca.done(function(res){
+            if(!res.error){   
+              butacas = butacas + ' ' + res.data[0].butaca;
+                
+            }else{
+                
+                alert(res.mensaje);
+            }
+        });
+
+    };
+
+  };
 
   function returnFormatfecha()
   {
