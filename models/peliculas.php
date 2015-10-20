@@ -70,7 +70,7 @@ class Peliculas
     
     }
     public function getPeliculaFuncionByID($id){
-        $query = "select a.idComplejo,nombre as nombreComplejo, f.idTipoFuncion,dia,horario,f.descripcion as formato, subtitulada   
+        $query = "select a.idComplejo,nombre as nombreComplejo, f.idTipoFuncion,dia,horario,f.descripcion as formato, subtitulada,idFuncionDetalle    
 from peliculacomplejo a
 inner join complejo b on b.idComplejo=a.idComplejo
 inner join pelicula c on a.idPelicula=c.idPelicula

@@ -102,10 +102,10 @@ button.margenTextbox{
 }
 .titulo{
 	
-    font-size: 21px;
-        color: white;
+    font-size: 18px;
+    color: white;
     font-weight: bold;
-    }
+}
 .trailer{
 	float: right;
 }
@@ -169,6 +169,12 @@ button.margenTextbox{
     
     border: 1px solid #ddd;
 }
-
+#tituloFunciones  .list-group{
+    margin-bottom: 0px;
+}
+#tituloFunciones  .list-group .list-group-item
+{
+    border: 0px;
+}
 
 

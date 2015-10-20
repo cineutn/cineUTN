@@ -3,12 +3,11 @@
         PELICULA : 'actions/actionPeliculas.php?action=obtenerPeliculaById',
         PELICULAFUNCION : 'actions/actionPeliculas.php?action=obtenerPeliculaFuncionById'
     }; 
-    var datosFunciones;
     
     $( document ).ready(function(){  
             otenerPeliculabyID();   
             otenerPeliculaFuncionbyID();
-            $('#tree').treeview({data: getTree(datosFunciones)});
+            
         
     });
     
@@ -22,6 +21,9 @@
             dataType : 'json',
             data  :   {
                 'id' :  $('#idPelicula').val()
+            },
+            beforeSend : function(){
+                $('#modalLoading').modal('show');
             }
         });
         
@@ -42,6 +44,9 @@
                 event.preventDefault();
                 alert(res.mensaje);
             }
+             
+             
+             
         });
 
         obtener.fail(function(res){
@@ -50,7 +55,7 @@
     
     };
     function otenerPeliculaFuncionbyID(){
-        debugger;
+        
         var obtener = $.ajax({
             url : URI.PELICULAFUNCION,
             method : "GET",
@@ -63,27 +68,34 @@
                         
          obtener.done(function(res){
             if(!res.error){
+                $('#modalLoading').modal('hide');
                anteriorComplejo='';
                 var tem=[];
                 
                $.each(res.data, function(i, item) {
-                   formato=item.subtitulada=='1' ? 'Subtitulada' : '';
+                   formato=item.subtitulada=='1' ? 'Subtitulada' : '';           
                    
-                   
-                   debugger;
-                   //si es el mismo complejo
+               //si es el mismo complejo
                    if(item.nombreComplejo==anteriorComplejo){
                        //si es el mismo dia
                         if(tem.slice(-1)[0].dias.slice(-1)[0].dia==item.dia){
                             //si es el mismo formato
                             if(tem.slice(-1)[0].dias.slice(-1)[0].formatos.slice(-1)[0].formato==item.formato + ' ' + formato){
-                                tem.slice(-1)[0].dias.slice(-1)[0].formatos.slice(-1)[0].horarios.push(item.horario);
+                                tem.slice(-1)[0].dias.slice(-1)[0].formatos.slice(-1)[0].horarios.push(
+                                    {
+                                          horario:  item.horario,
+                                          idFuncionDetalle:  item.idFuncionDetalle
+                                    }
+                                );
                             }else{
                             //distinto formato
                                 tem.slice(-1)[0].dias.slice(-1)[0].formatos.push(
                                     {
                                         formato : item.formato + ' ' + formato, 
-                                        horarios : [item.horario]
+                                        horarios : [{
+                                            horario:  item.horario,
+                                            idFuncionDetalle:  item.idFuncionDetalle
+                                            }]
                                                                             
                                     }
                                 );
@@ -96,7 +108,10 @@
                                     dia : item.dia,
                                     formatos : [{
                                         formato : item.formato + ' ' + formato, 
-                                        horarios : [item.horario]
+                                        horarios : [{
+                                          horario:  item.horario,
+                                          idFuncionDetalle:  item.idFuncionDetalle
+                                            }]
                                                                             
                                     }]
                            
@@ -108,7 +123,7 @@
                        
                    
                    }else{
-                        debugger;
+                        
                        anteriorComplejo=item.nombreComplejo;
                        
                        
@@ -118,7 +133,10 @@
                                 dia : item.dia,
                                 formatos : [{
                                     formato : item.formato + ' ' + formato, 
-                                    horarios : [item.horario]
+                                    horarios : [{
+                                          horario:  item.horario,
+                                          idFuncionDetalle:  item.idFuncionDetalle
+                                            }]
                                                                             
                                     }]
                            
@@ -126,21 +144,14 @@
                        });
                    
                    }
-                   /*
-                    dia: "Lunes 21"
-                    formato: "2D"
-                    horario: "14:30"
-                    idComplejo: "1"
-                    idTipoFuncion: "1"
-                    nombreComplejo: "UTN Avellaneda"
-                    subtitulada: "1"
-                   */
-                   
-                   
                    
                 });
                 
-               datosFunciones=tem; 
+                $('#tree').treeview({
+                    data: getTree(tem),
+                    enableLinks :true
+                
+                });
                 
             }else{
                 
@@ -157,160 +168,52 @@
     function getTree(datosFunciones) {
       // Some logic to retrieve, or generate tree structure
         
-        var arbolFunciones= [];
+        var arbolCine= [];
         
-        while(tem.length>0){
+        while(datosFunciones.length>0){
             complejo=datosFunciones.shift();
-            ramaArbol={
+            nodoComplejos={
                 text:complejo.complejo,
-                nodes:[]
-            }
+                nodes:[],
+                state: {
+                    
+                    expanded: false
+                  }
+             }
             while(complejo.dias.length>0){
                 diaFuncion=complejo.dias.shift();
-                ramaArbol.nodes.push(
+                
+                nodoFuncion=
                     {
                         text:diaFuncion.dia,
                         nodes:[]
-                    });
-                while(diaFuncion.formatos>0){
+                    };
+                while(diaFuncion.formatos.length>0){
                 //quedo aca
+                    formato=diaFuncion.formatos.shift();
+                    nodoFormato={
+                        text:formato.formato,
+                        nodes:[]
+                        
+                    };
+                    while(formato.horarios.length>0){
+                            temHorario=formato.horarios.shift();
+                        nodoFormato.nodes.push({
+                            text : temHorario.horario,
+                            href: "paginaCompra.php?idFuncionDetalle="+temHorario.idFuncionDetalle,
+                        });
+                    }
+                     nodoFuncion.nodes.push(nodoFormato);          
                 }
-                
+                nodoComplejos.nodes.push(nodoFuncion);
             }
-        
+        arbolCine.push(nodoComplejos);
         
         }
         
-        var tree = [
-              {
-                text: "UTN Avellaneda",
-                nodes: [
-                  {
-                    text: "Lunes",
-                    nodes: [
-                      {
-                        text: "2D",
-                        nodes: [
-                            {
-                                text: "15:15 HS"
-                            },
-                            {
-                                text: "17:00 HS"
-                            },
-                            {
-                                text: "19:10 HS",
-                            }
-                        ]
-                      },
-                      {
-                        text: "3D"
-                      }
-                    ]
-                  },
-                  {
-                    text: "Martes"
-                  }
-                ]
-              },
-              {
-                text: "UTN Medrano",
-                nodes: [
-                  {
-                    text: "Lunes",
-                    nodes: [
-                      {
-                        text: "2D",
-                        node: [
-                            {
-                                text: "15:15 HS"
-                            }
-                        ]
-                      },
-                      {
-                        text: "3D"
-                      }
-                    ]
-                  },
-                  {
-                    text: "Martes"
-                  }
-                ]
-              },
-              {
-                text: "UTN Lugano",
-                nodes: [
-                  {
-                    text: "Lunes",
-                    nodes: [
-                      {
-                        text: "2D",
-                        nodes: [
-                            {
-                                text: "15:15 HS"
-                            }
-                        ]
-                      },
-                      {
-                        text: "3D"
-                      }
-                    ]
-                  },
-                  {
-                    text: "Martes"
-                  }
-                ]
-              },
-              {
-                text: "UTN otra",
-                nodes: [
-                  {
-                    text: "Lunes",
-                    nodes: [
-                      {
-                        text: "2D",
-                        node: [
-                            {
-                                text: "15:15 HS"
-                            }
-                        ]
-                      },
-                      {
-                        text: "3D"
-                      }
-                    ]
-                  },
-                  {
-                    text: "Martes"
-                  }
-                ]  
-              },
-              {
-                text: "UTN otra mas",
-                nodes: [
-                  {
-                    text: "Lunes",
-                    nodes: [
-                      {
-                        text: "2D",
-                        node: [
-                            {
-                                text: "15:15 HS"
-                            }
-                        ]
-                      },
-                      {
-                        text: "3D"
-                      }
-                    ]
-                  },
-                  {
-                    text: "Martes"
-                  }
-                ]  
-              }
-            ];
         
-          return tree;
+        
+          return arbolCine;
     }
 
 })(jQuery)

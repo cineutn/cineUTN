@@ -3,7 +3,7 @@
 		PRECIOS : 'actions/actionPeliculaCompra.php?action=obtenerPrecios',
     };
     
-	//$idFuncion = $("#idFuncion");
+	$idFuncion = $("#idFuncionDetalle").val();
     $tituloPelicula =$("#tituloPelicula");
     $complejo =$("#complejo");
     $diaFuncion =$("#diaFuncion");
@@ -21,11 +21,11 @@
     function obtenerDetalleFuncion()
     {
         //$id = $idFuncion.val();
-        $funcionID=1;//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior
+        $funcionDetalleID=$idFuncion;//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior---cambio nombre variable,pato
         var obtener = $.ajax({
             url : URI.FUNCION,
             method : "GET",
-             data: {idFuncion:$funcionID},
+             data: {idFuncion:$funcionDetalleID},
             dataType : 'json',
         });        
 

@@ -29,7 +29,7 @@ class PeliculaCompra
                     inner join idioma il on fn.idIdioma = il.idIdioma
                     inner join formato fo on fn.idTipoFuncion = fo.idTipoFuncion
                     inner join complejo cm on cm.idComplejo = fn.idComplejo
-                    where fn.idFuncion = $id";  
+                    where fh.idFuncionDetalle = $id";  
        
         $funcionDetalle = array();
         if( $result = $this->connection->query($query) ){

@@ -1,5 +1,14 @@
-<?php require("partials/header.php"); ?>
+<?php
+    require("utils/request.php");
+    $request = new Request();
+    $idFuncionDetalle = $request->idFuncionDetalle;
 
+
+     require("partials/header.php"); 
+
+
+?>
+<input type='hidden' id='idFuncionDetalle' value= <?php echo $idFuncionDetalle ?> ></input>
        <div class="row paginaCompra">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 path">
                <div id="detalleCompra">EL CLAN CASTELLANO (P16)</div>

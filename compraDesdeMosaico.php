@@ -10,7 +10,7 @@
     <input type='hidden' id='idPelicula' value=<?php echo $idPelicula ?>></input>
 
         <div class="row detallesPelicula">
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="titulo">
 				</div>
 				<div class="imagenPelicula">
@@ -31,114 +31,46 @@
 				</div>
 			</div>
             
-			<div class="col-md-8">
-				
+			<div class="col-md-6">
+				<div class="titulo">
+                    Trailer
+				</div>
 				<!-- 16:9 aspect ratio -->
 				<div class="embed-responsive embed-responsive-16by9">
 				  <iframe class="embed-responsive-item" src=""></iframe>
 				</div> 
 				
 			</div>
+            <div class="col-md-4">
+                <div  id="tituloFunciones">
+                    <ul class="list-group">
+                        <li class="list-group-item"  style="color:undefined;background-color:red;">FUNCIONES</li>	
+                    </ul>
+                </div>
+                <div  id="tree">
+				
+				
+                </div>
+            </div>
 		</div>
-    <div class="row">
-        
-        <div class="col-md-12">
-			<ul class="list-group">
-                <li class="list-group-item" data-nodeid="0" style="color:undefined;background-color:red;">FUNCIONES</li>	
-            </ul>
-				
-        </div>
-    </div>
-    <div class="row">
-        
-        <div class="col-md-12" id="tree">
-				
-				
-        </div>
-    </div>
-
-		<!--<div class="row compraPelicula">
-            <div id="listComplejo" class="list-group col-md-3">
-              <a class="cabeceraLista">
-                Complejo
-              </a>
-              <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-              <a href="#" class="list-group-item">Morbi leo risus</a>
-              <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-              <a href="#" class="list-group-item">Vestibulum at eros</a>
+    	
+        <div class="modal" tabindex="-1" id="modalLoading" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Cargando...</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                <span class="sr-only">Cargando...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="listDias" class="list-group col-md-3">
-              <a href="#" class="list-group-item cabeceraLista">
-                Día
-              </a>
-              <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-              <a href="#" class="list-group-item">Morbi leo risus</a>
-              <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-              <a href="#" class="list-group-item">Vestibulum at eros</a>
-            </div>
-            <div id="listDias" class="list-group col-md-3">
-              <a href="#" class="list-group-item cabeceraLista">
-                Formato
-              </a>
-              <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-              <a href="#" class="list-group-item">Morbi leo risus</a>
-              <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-              <a href="#" class="list-group-item">Vestibulum at eros</a>
-            </div>
-            <div id="listDias" class="list-group col-md-3">
-              <a href="#" class="list-group-item cabeceraLista">
-                Horario
-              </a>
-              <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-              <a href="#" class="list-group-item">Morbi leo risus</a>
-              <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-              <a href="#" class="list-group-item">Vestibulum at eros</a>
-            </div>-->
-			<!--<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-			   <div class="panel panel-default col-md-3">
-					<ul class="nav nav-pills nav-stacked">
-					  <li role="presentation" class="active"><a>Complejo</a></li>
-					  <li class="opcionSeleccionada"><a>Complejo 1</a></li>
-					</ul>
-			  </div>
-			  <div class="panel panel-default col-md-3">
-					<ul class="nav nav-pills nav-stacked">
-					  <li class="active"><a>Día</a></li>
-					  <li><a href="#">Lunes</a></li>
-					  <li><a href="#">Martes</a></li>
-					  <li class="opcionSeleccionada"><a href="#">Miercoles</a></li>
-					  <li><a href="#">Jueves</a></li>
-					  <li><a href="#">Viernes</a></li>
-					  <li><a href="#">Sabado</a></li>
-					  <li><a href="#">Domingo</a></li>
+        </div>	
 
-					</ul>
-			  </div>
-			   <div class="panel panel-default col-md-3">
-					<ul class="nav nav-pills nav-stacked">
-					  <li role="presentation" class="active"><a>Formato</a></li>
-					  <li class="opcionSeleccionada"><a href="#">2d Subtitulado</a></li>
-					  <li><a href="#">2d Doblado</a></li>
-					</ul>
-			  </div>
-			   <div class="panel panel-default col-md-3">
-					<ul class="nav nav-pills nav-stacked">
-					  <li role="presentation" class="active"><a>Horario</a></li>
-					  <li role="presentation"><a href="#">15:00</a></li>
-					  <li class="opcionSeleccionada">
-						<a data-toggle="modal">17:00 
-						
-							<button id="btnComprar" class="btn btn-default btn-sm pull-right btn-seleccionado" >Comprar</button>
-						
-						</a>
-						
-				      </li>
-					</ul>
-			  </div>-->
-		
-		
-
-     
 <?php require("partials/footer.php"); ?>
 
 <link rel="stylesheet" href="assets/css/paginaInicio.css"> 
