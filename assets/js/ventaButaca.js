@@ -40,7 +40,7 @@ var URI = {
                 $fila=''; 
                 $filaActual='';
                 
-                if(res.data[0].fila>0){
+                if(res.data[0].fila!=null){
                     
                     $filaActual=res.data[0].fila;
                     $totalcolumna=0;                 
@@ -70,7 +70,7 @@ var URI = {
                     $pantalla= '<tr><td></td><td colspan='+$totalcolumna+'><img style="width:100%; height:25%;" src="assets/img/SeatScreen.png" /></td><td></td></tr>';
                     $pantalla=$pantalla+ $fila;
                     $esquemaSala.append($pantalla);
-                }
+               }
                 else{
                 alert('No hay sala');
                 }
