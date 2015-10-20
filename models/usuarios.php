@@ -22,8 +22,11 @@ class Usuario
     }
 
     public function validateUser($id,$password){
-        $query = "SELECT U.idUsuario, U.nombre, U.apellido, U.tipoUsuario, E.perfil, U.email FROM usuario U LEFT JOIN empleado E ON U.idUsuario = E.idUsuario 
-        WHERE  U.usuario = '".$id."' AND U.contraseña = '". $password . "'";  
+        $query = "SELECT U.idUsuario, U.nombre, U.apellido, TU.detalle AS tipoUsuario, E.perfil, U.email 
+                    FROM usuario U 
+                    LEFT JOIN empleado E ON U.idUsuario = E.idUsuario 
+                    INNER JOIN tipousuario TU ON U.tipoUsuario = TU.id
+                    WHERE  U.usuario = '".$id."' AND U.contraseña = '". $password . "'";  
         $r = $this->connection->query($query);
         return $r->fetch_assoc();
     }

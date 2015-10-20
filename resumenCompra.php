@@ -3,7 +3,7 @@
 <?php 
 
 	$varCodigo = isset($_POST["codigoVenta"]) ? $_POST["codigoVenta"] : ' ';
-	
+	$varCodigo = 's80rUU7Na0';
  ?>
 
        <div class="row paginaCompra">
@@ -18,7 +18,7 @@
                	>
                <b>4. CONFIRMACION</b></b>
             </div>   
-       <div class="confirmarOperacion">
+       <div class="confirmarOperacion" id="contenedorVenta">
             <div class="container">
 				<div class="row">
 													
@@ -44,31 +44,31 @@
 							</tr>
 							<tr>
 							  <td>Cine:</td>
-							  <td>UTN FRA</td>
+							  <td id="complejo">UTN FRA</td>
 							</tr>
 							<tr>
 							  <td >Sala:</td>
-							  <td>Sala 3</td>
+							  <td id="sala">Sala 3</td>
 							</tr>
 							<tr>
 							  <td >Pel&#237;cula:</td>
-							  <td >EL CLAN</td>
+							  <td id="pelicula">EL CLAN</td>
 							</tr>
 							<tr>
 							  <td >Fecha:</td>
-							  <td >Miercoles 26 Abril</td>
+							  <td id="fecha">Miercoles 26 Abril</td>
 							</tr>
 							<tr>
 							  <td >Horario:</td>
-							  <td >17:00</td>
+							  <td id="horario">17:00</td>
 							</tr>
 							<tr>
 							  <td >Entradas:</td>
-							  <td >2 x ADULTO ($200.00 - M-5 M-6)</td>
+							  <td id="entradas">2 x ADULTO ($200.00 - M-5 M-6)</td>
 							</tr>					  
 							<tr>
 							  <td>Pago Total:</td>
-							  <td>$200.00</td>
+							  <td id="precioTotal">$200.00</td>
 							</tr>
 						  </tbody>
 						</table>

@@ -34,4 +34,29 @@ class Ventas
         }
     }
 
+    public function getVenta($codigo){
+
+        $query = "SELECT V.codigo, C.nombre AS Complejo, P.titulo AS pelicula, S.descripcion AS Sala, FH.dia AS Fecha, FH.horario, V.monto AS precioTotal
+                    FROM venta V
+                    INNER JOIN ventadetalle VD ON V.idVenta = VD.idVenta
+                    INNER JOIN sala_funcion SF ON VD.idSalaFuncion = SF.idSalaFuncion
+                    INNER JOIN sala S ON S.idSala = SF.idSala
+                    INNER JOIN funcion F ON F.idFuncion = SF.idFuncion
+                    INNER JOIN pelicula P ON F.idPelicula = P.idPelicula
+                    INNER JOIN complejo C ON C.idComplejo = F.idComplejo
+                    INNER JOIN funcionhorario FH ON SF.idFuncionDetalle = FH.idFuncionDetalle
+                    WHERE V.codigo =  '$codigo'";
+
+        $venta = array();
+        if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $venta[] = $fila;
+            }
+            $result->free();
+        }
+        return $venta;
+
+    }
+
+
 }

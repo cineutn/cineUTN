@@ -11,6 +11,24 @@ function sendResponse($response){
     echo json_encode($response);
 }
 
+function obtenerVenta($request){
+    require("../models/ventas.php");
+    $c = new Ventas();
+    $codigo  = $request->codigo;
+    if($venta = $c->getVenta($codigo)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $venta
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener la venta. "
+        ));
+    }
+}
+
 function realizarVenta($request){
     require("../models/ventas.php");
     $c = new Ventas();
@@ -41,6 +59,9 @@ $action = $request->action;
 switch($action){             
     case "vender":
         realizarVenta($request);
+        break;
+    case "obtener":
+        obtenerVenta($request);
         break;
     
 }

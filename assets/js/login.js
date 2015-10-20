@@ -12,8 +12,9 @@
        
         var loginUser = $.ajax({
             url : URI.LOGIN,
-            method : "POST",
+            method : "GET",
             dataType : 'json',
+            async: false,
             data : $form.serialize()
         });
 
@@ -25,9 +26,9 @@
                 sessionStorage.setItem('apellido', res.data.apellido);
                 sessionStorage.setItem('email', res.data.email);
                 debugger;
-                $('#modalLogin').modal('hide');
+                 /*$('#modalLogin').modal('hide');
                 
-                /*alert(res.mensaje);*/
+               alert(res.mensaje);*/
             }else{
                 alert(res.mensaje);
 
