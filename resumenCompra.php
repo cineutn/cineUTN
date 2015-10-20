@@ -23,7 +23,7 @@
 				<div class="row">
 													
 					<div id="qrCode" >
-						<img id="imgCodigo" src="assets/img/subheaderbuy-all.jpg"	width="350" height="117" />						
+						<img id="imgCodigo" src="assets/img/subheaderbuy-all.jpg" width="350" height="117" />						
 						<div id="contenedorQR"></div>
 					</div>
 				</div>

@@ -55,7 +55,7 @@
     // Check if canvas is available in the browser (as Modernizr does)
     var hasCanvas = (function () {
 
-        var elem = document.createElement('canvas');
+        var elem = document.createElement('canvas');        
         return Boolean(elem.getContext && elem.getContext('2d'));
     }());
     var hasArcTo = Object.prototype.toString.call(window.opera) !== '[object Opera]';

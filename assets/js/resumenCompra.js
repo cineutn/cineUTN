@@ -15,11 +15,14 @@
     $horario = $('#horario');
     $entradas = $('#entradas');
     $precioTotal = $('#precioTotal');
+    
 
     $( document ).ready(function(){
         updateQrCode();
         obtenerVenta();
+        $miCanvas = $divContenedor.children('canvas');
         enviarEmail();
+        
     });
 
     function updateQrCode() {
@@ -81,8 +84,18 @@
         if (tipoUsuario == "cliente" ){
 
             var email = sessionStorage.getItem('email');
-            var nombreCompleto = sessionStorage.getItem('nombre') + ', ' + sessionStorage.getItem('apellido')
-            var mensaje =  $divContenedorVenta.html();
+            var nombreCompleto = sessionStorage.getItem('nombre') + ', ' + sessionStorage.getItem('apellido');                       
+            var codigoQR = $miCanvas[0].toDataURL("image/png");
+            var codigo = $codigoVenta.text();
+            var cine = $complejo.text();
+            var sala= $sala.text();
+            var pelicula= $pelicula.text();
+            var fecha= $fecha.text();
+            var horario= $horario.text();
+            var entradas= $entradas.text;
+            var pagoTotal= $precioTotal.text;
+
+            codigoQR = codigoQR.substring(22, codigoQR.length - 1 );
             
             var obtener = $.ajax({
             url : URI.EMAIL,
@@ -90,7 +103,15 @@
             dataType : 'json',
             data:   {email:email,
                     nombreCompleto:nombreCompleto,
-                    mensaje:mensaje}
+                    codigoQR:codigoQR,
+                    codigo:codigo,
+                    cine:cine,
+                    sala:sala,
+                    pelicula:pelicula,
+                    fecha:fecha,
+                    horario:horario,
+                    entradas:entradas,
+                    pagoTotal:pagoTotal}
             });
 
             obtener.done(function(res){
