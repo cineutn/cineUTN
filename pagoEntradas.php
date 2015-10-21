@@ -11,7 +11,7 @@
 
        <div class="row paginaCompra">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 path">
-               	<div>EL CLAN CASTELLANO (P16)</div>
+               	<div>TITULO PELICULA</div>
                	> DETALLE DE COMPRA >
                 	<a href="paginaCompra.php">1. ENTRADAS</a>
                	>               
@@ -27,23 +27,23 @@
                     <input name="idFuncionDetalle" id="idFuncionDetalle"  type="hidden" value=<?php echo $varIdFuncionDetalle; ?> >
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <label class="tituloDato">PELICULA</label>
-                        <span class="datos" id="tituloPelicula">EL CLAN CASTELLANO (P16)</span>
+                        <span class="datos" id="tituloPelicula"></span>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                        <label class="tituloDato"> CINE</label>
-                       <span class="datos" id="complejo">UTN FRA</span>
+                       <span class="datos" id="complejo"></span>
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <label class="tituloDato">DIA</label>
-                        <span class="datos" id="diaFuncion">Lunes 14 Septiembre</span>
+                        <span class="datos" id="diaFuncion"></span>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                         <label class="tituloDato">HORARIO</label>
-                        <span class="datos" id="horarioFuncion">14:00</span>                      
+                        <span class="datos" id="horarioFuncion"></span>                      
                     </div>
                     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                        <label class="tituloDato">SALA</label>
-                       <span class="datos" id="sala">Pantalla 10</span>
+                       <span class="datos" id="sala"></span>
                     </div>
                 </div>
            	</div>
@@ -51,15 +51,15 @@
                 <div class="row">
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         <label class="tituloDato">TIPO</label>
-                        <span class="datos" id="cantidadEntradas">2 X ADULTOS</span>
+                        <span class="datos" id="cantidadEntradas"></span>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                        <label class="tituloDato">BUTACAS</label>
-                       <span class="datos" id="butacas">M-5 M-6</span>
+                       <span class="datos" id="butacas"></span>
                     </div>                   
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 dato-PrecioTotal pull-right">
                        <label class="tituloDato">PRECIO TOTAL</label>
-                       <span class="datos" id="montoTotal">$200.00.-</span>
+                       <span class="datos" id="montoTotal"></span>
                     </div>
                 </div>
            </div>
@@ -178,7 +178,7 @@
         <div class="row confirmarOperacion">
             <div class="sombra"></div>
             <div class="precioTotal">PRECIO TOTAL: $
-                <span id="precioTotal">200.00</span>
+                <span id="precioTotal"></span>
                 .-
             </div>
             <button type="button" id="btnComprar" class="btn btn-success btn-Confirmar">CONFIRMAR OPERACION</button>           

@@ -17,6 +17,10 @@ class Ventas
         $idCliente = $this->connection->real_escape_string($venta['idCliente']);
         $fecha = $this->connection->real_escape_string($venta['fecha']);
         $codigo = $this->connection->real_escape_string($venta['codigo']);
+
+        $butacas = $this->connection->real_escape_string($venta['butacas']);
+        $preciosEntradas = $this->connection->real_escape_string($venta['preciosEntradas']);
+
         $query = "INSERT INTO venta VALUES (
                     DEFAULT,
                     '$monto',

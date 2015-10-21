@@ -380,7 +380,12 @@ function obtenerEntradas(){
     if ($bCompra){
       $rbReserva.prop("checked", false);
 
-      $divTipoPago.removeClass("hide");
+      var tipoUsuario = sessionStorage.getItem('tipoUsuario');
+
+      if (tipoUsuario != "cliente"){
+          $divTipoPago.removeClass("hide");
+      }
+      
       $divMedioPago.removeClass("hide");
       $divNumeroTarjeta.removeClass("hide");
       $divCodigoSeguridad.removeClass("hide");
@@ -452,6 +457,10 @@ function obtenerEntradas(){
         codigo = rand_code();
         $("#codigoVenta").val(codigo);
         
+        var butacas = sessionStorage.getItem('butacas');
+        var preciosEntradas = sessionStorage.getItem('butacas');
+        preciosEntradas = preciosEntradas.replace("$"," ");
+
         var comprar = $.ajax({
             url : URI.VENDER,
             method : "POST",
@@ -463,7 +472,9 @@ function obtenerEntradas(){
                     idVendedor:idVendedor,
                     idCliente:idCliente,
                     fecha:fecha,
-                    codigo:codigo
+                    codigo:codigo,
+                    butacas:butacas,
+                    preciosEntradas:preciosEntradas
                   } 
         });
        

@@ -7,7 +7,7 @@
 
        <div class="row paginaCompra">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 path">
-               <div>EL CLAN CASTELLANO (P16)</div>
+               <div>TITULO PELICULA</div>
                	> DETALLE DE COMPRA >
                 	<a href="paginaCompra.php">1. ENTRADAS</a>
                	>               
@@ -43,31 +43,31 @@
 							</tr>
 							<tr>
 							  <td>Cine:</td>
-							  <td id="complejo">UTN FRA</td>
+							  <td id="complejo"></td>
 							</tr>
 							<tr>
 							  <td >Sala:</td>
-							  <td id="sala">Sala 3</td>
+							  <td id="sala"></td>
 							</tr>
 							<tr>
 							  <td >Pel&#237;cula:</td>
-							  <td id="pelicula">EL CLAN</td>
+							  <td id="pelicula"></td>
 							</tr>
 							<tr>
 							  <td >Fecha:</td>
-							  <td id="fecha">Miercoles 26 Abril</td>
+							  <td id="fecha"></td>
 							</tr>
 							<tr>
 							  <td >Horario:</td>
-							  <td id="horario">17:00</td>
+							  <td id="horario"></td>
 							</tr>
 							<tr>
 							  <td >Entradas:</td>
-							  <td id="entradas">2 x ADULTO ($200.00 - M-5 M-6)</td>
+							  <td id="entradas"></td>
 							</tr>					  
 							<tr>
 							  <td>Pago Total:</td>
-							  <td id="precioTotal">$200.00</td>
+							  <td id="precioTotal"></td>
 							</tr>
 						  </tbody>
 						</table>
