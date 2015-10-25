@@ -97,7 +97,7 @@
 				});
 
 			}else{
-				 alert("Debes primero dar de alta el complejo para colocarle una imagen.");
+				 alert("Debes primero dar de alta la pelicula para colocarle una imagen.");
 			}        
 		}; 
 		

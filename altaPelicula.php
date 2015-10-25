@@ -98,84 +98,7 @@
 									</form>
 								</div>
 
-								<div id="contenedorPeliculas">
-									<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sombra">
-									</div>	
-									<div class="col-xs-9 col-sm-9 col-md-4 col-lg-4 uploadImagen">
-										<div class="avatar">
-											<div class="avatar-content">
-												<img src="assets/img/persona.png" id="vistaPrevia" class="imagen-avatar ">
-												</div>
-											</div>
-                                        </div>
-											<div class="col-xs-12 col-sm-9 col-md-8 col-lg-6">
-												<div class="form-group">	
-													<label id="lblTituloPelicula"/>
-												</div>											
-												<div class="form-group">
-													<label>
-														<label id="lblSinopsisPelicula"/>
-													</div>
-													<table class="table">	
-														<span>Ficha técnica </span>								
-														<tr>
-															<td style="width:25%">
-																<span>Genero: </span>
-															</td>
-															<td > 																	
-																<label id="lblGeneroPelicula"/>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<span>Duracion: </span>
-															</td>
-															<td>																		
-																<label id="lblDuracionPelicula"/>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<span>Actores: </span>
-															</td>
-															<td>																		
-																<label id="lblActoresPelicula"/>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<span>Director: </span>
-															</td>
-															<td>																				
-																<label id="lblActoresPelicula"/>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<span>Clasificación: </span>
-															</td>
-															<td>
-
-																<label id="lblDirectorPelicula"/>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<span>Fecha de Estreno: </span>
-															</td>
-															<td>			
-
-																<label id="lblFechaEstrenoPelicula"/>
-															</td>
-														</tr>															
-													</table>
-												</div>
-                                                <div class="col-xs-12 col-sm-9 col-md-8 col-lg-1">
-                                                    <div class="pull-right lapiz">
-                                                        <span class="glyphicon glyphicon-pencil"></span>
-                                                    </div>
-                                                </div>
-											-->
+								<div id="contenedorPeliculas">									
 										</div>
 									</div>
 
@@ -190,12 +113,4 @@
 									<script src="assets/js/vendor/bootstrap.min.js">
 								</script>
 								<script src="assets/js/altaPelicula.js"></script>
-							<!--<script src="assets/js/vendor/angular/angular.js"/>
-							</script>
-							<script src="assets/js/AltaPelicula/altaPelicula.js"/>
-						</script>
-						<script src="assets/js/AltaPelicula/peliculaService.js"/>
-					</script>
-					<script src="assets/js/AltaPelicula/peliculaController.js"/>
-				</script>-->
 				

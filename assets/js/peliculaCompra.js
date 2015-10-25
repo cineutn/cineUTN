@@ -20,9 +20,8 @@
 	
     
     function obtenerDetalleFuncion()
-    {
-        //$id = $idFuncion.val();
-        $funcionDetalleID=$idFuncionDetalle;//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior---cambio nombre variable,pato
+    {        
+        $funcionDetalleID=$idFuncionDetalle;
         var obtener = $.ajax({
             url : URI.FUNCION,
             method : "GET",
