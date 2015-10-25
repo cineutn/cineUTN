@@ -13,6 +13,7 @@ class Salas
 
   public function createSala($sala){        		
         
+		$idSala =$this->connection->real_escape_string($sala['idSala']);
 		$nombreSala =$this->connection->real_escape_string($sala['nombreSala']);
 		$fila =$this->connection->real_escape_string($sala['filas']);
 		$columna =$this->connection->real_escape_string($sala['columnas']);      
@@ -21,12 +22,26 @@ class Salas
         (DEFAULT,'$nombreSala','$fila','$columna')";
       
         if($this->connection->query($query)){
-              //$sala['idPelicula'] = $this->connection->insert_id;
+              $sala['idSala'] = $this->connection->insert_id;
             return $sala;
         }else{
             return false;
         }
     }
-
-
+    
+  
+  public function getSalas(){
+     $query ="SELECT * FROM sala";
+     $salas= array();
+      
+       if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $salas[] = $fila;
+            }
+            $result->free();
+        }
+        return $salas;
+  
+  }
+   
 }

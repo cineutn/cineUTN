@@ -17,8 +17,8 @@
                <th>Diagramar</th>  
             </tr>
           </thead>                    
-          <tbody id="rowSala" class="rowHide">
-              <tr>    						       
+          <tbody id="tablaSala">
+              <tr id="rowSala" class="rowHide">    						       
                 <td class="form-group">
                     <input name="nombreSala" id="nombreSala" placeholder="nombre sala" type="text" class="form-control">
                     <span class="help-block"></span>
@@ -34,11 +34,13 @@
                 <td>
                     <button type="button" class="btn btn-default btn-circle botonVerde"><i class="glyphicon glyphicon-ok textoBoton"></i></button>
                 </td>
-                <td>
-                   <button class="botonAzul" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button>
+                <td>                    
+                   <!--<button class="botonAzul" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button>-->
                 </td>
-              </tr>                               
-          </tbody>                    
+              </tr>             
+          </tbody>    
+            <tbody id="salas">            
+            </tbody>
         </table>
     </div>             
 </div>
