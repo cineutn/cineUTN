@@ -508,7 +508,7 @@ function obtenerEntradas(){
               async: false,
               method : "GET",
               data: {idSalaFuncion:idButaca,
-                     hanilitada:3},
+                     hanilitada:2},
               dataType : 'json',
           });
 

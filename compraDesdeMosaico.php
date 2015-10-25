@@ -11,7 +11,7 @@
 
         <div class="row detallesPelicula">
 			<div class="col-md-2">
-				<div class="titulo">
+				<div class="titulo" id="tituloPelicula">
 				</div>
 				<div class="imagenPelicula">
 					<img src="">

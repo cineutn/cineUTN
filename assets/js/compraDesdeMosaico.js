@@ -30,7 +30,7 @@
          obtener.done(function(res){
             if(!res.error){
                 var pelicula = res.data[0];
-                $('.titulo').html(pelicula.titulo);
+                $('#tituloPelicula').html(pelicula.titulo);
                 $('.imagenPelicula img').attr('src',pelicula.imagen);
                 $('.descripcionPelicula').html(pelicula.sinopsis);
                 $('.fichaTecnica p').html(
