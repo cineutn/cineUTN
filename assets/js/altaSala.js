@@ -45,9 +45,6 @@ $("#btnAddRow" ).click(function() {
                 //$formPelicula.addClass("hide");
                 //obtenerPeliculas();
             }); 
-          
-          
-      
       }
  
  });

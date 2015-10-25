@@ -13,11 +13,11 @@ class Salas
 
   public function createSala($sala){        		
         
-		$nombreSala =$this->connection->real_escape_string($pelicula['nombreSala']);
-		$fila =$this->connection->real_escape_string($pelicula['filas']);
-		$columna =$this->connection->real_escape_string($pelicula['columnas']);      
+		$nombreSala =$this->connection->real_escape_string($sala['nombreSala']);
+		$fila =$this->connection->real_escape_string($sala['filas']);
+		$columna =$this->connection->real_escape_string($sala['columnas']);      
       
-        $query = "INSERT INTO sala (idSala,nombresala,fila,columna) vlaues 
+        $query = "INSERT INTO sala(idSala,descripcion,fila, columna) values
         (DEFAULT,'$nombreSala','$fila','$columna')";
       
         if($this->connection->query($query)){
