@@ -8,6 +8,7 @@
             otenerPeliculabyID();   
             otenerPeliculaFuncionbyID();
             
+            
         
     });
     
@@ -218,22 +219,9 @@
         
           return arbolCine;
     }
+   
     
     
-    $('body').on("click","a[href*='paginaCompra']",function(e){
-        $idUsuario =   sessionStorage.getItem('idUser');
-
-        if ($idUsuario > 0 ){
-            
-
-        }else{
-            e.preventDefault();
-            $('#modalLogin').modal('show');
-            
-            
-        } 
-        
-    })
     
    
 

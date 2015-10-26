@@ -2,7 +2,10 @@
       
     var URI = {
         COMPLEJOS : 'actions/actionComplejos.php?action=obtener',
-        PELICULASCARTELERA : 'actions/actionPeliculas.php?action=obtenerCartelera'
+        PELICULASCARTELERA : 'actions/actionPeliculas.php?action=obtenerCartelera',
+        PELICULASXCOMPLEJO : '',
+        DIASPELICULA : '',
+        HORARIOSDIAPELICULA : ''
         
     };
 
@@ -15,7 +18,41 @@
             
         
         //bindeos
+        $('#contenedorPeliculas').on('click','[href*="compraDesdeMosaico"]',function(e){
+                $idUsuario =   sessionStorage.getItem('idUser');
+
+                if ($idUsuario > 0 ){
+
+
+                }else{
+                    e.preventDefault();
+                    $('#modalLogin').modal('show');
+
+
+                } 
+
+            });
+        
+        $('.menuFiltros .form-control').change(function(e){
+
+            switch(e.currentTarget.id) {
+                case 'cmbComplejos':
+                    code block
+                    break;
+                case 'cmbPeliculas':
+                    break;
+                case 'cmbDias':
+                    break;
+                case 'cmbHorarios':
+                    break;    
+            }
             
+            
+            
+         });   
+        
+        
+        
         
     });
 
