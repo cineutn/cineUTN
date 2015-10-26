@@ -1,6 +1,7 @@
  var URI = {        
         ADD : 'actions/actionAltaSala.php?action=nueva',
         SALAS: 'actions/actionAltaSala.php?action=obtener',	
+        ELIMINAR: 'actions/actionAltaSala.php?action=eliminar',	
     };
 
 $salaNueva =$("#rowSala");
@@ -13,10 +14,8 @@ $columna =$("#columna");
 
 $(document ).ready(function(){	   
         obtenerSalas();
-    
-   
-    
     });
+
 
 $("#btnAddRow" ).click(function() { 
     $salaNueva.removeClass("rowHide"); 
@@ -24,7 +23,8 @@ $("#btnAddRow" ).click(function() {
     $columna.attr('maxlength',2);          
 });
 
- $btnAltaModificacion.on("click",function(){
+
+$btnAltaModificacion.on("click",function(){
      bValidar="false";
      bValidar = validarDatos();      
       if (bValidar){          
@@ -40,8 +40,7 @@ $("#btnAddRow" ).click(function() {
                 dataType: 'json',
                
             })
-            addSala.done(function(response){	
-                console.log(response);
+            addSala.done(function(response){	                
                 $salaNueva.addClass("rowHide");                
                 obtenerSalas();
             }); 
@@ -86,15 +85,26 @@ function obtenerSalas(){
         
         $idSala =$(this).parent().parent()[0].childNodes[0].children[0].value;
         $nombreSala =$(this).parent().parent()[0].childNodes[0].children[1].outerText;
-        //console.log($idSala +',  '+  $nombreSala); 
+        $("#idSalaEliminar").val($idSala);        
         $('#modalEliminarSala').modal('show');
       
       
     });
 
 
- $("#elinarSala").click(function() {
-        
+ $("#elinarSala").click(function() {       
+       var eliminarSala =  $.ajax({
+                url: URI.ELIMINAR,
+                type: 'POST',
+                data: {
+                        idSala:$("#idSalaEliminar").val()
+				  },
+                dataType: 'json',
+               
+            })
+            eliminarSala.done(function(response){	
+                obtenerSalas();
+            });      
         $('#modalEliminarSala').modal('hide');
     });
 

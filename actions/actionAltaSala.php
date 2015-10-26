@@ -29,7 +29,7 @@ function nuevaSala($request){
     }else{
         sendResponse(array(
             "error" => true,
-            "mensaje" => "Error al crear  el sala"
+            "mensaje" => "Error al crear sala"
         ));
     }
 }
@@ -50,7 +50,27 @@ function obtenerSalas($request){
         ));
     }
 }
-    
+ 
+function eliminarSala($request){
+    require("../models/salas.php");
+    $s = new Salas();
+    $sala = array();    
+	$sala["idSala"] = $request->idSala;	
+					  
+    if($nuevo = $s->eliminarSala($sala)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "sala eliminada con exito. ",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al eliminar sala"
+        ));
+    }
+}
+
 $request = new Request();
 $action = $request->action;
 switch($action){                  
@@ -60,4 +80,8 @@ switch($action){
     case "obtener":
         obtenerSalas($request);
         break;   
+    case "eliminar":
+        eliminarSala($request);
+        break;          
+        
 }

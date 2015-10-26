@@ -34,8 +34,7 @@
                 <td>
                     <button type="button" class="btn btn-default btn-circle botonVerde"><i class="glyphicon glyphicon-ok textoBoton"></i></button>
                 </td>
-                <td>                    
-                   <!--<button class="botonAzul" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button>-->
+                <td>                                       
                 </td>
               </tr>             
           </tbody>    
@@ -54,7 +53,8 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="eliminarSalaLabel">Eliminar Sala</h4>
 			</div>			
-		  	<div class="modal-body">               
+		  	<div class="modal-body">  
+                    <input type='hidden' id='idSalaEliminar' value=""></input>
                     <span>Si elimina la sala tambien eliminara el esquema de la misma.</span></br>
                     <span>Desea Continuar?</span></br>
 		  	</div>

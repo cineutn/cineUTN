@@ -43,5 +43,15 @@ class Salas
         return $salas;
   
   }
+ 
+  public function eliminarSala($sala){
+    $idSala =$this->connection->real_escape_string($sala['idSala']);
+    $query = "DELETE FROM sala where idSala = $idSala";
+    if($this->connection->query($query)){             
+            return true;
+        }else{
+            return false;
+        }
+  }
    
 }
