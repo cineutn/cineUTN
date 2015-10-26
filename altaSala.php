@@ -45,6 +45,31 @@
     </div>             
 </div>
 	
+
+
+<div class="modal fade" id="modalEliminarSala" tabindex="-1" role="dialog" aria-labelledby="modalLoginLabel">
+	<div class="modal-dialog"  role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="eliminarSalaLabel">Eliminar Sala</h4>
+			</div>			
+		  	<div class="modal-body">               
+                    <span>Si elimina la sala tambien eliminara el esquema de la misma.</span></br>
+                    <span>Desea Continuar?</span></br>
+		  	</div>
+      	  <div class="modal-footer">
+				<button type="button" class="btn btn-default" id="elinarSala" >Aceptar</button>
+				<button  class="btn btn-default" data-dismiss="modal">Cancelar</button>
+		  	</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
 <?php require("partials/footer.php"); ?>
 <!-- Modal forms-->
 <?php require("partials/login.php"); ?>	
