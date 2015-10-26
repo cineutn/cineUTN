@@ -80,15 +80,13 @@ function obtenerSalas(){
 
 };
 
+//eliminar sala
   $contenedorSalas.on("click",".botonRojo",function(event){
-        event.preventDefault();
-        
+        event.preventDefault();        
         $idSala =$(this).parent().parent()[0].childNodes[0].children[0].value;
         $nombreSala =$(this).parent().parent()[0].childNodes[0].children[1].outerText;
         $("#idSalaEliminar").val($idSala);        
         $('#modalEliminarSala').modal('show');
-      
-      
     });
 
 
@@ -107,6 +105,15 @@ function obtenerSalas(){
             });      
         $('#modalEliminarSala').modal('hide');
     });
+
+//diagramar sala
+$contenedorSalas.on("click",".botonAzul",function(event){
+        event.preventDefault();        
+        $idSala =$(this).parent().parent()[0].childNodes[0].children[0].value;
+        $nombreSala =$(this).parent().parent()[0].childNodes[0].children[1].outerText;        
+        location.href='esquemaSala.php?idSala='+$idSala;
+    });
+
 
 function validarDatos(){
      var bRetorno = true;
