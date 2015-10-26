@@ -21,7 +21,9 @@ class Ventas
         $butacas = $this->connection->real_escape_string($venta['butacas']);
         $preciosEntradas = $this->connection->real_escape_string($venta['preciosEntradas']);
 
-        $query = "INSERT INTO venta VALUES (
+        try {
+            
+             $query = "INSERT INTO venta VALUES (
                     DEFAULT,
                     '$monto',
                     '$tipoVenta',
@@ -29,13 +31,42 @@ class Ventas
                     '$idCliente',
                     '$fecha',
                     '$codigo')";
+        
+        //$this->begin_transaction(MYSQLI_TRANS_START_READ_ONLY);
 
         if($this->connection->query($query)){
             $venta['idVenta'] = $this->connection->insert_id;
+
+            $idVenta = $venta['idVenta'];
+
+            $arrayButacas = explode(",", $butacas);
+
+            for ($i = 0; $i <= count($arrayButacas) -1; $i++) {
+                
+                $idButaca = $arrayButacas[$i];
+
+                $precio = 50;
+
+                $query2 = "INSERT INTO ventaDetalle VALUES (
+                    DEFAULT,
+                    '$idVenta',
+                    '$idButaca',
+                    '$precio')";
+                
+                $this->connection->query($query);
+                    
+            }
+
+            //$this->commit();
             return $venta;
         }else{
             return false;
         }
+        } catch (Exception $e) {
+            //$this->rollback();
+        }
+
+       
     }
 
     public function getVenta($codigo){
