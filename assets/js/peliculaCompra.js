@@ -112,13 +112,15 @@ function validarCompra(){
     $('#precios tr').each(function() {  
         idPrecio.push($(this).children('input').val());        
         precios.push($(this).find(".columnaPrecio").html());
+
+        
     });
     
+    sessionStorage.setItem('idPreciosGrilla',idPrecio);
     
     for(var i=0;i<cantidades.length;i++){        
         var sinMoneda = precios[i].split('$');
-        precioTotal= precioTotal +(cantidades[i] *sinMoneda[0]);
-        console.log(cantidades[i]);
+        precioTotal= precioTotal +(cantidades[i] *sinMoneda[0]);        
         if(cantidades[i]>0){
             ids.push(idPrecio[i])
         }
