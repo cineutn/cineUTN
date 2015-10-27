@@ -34,12 +34,18 @@
                 <div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">
                     <div class="form-group">
                         <input  name="nombreComplejo" id="nombreComplejo" type="text" placeholder="Nombre Complejo" class="form-control">    
+                        <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
+                        <span class="help-block"></span> 
                     </div>
                     <div class="form-group">
                         <input  name="direccionComplejo" id="direccionComplejo" type="text" placeholder="Dirección" class="form-control">
+                        <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
+                        <span class="help-block"></span> 
                     </div> 
                     <div class="form-group">
                         <textarea name="descripcionComplejo" id="descripcionComplejo" cols="30" rows="10" placeholder="Decripción" class="form-control text-descripcion"></textarea>    
+                        <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
+                        <span class="help-block"></span> 
                     </div>                                              
                 </div> 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">

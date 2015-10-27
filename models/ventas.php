@@ -71,7 +71,7 @@ class Ventas
 
     public function getVenta($codigo){
 
-        $query = "SELECT V.codigo, C.nombre AS Complejo, P.titulo AS pelicula, S.descripcion AS Sala, FH.dia AS Fecha, FH.horario, V.monto AS precioTotal
+        $query = "SELECT V.idVenta, V.codigo, C.nombre AS Complejo, P.titulo AS pelicula, S.descripcion AS Sala, FH.dia AS Fecha, FH.horario, V.monto AS precioTotal
                     FROM venta V
                     INNER JOIN ventadetalle VD ON V.idVenta = VD.idVenta
                     INNER JOIN sala_funcion SF ON VD.idSalaFuncion = SF.idSalaFuncion

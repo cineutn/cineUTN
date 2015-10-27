@@ -169,3 +169,16 @@
 .controles{
     margin-left: 10%;
 }
+
+.iconCerrar{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    color: silver;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+.icon{
+    right: -3%;
+}

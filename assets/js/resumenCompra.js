@@ -20,9 +20,7 @@
     $( document ).ready(function(){
         updateQrCode();
         obtenerVenta();
-        $miCanvas = $divContenedor.children('canvas');
-        enviarEmail();
-        
+        $miCanvas = $divContenedor.children('canvas');        
     });
 
     function updateQrCode() {
@@ -69,6 +67,7 @@
                 $horario.text(res.data[0].horario);
                 $entradas.text('');
                 $precioTotal.text(res.data[0].precioTotal);
+                 enviarEmail();
             }else{
                 event.preventDefault();
                 alert(res.mensaje);

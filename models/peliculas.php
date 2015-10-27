@@ -131,69 +131,6 @@ inner join formato f on f.idTipoFuncion=d.idTipoFuncion where a.idPelicula='$id'
             return false;
         }
     }
-    public function getPeliculaxComplejo($idComplejo){
-        $query = "select a.*
-from pelicula a inner join peliculacomplejo b
-on a.idPelicula=b.idPelicula
-where b.idComplejo='$idComplejo'";  
-       
-        $peliculas = array();
-        
-        try{
-            if( $result = $this->connection->query($query) ){
-                while($fila = $result->fetch_assoc()){
-                    $peliculas[] = $fila;
-                }
-                $result->free();
-            }
-        }
-        catch(Exception $e) {
-            throw new Exception ($e->getMessage());
-        }
-       
-        return $peliculas;
-    
-    }
-    public function getDiasxPeliculaxComplejo($id){
-        $query = "SELECT * FROM pelicula where idPelicula='$id'";  
-       
-        $peliculas = array();
-        
-        try{
-            if( $result = $this->connection->query($query) ){
-                while($fila = $result->fetch_assoc()){
-                    $peliculas[] = $fila;
-                }
-                $result->free();
-            }
-        }
-        catch(Exception $e) {
-            throw new Exception ($e->getMessage());
-        }
-       
-        return $peliculas;
-    
-    }
-    public function getHorariosxPeliculaxComplejo($id){
-        $query = "SELECT * FROM pelicula where idPelicula='$id'";  
-       
-        $peliculas = array();
-        
-        try{
-            if( $result = $this->connection->query($query) ){
-                while($fila = $result->fetch_assoc()){
-                    $peliculas[] = $fila;
-                }
-                $result->free();
-            }
-        }
-        catch(Exception $e) {
-            throw new Exception ($e->getMessage());
-        }
-       
-        return $peliculas;
-    
-    }
 
 
 

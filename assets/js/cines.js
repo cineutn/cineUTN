@@ -206,43 +206,92 @@
         $direccion = $direccionComplejo.val();
         $descripcion = $descripcionComplejo.val();
 
-        if ($id == "0"){
+        var bValidar;
+
+        bValidar = validarComplejo();
+
+        if (bValidar){
+
+            if ($id == "0"){
             
-            var addComplejo =  $.ajax({
-                url: URI.ADD,
-                type: 'POST',
-                data: {idComplejo:$id,
-                       nombreComplejo:$nombre, 
-                       direccionComplejo:$direccion,
-                       descripcionComplejo:$descripcion},
-                dataType: 'json',
-               
-            })
+                var addComplejo =  $.ajax({
+                    url: URI.ADD,
+                    type: 'POST',
+                    data: {idComplejo:$id,
+                           nombreComplejo:$nombre, 
+                           direccionComplejo:$direccion,
+                           descripcionComplejo:$descripcion},
+                    dataType: 'json',
+                   
+                })
 
-            addComplejo.done(function(response){
-                $formComplejo.addClass("hide");
-                obtenerComplejos();
-            });
+                addComplejo.done(function(response){
+                    $formComplejo.addClass("hide");
+                    obtenerComplejos();
+                });
 
-        }else{
+            }else{
 
-            var updateComplejo =  $.ajax({
-                url: URI.UPDATE,
-                type: 'POST',
-                data: {idComplejo:$id,
-                       nombreComplejo:$nombre, 
-                       direccionComplejo:$direccion,
-                       descripcionComplejo:$descripcion},
-                dataType: 'json',
-               
-            })
+                var updateComplejo =  $.ajax({
+                    url: URI.UPDATE,
+                    type: 'POST',
+                    data: {idComplejo:$id,
+                           nombreComplejo:$nombre, 
+                           direccionComplejo:$direccion,
+                           descripcionComplejo:$descripcion},
+                    dataType: 'json',
+                   
+                })
 
-            updateComplejo.done(function(response){
-                 $formComplejo.addClass("hide");
-                obtenerComplejos();
-            });
+                updateComplejo.done(function(response){
+                     $formComplejo.addClass("hide");
+                    obtenerComplejos();
+                });
+            }
         }
        
     });
+    
+    function validarComplejo(){
+        var bRetorno = true;
+
+        var nombre = $nombreComplejo.val();
+        if(nombre.length == 0){
+          $nombreComplejo.closest(".form-group").addClass("has-error");
+          $nombreComplejo.siblings(".glyphicon-remove").removeClass("hide");
+          $nombreComplejo.siblings(".help-block").html("Debe completar este campo");
+          bRetorno = false;
+        }else{
+          $nombreComplejo.closest(".form-group").removeClass("has-error");
+          $nombreComplejo.siblings(".glyphicon-remove").addClass("hide");
+          $nombreComplejo.siblings(".help-block").html("");          
+        }
+
+        var direccion = $direccionComplejo.val();
+        if(direccion.length == 0){
+          $direccionComplejo.closest(".form-group").addClass("has-error");
+          $direccionComplejo.siblings(".glyphicon-remove").removeClass("hide");
+          $direccionComplejo.siblings(".help-block").html("Debe completar este campo");
+          bRetorno = false;
+        }else{
+          $direccionComplejo.closest(".form-group").removeClass("has-error");
+          $direccionComplejo.siblings(".glyphicon-remove").addClass("hide");
+          $direccionComplejo.siblings(".help-block").html("");          
+        }
+
+        var descripcion = $descripcionComplejo.val();
+        if(descripcion.length == 0 ){
+            $descripcionComplejo.closest(".form-group").addClass("has-error");
+            $descripcionComplejo.siblings(".glyphicon-remove").removeClass("hide");
+            $descripcionComplejo.siblings(".help-block").html("Debe completar este campo");
+            bRetorno = false;
+        }else{
+            $descripcionComplejo.closest(".form-group").removeClass("has-error");
+            $descripcionComplejo.siblings(".glyphicon-remove").addClass("hide");
+            $descripcionComplejo.siblings(".help-block").html("");
+        }
+        
+        return bRetorno;
+    };
 
 })(jQuery)

@@ -3,9 +3,9 @@
     var URI = {
         COMPLEJOS : 'actions/actionComplejos.php?action=obtener',
         PELICULASCARTELERA : 'actions/actionPeliculas.php?action=obtenerCartelera',
-        PELICULASXCOMPLEJO : 'actions/actionPeliculas.php?action=obtenerPeliculaxComplejo',
-        DIASPELICULA : 'actions/actionPeliculas.php?action=obtenerDiasxPeliculaxComplejo',
-        HORARIOSDIAPELICULA : 'actions/actionPeliculas.php?action=obtenerHorariosxPeliculaxComplejo'
+        PELICULASXCOMPLEJO : '',
+        DIASPELICULA : '',
+        HORARIOSDIAPELICULA : ''
         
     };
 
@@ -34,65 +34,20 @@
             });
         
         $('.menuFiltros .form-control').change(function(e){
-            var url='';
-            data={};
-            
+
             switch(e.currentTarget.id) {
                 case 'cmbComplejos':
-                    url=URI.PELICULASXCOMPLEJO;
-                    data.idComplejo=$( "#cmbComplejos option:selected" ).val();
+                    code block
                     break;
                 case 'cmbPeliculas':
-                    url=URI.DIASPELICULA;
-                    data.idComplejo=$( "#cmbComplejos option:selected" ).val();
-                    data.idPelicula=$( "#cmbPeliculas option:selected" ).val();
                     break;
                 case 'cmbDias':
-                    url=URI.HORARIOSDIAPELICULA;
-                    data.idComplejo=$( "#cmbComplejos option:selected" ).val();
-                    data.idPelicula=$( "#cmbPeliculas option:selected" ).val();
-                    data.idDia=$( "#cmbDias option:selected" ).val();
                     break;
                 case 'cmbHorarios':
-                    //si cambia el combo horarios, habilito boton
-                    data.idComplejo=$( "#cmbComplejos option:selected" ).val();
-                    data.idPelicula=$( "#cmbPeliculas option:selected" ).val();
-                    data.idDia=$( "#cmbDias option:selected" ).val();
-                    data.idHorario=$( "#cmbHorarios option:selected" ).val();
                     break;    
             }
-             var obtener = $.ajax({
-                url : url,
-                method : "GET",
-                dataType : 'json',
-                data : data 
-             });
-            obtener.done(function(resultado){
-                if(!res.error){
-                    switch(e.currentTarget.id) {
-                        case 'cmbComplejos':
-                            //cargo combo de peliculas
-                            //$('#cmbPeliculas').
-                            break;
-                        case 'cmbPeliculas':
-                           
-                            break;
-                        case 'cmbDias':
-                            
-                            break;
-                        case 'cmbHorarios':
-                            
-                            break;    
-                    }   
-                    
-                    
-                    
-                    
-                }else{
-                    
-                    alert("error obnteniendo los datos");
-                }     
-            });
+            
+            
             
          });   
         
@@ -106,7 +61,7 @@
         var obtener = $.ajax({
             url : URI.COMPLEJOS,
             method : "GET",
-            dataType : 'json'
+            dataType : 'json',
         });
        
         obtener.done(function(res){

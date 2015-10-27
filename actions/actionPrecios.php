@@ -57,7 +57,7 @@ function modificarPrecio($request){
 function eliminarPrecio($request){
     require("../models/precios.php");
     $c = new Precios();
-    $precioId = $request->id;
+    $precioId = $request->idPrecio;
     if($c->removePrecio($precioId)){
         sendResponse(array(
             "error" => false,

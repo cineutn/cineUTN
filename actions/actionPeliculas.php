@@ -154,7 +154,8 @@ function obtenerPeliculaFuncionById($request){
                 "mensaje" => "",
                 "data" => $pelicula
             ));
-        }   
+        }
+    
     }
     catch(Exception $e){
         sendResponse(array(
@@ -162,66 +163,8 @@ function obtenerPeliculaFuncionById($request){
             "mensaje" => 'Error al obtener la pelicula. ' . $e->getMessage()
         ));
     }
-}
 
-function obtenerPeliculaxComplejo($request){
-    require("../models/peliculas.php");
-    $p = new Peliculas();
-    try{
-        if($pelicula = $p->getPeliculaxComplejo($request->idComplejo)){
-            sendResponse(array(
-                "error" => false,
-                "mensaje" => "",
-                "data" => $pelicula
-            ));
-        }   
-    }
-    catch(Exception $e){
-        sendResponse(array(
-            "error" => true,
-            "mensaje" => 'Error al obtener la pelicula. ' . $e->getMessage()
-        ));
-    }
-}
 
-function obtenerDiasxPeliculaxComplejo($request){
-    require("../models/peliculas.php");
-    $p = new Peliculas();
-    try{
-        if($pelicula = $p->getDiasxPeliculaxComplejo($request->id)){
-            sendResponse(array(
-                "error" => false,
-                "mensaje" => "",
-                "data" => $pelicula
-            ));
-        }   
-    }
-    catch(Exception $e){
-        sendResponse(array(
-            "error" => true,
-            "mensaje" => 'Error al obtener la pelicula. ' . $e->getMessage()
-        ));
-    }
-}
-
-function obtenerHorariosxPeliculaxComplejo($request){
-    require("../models/peliculas.php");
-    $p = new Peliculas();
-    try{
-        if($pelicula = $p->getHorariosxPeliculaxComplejo($request->id)){
-            sendResponse(array(
-                "error" => false,
-                "mensaje" => "",
-                "data" => $pelicula
-            ));
-        }   
-    }
-    catch(Exception $e){
-        sendResponse(array(
-            "error" => true,
-            "mensaje" => 'Error al obtener la pelicula. ' . $e->getMessage()
-        ));
-    }
 }
 
 $request = new Request();
@@ -245,18 +188,6 @@ switch($action){
     case "obtenerPeliculaFuncionById":
         obtenerPeliculaFuncionById($request);
         break;
-    case "obtenerPeliculaxComplejo":
-        obtenerPeliculaxComplejo($request);
-        break;    
-    case "obtenerDiasxPeliculaxComplejo":
-        obtenerDiasxPeliculaxComplejo($request);
-        break;
-    case "obtenerHorariosxPeliculaxComplejo":
-        obtenerHorariosxPeliculaxComplejo($request);
-        break;
         
-       
-        
-         
-        
+    
 }
