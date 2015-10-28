@@ -160,7 +160,9 @@ and (d.fechaBaja=0 or d.fechaBaja>now()) ";
     
     }
     public function getDiasxPeliculaxComplejo($id){
-        $query = "SELECT * FROM pelicula where idPelicula='$id'";  
+        $query = "select distinct dia
+from funcionhorario a
+where idFuncion='$id'";  
        
         $peliculas = array();
         

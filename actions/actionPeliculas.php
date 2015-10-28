@@ -172,7 +172,7 @@ function obtenerDiasxPeliculaxComplejo($request){
     require("../models/peliculas.php");
     $p = new Peliculas();
     try{
-        if($pelicula = $p->getDiasxPeliculaxComplejo($request->id)){
+        if($pelicula = $p->getDiasxPeliculaxComplejo($request->idFuncion)){
             sendResponse(array(
                 "error" => false,
                 "mensaje" => "",

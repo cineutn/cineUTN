@@ -22,9 +22,11 @@
                 $idUsuario =   sessionStorage.getItem('idUser');
 
                 if ($idUsuario > 0 ){
-
+                    
 
                 }else{
+                    
+                    
                     e.preventDefault();
                     $('#modalLogin').modal('show');
 
@@ -44,11 +46,14 @@
                     data.idComplejo=$( "#cmbComplejos option:selected" ).val();
                     $('#cmbPeliculas').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
                     break;
+                    
                 case 'cmbPeliculas':
                     url=URI.DIASPELICULA;
-                    data.idComplejo=$( "#cmbComplejos option:selected" ).val();
-                    data.idPelicula=$( "#cmbPeliculas option:selected" ).val();
+                    
+                    data.idFuncion=$( "#cmbPeliculas option:selected" ).val();
+                    $('#cmbDias').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
                     break;
+                    
                 case 'cmbDias':
                     url=URI.HORARIOSDIAPELICULA;
                     data.idComplejo=$( "#cmbComplejos option:selected" ).val();
@@ -73,26 +78,31 @@
                 if(!resultado.error){
                     switch(e.currentTarget.id) {
                         case 'cmbComplejos':
+                            
                             $('#cmbPeliculas option:selected').remove();
+                            
                             resultado.data.forEach(function(item){
                                  $('#cmbPeliculas').append(
                                     $('<option/>',{
                                         value   :   item.idFuncion
                                     }).append(item.titulo)
                                 );
-                            
                             });
-                            
-                           
-                            
-                            
-                            
-                            //cargo combo de peliculas
-                            //$('#cmbPeliculas').
                             break;
+                            
                         case 'cmbPeliculas':
                            
+                            $('#cmbDias option:selected').remove();
+                            
+                            resultado.data.forEach(function(item){
+                                 $('#cmbDias').append(
+                                    $('<option/>',{
+                                        value   :   data.idFuncion
+                                    }).append(item.dia)
+                                );
+                            });
                             break;
+                           
                         case 'cmbDias':
                             
                             break;
@@ -108,6 +118,9 @@
                     
                     alert("error obnteniendo los datos");
                 }     
+            });
+            obtener.fail(function(res){
+                 alert(res.responseText);
             });
             
          });   
