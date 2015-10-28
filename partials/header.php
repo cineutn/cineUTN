@@ -46,7 +46,7 @@
             </div>
             <ul class="tituloMenu" >
                 <li class="itemMenu">
-                    <a href="index.php">Home</a>
+                    <a id="itemHome" href="index.php">Home</a>
                 </li>
                 <li class="itemMenu">
                     <a href="cines.php">Cines</a>
