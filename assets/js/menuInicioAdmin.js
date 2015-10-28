@@ -10,8 +10,8 @@
     $divComplejos = $("#divComplejos");
     $divPrecios = $("#divPrecios");
     $divPeliculas = $("#divPeliculas");
+    $divEntradas = $("#divEntradas");
     $divWeb = $("#divWeb");
-
     
     $divFunciones.on("click",function(){
         window.location.href = "funciones.php";
@@ -35,6 +35,10 @@
 
     $divPeliculas.on("click",function(){
         window.location.href = "altaPelicula.php";
+    });
+
+    $divEntradas.on("click",function(){
+        window.location.href = "consultaVenta.php";
     });
 
     $divWeb.on("click",function(){

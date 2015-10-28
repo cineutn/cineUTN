@@ -7,7 +7,7 @@
        <div class="row paginaCompra">
            <form class="col-md-7" id="frmBuscarVenta">
             		<div class="form-group">
-                       <span id="spanTitulo">Ingrese el codigo de la Venta</span>
+                       <span id="spanTitulo">Ingrese el codigo de la Entrada</span>
                     </div>
                     <div class="form-group">
                        <input  name="ventaCodigo" id="ventaCodigo" type="text" placeholder="Codigo" class="form-control">

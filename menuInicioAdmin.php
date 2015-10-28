@@ -33,9 +33,9 @@
             <span id="iconAvatar" class="glyphicon glyphicon-credit-card icon"></span>
             <label class="box-titulo">Tarjetas</label>
         </div>
-        <div class="box rojoClaro" id="div">
-            <span id="iconAvatar" class="glyphicon glyphicon-camera icon"></span>
-            <label class="box-titulo">Precios</label>
+        <div class="box rojoClaro" id="divEntradas">
+            <span id="iconAvatar" class="glyphicon glyphicon-qrcode icon"></span>
+            <label class="box-titulo">Entradas</label>
         </div>
         <div class="box rojoOscuro" id="divWeb">
             <span id="iconAvatar" class="glyphicon glyphicon-globe icon"></span>
