@@ -24,17 +24,9 @@
 }
 
 .filtro{
-    display: inline-block;
-    margin-left: 20px;
-    margin-top: 10px;
-    width: 15%;
+   margin-top: 11px;
+    
 }
-
-.filtro select{
-    width: 100%;
-    display:  inline-block;
-}
-
 .filtro label{
     display: block;
     color: white;

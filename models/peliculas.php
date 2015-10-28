@@ -1,6 +1,5 @@
 <?php
 require("connection.php");
-
 class Peliculas
 {
     private $connection;
@@ -8,7 +7,6 @@ class Peliculas
     public function __construct(){
         $this->connection = ConnectionCine::getInstance();
     } 
-
 	
 	public function addImage($imagen){
         $PeliculaID = $this->connection->real_escape_string($imagen['id']);
@@ -131,7 +129,74 @@ inner join formato f on f.idTipoFuncion=d.idTipoFuncion where a.idPelicula='$id'
             return false;
         }
     }
-
-
-
+    public function getPeliculaxComplejo($idComplejo){
+        $query = "select idFuncion,concat(c.titulo ,' - ' ,f.descripcion,' - ',case subtitulada when 0 then 'Español' else 'Subtitulada' end ) as titulo
+from peliculacomplejo a
+inner join complejo b on b.idComplejo=a.idComplejo
+inner join pelicula c on a.idPelicula=c.idPelicula
+inner join funcion  d on d.idPelicula=c.idPelicula and d.idComplejo=a.idComplejo
+inner join formato f on f.idTipoFuncion=d.idTipoFuncion
+where b.idComplejo='$idComplejo' and (c.fechaBaja=0 or c.fechaBaja>now())
+and (d.fechaBaja=0 or d.fechaBaja>now()) ";
+            
+            
+             
+       
+        $peliculas = array();
+        
+        try{
+            if( $result = $this->connection->query($query) ){
+                while($fila = $result->fetch_assoc()){
+                    $peliculas[] = $fila;
+                }
+                $result->free();
+            }
+        }
+        catch(Exception $e) {
+            throw new Exception ($e->getMessage());
+        }
+       
+        return $peliculas;
+    
+    }
+    public function getDiasxPeliculaxComplejo($id){
+        $query = "SELECT * FROM pelicula where idPelicula='$id'";  
+       
+        $peliculas = array();
+        
+        try{
+            if( $result = $this->connection->query($query) ){
+                while($fila = $result->fetch_assoc()){
+                    $peliculas[] = $fila;
+                }
+                $result->free();
+            }
+        }
+        catch(Exception $e) {
+            throw new Exception ($e->getMessage());
+        }
+       
+        return $peliculas;
+    
+    }
+    public function getHorariosxPeliculaxComplejo($id){
+        $query = "SELECT * FROM pelicula where idPelicula='$id'";  
+       
+        $peliculas = array();
+        
+        try{
+            if( $result = $this->connection->query($query) ){
+                while($fila = $result->fetch_assoc()){
+                    $peliculas[] = $fila;
+                }
+                $result->free();
+            }
+        }
+        catch(Exception $e) {
+            throw new Exception ($e->getMessage());
+        }
+       
+        return $peliculas;
+    
+    }
 }
