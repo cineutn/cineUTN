@@ -15,7 +15,7 @@
                     <div class="avatar">
                         <div class="avatar-content">
                             <img src="assets/img/persona.png" id="vistaPrevia" class="imagen-avatar hide">
-                            <span id="iconAvatar" class="glyphicon  glyphicon-camera icon"></span>
+                            <span id="iconAvatar" class="glyphicon  glyphicon-camera icon icono"></span>
                             <p id="textoAvatar">Añadir foto <Br> del Complejo</p>
                         </div>
                         <div class="salas">
@@ -31,23 +31,27 @@
                         </button> 
                     </div>                                                       
                 </div>
-                <div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">
-                    <div class="form-group">
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-9 col-md-8 col-lg-7">
                         <input  name="nombreComplejo" id="nombreComplejo" type="text" placeholder="Nombre Complejo" class="form-control">    
-                        <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
+                        <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
                         <span class="help-block"></span> 
                     </div>
-                    <div class="form-group">
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-9 col-md-8 col-lg-7">
                         <input  name="direccionComplejo" id="direccionComplejo" type="text" placeholder="Dirección" class="form-control">
-                        <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
+                        <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
                         <span class="help-block"></span> 
                     </div> 
-                    <div class="form-group">
+                </div> 
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-9 col-md-8 col-lg-7">
                         <textarea name="descripcionComplejo" id="descripcionComplejo" cols="30" rows="10" placeholder="Decripción" class="form-control text-descripcion"></textarea>    
-                        <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
+                        <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
                         <span class="help-block"></span> 
                     </div>                                              
-                </div> 
+                </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
                         <button id="btnAltaModificacion" class="btn btn-primary btn-AltaModificacion pull-right" type="button">
                             <span id="iconButton" class="glyphicon glyphicon-plus"></span>

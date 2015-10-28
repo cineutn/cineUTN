@@ -11,20 +11,22 @@
 .menuFiltros {
     background-color: #D00809;
     border: 2px solid white;
-    height: 88px;
+    /*height: 88px;*/
     margin-bottom: 12px;
 }
 
 .menuFiltros button {
     margin-right: 15px;
     margin-top: 35px;
+    margin-bottom: 10px;    
     height: 36px;
 	background-color: #213969;
     border-color: #213969
 }
 
 .filtro{
-   margin-top: 11px;
+   margin-top: 10px;
+   margin-bottom: 10px;
     
 }
 .filtro label{

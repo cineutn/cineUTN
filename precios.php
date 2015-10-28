@@ -12,26 +12,32 @@
                 </div>
                 <form method="post" id="formPrecio">                    
                     <input id="idPrecio" name="idPrecio" type="hidden" class="hide" value="">
-                    <div class="col-md-7 form-group controles">
-                        <select name="idFormato" id="comboFormato" class="form-control"></select>
-                        <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
-                        <span class="help-block"></span>     
+                    <div class="form-group controles">
+                        <div class="col-md-7">
+                            <select name="idFormato" id="comboFormato" class="form-control"></select>
+                            <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
+                            <span class="help-block"></span>
+                        </div>                             
                     </div>
-                    <div class="col-md-8 form-group controles">
-                        <input  name="descripcionPrecio" id="descripcionPrecio" type="text" placeholder="Decripción" class="form-control">
-                        <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
-                        <span class="help-block"></span>     
+                    <div class="form-group controles">
+                        <div class="col-md-7">
+                            <input  name="descripcionPrecio" id="descripcionPrecio" type="text" placeholder="Decripción" class="form-control">
+                            <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
+                            <span class="help-block"></span> 
+                        </div>                           
                     </div> 
-                    <div class="col-md-8 form-group controles">
-                        <input  name="valorPrecio" id="valorPrecio" type="number" placeholder="Valor" class="form-control">
-                        <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
-                        <span class="help-block"></span>     
+                    <div class="form-group controles">
+                        <div class="col-md-7">
+                            <input  name="valorPrecio" id="valorPrecio" type="number" placeholder="Valor" class="form-control">
+                            <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
+                            <span class="help-block"></span>    
+                        </div>                             
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-                            <button id="btnAltaModificacion" class="btn btn-primary btn-AltaModificacion pull-right" type="button">
-                                <span id="iconButton" class="glyphicon glyphicon-plus"></span>
-                                <span id="btnText" class="">Crear</span>
-                            </button>
+                        <button id="btnAltaModificacion" class="btn btn-primary btn-AltaModificacion pull-right" type="button">
+                            <span id="iconButton" class="glyphicon glyphicon-plus"></span>
+                            <span id="btnText" class="">Crear</span>
+                        </button>
                     </div>  
                 </form>
              </div>

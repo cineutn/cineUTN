@@ -62,11 +62,13 @@ body{
 }
 
 .tituloMenu{
-  width: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 0px;
 }
 
 .itemMenu{
-  display: inline;
+    display: inline;
     padding-left: 10px;
     padding-right: 10px;
     font-size: 16px;
@@ -79,10 +81,10 @@ body{
 }
 
 .itemMenu a{
-  text-decoration: none;
+    text-decoration: none;
     color: white;
     font-weight: bold;
-   
+    margin-left: 2%;
 }
 
 .hide{

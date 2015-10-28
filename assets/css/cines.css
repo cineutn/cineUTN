@@ -125,12 +125,16 @@
 	display: inline;
 }
 
-.icon{
+.icono{
 	margin-left: 55px;
 	margin-top: 25px;
 	color: white;
 	font-size: 70px;
 	text-align: center;
+}
+
+.iconoError{
+	right: 2%;
 }
 
 .avatar-content p{

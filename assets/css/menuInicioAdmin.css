@@ -1,0 +1,85 @@
+.celeste{
+	background-color: #33b5e5;
+}
+
+.azul{
+	background-color: #0099cc;
+}
+
+.lila{
+	background-color: #aa66cc;
+}
+
+.violeta{
+	background-color: #9933cc;
+}
+
+.verdeClaro{
+	background-color: #99cc00;
+}	
+
+.verdeOscuro{
+	background-color: #669900;
+}
+
+.amarillo{
+	background-color: #ffbb33;
+}
+
+.naranja{
+	background-color: #ff8800;
+}
+
+.rojoClaro{
+	background-color: #ff4444;
+}
+
+.rojoOscuro{
+	background-color: #cc0000;
+}
+
+.box{
+	width: 200px;
+	height: 200px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	display: inline-block;
+	cursor: pointer;
+	border-radius: 5px;
+	-webkit-box-shadow:0px 1px 3px rgba(0,0,0,.15);
+    -moz-box-shadow:0px 1px 3px rgba(0,0,0,.15);
+    box-shadow:0px 1px 3px rgba(0,0,0,.15);
+    -webkit-transition:all .2s ease-out;
+    -moz-transition:all .2s ease-out;
+    -o-transition:all .2s ease-out;
+    transition:all .2s ease-out
+}
+
+.box:hover{
+	-webkit-box-shadow:0px 5px 20px rgba(0,0,0,.3);
+    -moz-box-shadow:0px 5px 20px rgba(0,0,0,.3);
+    box-shadow:0px 5px 20px rgba(0,0,0,.3);
+    margin-top:-5px
+}
+
+.box-titulo{
+	color: white;
+	font-size: 20px;
+	margin-top: 10px;
+	width: 100%;
+	text-align: center;
+}
+
+#contenedor{
+	padding-left: 5%;
+}
+
+.icon{
+	/*margin: 25% 25% auto;*/
+	color: white;
+	font-size: 100px;
+	width: 100%;
+	text-align: center;
+	margin-top: 25%;
+	display: inline-block;
+}
