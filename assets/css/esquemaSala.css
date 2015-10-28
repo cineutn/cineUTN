@@ -1,34 +1,18 @@
-.esquemaSala{
-	padding-bottom: 12px;
-	padding-left: 49px;
-    padding-right: 51px;
-    margin-bottom: 10px;
-}
-
-.divBotonButacas{
-	height: 57px;
-}
-
-.divButacas{
-	background-color:white; 
-	margin: 10%;
-}
-
 .divLeyendaButacas{
 	background-color:white; 
-	margin-top: 30%;
+	margin-top: 25%;
 }
 
-.divPantalla{
-	width:80%; 
-	margin:5%;
+.esquema{
+    margin:5%;
+    width: 60%;
 }
 
-.divColumnaSala{
-	display:inline-block;
-	margin:3px;
+.esquema.tr.td{    
+    margin:5%;
+    width: 10px;
 }
 
-.tituloLarge {
-   font-size:large;
+.centrar{
+    text-align:  center;
 }

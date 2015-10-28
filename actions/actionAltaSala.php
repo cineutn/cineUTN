@@ -71,6 +71,28 @@ function eliminarSala($request){
     }
 }
 
+//este metodo solo trae una sala, la obtiene por id
+function obtenerSala($request){
+    require("../models/salas.php");
+    $s = new Salas();
+    $sala = array();    
+	$idSala = $request->idSala;	
+    
+    if($nuevo = $s->obtenerSala($idSala)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "sala .",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener sala"
+        ));
+    }
+					  
+}
+    
 $request = new Request();
 $action = $request->action;
 switch($action){                  
@@ -82,6 +104,9 @@ switch($action){
         break;   
     case "eliminar":
         eliminarSala($request);
-        break;          
+        break;
+    case "obtenerUna":
+        obtenerSala($request);
+        break;
         
 }

@@ -20,7 +20,10 @@ $(document ).ready(function(){
 $("#btnAddRow" ).click(function() { 
     $salaNueva.removeClass("rowHide"); 
     $fila.attr('maxlength',2);
-    $columna.attr('maxlength',2);          
+    $columna.attr('maxlength',2);
+    $nombreSala.val("");
+    $fila.val("");
+    $columna.val("");
 });
 
 
@@ -62,8 +65,8 @@ function obtenerSalas(){
             res.data.forEach(function(item){                
                 $row=$row +
                 '<tr><td><input type="hidden" id="idSala" value='+item.idSala+' ></input><span>'+item.descripcion+'</span></td>'+
-                '<td><span>'+item.fila+'</span></td>'+
-                '<td><span>'+item.columna+'</span></td>'+
+                '<td><span>'+item.filas+'</span></td>'+
+                '<td><span>'+item.columnas+'</span></td>'+
                 '<td><button type="button" class="btn btn-default btn-circle botonRojo"><i class="glyphicon glyphicon-remove textoBoton"></i></button></button></td>'+
                 '<td><button  class="botonAzul" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button></td></tr>';                
             });
@@ -111,6 +114,7 @@ $contenedorSalas.on("click",".botonAzul",function(event){
         event.preventDefault();        
         $idSala =$(this).parent().parent()[0].childNodes[0].children[0].value;
         $nombreSala =$(this).parent().parent()[0].childNodes[0].children[1].outerText;        
+    console.log($(this).parent().parent()[0].childNodes[0].children[1].outerText );
         location.href='esquemaSala.php?idSala='+$idSala;
     });
 

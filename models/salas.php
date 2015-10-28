@@ -54,4 +54,19 @@ class Salas
         }
   }
    
+   public function obtenerSala($idSala){
+    $id = (int) $this->connection->real_escape_string($idSala);
+    $query = "SELECT * FROM sala where idSala = $id";
+       
+     $salas= '';      
+       if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $salas = $fila;
+            }
+            $result->free();
+        }
+        return $salas;
+  }
+    
+    
 }
