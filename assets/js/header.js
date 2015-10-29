@@ -7,9 +7,10 @@
     $divLoginRegistro = $('#login-registro');
     $divUserLogueado = $('#userLogueado');
     $saludoUsuario = $('#saludoUsuario');
+    $itemHome = $("#itemHome");
 
     $( document ).ready(function(){
-          obtenerUsuario();
+        obtenerUsuario();
     });
 
     function obtenerUsuario()
@@ -22,6 +23,12 @@
             $divUserLogueado.removeClass("hide");
             $divLoginRegistro.addClass("hide");
             $saludoUsuario.text("Bienvenido " + $nombreCompleto);
+
+            $tipoUsuario = sessionStorage.getItem('tipoUsuario');
+
+            if ($tipoUsuario == "administrador"){
+                $itemHome.prop("href", "menuInicioAdmin.php");
+            }
 
         }else{
 

@@ -25,10 +25,6 @@
                 sessionStorage.setItem('nombre', res.data.nombre);
                 sessionStorage.setItem('apellido', res.data.apellido);
                 sessionStorage.setItem('email', res.data.email);
-                debugger;
-                 /*$('#modalLogin').modal('hide');
-                
-               alert(res.mensaje);*/
             }else{
                 alert(res.mensaje);
 
