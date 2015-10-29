@@ -45,6 +45,8 @@
                     url=URI.PELICULASXCOMPLEJO;
                     data.idComplejo=$( "#cmbComplejos option:selected" ).val();
                     $('#cmbPeliculas').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
+                    
+                    
                     break;
                     
                 case 'cmbPeliculas':
@@ -56,9 +58,9 @@
                     
                 case 'cmbDias':
                     url=URI.HORARIOSDIAPELICULA;
-                    data.idComplejo=$( "#cmbComplejos option:selected" ).val();
-                    data.idPelicula=$( "#cmbPeliculas option:selected" ).val();
-                    data.idDia=$( "#cmbDias option:selected" ).val();
+                    data.idFuncion=$('#cmbDias option:selected').val();
+                    data.dia=$('#cmbDias option:selected').text();
+                    $('#cmbHorarios').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
                     break;
                 case 'cmbHorarios':
                     //si cambia el combo horarios, habilito boton
@@ -66,6 +68,8 @@
                     data.idPelicula=$( "#cmbPeliculas option:selected" ).val();
                     data.idDia=$( "#cmbDias option:selected" ).val();
                     data.idHorario=$( "#cmbHorarios option:selected" ).val();
+                    
+                    e.preventDefault();
                     break;    
             }
              var obtener = $.ajax({
@@ -104,6 +108,15 @@
                             break;
                            
                         case 'cmbDias':
+                            $('#cmbHorarios option:selected').remove();
+                            
+                             resultado.data.forEach(function(item){
+                                 $('#cmbHorarios').append(
+                                    $('<option/>',{
+                                        value   :   item.idFuncionDetalle
+                                    }).append(item.horario)
+                                );
+                             });
                             
                             break;
                         case 'cmbHorarios':
@@ -130,6 +143,33 @@
         
     });
 
+    function limpiaCombos(idComboInicioLimpieza){
+         switch(idComboInicioLimpieza) {
+                case 'cmbComplejos':
+                    
+                    $('#cmbPeliculas').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
+                    $('#cmbDias').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
+                    $('#cmbHorarios').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
+                    
+                    break;
+                    
+                case 'cmbPeliculas':
+                                        
+                    
+                    $('#cmbDias').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
+                    $('#cmbHorarios').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
+                    break;
+                    
+                case 'cmbDias':
+                    
+                    $('#cmbHorarios').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
+                    
+                 break;
+                    
+            }
+    
+    }
+    
     function obtenerComplejos()
     {   
         var obtener = $.ajax({

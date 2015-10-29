@@ -189,13 +189,19 @@ function obtenerDiasxPeliculaxComplejo($request){
 }
 function obtenerHorariosxPeliculaxComplejo($request){
     require("../models/peliculas.php");
-    $p = new Peliculas();
+     $p = new Peliculas();
+    
+    $pelicula = array();    
+	$pelicula["idFuncion"] = $request->idFuncion;
+	$pelicula["dia"] = $request->dia; 
+    
+    
     try{
-        if($pelicula = $p->getHorariosxPeliculaxComplejo($request->id)){
+        if($horarios = $p->getHorariosxPeliculaxComplejo($pelicula)){
             sendResponse(array(
                 "error" => false,
                 "mensaje" => "",
-                "data" => $pelicula
+                "data" => $horarios
             ));
         }   
     }
@@ -206,6 +212,8 @@ function obtenerHorariosxPeliculaxComplejo($request){
         ));
     }
 }
+
+
 $request = new Request();
 $action = $request->action;
 switch($action){   

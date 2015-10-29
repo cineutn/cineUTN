@@ -181,8 +181,13 @@ where idFuncion='$id'";
         return $peliculas;
     
     }
-    public function getHorariosxPeliculaxComplejo($id){
-        $query = "SELECT * FROM pelicula where idPelicula='$id'";  
+    public function getHorariosxPeliculaxComplejo($datos){
+        $idFuncion = $this->connection->real_escape_string($datos['idFuncion']);
+        $dia = $datos['dia'];
+        
+        $query = "  select idFuncionDetalle,horario 
+                    from funcionhorario
+                    where idFuncion=$idFuncion and dia='$dia'";  
        
         $peliculas = array();
         
