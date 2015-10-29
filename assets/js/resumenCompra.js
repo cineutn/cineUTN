@@ -82,7 +82,7 @@
 
         if (tipoUsuario == "cliente" ){
 
-            var email = sessionStorage.getItem('email');
+            var email = $("#emailUser").val();
             var nombreCompleto = sessionStorage.getItem('nombre') + ', ' + sessionStorage.getItem('apellido');                       
             var codigoQR = $miCanvas[0].toDataURL("image/png");
             var codigo = $codigoVenta.text();

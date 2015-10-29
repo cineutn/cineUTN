@@ -3,6 +3,7 @@
 <?php 
 
 	$varCodigo = isset($_POST["codigoVenta"]) ? $_POST["codigoVenta"] : ' ';
+	$varEmail = isset($_POST["mailVenta"]) ? $_POST["mailVenta"] : ' ';
  ?>
 
        <div class="row paginaCompra">
@@ -18,6 +19,7 @@
                <b>4. CONFIRMACION</b></b>
             </div>   
        <div class="confirmarOperacion" id="contenedorVenta">
+       		<input name="emailUser" id="emailUser" type="hidden" val=<?php echo $varEmail; ?>>
             <div class="container">
 				<div class="row">
 													

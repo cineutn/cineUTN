@@ -4,18 +4,16 @@
         LOGIN : 'actions/actions.php?action=validar'
     };
 
-    $form = $("#login_form");
-   
-    $form.on("submit",function(e){
+    $formLogin = $("#login_form");
+
+    $formLogin.on("submit",function(e){
         
-        //e.preventDefault();
-       
         var loginUser = $.ajax({
             url : URI.LOGIN,
             method : "GET",
             dataType : 'json',
             async: false,
-            data : $form.serialize()
+            data : $formLogin.serialize()
         });
 
         loginUser.done(function(res){
@@ -27,7 +25,6 @@
                 sessionStorage.setItem('email', res.data.email);
             }else{
                 alert(res.mensaje);
-
             }
         });
 

@@ -9,6 +9,23 @@ class Ventas
         $this->connection = ConnectionCine::getInstance();
     }   
 
+    public function createVentaDetalle($venta){
+        $idVenta = $this->connection->real_escape_string($venta['idVenta']);
+        $idButaca = $this->connection->real_escape_string($venta['idButaca']);
+        $precio = $this->connection->real_escape_string($venta['precio']);
+        $query = "INSERT INTO ventadetalle VALUES (
+                    DEFAULT,
+                    '$idVenta',
+                    '$idButaca',
+                    '$precio')";
+        if($this->connection->query($query)){
+            $ventaDetalle['idVentaDetalle'] = $this->connection->insert_id;
+            return $ventaDetalle;
+        }else{
+            return false;
+        }
+    }
+
     public function createVenta($venta){
         $id = $this->connection->real_escape_string($venta['idVenta']);
         $monto = $this->connection->real_escape_string($venta['monto']);
@@ -16,14 +33,8 @@ class Ventas
         $idVendedor = $this->connection->real_escape_string($venta['idVendedor']);
         $idCliente = $this->connection->real_escape_string($venta['idCliente']);
         $fecha = $this->connection->real_escape_string($venta['fecha']);
-        $codigo = $this->connection->real_escape_string($venta['codigo']);
-
-        $butacas = $this->connection->real_escape_string($venta['butacas']);
-        $preciosEntradas = $this->connection->real_escape_string($venta['preciosEntradas']);
-
-        try {
-            
-             $query = "INSERT INTO venta VALUES (
+        $codigo = $this->connection->real_escape_string($venta['codigo']);           
+        $query = "INSERT INTO venta VALUES (
                     DEFAULT,
                     '$monto',
                     '$tipoVenta',
@@ -31,42 +42,14 @@ class Ventas
                     '$idCliente',
                     '$fecha',
                     '$codigo')";
-        
-        //$this->begin_transaction(MYSQLI_TRANS_START_READ_ONLY);
 
         if($this->connection->query($query)){
             $venta['idVenta'] = $this->connection->insert_id;
-
-            $idVenta = $venta['idVenta'];
-
-            $arrayButacas = explode(",", $butacas);
-
-            for ($i = 0; $i <= count($arrayButacas) -1; $i++) {
-                
-                $idButaca = $arrayButacas[$i];
-
-                $precio = 50;
-
-                $query2 = "INSERT INTO ventaDetalle VALUES (
-                    DEFAULT,
-                    '$idVenta',
-                    '$idButaca',
-                    '$precio')";
-                
-                $this->connection->query($query);
-                    
-            }
-
-            //$this->commit();
             return $venta;
         }else{
             return false;
         }
-        } catch (Exception $e) {
-            //$this->rollback();
-        }
-
-       
+              
     }
 
     public function getVenta($codigo){

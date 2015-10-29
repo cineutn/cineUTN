@@ -33,15 +33,23 @@
                     </div>
                     <div id="userLogueado" class="hide">
                         <a id="saludoUsuario">
-                          Bienvenido
+                            Bienvenido
                         </a>    
-                        <a class="pull-right">
-                        MI CUENTA
-                        <img src="assets/img/Next-64.png">
-                        </a>
-                        
-                    </div>
-                    
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="btnMiCuenta" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                MI CUENTA
+                                <span id="cuentaFlecha" class="glyphicon glyphicon-menu-right"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li>
+                                    <a href="#"><span style="font-size: 13px;" class="glyphicon glyphicon-pencil"></span> Editar Perfil </a>
+                                </li>
+                                <li>
+                                    <a id="btnCerrarSesion"><span style="font-size: 13px;" class="glyphicon glyphicon-off"></span> Cerrar Sesión</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>                    
                 </div>
             </div>
             <ul class="tituloMenu" >
@@ -56,6 +64,9 @@
                 </li>
                 <li class="itemMenu">
                     <a href="formatos.php">Formatos</a>
+                </li>
+                <li  id="liEntradas" class="itemMenu hide">
+                    <a href="consultaVenta.php">Entradas</a>
                 </li>
             </ul>
         </div>

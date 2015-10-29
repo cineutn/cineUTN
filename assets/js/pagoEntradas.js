@@ -5,6 +5,7 @@
         DATOSTARJETA :  'actions/actionTarjetas.php?action=obtenerDatos',
         FUNCION : 'actions/actionPeliculaCompra.php?action=obtener',
         VENDER : 'actions/actionVenta.php?action=vender',
+        DETALLEVENTA : 'actions/actionVenta.php?action=venderDetalle',
         BUTACA : 'actions/actionVentaButacas.php?action=butaca',
         UPDATEBUTACA : 'actions/actionVentaButacas.php?action=reservar',
         DETALLEPRECIO: 'actions/actionPrecios.php?action=detalle'
@@ -82,20 +83,20 @@
                 
                 alert(res.mensaje);
             }
-        });
+          });
 
+    };
+
+    $butacas.text(butacas);  
   };
 
-  $butacas.text(butacas);  
-};
-
-function obtenerEntradas(){
+  function obtenerEntradas(){
 
     var cantidadEntradas = sessionStorage.getItem('cantidadEntradas');
     var arrayEntradas = cantidadEntradas.split(",");
     var entradas = '';
 
-    var idPrecios = sessionStorage.getItem('idPrecios');
+    var idPrecios = sessionStorage.getItem('idPreciosGrilla');
     var arrayPrecios = idPrecios.split(",");
 
     var preciosEntradas = sessionStorage.getItem('preciosEntradas');
@@ -128,20 +129,20 @@ function obtenerEntradas(){
                 
                 alert(res.mensaje);
             }
-        });
+          });
+
         }
           
+    };
 
+    $("#montoTotal").text('$' + precioTotal);
+    $precioTotal.text(precioTotal);
+    $cantidadEntradas.html(entradas);  
   };
-  $("#montoTotal").text('$' + precioTotal);
-  $precioTotal.text(precioTotal);
-  $cantidadEntradas.html(entradas);  
-};
 
-  function obtenerDetalleFuncion()
-  {   
-        //$id = $idFuncion.val();
-        $funcionID=$("#idFuncionDetalle").val();//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior
+  function obtenerDetalleFuncion(){   
+
+        $funcionID = $("#idFuncionDetalle").val();
         var obtener = $.ajax({
             url : URI.FUNCION,
             method : "GET",
@@ -169,12 +170,9 @@ function obtenerEntradas(){
         obtener.fail(function(res){
             alert(res.responseText)
         });
-
   };
 
-
-  function obtenerTarjetas()
-  {
+  function obtenerTarjetas(){
      var obtener = $.ajax({
             url : URI.TARJETAS,
             method : "GET",
@@ -200,12 +198,10 @@ function obtenerEntradas(){
 
         obtener.fail(function(res){
             alert(res.responseText)
-        });
-               
-    };
+        });              
+  };
   
-  function cargarComboAño()
-  {
+  function cargarComboAño(){
     var dfecha = new Date();
     var año = dfecha.getFullYear();
 
@@ -220,12 +216,11 @@ function obtenerEntradas(){
     $cmbAño.append($años);   
   };
 
-  function setMaxLength()
-  {
+  function setMaxLength(){
     id = $cmbTarjetas.val();
 
-    if (id > 0)
-    {
+    if (id > 0){
+
         var obtenerDatos = $.ajax({
             url : URI.DATOSTARJETA,
             method : "GET",
@@ -244,12 +239,10 @@ function obtenerEntradas(){
                 alert(res.mensaje);
             }
         });
-    }
-     
+    }     
   };
 
-  function validarDatos()
-  {
+  function validarDatos(){
     var bRetorno = true;
     $bCompra = $rbCompra.prop("checked");
     $tipoCompra = "";
@@ -372,7 +365,6 @@ function obtenerEntradas(){
       $divCodigoSeguridad.removeClass("hide");
       $divFechaVencimiento.removeClass("hide");
     }
-
   });
 
   $rbCompra.on("change", function(){
@@ -417,15 +409,12 @@ function obtenerEntradas(){
     return /\d/.test(String.fromCharCode(keynum));
   });
 
-  
   $codigoSeguridad.on("keypress", function(event){
     var keynum = window.event ? window.event.keyCode : e.which;
     if ((keynum == 8) || (keynum == 46))
     return true;               
     return /\d/.test(String.fromCharCode(keynum));
-
   });
-
 
   $btnComprar.on("click", function(){
       bValidar = false;
@@ -455,16 +444,19 @@ function obtenerEntradas(){
 
         monto = parseFloat($("#precioTotal").text());
         codigo = rand_code();
-        $("#codigoVenta").val(codigo);
+
+        var email;
+
+        email = $inputEmail.val();
         
-        var butacas = sessionStorage.getItem('butacas');
-        var preciosEntradas = sessionStorage.getItem('butacas');
-        preciosEntradas = preciosEntradas.replace("$"," ");
+        $("#codigoVenta").val(codigo);
+        $("#mailVenta").val(email);
 
         var comprar = $.ajax({
             url : URI.VENDER,
             method : "POST",
             dataType : 'json',
+            async:false,
             data: {
                     idVenta:0,
                     monto:monto,
@@ -472,62 +464,91 @@ function obtenerEntradas(){
                     idVendedor:idVendedor,
                     idCliente:idCliente,
                     fecha:fecha,
-                    codigo:codigo,
-                    butacas:butacas,
-                    preciosEntradas:preciosEntradas
+                    codigo:codigo
                   } 
         });
        
         comprar.done(function(res){
             if(!res.error){
+              var idVenta;
+              idVenta = res.data.idVenta;
 
-
-                $frmResumenCompra.submit();
-
+              crearDetalleVenta(idVenta);
             }else{
                 event.preventDefault();
                 alert(res.mensaje);
             }
         });  
 
-      } 
-  
+      }  
   });
   
-  function actualizarButacas(){
-
-    var idButacas = sessionStorage.getItem('butacas');
-    var arrayButacas = idButacas.split(",");
-    var butacas = '';
+  function crearDetalleVenta(idVenta){
+    var sMensaje = "";
+    var ventaId = idVenta;
+    var butacas = sessionStorage.getItem('butacas');
+    var arrayButacas = butacas.split(",",butacas);
+    var preciosEntradas = sessionStorage.getItem('preciosEntradas');
+    preciosEntradas = preciosEntradas.replace("$"," ");
 
     for (var i = 0; i < arrayButacas.length ; i++) {
-        var idButaca = parseInt(arrayButacas[i]);
+        var idButaca;
+        var precio;
 
-          var obtenerButaca = $.ajax({
-              url : URI.UPDATEBUTACA,
-              async: false,
-              method : "GET",
-              data: {idSalaFuncion:idButaca,
-                     hanilitada:2},
-              dataType : 'json',
-          });
+        idButaca = parseInt(arrayButacas[i]);
+        precio = 50;
 
-          obtenerButaca.done(function(res){
-            if(!res.error){   
-              butacas = butacas + ' ' + res.data[0].butaca;
-                
+        var crearDetalle = $.ajax({
+            url : URI.DETALLEVENTA,
+            method : "POST",
+            dataType : 'json',
+            async:false,
+            data: {
+                    idVenta:ventaId,
+                    idButaca:idButaca,
+                    precio:precio
+                  } 
+        });
+       
+        crearDetalle.done(function(res){
+            if(!res.error){
+                actualizarButaca(idButaca);
             }else{
-                
-                alert(res.mensaje);
+                sMensaje = res.mensaje;
             }
         });
 
     };
 
+    if (sMensaje != "" ){
+      $frmResumenCompra.submit();
+    }else{
+      alert(sMensaje);
+    }
+
   };
 
-  function returnFormatfecha()
-  {
+  function actualizarButaca(idButaca){
+
+    var updateButaca = $.ajax({
+        url : URI.UPDATEBUTACA,
+        async: false,
+        method : "GET",
+        data: {idSalaFuncion:idButaca,
+               hanilitada:2},
+        dataType : 'json'
+    });
+
+    updateButaca.done(function(res){
+        if(!res.error){   
+                          
+        }else{                
+            alert(res.mensaje);
+        }
+    });
+  };
+
+  function returnFormatfecha(){
     var dfecha = new Date();
 
     var dMes = dfecha.getMonth() + 1;
@@ -550,14 +571,11 @@ function obtenerEntradas(){
     longitud = 10;
     code = "";
 
-      for (x=0; x < longitud; x++){
-
-        rand = Math.floor(Math.random()*caracteres.length);      
-        code += caracteres.substr(rand, 1);
-
-      }
-
+    for (x=0; x < longitud; x++){
+      rand = Math.floor(Math.random()*caracteres.length);      
+      code += caracteres.substr(rand, 1);
+    }
     return code;
-}
+  }
 
 })(jQuery);

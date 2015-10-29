@@ -24,7 +24,26 @@
     $( document ).ready(function(){
         obtenerFormatos();
         obtenerPrecios();
+        ocultarBotones();
     });
+
+    function ocultarBotones(){
+
+        var tipoUsuario;
+
+        $tipoUsuario = sessionStorage.getItem('tipoUsuario');
+
+        if ($tipoUsuario == "administrador"){
+            $(".updatePrecio").removeClass("hide");
+            $(".removePrecio").removeClass("hide");
+            $botonAddPrecio.removeClass("hide");
+        }else{
+            $(".updatePrecio").addClass("hide");
+            $(".removePrecio").addClass("hide");
+            $botonAddPrecio.addClass("hide");
+        }
+    
+    };
 
     function obtenerFormatos()
     {   
@@ -62,6 +81,7 @@
        var obtener = $.ajax({
             url : URI.GET,
             method : "GET",
+            async:false,
             dataType : 'json',
         });
        

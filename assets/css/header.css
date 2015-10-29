@@ -61,6 +61,17 @@ body{
     font-size: 10px;
 }
 
+#btnMiCuenta{
+    background-color: #213969;
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+
+#btnMiCuenta span{
+   margin-left: 2px;
+}
+
 .tituloMenu{
     width: 100%;
     text-align: center;

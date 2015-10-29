@@ -24,7 +24,7 @@ class PeliculaCompra
                     cm.nombre
                     from funcion as fn 
                     inner join funcionhorario fh on fn.idFuncion = fh.idFuncion
-                    inner join sala as sl on fn.idSala = sl.idSala
+                    inner join sala as sl on fh.idSala = sl.idSala
                     inner join pelicula pl on fn.idPelicula = pl.idPelicula
                     inner join idioma il on fn.idIdioma = il.idIdioma
                     inner join formato fo on fn.idTipoFuncion = fo.idTipoFuncion

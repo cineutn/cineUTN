@@ -26,13 +26,31 @@
 
     $( document ).ready(function(){
         obtenerComplejos();
+        ocultarBotones();
     });
+
+    function ocultarBotones(){
+
+        var tipoUsuario;
+
+        $tipoUsuario = sessionStorage.getItem('tipoUsuario');
+
+        if ($tipoUsuario == "administrador"){
+            $(".lapiz").removeClass("hide");
+            $botonAddComplejo.removeClass("hide");
+        }else{
+            $(".lapiz").addClass("hide");
+            $botonAddComplejo.addClass("hide");
+        }
+    
+    };
 
     function obtenerComplejos()
     {   
         var obtener = $.ajax({
             url : URI.COMPLEJOS,
             method : "GET",
+            async:false,
             dataType : 'json',
         });
        

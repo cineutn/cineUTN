@@ -8,6 +8,10 @@
     $divUserLogueado = $('#userLogueado');
     $saludoUsuario = $('#saludoUsuario');
     $itemHome = $("#itemHome");
+    $liEntradas = $("#liEntradas");
+    $btnCerrarSesion = $("#btnCerrarSesion");
+
+    $('#btnMiCuenta').dropdown()
 
     $( document ).ready(function(){
         obtenerUsuario();
@@ -28,17 +32,21 @@
 
             if ($tipoUsuario == "administrador"){
                 $itemHome.prop("href", "menuInicioAdmin.php");
-            }
-
+            }else if($tipoUsuario == "vendedor"){   
+                $liEntradas.removeClass("hide");
+            }       
         }else{
 
             $divUserLogueado.addClass("hide");
             $divLoginRegistro.removeClass("hide");
             $saludoUsuario.text("");
         }
-       
-
-               
+           
     };
+
+    $btnCerrarSesion.on("click", function(){
+        sessionStorage.clear();
+        window.location.href='index.php';
+    });
 
 })(jQuery)
