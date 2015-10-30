@@ -93,6 +93,7 @@
             url : URI.GETBUTACAS,
             method : "GET",
             dataType : 'json',
+            async:false,
             data: {idVenta:idVenta}
         });
 

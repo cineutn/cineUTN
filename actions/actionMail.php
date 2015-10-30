@@ -27,6 +27,18 @@ function sendMail($request){
       $entradas= $request->entradas;
       $pagoTotal= $request->pagoTotal;
 
+      //eliminamos data:image/png; y base64, de la cadena que tenemos
+      //hay otras formas de hacerlo          
+      //list(, $codigoQR) = explode(';', $codigoQR);
+      //list(, $codigoQR) = explode(',', $codigoQR);
+      //Decodificamos $Base64Img codificada en base64.
+      $codigoQR = base64_decode($codigoQR);
+      //escribimos la información obtenida en un archivo llamado 
+      //unodepiera.png para que se cree la imagen correctamente
+      $pathCodigo = '../assets/img/codigosQR/'.$codigo.'.png';
+
+      file_put_contents($pathCodigo, $codigoQR);  
+      
       $cuerpo ='
       <style type="text/css">
           .centrar{
@@ -71,7 +83,7 @@ function sendMail($request){
                           
           <div id="qrCode" >
             <img id="imgCodigo" src="../assets/img/subheaderbuy-all.jpg" width="350" height="117" />           
-            <div id="contenedorQR"><img src="cid:Filename.png" id="codigoQR" width="200" height="200" /></div>
+            <div id="contenedorQR"><img src="'.$pathCodigo.'" id="codigoQR" width="200" height="200" /></div>
           </div>
         </div>
         <div class="row">
@@ -83,7 +95,7 @@ function sendMail($request){
           pel&#237;cula!</p>
         </div>
         <div id="tablaResumenCompra" class="row">
-          <table class="table table-condensed" style="margin:auto;margin-left:50%;"> 
+          <table class="table table-condensed" style="margin:auto;"> 
             <tbody>
               <tr>
                 <td>C&#243;digo de Retiro:</td>

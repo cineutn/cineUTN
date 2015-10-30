@@ -483,20 +483,52 @@
       }  
   });
   
+  function obtenerArrayPrecios(){
+    var sRetorno = "";
+    var preciosEntradas = sessionStorage.getItem('preciosEntradas');
+    var arrayPrecios = preciosEntradas.split(",");
+
+    var cantidadEntadas = sessionStorage.getItem('cantidadEntradas');
+    var arrayCantidad = cantidadEntadas.split(",");
+
+    for (var i = 0; i < arrayCantidad.length ; i++) {
+        var cantidad = parseInt(arrayCantidad[i]);
+
+        if (cantidad > 0){
+            for (var j = 0; j < cantidad ; j++) {
+                  var precio;
+
+                  precio = parseInt(arrayPrecios[i].replace("$",""));
+
+                  sRetorno = sRetorno + ";" + precio;
+            };
+        }
+
+    };
+
+    if(sRetorno.startsWith(";")){
+      sRetorno = sRetorno.substring(1,sRetorno.length);
+    }
+
+    return sRetorno;
+  };
+
   function crearDetalleVenta(idVenta){
     var sMensaje = " ";
     var ventaId = idVenta;
+    
     var butacas = sessionStorage.getItem('butacas');
     var arrayButacas = butacas.split(",");
-    var preciosEntradas = sessionStorage.getItem('preciosEntradas');
-    preciosEntradas = preciosEntradas.replace("$"," ");
-
+    
+    var precios = obtenerArrayPrecios();
+    var arrayPrecios = precios.split(";");
+    
     for (var i = 0; i < arrayButacas.length ; i++) {
         var idButaca;
         var precio;
 
         idButaca = parseInt(arrayButacas[i]);
-        precio = 50;
+        precio = parseInt(arrayPrecios[i]);
 
         var crearDetalle = $.ajax({
             url : URI.DETALLEVENTA,
