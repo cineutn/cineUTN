@@ -75,6 +75,24 @@ function realizarVentaDetalle($request){
     }
 }
 
+function obtenerButacas($request){
+    require("../models/ventas.php");
+    $c = new Ventas();
+    $idVenta  = $request->idVenta;
+    if($butacas = $c->getVentaButaca($idVenta)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $butacas
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener las butacas vendidas. "
+        ));
+    }
+}
+
 $request = new Request();
 $action = $request->action;
 switch($action){             
@@ -82,10 +100,13 @@ switch($action){
         realizarVenta($request);
         break;
     case "venderDetalle":
-        realizarVenta($request);
+        realizarVentaDetalle($request);
         break;
     case "obtener":
         obtenerVenta($request);
+        break;
+    case "obtenerButacas":
+        obtenerButacas($request);
         break;
     
 }

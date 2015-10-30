@@ -19,7 +19,8 @@
                <b>4. CONFIRMACION</b></b>
             </div>   
        <div class="confirmarOperacion" id="contenedorVenta">
-       		<input name="emailUser" id="emailUser" type="hidden" val=<?php echo $varEmail; ?>>
+       		<input name="ventaID" id="ventaID" type="hidden" value="">
+       		<input name="emailUser" id="emailUser" type="hidden" value=<?php echo $varEmail; ?>>
             <div class="container">
 				<div class="row">
 													

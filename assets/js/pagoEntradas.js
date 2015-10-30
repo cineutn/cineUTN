@@ -109,7 +109,7 @@
         var cantidad = parseInt(arrayEntradas[i]);
         var monto =  parseInt(arrayPreciosEntradas[i]);
 
-        precioTotal = parseInt(precioTotal) + parseInt(monto);
+        precioTotal = parseInt(precioTotal) + (parseInt(monto) * parseInt(cantidad));
 
         if (cantidad > 0) {
 
@@ -484,10 +484,10 @@
   });
   
   function crearDetalleVenta(idVenta){
-    var sMensaje = "";
+    var sMensaje = " ";
     var ventaId = idVenta;
     var butacas = sessionStorage.getItem('butacas');
-    var arrayButacas = butacas.split(",",butacas);
+    var arrayButacas = butacas.split(",");
     var preciosEntradas = sessionStorage.getItem('preciosEntradas');
     preciosEntradas = preciosEntradas.replace("$"," ");
 
@@ -520,7 +520,7 @@
 
     };
 
-    if (sMensaje != "" ){
+    if (sMensaje == " " ){
       $frmResumenCompra.submit();
     }else{
       alert(sMensaje);

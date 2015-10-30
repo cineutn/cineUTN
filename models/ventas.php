@@ -76,5 +76,21 @@ class Ventas
 
     }
 
+    public function getVentaButaca($idVenta){
 
+        $query = "SELECT CONCAT( SF.fila,  ' - ', SF.columna ) AS butaca
+                    FROM venta V
+                    INNER JOIN ventadetalle VD ON V.idVenta = VD.idVenta
+                    INNER JOIN sala_funcion SF ON VD.idSalaFuncion = SF.idSalaFuncion
+                    WHERE V.idVenta ='$idVenta'";
+
+        $butacas = array();
+        if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $butacas[] = $fila;
+            }
+            $result->free();
+        }
+        return $butacas;
+    }
 }

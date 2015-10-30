@@ -2,6 +2,7 @@
       
     var URI = {
         GETVENTA : 'actions/actionVenta.php?action=obtener',
+        GETBUTACAS : 'actions/actionVenta.php?action=obtenerButacas',
         EMAIL : 'actions/actionMail.php?action=enviar'
     };
    
@@ -16,6 +17,7 @@
     $entradas = $('#entradas');
     $precioTotal = $('#precioTotal');
     
+    $inputVentaID = $("#ventaID");
 
     $( document ).ready(function(){
         updateQrCode();
@@ -60,14 +62,19 @@
 
          obtener.done(function(res){
             if(!res.error){
+                $inputVentaID.val(res.data[0].idVenta)
                 $complejo.text(res.data[0].Complejo);
                 $sala.text(res.data[0].Sala);
                 $pelicula.text(res.data[0].pelicula);
                 $fecha.text(res.data[0].Fecha);
                 $horario.text(res.data[0].horario);
                 $entradas.text('');
-                $precioTotal.text(res.data[0].precioTotal);
-                 enviarEmail();
+                $precioTotal.text('$' + res.data[0].precioTotal);
+                obtenerButacas();
+                enviarEmail();
+
+                sessionStorage.removeItem("butacas");
+                sessionStorage.removeItem("cantidadEntradas");
             }else{
                 event.preventDefault();
                 alert(res.mensaje);
@@ -75,6 +82,36 @@
         });
 
     };          
+
+    function obtenerButacas(){
+
+        var idVenta;
+
+        idVenta =  $inputVentaID.val();
+
+        var obtenerButacas = $.ajax({
+            url : URI.GETBUTACAS,
+            method : "GET",
+            dataType : 'json',
+            data: {idVenta:idVenta}
+        });
+
+        obtenerButacas.done(function(res){
+            if(!res.error){
+                var butacas = "(";
+
+                res.data.forEach(function(item){
+                    butacas = butacas + " " + item.butaca + " ";                    
+                });
+
+                butacas = butacas + " )";
+                $entradas.text(butacas);
+            }else{
+                event.preventDefault();
+                alert(res.mensaje);
+            }
+        });
+    };
 
     function enviarEmail(){
 
@@ -122,9 +159,6 @@
                 }
             });
         }
-
-        
-
     };
 
 })(jQuery)
