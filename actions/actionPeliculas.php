@@ -159,6 +159,12 @@ function obtenerPeliculaxComplejo($request){
                 "mensaje" => "",
                 "data" => $pelicula
             ));
+        }else {
+            sendResponse(array(
+                "error" => True,
+                "mensaje" => "No hay datos"
+            ));
+        
         }   
     }
     catch(Exception $e){
@@ -178,7 +184,13 @@ function obtenerDiasxPeliculaxComplejo($request){
                 "mensaje" => "",
                 "data" => $pelicula
             ));
-        }   
+        } else {
+            sendResponse(array(
+                "error" => True,
+                "mensaje" => "No hay datos"
+            ));
+        
+        }  
     }
     catch(Exception $e){
         sendResponse(array(
@@ -203,7 +215,13 @@ function obtenerHorariosxPeliculaxComplejo($request){
                 "mensaje" => "",
                 "data" => $horarios
             ));
-        }   
+        } else {
+            sendResponse(array(
+                "error" => True,
+                "mensaje" => "No hay datos"
+            ));
+        
+        }  
     }
     catch(Exception $e){
         sendResponse(array(

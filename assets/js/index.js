@@ -15,6 +15,7 @@
     $( document ).ready(function(){
             obtenerComplejos();
             otenerPeliculasCartelera();
+        
             
         
         //bindeos
@@ -25,11 +26,9 @@
                     
 
                 }else{
-                    
-                    
+                     
                     e.preventDefault();
                     $('#modalLogin').modal('show');
-
 
                 } 
 
@@ -41,7 +40,7 @@
             
             switch(e.currentTarget.id) {
                 case 'cmbComplejos':
-                    
+                    limpiaCombos('cmbComplejos');
                     url=URI.PELICULASXCOMPLEJO;
                     data.idComplejo=$( "#cmbComplejos option:selected" ).val();
                     $('#cmbPeliculas').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
@@ -50,13 +49,15 @@
                     break;
                     
                 case 'cmbPeliculas':
+                    limpiaCombos('cmbPeliculas');
                     url=URI.DIASPELICULA;
-                    
                     data.idFuncion=$( "#cmbPeliculas option:selected" ).val();
                     $('#cmbDias').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
                     break;
                     
                 case 'cmbDias':
+                    
+                    limpiaCombos('cmbDias');
                     url=URI.HORARIOSDIAPELICULA;
                     data.idFuncion=$('#cmbDias option:selected').val();
                     data.dia=$('#cmbDias option:selected').text();
@@ -64,13 +65,9 @@
                     break;
                 case 'cmbHorarios':
                     //si cambia el combo horarios, habilito boton
-                    data.idComplejo=$( "#cmbComplejos option:selected" ).val();
-                    data.idPelicula=$( "#cmbPeliculas option:selected" ).val();
-                    data.idDia=$( "#cmbDias option:selected" ).val();
-                    data.idHorario=$( "#cmbHorarios option:selected" ).val();
-                    
-                    e.preventDefault();
-                    break;    
+                    $('.menuFiltros button').prop('disabled',false);
+                    return false;
+                    break;   
             }
              var obtener = $.ajax({
                 url : url,
@@ -78,12 +75,26 @@
                 dataType : 'json',
                 data : data
              });
+            
             obtener.done(function(resultado){
-                if(!resultado.error){
+                var error=0;
+                if(resultado.error){
+                    error=1;
+                }
                     switch(e.currentTarget.id) {
                         case 'cmbComplejos':
                             
-                            $('#cmbPeliculas option:selected').remove();
+                            $('#cmbPeliculas option:selected')[0].remove();
+                            
+                            if(error==1){
+                                $('#cmbPeliculas').prepend(
+                                    $('<option/>',{
+                                        value   :   1,
+                                        selected:''
+                                    }).append("No se encontraron datos")
+                                );
+                                break;
+                            }
                             
                             resultado.data.forEach(function(item){
                                  $('#cmbPeliculas').append(
@@ -96,7 +107,17 @@
                             
                         case 'cmbPeliculas':
                            
-                            $('#cmbDias option:selected').remove();
+                            $('#cmbDias option:selected')[0].remove();
+                            
+                            if(error==1){
+                                $('#cmbPeliculas').prepend(
+                                    $('<option/>',{
+                                        value   :  1,
+                                        selected:''
+                                    }).append("No se encontraron datos")
+                                );
+                                break;
+                            }
                             
                             resultado.data.forEach(function(item){
                                  $('#cmbDias').append(
@@ -108,7 +129,18 @@
                             break;
                            
                         case 'cmbDias':
-                            $('#cmbHorarios option:selected').remove();
+                            $('#cmbHorarios option:selected')[0].remove();
+                            
+                            if(error==1){
+                                $('#cmbPeliculas').prepend(
+                                    $('<option/>',{
+                                        value   :   1,
+                                        selected:''
+                                    }).append("No se encontraron datos")
+                                );
+                                break;
+                            }
+                            
                             
                              resultado.data.forEach(function(item){
                                  $('#cmbHorarios').append(
@@ -119,18 +151,12 @@
                              });
                             
                             break;
-                        case 'cmbHorarios':
-                            
-                            break;    
+                          
                     }   
                     
                     
                     
                     
-                }else{
-                    
-                    alert("error obnteniendo los datos");
-                }     
             });
             obtener.fail(function(res){
                  alert(res.responseText);
@@ -138,31 +164,52 @@
             
          });   
         
+        $('.menuFiltros button').on('click',function(){
+            
+            $idUsuario =   sessionStorage.getItem('idUser');
+
+                if ($idUsuario > 0 ){
+                    
+                    $(location).attr('href', 'paginaCompra.php?idFuncionDetalle=' + $('#cmbHorarios option:selected').val());    
+                    
+                }else{
+                     
+                    
+                    $('#modalLogin').modal('show');
+
+                }
+            
+            
+            
         
-        
+        });
         
     });
 
     function limpiaCombos(idComboInicioLimpieza){
+        
+        $('.menuFiltros button').prop('disabled',true);
+        
          switch(idComboInicioLimpieza) {
                 case 'cmbComplejos':
                     
-                    $('#cmbPeliculas').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
-                    $('#cmbDias').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
-                    $('#cmbHorarios').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
+                    $('#cmbPeliculas option').each(function(e,item){item.value>0 ? item.remove() :false})
+                    $('#cmbDias option').each(function(e,item){item.value>0 ? item.remove() :false})
+                    $('#cmbHorarios option').each(function(e,item){item.value>0 ? item.remove() :false})
                     
                     break;
                     
                 case 'cmbPeliculas':
-                                        
                     
-                    $('#cmbDias').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
-                    $('#cmbHorarios').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
+                    $('#cmbDias option').each(function(e,item){item.value>0 ? item.remove() :false})
+                    $('#cmbHorarios option').each(function(e,item){item.value>0 ? item.remove() :false})
+                   
                     break;
                     
                 case 'cmbDias':
                     
-                    $('#cmbHorarios').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
+                 $('#cmbHorarios option').each(function(e,item){item.value>0 ? item.remove() :false})
+                 
                     
                  break;
                     
@@ -248,6 +295,8 @@
         });
     
     };
+    
+    
     
     
     
