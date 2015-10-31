@@ -2,6 +2,7 @@
         ADD : 'actions/actionAltaSala.php?action=nueva',
         SALAS: 'actions/actionAltaSala.php?action=obtener',	
         ELIMINAR: 'actions/actionAltaSala.php?action=eliminar',	
+        DIAGRAMAR: 'actions/actionEsquemaSala.php?action=nueva',	
     };
 
 $salaNueva =$("#rowSala");
@@ -21,14 +22,17 @@ $("#btnAddRow" ).click(function() {
     $salaNueva.removeClass("rowHide"); 
     $fila.attr('maxlength',2);
     $columna.attr('maxlength',2);
-    $nombreSala.val("");
-    $fila.val("");
-    $columna.val("");
+    $("#nombreSala").val("");
+    $("#fila").val("");
+    $("#columna").val("");
 });
 
 
 $btnAltaModificacion.on("click",function(){
      bValidar="false";
+     $nombreSala =$("#nombreSala");
+     $fila =$("#fila");
+     $columna =$("#columna");
      bValidar = validarDatos();      
       if (bValidar){          
            var addSala =  $.ajax({
@@ -43,7 +47,9 @@ $btnAltaModificacion.on("click",function(){
                 dataType: 'json',
                
             })
-            addSala.done(function(response){	                
+            addSala.done(function(response){	
+                console.log(response.data.idSala);
+                diagramarSalaDetalle($fila.val(),$columna.val(),response.data.idSala)
                 $salaNueva.addClass("rowHide");                
                 obtenerSalas();
             }); 
@@ -105,23 +111,58 @@ function obtenerSalas(){
             })
             eliminarSala.done(function(response){	
                 obtenerSalas();
-            });      
+            });  
+        $("#nombreSala").val("");
+        $("#fila").val("");
+        $("#columna").val("");
         $('#modalEliminarSala').modal('hide');
+      
     });
 
 //diagramar sala
 $contenedorSalas.on("click",".botonAzul",function(event){
         event.preventDefault();        
         $idSala =$(this).parent().parent()[0].childNodes[0].children[0].value;
-        $nombreSala =$(this).parent().parent()[0].childNodes[0].children[1].outerText;        
-    console.log($(this).parent().parent()[0].childNodes[0].children[1].outerText );
+        $nombreSala =$(this).parent().parent()[0].childNodes[0].children[1].outerText;
         location.href='esquemaSala.php?idSala='+$idSala;
     });
 
 
+
+function diagramarSalaDetalle(cantidadFilas,cantidadColumnas,id){ 
+    
+    var tope = 65+ parseInt(cantidadFilas); 
+    for(var j=65;j<= tope;j++){                 
+        //String.fromCharCode(j)
+        for(var i=0;i<cantidadColumnas;i++){
+         //insertar par fila columna, primero paso fila de nro a letra con String.fromCharCode() 
+            console.log('id ' + id +'fila ' +String.fromCharCode(j) +'columnna ' + i  );
+            var addSalaDetalle =  $.ajax({
+                url: URI.DIAGRAMAR,
+                type: 'POST',
+                data: {
+                        idSala:id,                        
+                        fila: String.fromCharCode(j),				        
+                        columna:i
+                  },
+                dataType: 'json',
+
+            })
+            addSalaDetalle.done(function(response){	
+                console.log('response ' +response);
+               //alert('se');
+            }); 
+            
+        }        
+    }
+    
+
+};
+
+
 function validarDatos(){
      var bRetorno = true;
-     
+     console.log($nombreSala);
      if($nombreSala.val().length == 0){
           $nombreSala.closest(".form-group").addClass("has-error");          
           $nombreSala.siblings(".help-block").html("Debe completar este campo");

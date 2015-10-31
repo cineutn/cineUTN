@@ -23,7 +23,7 @@
                  <div><img src="assets/img/butacaLibre.png" /><p style="font-size:medium;">Butaca de la sala</p></div>
             </div>	
             <div class="divBotonButacas">					
-                <button type="button" class="btn btn-success btn-Confirmar pull-left">Guardar</button>
+                <button type="button" id="btnGuardarSala" class="btn btn-success btn-Confirmar pull-left">Guardar</button>
             </div>
          </div>
         </div>

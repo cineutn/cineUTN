@@ -6,7 +6,7 @@
     $cantidadFilas =0;
     $cantidadColumnas =0;
     $esquemaSala =$("#esquemaSala");
-    $pathSeleccionada="assets/img/butacaSeleccionada.png";
+    $pathSeleccionada="assets/img/butacaOcupada.png";
     $pathLibre="assets/img/butacaLibre.png";
 
 
@@ -44,13 +44,11 @@ function graficarSalaVacia(fil,col){
     $esquemaSala.html("");
     $fila='';
    
-    var tope = 65+ parseInt(fil);
-    console.log(fil);
-    console.log(tope);
+    var tope = 65+ parseInt(fil); 
     for(var j=65;j<= tope;j++){                 
         $fila =$fila+'<tr><td>'+  String.fromCharCode(j)+'</td>';
         for(var i=0;i<col;i++){
-            $fila = $fila +'<td class="esbirro centrar"><span><input type="hidden" value="libre"><img src="assets/img/butacaLibre.png" /></span></td>';    
+            $fila = $fila +'<td class="esbirro centrar"><input type="hidden" value="libre"><img src="assets/img/butacaLibre.png" /></td>';    
         }
         $fila =$fila +'<td class="centrar">'+ String.fromCharCode(j)+'</td></tr>';
     }
@@ -64,22 +62,25 @@ function graficarSalaVacia(fil,col){
     
 }
 
-$("#esquemaSala").on("click",".esbirro",function(){      
+$esquemaSala.on("click",".esbirro",function(){      
     event.stopPropagation();
 //    $idButaca = $(this)[0].id;         
-    $estadoButaca = $(this).children('input'); 
+    $estadoButaca = $(this).children('input').val(); 
     console.log($estadoButaca);
         if($estadoButaca==='libre'){
             $(this).children('img').attr('src',$pathSeleccionada);
             $(this).children('input').attr('value','seleccionada');
-            $cantidadEntradas--;
-
         }
         if($estadoButaca==='seleccionada'){
             $(this).children('img').attr('src',$pathLibre);
-            $(this).children('input').attr('value','libre');
-            $cantidadEntradas++;    
+            $(this).children('input').attr('value','libre');           
 
         }
 });
- 
+
+$("#btnGuardarSala").click(function(){
+
+     $("td").each(function() {
+        console.log($(this).children('input').val());
+     });
+});
