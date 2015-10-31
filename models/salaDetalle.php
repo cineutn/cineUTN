@@ -17,8 +17,8 @@ class SalaDetalle
 		$fila =$this->connection->real_escape_string($sala['fila']);
 		$columna =$this->connection->real_escape_string($sala['columna']);      
       
-       $query = "INSERT INTO saladetalle(IdSalaDetalle,idSala,fila,columna,habilitada) VALUES
-       (DEFAULT,$idSala,$fila,$columna,0)";
+       $query = "INSERT INTO saladetalle(IdSalaDetalle,idSala,fila,columna) VALUES
+       (DEFAULT,$idSala,'$fila',$columna)";
      
       
         if($this->connection->query($query)){

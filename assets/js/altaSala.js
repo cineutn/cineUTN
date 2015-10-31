@@ -141,6 +141,7 @@ function diagramarSalaDetalle(cantidadFilas,cantidadColumnas,id){
                 url: URI.DIAGRAMAR,
                 type: 'POST',
                 data: {
+                        idSalaDetalle:0,
                         idSala:id,                        
                         fila: String.fromCharCode(j),				        
                         columna:i

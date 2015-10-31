@@ -15,8 +15,8 @@ function nuevaSalaDetalle($request){
 	require("../models/salaDetalle.php");
     $s = new SalaDetalle();
     $sala = array();    
-	$sala["idSalaDetalle"] = 0;
-    $sala["idSala"] = $request->id;	
+	//$sala["idSalaDetalle"] = $request->idSalaDetalle;
+    $sala["idSala"] = $request->idSala;	
 	$sala["fila"] = $request->fila;  
 	$sala["columna"] = $request->columna;
 					  
