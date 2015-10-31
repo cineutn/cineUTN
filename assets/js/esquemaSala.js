@@ -1,5 +1,5 @@
  var URI = {        
-        SALA: 'actions/actionAltaSala.php?action=obtenerUna',	        
+        SALA: 'actions/actionEsquemaSala.php?action=obtener',	        
     };
     
     $idSala = $("#idSala").val();
@@ -25,10 +25,14 @@ function obtenerSala(){
             dataType : 'json',
         });   
      obtener.done(function(res){
-         if(!res.error){  
-            $cantidadFilas=res.data.filas;
-            $cantidadColumnas=res.data.columnas;           
-            graficarSalaVacia($cantidadFilas,$cantidadColumnas);
+         if(!res.error){     
+             console.log(res);
+            //graficarSalaVacia($cantidadFilas,$cantidadColumnas);
+             
+             
+             
+             
+             
          }else{
              alert(res.mensaje);
          }
