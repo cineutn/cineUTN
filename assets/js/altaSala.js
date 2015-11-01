@@ -132,9 +132,9 @@ $contenedorSalas.on("click",".botonAzul",function(event){
 //guarda la sala en sala detalle
 function diagramarSalaDetalle(cantidadFilas,cantidadColumnas,id){     
     var tope = 65+ parseInt(cantidadFilas); 
-    for(var j=65;j<= tope;j++){                 
+    for(var j=65;j< tope;j++){                 
         //String.fromCharCode(j)
-        for(var i=0;i<cantidadColumnas;i++){
+        for(var i=1;i<=cantidadColumnas;i++){
          //insertar par fila columna, primero paso fila de nro a letra con String.fromCharCode()             
             var addSalaDetalle =  $.ajax({
                 url: URI.DIAGRAMAR,
@@ -143,7 +143,8 @@ function diagramarSalaDetalle(cantidadFilas,cantidadColumnas,id){
                         idSalaDetalle:0,
                         idSala:id,                        
                         fila: String.fromCharCode(j),				        
-                        columna:i
+                        columna:i,
+                        habilitada:1
                   },
                 dataType: 'json',
 

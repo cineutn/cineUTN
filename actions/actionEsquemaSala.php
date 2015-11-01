@@ -19,6 +19,7 @@ function nuevaSalaDetalle($request){
     $sala["idSala"] = $request->idSala;	
 	$sala["fila"] = $request->fila;  
 	$sala["columna"] = $request->columna;
+    $sala["habilitada"] = $request->habilitada;
 					  
     if($nuevo = $s->createSalaDetalle($sala)){
         sendResponse(array(

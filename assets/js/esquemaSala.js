@@ -11,10 +11,7 @@
 
 
 $(document ).ready(function(){	      
-        
-    //caso de no se haya guardado la sala aun
-    obtenerSala();
-    
+    obtenerSala();    
     });
 
 function obtenerSala(){    
@@ -27,12 +24,40 @@ function obtenerSala(){
      obtener.done(function(res){
          if(!res.error){     
              console.log(res);
-            //graficarSalaVacia($cantidadFilas,$cantidadColumnas);
-             
-             
-             
-             
-             
+            
+              if(!res.error){
+                $esquemaSala.html("");     
+                $fila=''; 
+                $filaActual='';
+                if(res.data[0].fila!=null){
+                    $filaActual=res.data[0].fila;
+                    $totalcolumna=0;                 
+                    $fila ='<tr><td class="centrar">'+$filaActual+'</td>';                    
+                    res.data.forEach(function(item){                         
+                        if($filaActual===item.fila)
+                        {
+                            $fila=$fila + '<td id="'+item.IdSalaDetalle+'" class="centrar esbirro">'+traerButaca(item.habilitada,item.IdSalaDetalle)+'</td>';
+                            $totalcolumna=item.columna;
+                        }
+                        else{
+                        
+                            $fila= $fila+'<td>'+$filaActual+'</td></tr>'+
+                            '<td>'+item.fila+'</td><td id="'+item.IdSalaDetalle+'" class="centrar esbirro">'+traerButaca(item.habilitada,item.IdSalaDetalle)+'</td>';
+                            $filaActual=item.fila;                            
+                        }
+                    });
+                    $fila =$fila +('<td>'+$filaActual+'</td></tr><tr><td></td>');
+                    for(i=1;i<=$totalcolumna;i++){
+                        $fila =$fila +('<td  class="centrar">'+i+'</td>');                    
+                    }
+                    $fila =$fila +('</tr>');                    
+                    $pantalla= '<tr><td></td><td colspan='+$totalcolumna+'><img style="width:100%; height:25%;" src="assets/img/SeatScreen.png" /></td><td></td></tr>';
+                    $pantalla=$pantalla+ $fila;
+                    $esquemaSala.append($pantalla);                    
+                }else{
+                alert('No hay sala');
+                }
+              }
          }else{
              alert(res.mensaje);
          }
@@ -41,30 +66,21 @@ function obtenerSala(){
     obtener.fail(function(res){
         alert(res.responseText)
         });
-
 }
 
-function graficarSalaVacia(fil,col){
-    $esquemaSala.html("");
-    $fila='';
-   
-    var tope = 65+ parseInt(fil); 
-    for(var j=65;j<= tope;j++){                 
-        $fila =$fila+'<tr><td>'+  String.fromCharCode(j)+'</td>';
-        for(var i=0;i<col;i++){
-            $fila = $fila +'<td class="esbirro centrar"><input type="hidden" value="libre"><img src="assets/img/butacaLibre.png" /></td>';    
+
+    function traerButaca(estado,id){
+        $imagen='';        
+       
+        if(estado==0){
+            $imagen='<input type="hidden" value="libre"><img src="assets/img/butacaLibre.png" />';        
         }
-        $fila =$fila +'<td class="centrar">'+ String.fromCharCode(j)+'</td></tr>';
-    }
-     $fila =$fila +'<tr><td></td>';
-    for(var i=1;i<=col;i++){
-     $fila =$fila +'<td class="centrar">'+i+'</td>';
+        if(estado==2){
+            $imagen='<input type="hidden" value="ocupada"><img src="assets/img/butacaOcupada.png" />';        
+        }
     
-    }
-    $fila =$fila +'<td></td></tr>';
-    $esquemaSala.append($fila);
-    
-}
+        return $imagen;
+    } 
 
 $esquemaSala.on("click",".esbirro",function(){      
     event.stopPropagation();

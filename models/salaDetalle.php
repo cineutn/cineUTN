@@ -16,9 +16,10 @@ class SalaDetalle
 		$idSala =$this->connection->real_escape_string($sala['idSala']);		
 		$fila =$this->connection->real_escape_string($sala['fila']);
 		$columna =$this->connection->real_escape_string($sala['columna']);      
+		$habilitada =$this->connection->real_escape_string($sala['habilitada']);      
       
-       $query = "INSERT INTO saladetalle(IdSalaDetalle,idSala,fila,columna) VALUES
-       (DEFAULT,$idSala,'$fila',$columna)";
+       $query = "INSERT INTO saladetalle(IdSalaDetalle,idSala,fila,columna,habilitada) VALUES
+       (DEFAULT,$idSala,'$fila',$columna,$habilitada)";
      
       
         if($this->connection->query($query)){
@@ -42,12 +43,12 @@ public function eliminarSalaDetalle($sala){
     
    public function obtenerSalaDetalle($idSala){
     $id = (int) $this->connection->real_escape_string($idSala);
-    $query = "SELECT * FROM saladetalle where idSala = $id";
+    $query = "SELECT * FROM saladetalle where idSala = $id order by fila,columna";
        
-     $salas= '';      
+     $salas = array();     
        if( $result = $this->connection->query($query) ){
             while($fila = $result->fetch_assoc()){
-                $salas = $fila;
+                $salas[] = $fila;
             }
             $result->free();
         }
