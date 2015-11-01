@@ -6,16 +6,16 @@
     require("partials/header.php"); 
 ?>
 
-<div >
+<div class="row butacas">
      
-        <input type='hidden' id='idSala' value=<?php echo $idSala ?>></input>
-        <div class="col-md-6">	               
+        <input type='hidden' id='idSala' value=<?php echo $idSala ?>></input>	   
+        <div class="col-md-5">	               
             <table class="esquema" id="esquemaSala">                    
 
             </table>
         </div>	
-        <div class="col-md-6">
-          <div   class="row divLeyendaButacas">	
+        <div class="col-md-6" style="background-color:white;">
+          <br /><br />
             <div>
                  <div><img src="assets/img/butacaOcupada.png" /><p style="font-size:medium;">Butaca a excluir</p></div>
             </div>
@@ -25,7 +25,7 @@
             <div class="divBotonButacas">					
                 <button type="button" id="btnGuardarSala" class="btn btn-success btn-Confirmar pull-left">Guardar</button>
             </div>
-         </div>
+         
         </div>
     
 </div>

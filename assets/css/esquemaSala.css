@@ -1,14 +1,11 @@
-.divLeyendaButacas{
-	background-color:white; 
-	margin-top: 25%;
+.butacas{
+	background-color: white;
 }
 
 .esquema{
     margin:5%;
     width: 60%;
 }
-
-
 
 .centrar{
     text-align:  center;
