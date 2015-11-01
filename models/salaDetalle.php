@@ -53,6 +53,18 @@ public function eliminarSalaDetalle($sala){
             $result->free();
         }
         return $salas;
-  }    
+  }
+    
+    public function editarSalaDetalle($sala){
+        $idSalaDetalle =$this->connection->real_escape_string($sala['idSalaDetalle']);
+        $habilitada =$this->connection->real_escape_string($sala['habilitada']);
+        
+        $query = "UPDATE saladetalle SET habilitada=$habilitada WHERE IdSalaDetalle = $idSalaDetalle";
+        if($this->connection->query($query)){             
+                return true;
+            }else{
+                return false;
+            }
+      }
     
 }

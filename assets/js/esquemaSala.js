@@ -1,5 +1,6 @@
  var URI = {        
         SALA: 'actions/actionEsquemaSala.php?action=obtener',	        
+        EDITAR: 'actions/actionEsquemaSala.php?action=editar',
     };
     
     $idSala = $("#idSala").val();
@@ -8,10 +9,11 @@
     $esquemaSala =$("#esquemaSala");
     $pathSeleccionada="assets/img/butacaOcupada.png";
     $pathLibre="assets/img/butacaLibre.png";
+    $idButacaOcupadaInicial=[];
 
 
 $(document ).ready(function(){	      
-    obtenerSala();    
+    obtenerSala(); 
     });
 
 function obtenerSala(){    
@@ -23,8 +25,6 @@ function obtenerSala(){
         });   
      obtener.done(function(res){
          if(!res.error){     
-             console.log(res);
-            
               if(!res.error){
                 $esquemaSala.html("");     
                 $fila=''; 
@@ -72,11 +72,13 @@ function obtenerSala(){
     function traerButaca(estado,id){
         $imagen='';        
        
-        if(estado==0){
+        if(estado==1){
             $imagen='<input type="hidden" value="libre"><img src="assets/img/butacaLibre.png" />';        
         }
         if(estado==2){
-            $imagen='<input type="hidden" value="ocupada"><img src="assets/img/butacaOcupada.png" />';        
+            $imagen='<input type="hidden" value="ocupada"><img src="assets/img/butacaOcupada.png" />'; 
+            //guardo el esado inicial de las butacas seleccionadas
+            $idButacaOcupadaInicial.push(id);
         }
     
         return $imagen;
@@ -85,22 +87,78 @@ function obtenerSala(){
 $esquemaSala.on("click",".esbirro",function(){      
     event.stopPropagation();
 //    $idButaca = $(this)[0].id;         
-    $estadoButaca = $(this).children('input').val(); 
-    console.log($estadoButaca);
+    $estadoButaca = $(this).children('input').val();   
         if($estadoButaca==='libre'){
             $(this).children('img').attr('src',$pathSeleccionada);
-            $(this).children('input').attr('value','seleccionada');
+            $(this).children('input').attr('value','ocupada');
         }
-        if($estadoButaca==='seleccionada'){
+        if($estadoButaca==='ocupada'){
             $(this).children('img').attr('src',$pathLibre);
-            $(this).children('input').attr('value','libre');           
-
+            $(this).children('input').attr('value','libre');
         }
 });
 
 $("#btnGuardarSala").click(function(){
+    $idButacaOcupadaFinal=[];    
+    $error=false;
+   $(".esbirro" ).each(function() {
+        if($(this).children('input').val() ==='ocupada'){            
+           $idButacaOcupadaFinal.push($(this)[0].id);            
+          //si la butaca no esta en las seleccionadas inicilamente le cambio el estado a seleccionada
+          if($.inArray($(this)[0].id,$idButacaOcupadaInicial)==-1){
+          //guardo estado =2
+              console.log('guardo ' +$(this)[0].id);
+              
+                var editarEstado = $.ajax({
+                                url : URI.EDITAR,
+                                method : "POST",
+                                 data: {
+                                     idSalaDetalle:$(this)[0].id,
+                                     habilitada:2
+                                 },
+                                dataType : 'json',
+                            });        
 
-     $("td").each(function() {
-        console.log($(this).children('input').val());
-     });
+                editarEstado.done(function(res){
+                if(res.error){     
+                    $error=true;
+                    alert(res.mensaje);
+                    }
+                });
+              
+          }
+        }                       
+    });
+    
+    //si la butaca se deselecciono, le cambio el estado
+    $.each($idButacaOcupadaInicial, function( index, value ){  
+        if($.inArray(value,$idButacaOcupadaFinal)==-1){
+            //borro this  
+            console.log('borro '+ value);
+
+             var editarEstado = $.ajax({
+                            url : URI.EDITAR,
+                            method : "POST",
+                             data: {
+                                 idSalaDetalle:value,
+                                 habilitada:1
+                             },
+                            dataType : 'json',
+                        });        
+
+            editarEstado.done(function(res){
+            if(res.error){         
+                $error=true;
+                alert(res.mensaje);
+                };
+            });
+
+        }
+    });
+    
+    if(!$error){
+      location.href='altaSala.php';
+    
+    }
+    
 });

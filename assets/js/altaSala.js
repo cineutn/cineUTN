@@ -12,7 +12,7 @@ $btnAltaModificacion =$(".botonVerde");
 $nombreSala =$("#nombreSala");
 $fila =$("#fila");
 $columna =$("#columna");
-
+$tablaSala= $("#tablaSala");
 
 $(document ).ready(function(){	   
         obtenerSalas();
@@ -26,6 +26,12 @@ $("#btnAddRow" ).click(function() {
     $("#nombreSala").val("");
     $("#fila").val("");
     $("#columna").val("");
+});
+
+$tablaSala.on("click",".botonNegro",function(event){
+    event.preventDefault();    
+    $salaNueva.addClass("rowHide"); 
+  
 });
 
 
@@ -73,7 +79,7 @@ function obtenerSalas(){
                 '<tr><td><input type="hidden" id="idSala" value='+item.idSala+' ></input><span>'+item.descripcion+'</span></td>'+
                 '<td><span>'+item.filas+'</span></td>'+
                 '<td><span>'+item.columnas+'</span></td>'+
-                '<td><button type="button" class="btn btn-default btn-circle botonRojo"><i class="glyphicon glyphicon-remove textoBoton"></i></button></button></td>'+
+                '<td><button type="button" class="btn btn-default btn-circle botonRojo"><i class="glyphicon glyphicon-remove textoBoton"></i></button></td>'+
                 '<td><button  class="botonAzul" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button></td></tr>';                
             });
             $contenedorSalas.append($row);

@@ -74,11 +74,29 @@ function obtenerSalaDetalle($request){
             "error" => true,
             "mensaje" => "Error al obtener detalle de sala"
         ));
-    }
-					  
+    }					  
 }
 
-
+function editarSalaDetalle($request){
+    require("../models/salaDetalle.php");
+    $s = new SalaDetalle();
+    $sala = array();    
+	$sala["idSalaDetalle"] = $request->idSalaDetalle;	
+    $sala["habilitada"] = $request->habilitada;	  
+    
+    if($nuevo = $s->editarSalaDetalle($sala)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "Detallae de sala eliminada con exito. ",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al eliminar detalle sala"
+        ));
+    }
+}
     
 $request = new Request();
 $action = $request->action;
@@ -91,5 +109,9 @@ switch($action){
         break; 
     case "obtener":
         obtenerSalaDetalle($request);
+        break;
+    case "editar":
+        editarSalaDetalle($request);
         break; 
+        
 }
