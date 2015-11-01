@@ -157,6 +157,7 @@ $("#btnGuardarSala").click(function(){
     });
     
     if(!$error){
+        alert('Esquema guardado!');
       location.href='altaSala.php';
     
     }
