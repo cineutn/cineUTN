@@ -71,7 +71,6 @@
   	border-radius: 12px;
  	width: 186px;
     height: 140px; 	
-  	opacity: 0;
   	display: block;
   	transition: 2.5s;
   	border: .1em lightgray solid;
@@ -82,6 +81,7 @@
 	margin-left: 5px;
 	margin-top: 10px;
 	cursor: pointer;
+    margin-bottom: 11px;
 }
 
 .uploadImagen{
@@ -101,10 +101,9 @@
 }
 
 .icon{
-	margin-left: 55px;
 	margin-top: 25px;
 	color: white;
-	font-size: 70px;
+	font-size: 23px;
 	text-align: center;
 }
 
@@ -146,4 +145,7 @@
 .lapiz span{
 	margin-top: 5px;
 	font-size: 20px;
+}
+#barra_de_progreso{
+    margin-top: 7px;
 }

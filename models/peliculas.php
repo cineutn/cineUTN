@@ -9,7 +9,8 @@ class Peliculas
     } 
 	
 	public function addImage($imagen){
-        $PeliculaID = $this->connection->real_escape_string($imagen['id']);
+        
+        /*$PeliculaID = $this->connection->real_escape_string($imagen['id']);
         $path = $this->connection->real_escape_string($imagen['path']);
         $file_name = $this->connection->real_escape_string($imagen['file_name']);
         $fullPath = $path.'/'.$file_name;
@@ -21,7 +22,21 @@ class Peliculas
             return $imagen;
         }else{
             return false;
-        }
+        }*/
+         if (isset($_FILES['archivo'])) {
+           $archivo = $_FILES['archivo'];
+           $extension = pathinfo($archivo['name'], PATHINFO_EXTENSION);
+           $time = time();
+           $nombre = "{$_POST['nombre_archivo']}_$time.$extension";
+           if (move_uploaded_file($archivo['tmp_name'], "archivos_subidos/$nombre")) {
+              echo 1;
+           } else {
+              echo 0;
+           }
+}
+        
+        
+        
     }
     public function getPeliculas(){
         $query = "SELECT * FROM pelicula";  
@@ -103,12 +118,12 @@ inner join formato f on f.idTipoFuncion=d.idTipoFuncion where a.idPelicula='$id'
 		$clasificacionPelicula = $this->connection->real_escape_string($pelicula['clasificacionPelicula']);
 		$generoPelicula = $this->connection->real_escape_string($pelicula['generoPelicula']);							        
         $sinopsisPelicula = $this->connection->real_escape_string($pelicula['sinopsisPelicula']);
-		$imagenPelicula = $this->connection->real_escape_string($pelicula['imagenPelicula']);	
 		$trailerPelicula = $this->connection->real_escape_string($pelicula['trailerPelicula']);
 		$actoresPelicula = $this->connection->real_escape_string($pelicula['actoresPelicula']);
 		$directorPelicula = $this->connection->real_escape_string($pelicula['directorPelicula']);	
 		$fechaEstrenoPelicula = $this->connection->real_escape_string($pelicula['fechaEstrenoPelicula']);
-		
+		$urlimagen = $this->connection->real_escape_string( $pelicula["urlimagen"]);
+        
         $query = "INSERT INTO pelicula (idPelicula,titulo,duracion,clasificacion,genero,estreno,fechaAlta,sinopsis,imagen,trailer,actores,director) VALUES (                    
 					DEFAULT,
                     '$tituloPelicula',
@@ -118,7 +133,7 @@ inner join formato f on f.idTipoFuncion=d.idTipoFuncion where a.idPelicula='$id'
 					'$fechaEstrenoPelicula',
                      SYSDATE(),							
 					'$sinopsisPelicula',					
-                    '$imagenPelicula',
+                    '$urlimagen',
 					'$trailerPelicula',
 					'$actoresPelicula',
 					'$directorPelicula')";

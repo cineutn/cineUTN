@@ -50,11 +50,11 @@ function nuevaPelicaula($request){
 	$pelicula["generoPelicula"] = $request->generoPelicula;  	
 	$pelicula["fechaBajaPelicula"] = $request->fechaBajaPelicula; 	
 	$pelicula["sinopsisPelicula"] = $request->sinopsisPelicula; 
-	$pelicula["imagenPelicula"] = $request->imagenPelicula;  
 	$pelicula["trailerPelicula"] = $request->trailerPelicula;	
 	$pelicula["actoresPelicula"] =$request->actoresPelicula;
 	$pelicula["directorPelicula"] =$request->directorPelicula;
 	$pelicula["fechaEstrenoPelicula"] =$request->fechaEstrenoPelicula;
+    $pelicula["urlimagen"] = $request->urlimagen;
 					  
     if($nuevo = $p->createpelicula($pelicula)){
         sendResponse(array(
@@ -72,6 +72,8 @@ function nuevaPelicaula($request){
 function subir($request){
     require("../models/peliculas.php");
     
+    
+       
     if(!empty($_FILES)){         
         $imgFile = $_FILES[0];
         $imgData = new Peliculas();

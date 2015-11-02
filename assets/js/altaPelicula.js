@@ -11,95 +11,143 @@
 	$clasificacionPelicula =$("#clasificacionPelicula");
 	$generoPelicula =$("#generoPelicula");		
 	$sinopsisPelicula =$("#sinopsisPelicula");
-	$imagenPelicula =$("#imagenPelicula");
 	$trailerPelicula =$("#trailerPelicula");	
 	$actoresPelicula =$("#actoresPelicula");	
 	$directorPelicula =$("#directorPelicula");	
 	$fechaEstrenoPelicula =$("#fechaEstrenoPelicula");
 	$botonAddPelicula = $("#btnAdd");
     $btnAltaModificacion = $("#btnAltaModificacion");	
-	$form =  $('#uploadForm');
+	//$form =  $('#uploadForm');
 	$formPelicula=$("#form-nuevaPelicula");
 	$btnText =$("#btnText");
 	$btnCerrar = $("#iconCerrar");
 	$contenedorPeliculas=$("#contenedorPeliculas");
 	
-	   $( document ).ready(function(){	   
+    $( document ).ready(function(){	   
         obtenerPeliculas();
-    });
-	
-	
-	
-	  $botonAddPelicula.on("click",function(){
-       $formPelicula.removeClass("hide");          
-       $("#idPelicula").val("0");
-	   $("#tituloPelicula").val("");
-	   $("#duracionPelicula").val("");
-	   $("#clasificacionPelicula").val("");
-	   $("#generoPelicula").val("");		
-	   $("#sinopsisPelicula").val("");
-	   $("#imagenPelicula").val("");
-	   $("#trailerPelicula").val("");	
-	   $("#actoresPelicula").val("");	
-	   $("#directorPelicula").val("");	
-	   $("#fechaEstrenoPelicula").val("");
-          
-        $("#vistaPrevia").addClass('hide');
-        $("#vistaPrevia").css('opacity', '0.0');
-        $("#iconAvatar").removeClass("hide");
-        $("#textoAvatar").removeClass("hide");
+        $botonAddPelicula.on("click",function(){
+           $formPelicula.removeClass("hide");          
+           $("#idPelicula").val("0");
+           $("#tituloPelicula").val("");
+           $("#duracionPelicula").val("");
+           $("#clasificacionPelicula").val("");
+           $("#generoPelicula").val("");		
+           $("#sinopsisPelicula").val("");
+           $("#imagenPelicula").val("");
+           $("#trailerPelicula").val("");	
+           $("#actoresPelicula").val("");	
+           $("#directorPelicula").val("");	
+           $("#fechaEstrenoPelicula").val("");
 
-        $btnText.text("Crear");
+            $("#vistaPrevia").addClass('hide');
+            $("#vistaPrevia").css('opacity', '0.0');
+            $("#iconAvatar").removeClass("hide");
+            $("#textoAvatar").removeClass("hide");
+
+            $btnText.text("Crear");
         
+        });
+        $("#archivos_subidos").on('click', '.eliminar_archivo', function() {
+            var archivo = $(this).parents('.row').eq(0).find('span').text();
+            archivo = $.trim(archivo);
+            eliminarArchivos(archivo);
+        });
     });
 	
-	  $btnCerrar.on("click",function(){
+    function subirArchivos() {
+         
+        var d = new Date();
+
+        var month = d.getMonth()+1;
+        var day = d.getDate();
+
+        var output = d.getFullYear() + '-' +
+            (month<10 ? '0' : '') + month + '-' +
+            (day<10 ? '0' : '') + day;
+         
+        $("#nombreImagen").val($("#nombre_archivo").val() + "_" + output+"." + $('#archivo').val().split('.').pop()); 
+         
+        $("#archivo").upload('utils/subir_archivo.php',
+        {
+            nombre_archivo: $("#nombre_archivo").val()
+        },
+        function(respuesta) {
+            //Subida finalizada.
+            $("#barra_de_progreso").val(0);
+            if (respuesta === 1) {
+                mostrarRespuesta('El archivo ha sido subido correctamente.', true);
+                $("#nombre_archivo, #archivo").val('');
+            } else {
+                mostrarRespuesta('El archivo NO se ha podido subir.', false);
+            }
+            mostrarArchivos();
+        }, function(progreso, valor) {
+            //Barra de progreso.
+            $("#barra_de_progreso").val(valor);
+        });
+    }
+	function mostrarRespuesta(mensaje, ok){
+                $("#respuesta").removeClass('alert-success').removeClass('alert-danger').html(mensaje);
+                if(ok){
+                    $("#respuesta").addClass('alert-success');
+                }else{
+                    $("#respuesta").addClass('alert-danger');
+                }
+            }
+	
+    function mostrarArchivos() {
+                $.ajax({
+                    url: 'utils/mostrar_archivos.php',
+                    dataType: 'JSON',
+                   success: function(respuesta) {
+                        if (respuesta) {
+                            var html = '';
+                            for (var i = 0; i < respuesta.length; i++) {
+                                if (respuesta[i] != undefined && respuesta[i] ==$("#nombreImagen").val()) {
+                                    html += '<div class="row"> <span class="col-lg-6"> ' + respuesta[i] + ' </span> <div class="col-lg-2"> <a class="eliminar_archivo btn btn-danger" href="javascript:void(0);"> Eliminar </a> </div> </div> <hr />';
+                                }
+                            }
+                            $("#archivos_subidos").html(html);
+                        }
+                    }
+                });
+            }
+    function eliminarArchivos(archivo) {
+                $.ajax({
+                    url: 'utils/eliminar_archivo.php',
+                    type: 'POST',
+                    timeout: 10000,
+                    data: {archivo: archivo},
+                    error: function() {
+                        mostrarRespuesta('Error al intentar eliminar el archivo.', false);
+                    },
+                    success: function(respuesta) {
+                        if (respuesta == 1) {
+                            mostrarRespuesta('El archivo ha sido eliminado.', true);
+                        } else {
+                            mostrarRespuesta('Error al intentar eliminar el archivo.', false);                            
+                        }
+                        mostrarArchivos();
+                    }
+                });
+            }
+   
+    
+	
+	$btnCerrar.on("click",function(){
         $formPelicula.addClass("hide");   
     });
 	
 	
 	
 	$('input[type=file]').on('change', prepareUpload);
-    $form.on('submit', uploadFiles);
+   // $form.on('submit', uploadFiles);
 	
 	 function prepareUpload(event){				
 			files = event.target.files;						
 		 };
 	
-	    function uploadFiles(event){			
-			event.stopPropagation();
-			event.preventDefault();			
-			id = $idPelicula.val();
-			 if (id > 0 ){
-				var data = new FormData();
-		   
-				$.each(files, function(key, value){
-					data.append(key, value);
-				});
-				
-
-				var uploadImage =  $.ajax({
-					url: URI.UPLOAD + "&idPelicula=" + id,
-					type: 'POST',
-					data: data,
-					cache: false,
-					dataType: 'json',
-					processData: false,
-					contentType: false
-				})
-
-				uploadImage.done(function(response){
-					alert(response.mensaje);
-				});
-
-				uploadImage.always(function(response){
-					$form-nuevaPelicula.addClass("hide");					
-				});
-
-			}else{
-				 alert("Debes primero dar de alta la pelicula para colocarle una imagen.");
-			}        
-		}; 
+	
 		
 		
 		 var input = document.querySelector("input[type=file]"),
@@ -132,6 +180,7 @@
 		 	reader.readAsDataURL(file);
 		 }, false);
 	
+    $('#boton_subir').on('click',subirArchivos);
 	
 	
 	
@@ -201,11 +250,11 @@
 			$clasificacion =$clasificacionPelicula.val();
 			$genero =$generoPelicula.val();						
 			$sinopsis =$sinopsisPelicula.val();
-			$imagen =$imagenPelicula.val();
 			$trailer =$trailerPelicula.val();
 			$actores =$actoresPelicula.val();
 			$director =$directorPelicula.val();
-			$fechaEstreno = $fechaEstrenoPelicula.val();	
+			$fechaEstreno = $fechaEstrenoPelicula.val();
+            $urlimagen =  "assets/img/peliculas/" + $("#nombreImagen").val();
 	
 	 var addPelicula =  $.ajax({
                 url: URI.ADD,
@@ -217,11 +266,11 @@
 				        clasificacionPelicula:$clasificacion,
 				        generoPelicula:$genero,				        
 				        sinopsisPelicula:$sinopsis,
-				        imagenPelicula:$imagen,
 				        trailerPelicula:$trailer,
 						actoresPelicula:$actores,
 						directorPelicula:$director,
-						fechaEstrenoPelicula:$fechaEstreno
+						fechaEstrenoPelicula:$fechaEstreno,
+                        urlimagen   :   $urlimagen
 				  },
                 dataType: 'json',
                
