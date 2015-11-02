@@ -81,4 +81,11 @@ class Complejos
         }
     }
 
+    public function removeComplejo($complejoId){
+        $id = (int) $this->connection->real_escape_string($complejoId);
+        $query = "DELETE FROM complejo
+                  WHERE idComplejo = $id";
+        return $this->connection->query($query);
+    }
+
 }

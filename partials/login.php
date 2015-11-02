@@ -17,7 +17,7 @@
 					</div>				 			  
 				  	<p>
 				  		<button type="submit" class="btn btn-primary">Entrar</button>
-						<a href="#">Olvidaste tu Contraseña?</a>
+						<a href="passRecover.php">Olvidaste tu Contraseña?</a>
 				  </p>
 				</form>
 		  	</div> 

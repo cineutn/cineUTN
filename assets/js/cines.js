@@ -5,6 +5,7 @@
         UPLOAD : 'actions/actionComplejos.php?action=subir',
         ADD : 'actions/actionComplejos.php?action=nuevo',
         UPDATE : 'actions/actionComplejos.php?action=modificar',
+        REMOVE : 'actions/actionComplejos.php?action=eliminar'
     };
 
     $contenedorCines = $("#contenedorCines");
@@ -37,9 +38,11 @@
 
         if ($tipoUsuario == "administrador"){
             $(".lapiz").removeClass("hide");
+            $(".cruz").removeClass("hide");
             $botonAddComplejo.removeClass("hide");
         }else{
             $(".lapiz").addClass("hide");
+            $(".cruz").addClass("hide");
             $botonAddComplejo.addClass("hide");
         }
     
@@ -79,6 +82,9 @@
                             '<p id="descripcionComplejo">'+item.descripcion+'</p>'+
                             '<div class="pull-right lapiz">'+
                                 '<span class="glyphicon glyphicon-pencil"></span>'+   
+                            '</div>'+
+                            '<div class="pull-right cruz">'+
+                                '<span class="glyphicon glyphicon-remove"></span>'+   
                             '</div>'+                         
                         '</div>'+    
                     '</div>';
@@ -212,6 +218,31 @@
         $iconButton.addClass('glyphicon glyphicon-pencil');       
     });
     
+    $contenedorCines.on("click",".cruz",function(event){
+        event.preventDefault();
+        
+        if(confirm("¿Desea eliminar el complejo seleccionado?")){
+            $divPadre = $(this).closest('.cine');
+            $complejoID =  $divPadre.children('#idComplejo').text();
+        
+            var deleteComplejo =  $.ajax({
+                url: URI.REMOVE,
+                type: 'POST',
+                data: {idComplejo:$complejoID},
+                dataType: 'json',
+            })
+
+            deleteComplejo.done(function(response){
+                $form.addClass("hide");
+                obtenerComplejos();
+            });
+
+        }
+        else{
+            return false;
+        }     
+    });
+
     $btnCerrar.on("click",function(){
         $formComplejo.addClass("hide");   
     });

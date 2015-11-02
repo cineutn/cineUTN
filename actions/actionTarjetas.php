@@ -12,7 +12,7 @@ function sendResponse($response){
 }
 
 
-function nuevoPrecio($request){
+function nuevaTarjeta($request){
     require("../models/tarjetas.php");
     $c = new Tarjetas();
     $tarjeta = array();
@@ -34,7 +34,7 @@ function nuevoPrecio($request){
     }
 }
 
-function modificarPrecio($request){
+function modificarTarjeta($request){
     require("../models/tarjetas.php");
     $c = new Tarjetas();
     $tarjeta = array();

@@ -56,19 +56,19 @@ function modificarComplejo($request){
     }
 }
 
-function eliminarTweet($request){
+function eliminarComplejo($request){
     require("../models/complejos.php");
     $c = new Complejos();
-    $comentarioId = $request->id;
-    if($c->removeComentario($comentarioId)){
+    $complejoId = $request->idComplejo;
+    if($c->removeComplejo($complejoId)){
         sendResponse(array(
             "error" => false,
-            "mensaje" => "Comentario eliminado"
+            "mensaje" => "Complejo eliminado"
         ));
     }else{
         sendResponse(array(
             "error" => true,
-            "mensaje" => "Error ..."
+            "mensaje" => "Error al eliminar el complejo."
         ));
     }
 }
@@ -162,7 +162,7 @@ switch($action){
         modificarComplejo($request);
         break;
     case "eliminar":
-        eliminarTweet($request);
+        eliminarComplejo($request);
         break;
     case "obtener":
         obtenerComplejo($request);

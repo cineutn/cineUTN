@@ -33,21 +33,40 @@
 }
 
 .lapiz{
+	background-color: #28B1D2;
+	border: #0981B7 2px solid;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	background-color: #28B1D2;
 	color: white;
 	width: 40px;
 	height: 40px;
 	text-align: center;
 	vertical-align: center;
-	border-radius: 20px;
-	border: #0981B7 2px solid;
+	border-radius: 20px;	
 	cursor: pointer;
 }
 
 .lapiz span{
 	margin-top: 5px;
+	font-size: 20px;
+}
+
+.cruz{
+   	background-color: #FF3B04;
+    border: #B70909 2px solid;
+    margin-right: 10px;
+	margin-bottom: 10px;
+	color: white;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	vertical-align: center;
+	border-radius: 20px;	
+	cursor: pointer;
+}
+
+.cruz span{
+    margin-top: 6px;
 	font-size: 20px;
 }
 

@@ -1,0 +1,41 @@
+@media print{
+
+	body {-webkit-print-color-adjust: exact;}
+	
+	.entrada{
+		-webkit-print-color-adjust:exact;
+		background-color: silver;
+	}
+
+	.clienteHeader{
+		background-color: #03539e;
+		color: #B31516;
+		font-family: "Arial";
+	}
+	
+	.clienteFooter{
+		background-color: #B31516;	
+		color: #03539e;
+	}
+
+	.empleadoHeader{
+		background-color: white;
+	}
+
+	.empleadoFooter{
+		background-color: #03539e;
+		color: #B31516;
+	}
+
+	#salaTicket2{
+		color: #03539e;
+	}
+
+	#fechaTicket{
+		color: #03539e;
+	}
+
+	#peliculaTicket{
+		color: #03539e;
+	}
+}

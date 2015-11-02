@@ -12,7 +12,9 @@ class Tarjetas
     public function getTarjetas(){
         $query = "SELECT 
                     idTarjeta,
-                    empresa
+                    empresa,
+                    cantNumeros,
+                    codigoSeguridad
                     FROM tarjeta                     
                     ORDER BY empresa ";  
        
@@ -52,8 +54,8 @@ class Tarjetas
         $query = "INSERT INTO tarjeta VALUES (
                     DEFAULT,
                     '$empresa',
-                    '$codigoSeguridad',
-                    '$cantNumeros')";
+                    '$cantNumeros',
+                    '$codigoSeguridad')";
 
         if($this->connection->query($query)){
             $tarjeta['idTarjeta'] = $this->connection->insert_id;

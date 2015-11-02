@@ -20,6 +20,7 @@
                     </div>           		
            </form>
        <div class="confirmarOperacion" id="contenedorVenta">
+       		<input name="ventaID" id="ventaID" type="hidden" value="">
             <div class="container">
 				<div class="row">
 					<input id="idVenta" type="hidden">					
@@ -152,10 +153,13 @@
     </div>
 	
 <?php require("partials/footer.php"); ?>
-    
- 	<link rel="stylesheet" href="assets/css/paginaInicio.css">
-    <link rel="stylesheet" href="assets/css/paginaCompra.css">   
-    <script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
-    <script src="assets/js/vendor/bootstrap.min.js"></script>
-	<script src="assets/js/vendor/jquery.qrcode-0.12.0.js"></script>
-	<script src="assets/js/consultaVenta.js"></script>
+<?php require("partials/entrada.php"); ?>
+
+<link href="assets/css/entradaPrint.css" type="text/css" media="print" />
+<link rel="stylesheet" href="assets/css/paginaInicio.css">
+<link rel="stylesheet" href="assets/css/paginaCompra.css">     
+<script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
+<script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="assets/js/vendor/jquery.qrcode-0.12.0.js"></script>
+<script src="assets/js/vendor/jquery.PrintArea.js"></script>
+<script src="assets/js/consultaVenta.js"></script>

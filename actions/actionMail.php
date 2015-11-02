@@ -241,12 +241,68 @@ function sendMail($request){
       }
 }
 
+function sendMailRecover($request){
+      include("api/class.phpmailer.php");
+      include("api/class.smtp.php");
+            
+      $mailCliente = $request->email;
+      $nombre = $request->nombreCompleto;
+      $Password = $request->Password;
+
+      $cuerpo ='
+        Hola '.$nombre.'
+
+        Recibimos una solicitud de reenvío de contraseña del usuario a esta dirección.
+        Los datos son los siguientes: 
+
+        Contraseña: '.$Password.'  
+
+        Atentamente
+        UTN Cines.- 
+
+        Notificacion de UTN Cines.-
+      
+      ';
+
+      $mail = new PHPMailer();
+      $mail->IsSMTP();
+      $mail->SMTPAuth = true;
+      $mail->SMTPSecure = "ssl";
+      $mail->Host = "smtp.gmail.com";
+      $mail->Port = 465;
+      $mail->Username = "cineutn@gmail.com";
+      $mail->Password = "cineutn2015";
+
+      $mail->From = "cineutn@gmail.com";
+      $mail->FromName = "Cines UTN";
+      $mail->Subject = "UTN Cines";
+      $mail->AltBody = "";
+      $mail->MsgHTML($cuerpo);
+      
+      $mail->AddAddress($mailCliente, $nombre);
+      $mail->IsHTML(false);
+
+      if(!$mail->Send()) {
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al enviar el Email. ". $mail->ErrorInfo
+        ));
+      } else {
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "El email fue enviado con exito. "
+        ));
+      }
+}
 
 $request = new Request();
 $action = $request->action;
 switch($action){
     case "enviar":
         sendMail($request);
+        break;
+    case "recover":
+        sendMailRecover($request);
         break;                
     default:
         sendMail($request);

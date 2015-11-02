@@ -1,18 +1,18 @@
-.precios{
+.tarjetas{
 	background-color: white;
 }
 
-.precios-Titulo{
+.tarjeta-Titulo{
 	font-weight: bold;
 	margin-left: 15px;
 }
 
-.precios-Descripcion{
+.tarjeta-empresa{
 	font-style: italic;
 	margin-left: 15px;
 }
 
-.columna-Precio{
+.columna-Tarjeta{
 	background: #fff;
     display: block;
     list-style-type: none;
@@ -32,7 +32,7 @@
     transition:all .2s ease-out
 }
 
-.columna-Precio:hover{
+.columna-Tarjeta:hover{
 	-webkit-box-shadow:0px 5px 20px rgba(0,0,0,.3);
     -moz-box-shadow:0px 5px 20px rgba(0,0,0,.3);
     box-shadow:0px 5px 20px rgba(0,0,0,.3);
@@ -103,7 +103,7 @@
     padding-top: 15px;
 }
 
-.addPrecio{
+.addTarjeta{
     margin-right: 25px;
     margin-bottom: 10px;
     background-color: #21CE5C;
@@ -116,13 +116,13 @@
     cursor: pointer;
 }
 
-.addPrecio span{
+.addTarjeta span{
     margin-top: 6px;
     margin-left: 1px;
     font-size: 20px;
 }
 
-.updatePrecio{
+.updateTarjeta{
     margin-left: 10px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -137,13 +137,13 @@
     display: inline-block;
 }
 
-.updatePrecio span{
+.updateTarjeta span{
     margin-top: 6px;
     margin-left: 1px;
     font-size: 15px;
 }
 
-.removePrecio{
+.removeTarjeta{
     margin-left: 25px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -158,7 +158,7 @@
     display: inline-block;
 }
 
-.removePrecio span{
+.removeTarjeta span{
     margin-top: 6px;
     font-size: 15px;
 }

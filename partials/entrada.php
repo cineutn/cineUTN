@@ -1,22 +1,23 @@
-<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="../assets/css/entrada.css">
+<link rel="stylesheet" href="assets/css/entrada.css">
+<link href="assets/css/entradaPrint.css" type="text/css" media="print" />
 
-<div class="entrada">
+<div id="ticket" class="entrada hide">
 	<div class="clienteHeader">
 		<label>SALA</label>
-		<span>8</span>
+		<span id="salaTicket">8</span>
 	</div>
 	<div class="empleadoHeader">
-		<label>SALA</label>
-		<span>8</span>
+		<label id="salaTicket2">SALA 8</label>
+		<label id="fechaTicket"><span id="diaTicket">Viernes 30</span>, <span id="añoTicket">2012</span> | <span id="horaTicket">07:00 PM</span></label>
+		<label id="peliculaTicket">Sherlock Holmes: Juego de sombras</label>
 	</div >
 	<div class="clienteFooter">
-		<label >SALA</label>
-		<span>8</span>
+		<label >ASIENTOS</label>
+		<span id="butacasTicket">A-1 A-2 A-3</span>
 	</div>
 	<div class="empleadoFooter">
-		<label >SALA</label>
-		<span>8</span>
+		<img src="assets/img/UTNCineLogo.png" alt="">
+		<label>Cines UTN</label>
 	</div>
 	
 </div>
