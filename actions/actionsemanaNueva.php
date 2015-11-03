@@ -70,8 +70,7 @@ function nuevaSemana($request){
 
 function fechaInicioSemana($request){
     require("../models/semanas.php");
-    $s = new Semanas();
-    //$semana = array();    
+    $s = new Semanas();       
 	$semana = $request->numeroSemana;   
 	
     if($nuevo = $s->obtenerFechaInicioSemana($semana)){
@@ -87,6 +86,26 @@ function fechaInicioSemana($request){
         ));
     }
 }
+
+function diasSemana($request){
+    require("../models/semanas.php");
+    $s = new Semanas();    
+	$semana = $request->numeroSemana;   
+	
+    if($nuevo = $s->obtenerDiasSemana($semana)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $nuevo
+        ));
+     }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener semana. "
+        ));
+    }
+}
+
     
 $request = new Request();
 $action = $request->action;
@@ -103,6 +122,8 @@ switch($action){
   case "fechaInicioSemana":
         fechaInicioSemana($request);
         break;
-        
+  case "diasSemana":
+        DiasSemana($request);
+        break;        
         
 }

@@ -10,33 +10,26 @@
         <div class=" col-md-4">
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation" class="active"><a>Pelicula/Formato</a></li>
-                <li id="contenedorPeliculas" > </li>
-                
-               <!--<li><a>Rapidos y fruriosos 7/ 3D subtitulada</a></li>
-                <li ><a>Rapidos y fruriosos 7/ 3D castellano</a></li>
-                <li class="opcionSeleccionada"><a>Rapidos y fruriosos 7/ 2D subtitulada</a></li>
-                <li><a>Rapidos y fruriosos 7/ 2D castellano</a></li>-->
+                <li id="contenedorPeliculas" ></li>
             </ul>
       </div>
        <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
               <li role="presentation" class="active"><a>Sala</a></li>
-              <li class="opcionSeleccionada"><a href="#">Sala 1</a></li>
-              <li><a href="#">Sala 2</a></li>
-                <li><a href="#">Sala 3</a></li>
-            </ul>
+                <li id="contenedorSalas" ></li>
+           </ul>
       </div>   
       <div class="col-md-4">
             <ul class="nav nav-pills nav-stacked">
               <li class="active"><a>Día</a></li>
-              <li  class="opcionSeleccionada"><a href="#">Jueves</a></li>
+                <li id="contenedorSemana" ></li>
+              <!--<li  class="opcionSeleccionada"><a href="#">Jueves</a></li>
               <li class="opcionSeleccionada"><a href="#">Viernes</a></li>
               <li class="opcionSeleccionada"><a href="#">Sabado</a></li>
               <li class="opcionSeleccionada"><a href="#">Domingo</a></li>
               <li class="opcionSeleccionada"><a href="#">Lunes</a></li>
               <li class="opcionSeleccionada"> <a href="#">Martes</a></li>
-              <li class="opcionSeleccionada"><a href="#">Mierocles</a></li>
-
+              <li class="opcionSeleccionada"><a href="#">Mierocles</a></li>-->
             </ul>
       </div>
        <div class="col-md-2">

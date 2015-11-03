@@ -66,7 +66,19 @@ class Semanas
         return $fecha;
   }
     
-    
+   public function obtenerDiasSemana($semana){
+    $nro = (int) $this->connection->real_escape_string($semana);
+    $query = "SELECT * FROM semana where numeroSemana=$nro order by fecha asc";
+       
+     $fecha= array();      
+       if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $fecha[] = $fila;
+            }
+            $result->free();
+        }
+        return $fecha;
+   }   
     
     
 }
