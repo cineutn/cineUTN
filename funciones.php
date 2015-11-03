@@ -13,13 +13,13 @@
                 <li id="contenedorPeliculas" ></li>
             </ul>
       </div>
-       <div class="col-md-2">
+       <div class="col-md-3">
             <ul class="nav nav-pills nav-stacked">
               <li role="presentation" class="active"><a>Sala</a></li>
                 <li id="contenedorSalas" ></li>
            </ul>
       </div>   
-      <div class="col-md-4">
+      <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
               <li class="active"><a>Día</a></li>
                 <li id="contenedorSemana" ></li>          

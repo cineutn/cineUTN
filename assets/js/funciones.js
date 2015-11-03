@@ -112,8 +112,8 @@ function obtenerDias(){
             console.log(res);
            $row='';
             $contenedorSemana.html("");            
-            res.data.forEach(function(item){                
-                $row=$row +'<li><input type="hidden" id="idPelicula" value='+item.idSemana+' ></input><a>'+item.fecha+'</a></li>';                                
+            res.data.forEach(function(item){                  
+                $row=$row +'<li><input type="hidden" id="idPelicula" value='+item.idSemana+' ></input><a>'+obtenerFecha(item.fecha) +'</a></li>';                                
             });
             $contenedorSemana.after($row);
         }else{
@@ -128,7 +128,7 @@ function obtenerDias(){
 };
 
 
-  var getIntervalo = function(fecha){
+ function obtenerFecha(fecha){
     var fechaRetorno = '';
 
     var date1 = new Date(fecha);
