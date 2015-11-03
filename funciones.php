@@ -10,10 +10,12 @@
         <div class=" col-md-4">
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation" class="active"><a>Pelicula/Formato</a></li>
-                <li><a>Rapidos y fruriosos 7/ 3D subtitulada</a></li>
+                <li id="contenedorPeliculas" > </li>
+                
+               <!--<li><a>Rapidos y fruriosos 7/ 3D subtitulada</a></li>
                 <li ><a>Rapidos y fruriosos 7/ 3D castellano</a></li>
                 <li class="opcionSeleccionada"><a>Rapidos y fruriosos 7/ 2D subtitulada</a></li>
-                <li><a>Rapidos y fruriosos 7/ 2D castellano</a></li>
+                <li><a>Rapidos y fruriosos 7/ 2D castellano</a></li>-->
             </ul>
       </div>
        <div class="col-md-2">

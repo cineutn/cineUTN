@@ -17,6 +17,6 @@ $action = $request->action;
 switch($action){                  
    // case "obtenerPeliculas":
      //   obtenerPeliculas($request);
-        break;    
+       // break;    
         
 }

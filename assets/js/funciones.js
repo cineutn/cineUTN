@@ -4,6 +4,7 @@
     };
 
 $nroSemana =$("#nroSemana").val();
+$contenedorPeliculas =$("#contenedorPeliculas");
 
 $(document ).ready(function(){	  
     $fehaInicioSemana= obtenerInicioSemana();
@@ -46,14 +47,20 @@ function obtenerPeliculas($fehaInicioSemana){
         url : URI.PELICULAS,
         method : "GET",
         data: {
-                        fechaSemana:$fehaInicioSemana
-				  },
+            fechaSemana:$fehaInicioSemana
+        },
         dataType : 'json',
     });
 
     obtener.done(function(res){
-        if(!res.error){				            
-            console.log(res);
+        if(!res.error){
+            $row='';
+            $contenedorPeliculas.html("");            
+            res.data.forEach(function(item){                
+                $row=$row +'<li><input type="hidden" id="idPelicula" value='+item.idPelicula+' ></input><a>'+item.titulo+'</a></li>'+
+                                '<input type="hidden" id="duracion" value='+item.duracion+' >';
+            });
+            $contenedorPeliculas.after($row);
         }else{
             event.preventDefault();
             alert(res.mensaje);

@@ -225,7 +225,7 @@ where idFuncion='$id'";
     
  public function getPeliculasDetalle($fechaSemana){    
       
-     $query ="SELECT idPelicula,titulo,duracion FROM pelicula WHERE fechaBaja='0000-00-00 00:00:00' AND fechaestreno < '$fechaSemana' order by fechaAlta";
+     $query ="SELECT idPelicula,titulo,duracion FROM pelicula WHERE fechaBaja='0000-00-00 00:00:00' AND estreno < '$fechaSemana' order by fechaAlta";
      $peliculas= array();
       
        if( $result = $this->connection->query($query) ){
