@@ -234,6 +234,28 @@ function obtenerHorariosxPeliculaxComplejo($request){
 }
 
 
+function obtenerPeliculasActivas($request){
+    require("../models/peliculas.php");
+    
+    $p = new Peliculas();
+    $fechaSemana =$request ->fechaSemana;
+    if($peliculas = $p->getPeliculasDetalle($fechaSemana)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $peliculas
+        ));
+     }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener detalle de peliculas. "
+        ));
+    }
+}
+
+
+
+
 $request = new Request();
 $action = $request->action;
 switch($action){   
@@ -263,6 +285,9 @@ switch($action){
         break;
     case "obtenerHorariosxPeliculaxComplejo":
         obtenerHorariosxPeliculaxComplejo($request);
+        break;
+     case "obtenerPeliculasActivas":
+        obtenerPeliculasActivas($request);
         break;
         
        

@@ -67,6 +67,26 @@ function nuevaSemana($request){
         ));
     }
 }
+
+function fechaInicioSemana($request){
+    require("../models/semanas.php");
+    $s = new Semanas();
+    //$semana = array();    
+	$semana = $request->numeroSemana;   
+	
+    if($nuevo = $s->obtenerFechaInicioSemana($semana)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $nuevo
+        ));
+     }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener fehca de incio de semana. "
+        ));
+    }
+}
     
 $request = new Request();
 $action = $request->action;
@@ -79,6 +99,9 @@ switch($action){
         break;        
    case "nueva":
         nuevaSemana($request);
+        break;
+  case "fechaInicioSemana":
+        fechaInicioSemana($request);
         break;
         
         

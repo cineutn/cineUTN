@@ -221,4 +221,24 @@ where idFuncion='$id'";
         return $peliculas;
     
     }
+    
+    
+ public function getPeliculasDetalle($fechaSemana){    
+      
+     $query ="SELECT idPelicula,titulo,duracion FROM pelicula WHERE fechaBaja='0000-00-00 00:00:00' AND fechaestreno < '$fechaSemana' order by fechaAlta";
+     $peliculas= array();
+      
+       if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $peliculas[] = $fila;
+            }
+            $result->free();
+        }
+        return $peliculas;
+  
+  } 
+    
+    
+    
+    
 }

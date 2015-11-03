@@ -50,6 +50,23 @@ class Semanas
         }else{
             return false;
         }
-    }    
+    }
+    
+  public function obtenerFechaInicioSemana($semana){
+    $nro = (int) $this->connection->real_escape_string($semana);
+    $query = "SELECT fecha FROM semana where numeroSemana=$nro order by fecha asc limit 1";
+       
+     $fecha= '';      
+       if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $fecha = $fila;
+            }
+            $result->free();
+        }
+        return $fecha;
+  }
+    
+    
+    
     
 }

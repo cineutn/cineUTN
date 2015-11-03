@@ -66,11 +66,7 @@ $btnAddRow.click(function() {
     });
     obtener.fail(function(res){
         alert(res.responseText)
-    });
-    
-   /* 
-        
-   obtenerSemanas();*/
+    });  
 });
 
 function generarSemana(ultimaFecha,ultimaSemana){
@@ -96,6 +92,7 @@ function generarSemana(ultimaFecha,ultimaSemana){
         });
 
     }
+    obtenerSemanas();
 }  
 
   $contenedorSemanas.on("click",".botonAzul",function(event){
