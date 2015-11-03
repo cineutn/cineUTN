@@ -170,6 +170,10 @@ thead tr th{
 	right: 20%;
 }
 
+.iconoError{
+	right: 2%;
+}
+
 #contenedorQR > * {
     display: block;
 }
@@ -187,6 +191,12 @@ thead tr th{
 }
 
 #frmBuscarVenta{
+	margin-top: 20px;
+	margin-left: 20%;
+	margin-bottom: 20px;
+}
+
+#frmRecoverPass{
 	margin-top: 20px;
 	margin-left: 20%;
 	margin-bottom: 20px;

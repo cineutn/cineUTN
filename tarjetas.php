@@ -1,7 +1,7 @@
 <?php require("partials/header.php"); ?>
 
         <div class="row tarjetas">
-            <h2 class="tarjeta-Titulo">Tarjetas</h2>
+            <h2 class="tarjeta-Titulo">TARJETAS</h2>
             <div id="btnAdd" class="pull-right addTarjeta">
                 <span class="glyphicon glyphicon-plus"></span>    
             </div>

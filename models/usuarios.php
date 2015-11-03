@@ -15,8 +15,14 @@ class Usuario
         return $cantidad->fetch_assoc();
     }
 
-     public function getUser($id){  
+    public function getUser($id){  
         $query = "SELECT * FROM usuarios WHERE usuarioID = '".$id."'";
+        $r = $this->connection->query($query);
+        return $r->fetch_assoc();
+    }
+
+    public function getUserByMail($mail){  
+        $query = "SELECT * FROM usuario WHERE email = '".$mail."'";
         $r = $this->connection->query($query);
         return $r->fetch_assoc();
     }

@@ -12,6 +12,25 @@ function redirect($url){
    die();
 }
 
+function recoverPassword($request){
+    require("../models/usuarios.php");
+    $user = new Usuario();
+    $email = $request->email;
+    if($usuario = $user->getUserByMail($email)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data"=> $usuario
+        ));
+      
+    }else{
+         sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener datos de usuario. "
+        ));
+    }
+}
+
 function validateUser($request){
     require("../models/usuarios.php");    
     $user = new Usuario();
@@ -96,7 +115,10 @@ function logoutUser($request){
 $request = new Request();
 $action = $request->action;
 switch($action){
-     case "redirecRegistrar":
+    case "recover":
+        recoverPassword($request);
+        break;
+    case "redirecRegistrar":
         redirecRegistro($request);
         break;
     case "nuevoUser":

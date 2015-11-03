@@ -246,21 +246,25 @@ function sendMailRecover($request){
       include("api/class.smtp.php");
             
       $mailCliente = $request->email;
-      $nombre = $request->nombreCompleto;
-      $Password = $request->Password;
+      $nombre = $request->nombre;
+      $Password = $request->contraseña;
 
       $cuerpo ='
         Hola '.$nombre.'
-
+        <br>
+        <br>
         Recibimos una solicitud de reenvío de contraseña del usuario a esta dirección.
         Los datos son los siguientes: 
-
+        <br>
         Contraseña: '.$Password.'  
-
+        <br>
+        <br>
         Atentamente
+        <br>
         UTN Cines.- 
-
-        Notificacion de UTN Cines.-
+        <br>
+        <br>
+        Notificacion de UTN Cines.
       
       ';
 
@@ -272,15 +276,16 @@ function sendMailRecover($request){
       $mail->Port = 465;
       $mail->Username = "cineutn@gmail.com";
       $mail->Password = "cineutn2015";
+      $mail->CharSet = 'UTF-8';
 
       $mail->From = "cineutn@gmail.com";
       $mail->FromName = "Cines UTN";
-      $mail->Subject = "UTN Cines";
+      $mail->Subject = "Notificación de UTN Cines";
       $mail->AltBody = "";
       $mail->MsgHTML($cuerpo);
       
       $mail->AddAddress($mailCliente, $nombre);
-      $mail->IsHTML(false);
+      $mail->IsHTML(true);
 
       if(!$mail->Send()) {
         sendResponse(array(
@@ -292,6 +297,7 @@ function sendMailRecover($request){
             "error" => false,
             "mensaje" => "El email fue enviado con exito. "
         ));
+        return true;
       }
 }
 
