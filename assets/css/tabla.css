@@ -1,0 +1,15 @@
+.table.table-condensed.table-hover.table-striped.bootgrid-table{
+    background-color: white;
+	border-radius: 9px;
+ }
+ 
+ #contenedorTabla
+ {
+	 border-radius: 7px;
+    /* border-color: white; */
+    /* border-width: 1px; */
+    /* border-style: solid; */
+    background-color: #f5f5f5;
+	 
+ }
+

@@ -13,7 +13,8 @@
     $divTarjetas = $("#divTarjetas");
     $divEntradas = $("#divEntradas");
     $divWeb = $("#divWeb");
-    
+    $divUsuarios = $("#divUsuarios");
+	
     $divFunciones.on("click",function(){
         window.location.href = "funciones.php";
     });
@@ -48,6 +49,10 @@
 
     $divWeb.on("click",function(){
         window.location.href = "index.php";
+    });
+	
+	$divUsuarios.on("click",function(){
+        window.location.href = "usuarios.php";
     });
     
 })(jQuery)
