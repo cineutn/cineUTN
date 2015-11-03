@@ -76,6 +76,7 @@ function generarSemana(ultimaFecha,ultimaSemana){
     for(var i=1;i<=7;i++){
         var addSemana =  $.ajax({
             url: URI.ADD,
+            async: false,
             type: 'POST',
             data: {
                     fecha:ultimaFecha,
@@ -84,8 +85,7 @@ function generarSemana(ultimaFecha,ultimaSemana){
               },
             dataType: 'json',
             })
-            addSemana.done(function(response){
-                console.log(response);
+            addSemana.done(function(response){                
             });
          addSemana.fail(function(res){
             alert(res.responseText)

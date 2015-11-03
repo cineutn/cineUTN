@@ -16,7 +16,7 @@
     $divUsuarios = $("#divUsuarios");
 	
     $divFunciones.on("click",function(){
-        window.location.href = "funciones.php";
+        window.location.href = "semanaNueva.php";
     });
 
     $divSalas.on("click",function(){

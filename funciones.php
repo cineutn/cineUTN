@@ -22,14 +22,7 @@
       <div class="col-md-4">
             <ul class="nav nav-pills nav-stacked">
               <li class="active"><a>Día</a></li>
-                <li id="contenedorSemana" ></li>
-              <!--<li  class="opcionSeleccionada"><a href="#">Jueves</a></li>
-              <li class="opcionSeleccionada"><a href="#">Viernes</a></li>
-              <li class="opcionSeleccionada"><a href="#">Sabado</a></li>
-              <li class="opcionSeleccionada"><a href="#">Domingo</a></li>
-              <li class="opcionSeleccionada"><a href="#">Lunes</a></li>
-              <li class="opcionSeleccionada"> <a href="#">Martes</a></li>
-              <li class="opcionSeleccionada"><a href="#">Mierocles</a></li>-->
+                <li id="contenedorSemana" ></li>          
             </ul>
       </div>
        <div class="col-md-2">
@@ -38,10 +31,10 @@
             <li role="presentation"><a href="#">
                 <button type="button" class="btn btn-default btn-circle botonAzul"><i class="glyphicon glyphicon-pencil textoBoton"></i></button> 13:00</a>
             </li>
-            <li class="opcionSeleccionada"><a href="#">
+            <li><a href="#">
                 <button type="button" class="btn btn-default btn-circle botonAzul"><i  class="glyphicon glyphicon-pencil textoBoton" ></i></button> 15:00</i></a>
            </li>
-            <li class="opcionSeleccionada"><a href="#">
+            <li ><a href="#">
                 <button type="button" class="btn btn-default btn-circle botonAzul"><i class="glyphicon glyphicon-pencil textoBoton"></i></button> 17:00</a>
             </li>
             <li><a href="#"><button type="button" class="btn btn-default btn-circle botonAzul"><i class="glyphicon glyphicon-pencil textoBoton"></i></button> 19:00</a></li>
