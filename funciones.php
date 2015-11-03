@@ -14,7 +14,7 @@
 							  </div>
 							  <div class="panel panel-default col-md-3">
 									<ul class="nav nav-pills nav-stacked">
-									  <li class="active"><a>Día</a></li>
+									  <li class="active"><a>DÃ­a</a></li>
 									  <li  class="opcionSeleccionada"><a href="#">Jueves</a></li>
 									  <li class="opcionSeleccionada"><a href="#">Viernes</a></li>
 									  <li class="opcionSeleccionada"><a href="#">Sabado</a></li>
@@ -49,7 +49,7 @@
 			</div>
 			<div class="col-md-1"  >			   
 			   <div class="row" style="margin-top:100%;">
-					<input class="btn btn-success btn-Confirmar" "id="Button3" type="button" value="Guardar" />
+					<input class="btn btn-success btn-Confirmar" id="Button3" type="button" value="Guardar" />
 				</div> 
 			</div>
 </div>

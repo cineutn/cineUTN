@@ -7,12 +7,12 @@
          </button>              
     </div>            
     <div class="col-md-11">
-        <table class="table table-condensed" >
+        <table class="table table-condensed" id="contenedorSemanas" >
           <thead>
             <tr>
-               <th>Semana número</th>
-               
+               <th>Semana número</th>               
                <th>Cantidad de Funciones</th>                       
+               <th>Cargar funciones</th>
             </tr>
           </thead>                    
           <tbody id="tablaSemana">              

@@ -6,6 +6,7 @@
 
 $contenedorSemana =$("#tablaSemana");
 $btnAddRow=$("#btnAddRow");
+$contenedorSemanas=$("#contenedorSemanas");
 
 $(document ).ready(function(){	   
         obtenerSemanas();
@@ -25,7 +26,8 @@ function obtenerSemanas(){
             
             res.data.forEach(function(item){                
                 $row=$row +
-                '<tr id="rowSala"><td class="form-group"><span>'+item.numeroSemana+'</span></td><td class="form-group"><span>0</span></td></tr> ';      
+                '<tr id="rowSala"><td class="form-group"><span>'+item.numeroSemana+'</span></td><td class="form-group"><span>0</span></td>'+
+                '<td><button  class="botonAzul" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button></td></tr>';      
             });
             $contenedorSemana.append($row);
         }else{
@@ -95,3 +97,9 @@ function generarSemana(ultimaFecha,ultimaSemana){
 
     }
 }  
+
+  $contenedorSemanas.on("click",".botonAzul",function(event){
+    event.preventDefault();        
+    $numeroSemana= $(this).parent().parent()[0].childNodes[0].children[0].textContent;
+    location.href='funciones.php?numeroSemana='+$numeroSemana;
+    });

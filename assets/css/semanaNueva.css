@@ -7,3 +7,18 @@
 	 border-radius:15px; 
 	 background-color:green;
 }
+
+.botonAzul {
+	width:30px; 
+	height:30px; 
+	text-align:center;
+	padding:6px 0; 
+	font-size:12px; 
+	border-radius:15px; 
+	background-color:darkslateblue;
+}
+
+.textoBoton {
+  color:white;
+
+}
