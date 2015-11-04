@@ -38,13 +38,13 @@ class Usuario
     }
 
     public function validateMail($mail){
-        $query = "SELECT * FROM usuarios WHERE mail = '".$mail."'";                 
+        $query = "SELECT * FROM usuario WHERE email = '".$mail."'";                 
         $r = $this->connection->query($query);
         return $r->fetch_assoc();
     }
 
      public function validateUserName($userName){
-        $query = "SELECT * FROM usuarios WHERE userName = '".$userName."'";                 
+        $query = "SELECT * FROM usuario WHERE usuario = '".$userName."'";                 
         $r = $this->connection->query($query);
         return $r->fetch_assoc();
     }
@@ -63,7 +63,7 @@ class Usuario
          $dni = $this->connection->real_escape_string($user['dni']);
 
             
-        $query = " INSERT INTO `utncine`.`usuario` 
+        $query = " INSERT INTO `usuario` 
             (`idUsuario`, `nombre`, `apellido`, `dni`, `sexo`, `fechaNacimiento`, `email`, `usuario`, `contraseña`, `telefono`, `estado`, `tipoUsuario`)              VALUES (NULL, '$nombre', '$apellido', '$dni', '$genero', '$fechaNacimiento', '$email', '$usuario', '$password', '$telefono', 'online', '$perfil')";
         
         if($this->connection->query($query)){

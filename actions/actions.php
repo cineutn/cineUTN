@@ -69,14 +69,18 @@ function nuevoUser($request){
     
     
     if($usuario = $c->createUser($user)){
-      $c = $user->validateUser($user["usuario"],$user["password"]);
+      //$c = $user->validateUser($user["usuario"],$user["password"]);
       sendResponse(array(
             "error" => false,
             "mensaje" => "Usuario Creado.",
-            "data"=> $c
+            "data"=> $usuario
         ));
     }else{
-        echo "Error al registrar el usuario. " ;
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al registrar el usuario."
+        ));
+        
     }
 }
 

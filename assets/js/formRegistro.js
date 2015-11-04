@@ -24,7 +24,7 @@
    
     $('#signupform').submit(function(e) { 
          $('#signupform [data-toggle="tooltip"]').tooltip('hide');
-        //e.preventDefault();
+        e.preventDefault();
     
         //se traen todos los inputs del formulario
         var $inputs = $('#signupform :input');
@@ -49,18 +49,21 @@
             });
             loginSignup.done(function(res){
             if(!res.error){
-                sessionStorage.setItem('idUser', res.data.idUsuario);
-                sessionStorage.setItem('tipoUsuario', res.data.tipoUsuario);
+                sessionStorage.setItem('idUser', res.data.usuarioID);
+                sessionStorage.setItem('tipoUsuario', res.data.perfil);
                 sessionStorage.setItem('nombre', res.data.nombre);
-                sessionStorage.setItem('apellido', res.data.apellido);              
-                
-                /*alert(res.mensaje);*/
+                sessionStorage.setItem('apellido', res.data.apellido);  
+                 location.reload();
             }else{
                 alert(res.mensaje);
 
             }
         });
             
+         loginSignup.fail(function(){
+         
+            alert("error");
+         });   
             
             
             
@@ -78,21 +81,45 @@
     }
     
      $( document ).ready(function(){
-         //$('[data-toggle="tooltip"]').tooltip()
-         
-/*
-           if($nombreCompleto.val() == 'name="nombreCompleto"'){
-                $nombreCompleto.val('');
-            }
-
-            if($mail.val() == 'name="mail"'){
-                $mail.val('');
-            }
-
-            if($password.val() == 'name="password"'){
-                $password.val('');
-            }*/
-			
+        $('#email').on('change',function(){
+           
+            var validaMail = $.ajax({
+                url: URI.VALIDARMAIL,
+                method: "POST",
+                data: {mail : $('#email').val()},
+                dataType: 'json'
+            });
+            validaMail.done(function(e){
+                if(e.error){  $('<div class="alert alert-danger">    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>    <strong>Atencion!</strong> El email '+ $('#email').val()+ ' ya esta en uso.</div>').insertAfter($('#email').parent().parent());
+                            
+                
+                    $('#email').val('');
+               }
+                
+                
+                
+             });
+            
+        
+        }); 
+		
+        $('#usuario').on('change',function(){
+           
+            var validaMail = $.ajax({
+                url: URI.VALIDARUSERNAME,
+                method: "POST",
+                data: {userName : $('#usuario').val()},
+                dataType: 'json'
+            });
+            validaMail.done(function(e){
+                  $('<div class="alert alert-danger">    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>    <strong>Atencion!</strong> El usuario '+ $('#usuario').val()+ ' ya esta en uso.</div>').insertAfter($('#usuario').parent().parent());
+                            
+                
+                    $('#usuario').val('');
+             });
+            
+        
+        }); 	
       });
 	 
 

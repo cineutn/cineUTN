@@ -1,3 +1,12 @@
+<link rel="stylesheet" href="http://css-spinners.com/css/spinner/spinner.css" type="text/css">
+<style>
+    .spinner-loader{
+    font-size: 6px !important;
+    margin-bottom: -5px !important;
+    }
+</style>
+
+
 <div class="modal fade" id="modalSignup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -7,13 +16,16 @@
 		  </div>
 		  <div class="modal-body">
 			<form id="signupform" role="form" class="form-horizontal">
-                <input name="perfil" type="hidden" id="perfil"  value="cliente"> 
+                <input name="perfil" type="hidden" id="perfil"  value="1"> 
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-					<div class="col-sm-10">
+					<div class="col-sm-9">
 					  <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
 					</div>
+                    <div class="spinner-loader">
+</div>
 			    </div>
+                
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Nombre</label>
 					<div class="col-sm-10">
@@ -66,10 +78,10 @@
 					<label for="inputEmail3" class="col-sm-2 control-label">Genero</label>
 					<div class="col-sm-10">
 						<label class="radio-inline">
-						  <input type="radio" name="genero" id="generoMasculino" value="masculino" required> Masculino
+						  <input type="radio" name="genero" id="generoMasculino" value="M" required> Masculino
 						</label>
 						<label class="radio-inline">
-						  <input type="radio" name="genero" id="generoFemenino" value="femenino" required> Femenino
+						  <input type="radio" name="genero" id="generoFemenino" value="F" required> Femenino
 						</label>
 					</div>	
 			    </div>	
