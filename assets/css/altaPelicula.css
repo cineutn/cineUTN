@@ -2,13 +2,20 @@
 	background-color: white;	
 }
 
+.peliculas-Titulo{
+	font-weight: bold;
+    margin-left: 15px;
+}
+
 .sombra{
 	background: url(../img/billboard-shadow.png) repeat-x left top;
     padding-top: 15px;
 }
+
 .detallesPelicula{
 	    padding-left: 33px;
 }
+
 .detallesPelicula .col-md-9{
 	    max-width: 72%;
 }
@@ -19,6 +26,7 @@
  }
 
  .addPelicula{
+ 	margin-top: 10px;
 	margin-right: 25px;
 	margin-bottom: 10px;
 	background-color: #21CE5C;
@@ -45,9 +53,9 @@
 	display: inline;
 }
 
-.contenedorPelicula{
+/*.contenedorPelicula{
     margin:1%;
-}
+}*/
 
 .avatar{
 	background: #fff;  	
@@ -102,9 +110,10 @@
 
 .icon{
 	margin-top: 25px;
-	color: white;
-	font-size: 23px;
 	text-align: center;
+	color: white;
+    font-size: 70px;
+    width: 100%;
 }
 
 .avatar-content p{

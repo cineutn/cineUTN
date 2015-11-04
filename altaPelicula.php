@@ -1,6 +1,7 @@
 <?php require("partials/header.php"); ?>
 
 <div class="row peliculas">
+    <h2 class="peliculas-Titulo">PELICULAS</h2>
 	<div id="btnAdd" class="pull-right addPelicula">
 		<span class="glyphicon glyphicon-plus"/>   	
     </div>
@@ -13,8 +14,8 @@
                 <div class="avatar">
                     <div class="avatar-content">
                         <img src="assets/img/persona.png" id="vistaPrevia" class="imagen-avatar hide">
-                        <span id="iconAvatar" class="glyphicon  glyphicon-camera icon"/>
-                        <p id="textoAvatar">Añadir foto del Complejo</p>
+                        <span id="iconAvatar" class="glyphicon  glyphicon-camera icon"></span>
+                        <p id="textoAvatar">Añadir foto de la pelicula</p>
                     </div>
                     <div id="respuesta" class="alert"></div>
                  
@@ -35,9 +36,12 @@
                         </div>  
                         <div class="row">
                             <div class="col-lg-4">
-                                <button type="button" id="boton_subir" value="Subir" class="btn btn-success">Subir Imagen</button>
+                                <button type="button" id="boton_subir" value="Subir" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-open"></span>
+                                    <span>Subir Imagen</span>
+                                </button>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-10">
                                 <progress id="barra_de_progreso" value="0" max="100"></progress>
                             </div>
                         </div>
@@ -61,7 +65,7 @@
                             <span>Genero: </span>
                         </td>
                         <td >
-                            <input  name="generoPelicula" id="generoPelicula" type="text"  class="form-control" placeholder=".:INDIQUE GENERO:.">
+                            <input  name="generoPelicula" id="generoPelicula" type="text"  class="form-control" placeholder="Indique Genero">
                         </td>
                     </tr>
                     <tr>
@@ -69,7 +73,7 @@
                             <span>Duracion: </span>
                         </td>
                         <td>
-                            <input name="duracionPelicula" id="duracionPelicula" type="text" class="form-control"  placeholder=".:INDIQUE DURACION:.">
+                            <input name="duracionPelicula" id="duracionPelicula" type="text" class="form-control"  placeholder="Indique Duración">
                         </td>
                     </tr>
                     <tr>
@@ -77,7 +81,7 @@
                             <span>Actores: </span>
                         </td>
                         <td>
-                            <input name="actoresPelicula" id="actoresPelicula" type="text" class="form-control"  placeholder=".:INDIQUE ACTORES:.">
+                            <input name="actoresPelicula" id="actoresPelicula" type="text" class="form-control"  placeholder="Indique Actores">
                         </td>
                     </tr>
                     <tr>
@@ -85,7 +89,7 @@
                             <span>Director: </span>
                         </td>
                         <td>
-                            <input name="directorPelicula" id="directorPelicula" type="text" class="form-control" placeholder=".:INDIQUE DIRECTOR:.">
+                            <input name="directorPelicula" id="directorPelicula" type="text" class="form-control" placeholder="Indique Director">
                         </td>
                     </tr>
                     <tr>
@@ -93,7 +97,7 @@
                             <span>Clasificación: </span>
                         </td>
                         <td>
-                            <input name="clasificacionPelicula" id="clasificacionPelicula" type="text" class="form-control"  placeholder=".:INDIQUE CLASIFICACION:.">
+                            <input name="clasificacionPelicula" id="clasificacionPelicula" type="text" class="form-control"  placeholder="Indique Clasificación">
                         </td>
                     </tr>
                     <tr>
@@ -101,14 +105,14 @@
                             <span>Fecha de Estreno: </span>
                         </td>
                         <td>			
-                            <input name="fechaEstrenoPelicula" id="fechaEstrenoPelicula" type="date" class="form-control"  placeholder=".:INDIQUE CLASIFICACION:.">
+                            <input name="fechaEstrenoPelicula" id="fechaEstrenoPelicula" type="date" class="form-control"  placeholder="Indique fecha de estreno">
                         </td>
                     </tr>															
                 </table>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
                 <button id="btnAltaModificacion" class="btn btn-primary btn-AltaModificacion pull-right" type="button">
-                    <span id="iconButton" class="glyphicon glyphicon-plus"/>
+                    <span id="iconButton" class="glyphicon glyphicon-plus"></span>
                     <span id="btnText">Crear</span>
                 </button>
             </div>
@@ -124,10 +128,8 @@
 <?php require("partials/registro.php"); ?>										
 
 <link rel="stylesheet" href="assets/css/altaPelicula.css">																		
-<script src="assets/js/vendor/jquery-1.11.3.min.js"/>
-</script>
-<script src="assets/js/vendor/bootstrap.min.js">
-</script>
+<script src="assets/js/vendor/jquery-1.11.3.min.js"/></script>
+<script src="assets/js/vendor/bootstrap.min.js"></script>
 <script src="assets/js/uploadImage.js"></script>
 <script src="assets/js/altaPelicula.js"></script>
 

@@ -145,11 +145,11 @@
 }
 
 .icono{
-	margin-left: 55px;
 	margin-top: 25px;
-	color: white;
-	font-size: 70px;
-	text-align: center;
+    text-align: center;
+    color: white;
+    font-size: 70px;
+    width: 100%;
 }
 
 .iconoError{
