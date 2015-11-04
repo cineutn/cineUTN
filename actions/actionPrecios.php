@@ -16,7 +16,7 @@ function nuevoPrecio($request){
     $c = new Precios();
     $precio = array();   
     $precio["idPrecio"] = $request->idPrecio;
-    $precio["idFormato"] = $request->idFormato;
+    $precio["formato"] = $request->formato;
     $precio["descripcionPrecio"] = $request->descripcionPrecio;
     $precio["valorPrecio"] = $request->valorPrecio;   
     if($nuevo = $c->createPrecio($precio)){
@@ -38,7 +38,7 @@ function modificarPrecio($request){
     $c = new Precios();
     $precio = array();
     $precio["idPrecio"] = $request->idPrecio;
-    $precio["idFormato"] = $request->idFormato;
+    $precio["formato"] = $request->formato;
     $precio["descripcionPrecio"] = $request->descripcionPrecio;
     $precio["valorPrecio"] = $request->valorPrecio; 
     if($c->updatePrecio($precio)){

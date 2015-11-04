@@ -19,8 +19,7 @@
     });
 	
     
-    function obtenerDetalleFuncion()
-    {        
+    function obtenerDetalleFuncion(){        
         $funcionDetalleID=$idFuncionDetalle;
         var obtener = $.ajax({
             url : URI.FUNCION,
@@ -37,7 +36,7 @@
                 $("#horarioFuncion").text(res.data[0].horario);
                 $("#sala").text(res.data[0].sala);               
                 $("#detalleCompra").text(res.data[0].titulo+' '+res.data[0].idioma+' ('+res.data[0].clasificacion+')');                
-                $("#idTipoFuncion").val(res.data[0].idTipoFuncion);
+                $("#idTipoFuncion").val(res.data[0].tipoFuncion);
                  $imagen = '<img id="imagenPelicula" src='+res.data[0].imagen+' class="img-responsive" alt="Responsive image">';                
                 $imagenPelicula.append($imagen);                
                 obtenerPrecioFuncion();                

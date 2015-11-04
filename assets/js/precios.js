@@ -42,7 +42,6 @@
             $(".removePrecio").addClass("hide");
             $botonAddPrecio.addClass("hide");
         }
-    
     };
 
     function obtenerFormatos()
@@ -60,7 +59,7 @@
                 $cmbFormatos.html("");
                 //Itero sobre la lista
                 res.data.forEach(function(item){
-                    $formatos = $formatos + '<option value="'+item.idFormato+'">'+item.descripcion+'</option>';
+                    $formatos = $formatos + '<option value="'+item.descripcion+'">'+item.descripcion+'</option>';
                 });
                 //lo agrego al listado
                 $cmbFormatos.append($formatos);
@@ -72,8 +71,7 @@
 
         obtener.fail(function(res){
             alert(res.responseText)
-        });
-               
+        });         
     };
     
     function obtenerPrecios()
@@ -177,9 +175,9 @@
 
         $formato = $precioFormato.substring(5,$precioFormato.length);  
         
-        idFormato = $("#comboFormato option:contains('"+$formato+"')").val();
+        var formato = $("#comboFormato option:contains('"+$formato+"')").val();
       
-        $cmbFormatos.val(idFormato);
+        $cmbFormatos.val(formato);
         
         $btnText.text("Modificar");
         $iconButton.removeClass('glyphicon glyphicon-plus');
@@ -209,7 +207,6 @@
         else{
             return false;
         }
-
     });
 
     $btnAltaModificacion.on("click", function(){
@@ -231,7 +228,7 @@
                     url: URI.ADD,
                     type: 'POST',
                     data: {idPrecio:$id,
-                           idFormato:$formato, 
+                           formato:$formato, 
                            descripcionPrecio:$descripcion,
                            valorPrecio:$precio},
                     dataType: 'json',
@@ -249,7 +246,7 @@
                     url: URI.UPDATE,
                     type: 'POST',
                     data: {idPrecio:$id,
-                           idFormato:$formato, 
+                           formato:$formato, 
                            descripcionPrecio:$descripcion,
                            valorPrecio:$precio},
                     dataType: 'json',
@@ -263,8 +260,6 @@
             }
 
         }
-       
-
     });
      
     $btnCerrar.on("click",function(){
@@ -274,8 +269,8 @@
     function validarPrecio(){
         var bRetorno = true;
 
-        var idFormato = $cmbFormatos.val();
-        if(idFormato == 0){
+        var formato = $cmbFormatos.val();
+        if(formato == 0){
           $cmbFormatos.closest(".form-group").addClass("has-error");
           $cmbFormatos.siblings(".glyphicon-remove").removeClass("hide");
           $cmbFormatos.siblings(".help-block").html("Debe seleccionar un formato de pelicula");

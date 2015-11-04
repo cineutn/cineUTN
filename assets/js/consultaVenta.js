@@ -74,6 +74,8 @@
 
         codigo =  $codigoVenta.text();
 
+        limpiarDatos();
+                
         var obtener = $.ajax({
             url : URI.GETVENTA,
             method : "GET",
@@ -139,6 +141,25 @@
                 alert(res.mensaje);
             }
         });
+    };
+
+    function limpiarDatos(){
+        $inputVentaID.val("");
+        $complejo.text("");
+        $sala.text("");
+        $pelicula.text("");
+        $fecha.text("");
+        $horario.text("");
+        $entradas.text("");
+        $precioTotal.text("");
+        $entradas.text("");
+
+        $("#salaTicket").text("");
+        $("#salaTicket2").text("");
+        $("#diaTicket").text("");
+        $("#horaTicket").text("");
+        $("#peliculaTicket").text("");
+        $("#butacasTicket").text("");
     };
 
 })(jQuery)

@@ -11,12 +11,11 @@ class Precios
 
     public function getPrecios(){
         $query = "SELECT 
-                    F.descripcion AS Formato, 
+                    P.formato AS Formato, 
                     P.idPrecio, 
                     P.descripcion, 
                     P.valor 
                     FROM precios P 
-                    INNER JOIN formato F ON P.idFormato = F.idFormato 
                     ORDER BY Formato ";  
        
         $precios = array();
@@ -46,7 +45,7 @@ class Precios
     }   
 
     public function getFormatos(){
-        $query = "SELECT DISTINCT descripcion, idFormato FROM formato";  
+        $query = "SELECT DISTINCT descripcion FROM formato";  
        
         $formatos = array();
         if( $result = $this->connection->query($query) ){
@@ -60,12 +59,12 @@ class Precios
 
     public function createPrecio($precio){
         $id = $this->connection->real_escape_string($precio['idPrecio']);
-        $idFormato = $this->connection->real_escape_string($precio['idFormato']);
+        $formato = $this->connection->real_escape_string($precio['formato']);
         $descripcion = $this->connection->real_escape_string($precio['descripcionPrecio']);
         $valor = $this->connection->real_escape_string($precio['valorPrecio']);
         $query = "INSERT INTO precios VALUES (
                     DEFAULT,
-                    '$idFormato',
+                    '$formato',
                     '$descripcion',
                     '$valor')";
 
@@ -79,12 +78,12 @@ class Precios
 
     public function updatePrecio($precio){
         $id = $this->connection->real_escape_string($precio['idPrecio']);
-        $idFormato = $this->connection->real_escape_string($precio['idFormato']);
+        $formato = $this->connection->real_escape_string($precio['formato']);
         $descripcion = $this->connection->real_escape_string($precio['descripcionPrecio']);
         $valor = $this->connection->real_escape_string($precio['valorPrecio']);
        
         $query = "UPDATE precios SET 
-                    idFormato = '$idFormato',
+                    formato = '$formato',
                     descripcion = '$descripcion',
                     valor = '$valor'
                     WHERE idPrecio = '$id'";

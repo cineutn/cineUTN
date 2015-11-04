@@ -45,11 +45,10 @@
             $(".cruz").addClass("hide");
             $botonAddComplejo.addClass("hide");
         }
-    
     };
 
-    function obtenerComplejos()
-    {   
+    function obtenerComplejos(){
+        
         var obtener = $.ajax({
             url : URI.COMPLEJOS,
             method : "GET",

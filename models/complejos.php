@@ -48,9 +48,9 @@ class Complejos
         $query = "INSERT INTO complejo VALUES (
                     DEFAULT,
                     '$idZona',
-                    '$nombre',
-                    '$direccion',
+                    '$nombre',                    
                     '$descripcion',
+                    '$direccion',
                     '')";
 
         if($this->connection->query($query)){

@@ -49,7 +49,7 @@ class PeliculaCompra
                     P.descripcion, 
                     P.valor 
                     FROM precios P 
-                    where P.idFormato = $id";                    
+                    where P.formato = $id";                    
        
         $precioFormato = array();
         if( $result = $this->connection->query($query) ){
