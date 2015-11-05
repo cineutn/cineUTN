@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group controles">
                         <div class="col-md-7">
-                            <input  name="descripcionPrecio" id="descripcionPrecio" type="text" placeholder="Decripción" class="form-control">
+                            <input maxlength="50" name="descripcionPrecio" id="descripcionPrecio" type="text" placeholder="Decripción" class="form-control">
                             <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
                             <span class="help-block"></span> 
                         </div>                           

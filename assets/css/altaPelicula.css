@@ -62,14 +62,15 @@
   	margin-left: 1%;
   	display: inline-block;
   	cursor: pointer;
+  	margin-bottom: 5px;
 }
 
 .avatar-content{
 	display: inline-block;
 	background-color: #0084B4;
   	border-radius: 12px;
-  	width: 186px;
-    height: 140px;
+  	height: 333px;
+    width: 220px;
     margin-top: 10px;
     margin-bottom: 10px;
     vertical-align: top;
@@ -77,8 +78,8 @@
 
 .imagen-avatar{
   	border-radius: 12px;
- 	width: 186px;
-    height: 140px; 	
+ 	height: 333px;
+    width: 220px;
   	display: block;
   	transition: 2.5s;
   	border: .1em lightgray solid;
@@ -109,7 +110,7 @@
 }
 
 .icon{
-	margin-top: 25px;
+	margin-top: 50%;
 	text-align: center;
 	color: white;
     font-size: 70px;
@@ -117,11 +118,12 @@
 }
 
 .avatar-content p{
-	margin-left: 30px;
+	margin-left: 40px;
 	text-align: center;
 	width: 130px;
 	font-weight: bold;
 	line-height:18px;
+	font-size: 20px;
 }
 
 .text-descripcion{
@@ -155,6 +157,38 @@
 	margin-top: 5px;
 	font-size: 20px;
 }
+
+.cruz {
+    background-color: #FF3B04;
+    border: #B70909 2px solid;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    color: white;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    vertical-align: center;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.cruz span{
+	margin-top: 7px;
+	font-size: 20px;
+}
+
 #barra_de_progreso{
     margin-top: 7px;
+}
+
+textarea.form-control {
+    height: auto;
+}
+
+.text-descripcion {
+    resize: none;
+}
+
+.iconoError{
+    right: 2%;
 }

@@ -43,8 +43,7 @@
     
     };
  
-    function obtenerTarjetas()
-    {   
+    function obtenerTarjetas(){   
        var obtener = $.ajax({
             url : URI.GET,
             method : "GET",
@@ -73,11 +72,11 @@
                                     '<span id="iconAvatar" class="glyphicon glyphicon-credit-card"></span>'+
                                 '</li>'+
                                 '<li class="columna-footer">'+
-                                    '<div id="btnUpdate" class="updateTarjeta">'+
-                                        '<span class="glyphicon glyphicon-pencil lapiz"></span>'+    
+                                    '<div id="btnUpdate" class="updateTarjeta lapiz">'+
+                                        '<span class="glyphicon glyphicon-pencil"></span>'+    
                                     '</div>'+
-                                    '<div id="btnRemove" class="removeTarjeta">'+
-                                        '<span class="glyphicon glyphicon-remove cruz"></span>'+    
+                                    '<div id="btnRemove" class="removeTarjeta cruz">'+
+                                        '<span class="glyphicon glyphicon-remove"></span>'+    
                                     '</div>'+                            
                                 '</li>'+
                             '</ul>'+                            
@@ -127,7 +126,9 @@
         
         $btnText.text("Modificar");
         $iconButton.removeClass('glyphicon glyphicon-plus');
-        $iconButton.addClass('glyphicon glyphicon-pencil');       
+        $iconButton.addClass('glyphicon glyphicon-pencil');
+        
+        validarTarjeta();   
     });
     
     $contenedorTarjetas.on("click",".cruz",function(event){

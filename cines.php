@@ -33,14 +33,14 @@
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12 col-sm-9 col-md-8 col-lg-7">
-                            <input  name="nombreComplejo" id="nombreComplejo" type="text" placeholder="Nombre Complejo" class="form-control">    
+                            <input maxlength="50" name="nombreComplejo" id="nombreComplejo" type="text" placeholder="Nombre Complejo" class="form-control">    
                             <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
                             <span class="help-block"></span> 
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12 col-sm-9 col-md-8 col-lg-7">
-                            <input  name="direccionComplejo" id="direccionComplejo" type="text" placeholder="Dirección" class="form-control">
+                            <input maxlength="150" name="direccionComplejo" id="direccionComplejo" type="text" placeholder="Dirección" class="form-control">
                             <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
                             <span class="help-block"></span> 
                         </div> 

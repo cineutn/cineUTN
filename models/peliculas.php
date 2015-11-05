@@ -23,23 +23,22 @@ class Peliculas
         }else{
             return false;
         }*/
-         if (isset($_FILES['archivo'])) {
+        if (isset($_FILES['archivo'])){
+
            $archivo = $_FILES['archivo'];
            $extension = pathinfo($archivo['name'], PATHINFO_EXTENSION);
            $time = time();
            $nombre = "{$_POST['nombre_archivo']}_$time.$extension";
-           if (move_uploaded_file($archivo['tmp_name'], "archivos_subidos/$nombre")) {
+           if (move_uploaded_file($archivo['tmp_name'], "archivos_subidos/$nombre")){
               echo 1;
-           } else {
+           }else{
               echo 0;
            }
-}
-        
-        
-        
+        }      
     }
+
     public function getPeliculas(){
-        $query = "SELECT * FROM pelicula";  
+        $query = "SELECT * FROM pelicula ORDER BY titulo";  
        
         $peliculas = array();
         if( $result = $this->connection->query($query) ){
@@ -49,7 +48,8 @@ class Peliculas
             $result->free();
         }
         return $peliculas;
-    }  
+    }
+
     public function getPeliculasCartelera(){
         $query = "SELECT idPelicula,titulo,imagen FROM `pelicula` WHERE `fechaBaja`='0000-00-00 00:00:00' order by fechaAlta";  
        
@@ -111,6 +111,47 @@ inner join formato f on f.idTipoFuncion=d.idTipoFuncion where a.idPelicula='$id'
         return $peliculas;
     
     }
+
+    public function updatePelicula($pelicula){
+        $id = $this->connection->real_escape_string($pelicula['idPelicula']);
+        $tituloPelicula = $this->connection->real_escape_string($pelicula['tituloPelicula']);
+        $duracionPelicula = $this->connection->real_escape_string($pelicula['duracionPelicula']);
+        $clasificacionPelicula = $this->connection->real_escape_string($pelicula['clasificacionPelicula']);
+        $generoPelicula = $this->connection->real_escape_string($pelicula['generoPelicula']);                                   
+        $sinopsisPelicula = $this->connection->real_escape_string($pelicula['sinopsisPelicula']);
+        $trailerPelicula = $this->connection->real_escape_string($pelicula['trailerPelicula']);
+        $actoresPelicula = $this->connection->real_escape_string($pelicula['actoresPelicula']);
+        $directorPelicula = $this->connection->real_escape_string($pelicula['directorPelicula']);   
+        $fechaEstrenoPelicula = $this->connection->real_escape_string($pelicula['fechaEstrenoPelicula']);
+        $urlimagen = $this->connection->real_escape_string( $pelicula["urlimagen"]);
+       
+        $query = "UPDATE pelicula SET 
+                    titulo = '$tituloPelicula',
+                    duracion = '$duracionPelicula',                                        
+                    clasificacion = '$clasificacionPelicula',
+                    genero = '$generoPelicula',
+                    estreno = '$fechaEstrenoPelicula',                      
+                    sinopsis = '$sinopsisPelicula',                    
+                    imagen = '$urlimagen',
+                    trailer = '$trailerPelicula',
+                    actores = '$actoresPelicula',
+                    director = '$directorPelicula'
+                    WHERE idPelicula = '$id'";
+
+        if($this->connection->query($query)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function removePelicula($peliculaId){
+        $id = (int) $this->connection->real_escape_string($peliculaId);
+        $query = "DELETE FROM pelicula
+                  WHERE idPelicula = $id";
+        return $this->connection->query($query);
+    }
+
     public function createPelicula($pelicula){        
 		$id = $this->connection->real_escape_string($pelicula['idPelicula']);
         $tituloPelicula = $this->connection->real_escape_string($pelicula['tituloPelicula']);

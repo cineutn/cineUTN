@@ -44,8 +44,7 @@
         }
     };
 
-    function obtenerFormatos()
-    {   
+    function obtenerFormatos(){   
        var obtener = $.ajax({
             url : URI.GETFORMATOS,
             method : "GET",
@@ -74,8 +73,7 @@
         });         
     };
     
-    function obtenerPrecios()
-    {   
+    function obtenerPrecios(){   
        var obtener = $.ajax({
             url : URI.GET,
             method : "GET",
@@ -121,11 +119,11 @@
                                     '<span class="detalle-texto">Por Persona</span>'+
                                 '</li>'+
                                 '<li class="columna-footer">'+
-                                    '<div id="btnUpdate" class="updatePrecio">'+
-                                        '<span class="glyphicon glyphicon-pencil lapiz"></span>'+    
+                                    '<div id="btnUpdate" class="updatePrecio lapiz">'+
+                                        '<span class="glyphicon glyphicon-pencil "></span>'+    
                                     '</div>'+
-                                    '<div id="btnRemove" class="removePrecio">'+
-                                        '<span class="glyphicon glyphicon-remove cruz"></span>'+    
+                                    '<div id="btnRemove" class="removePrecio cruz">'+
+                                        '<span class="glyphicon glyphicon-remove "></span>'+    
                                     '</div>'+                            
                                 '</li>'+
                             '</ul>'+                            
@@ -181,7 +179,9 @@
         
         $btnText.text("Modificar");
         $iconButton.removeClass('glyphicon glyphicon-plus');
-        $iconButton.addClass('glyphicon glyphicon-pencil');       
+        $iconButton.addClass('glyphicon glyphicon-pencil');
+
+        validarPrecio();   
     });
     
     $contenedorPrecios.on("click",".cruz",function(event){

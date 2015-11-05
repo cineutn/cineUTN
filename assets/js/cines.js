@@ -214,7 +214,9 @@
 
         $btnText.text("Modificar");
         $iconButton.removeClass('glyphicon glyphicon-plus');
-        $iconButton.addClass('glyphicon glyphicon-pencil');       
+        $iconButton.addClass('glyphicon glyphicon-pencil');
+
+        validarComplejo();
     });
     
     $contenedorCines.on("click",".cruz",function(event){

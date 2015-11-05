@@ -13,21 +13,21 @@
                     <input id="idTarjeta" name="idTarjeta" type="hidden" class="hide" value="">
                     <div class="form-group controles">
                         <div class="col-md-7">
-                            <input  name="empresa" id="empresa" type="text" placeholder="Empresa" class="form-control">
+                            <input maxlength="50" name="empresa" id="empresa" type="text" placeholder="Empresa" class="form-control">
                             <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
                             <span class="help-block"></span> 
                         </div>                           
                     </div> 
                     <div class="form-group controles">
                         <div class="col-md-7">
-                            <input  name="cantNumeros" id="cantNumeros" type="number" placeholder="Cantidad de digitos" class="form-control">
+                            <input name="cantNumeros" id="cantNumeros" type="number" placeholder="Cantidad de digitos" class="form-control">
                             <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
                             <span class="help-block"></span>    
                         </div>                             
                     </div>
                     <div class="form-group controles">
                         <div class="col-md-7">
-                            <input  name="codigoSeguridad" id="codigoSeguridad" type="number" placeholder="Cantidad de digitos de seguridad" class="form-control">
+                            <input name="codigoSeguridad" id="codigoSeguridad" type="number" placeholder="Cantidad de digitos de seguridad" class="form-control">
                             <span class="hide glyphicon glyphicon-remove form-control-feedback icon"></span>
                             <span class="help-block"></span>    
                         </div>                             

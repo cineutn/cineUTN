@@ -1,12 +1,15 @@
 <?php
 require("../utils/request.php");
+
 function redirect($url){
    header('Location: ' . $url, true, 303);
    die();
 }
+
 function sendResponse($response){
     echo json_encode($response);
 }
+
 function obtenerPeliculas($request){
     require("../models/peliculas.php");
     $p = new Peliculas();
@@ -253,8 +256,50 @@ function obtenerPeliculasActivas($request){
     }
 }
 
+function eliminarPelicula($request){
+    require("../models/peliculas.php");
+    $p = new Peliculas();
+    $peliculaId = $request->idPelicula;
+    if($p->removePelicula($peliculaId)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "Pelicula eliminada"
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error ..."
+        ));
+    }
+}
 
-
+function modificarPelicula($request){
+    require("../models/peliculas.php");
+    $p = new Peliculas();
+    $pelicula = array();    
+    $pelicula["idPelicula"] = $request->idPelicula;
+    $pelicula["tituloPelicula"] = $request->tituloPelicula;  
+    $pelicula["duracionPelicula"] = $request->duracionPelicula;
+    $pelicula["clasificacionPelicula"] = $request->clasificacionPelicula;
+    $pelicula["generoPelicula"] = $request->generoPelicula;   
+    $pelicula["sinopsisPelicula"] = $request->sinopsisPelicula; 
+    $pelicula["trailerPelicula"] = $request->trailerPelicula;   
+    $pelicula["actoresPelicula"] =$request->actoresPelicula;
+    $pelicula["directorPelicula"] =$request->directorPelicula;
+    $pelicula["fechaEstrenoPelicula"] =$request->fechaEstrenoPelicula;
+    $pelicula["urlimagen"] = $request->urlimagen;
+    if($p->updatePelicula($pelicula)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "Pelicula actualizada con exito. "
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al actualizar pelicula ..."
+        ));
+    }
+}
 
 $request = new Request();
 $action = $request->action;
@@ -267,6 +312,12 @@ switch($action){
         break;
     case "obtener":
         obtenerPeliculas($request);
+        break;
+    case "eliminar":
+        eliminarPelicula($request);
+        break;
+     case "modificar":
+        modificarPelicula($request);
         break;
     case "obtenerCartelera":
         obtenerPeliculasCartelera($request);
@@ -289,9 +340,4 @@ switch($action){
      case "obtenerPeliculasActivas":
         obtenerPeliculasActivas($request);
         break;
-        
-       
-        
-         
-        
 }

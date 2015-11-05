@@ -52,11 +52,20 @@
             </div>
             <input type="hidden" id="nombreImagen"></input>
             <div class="col-xs-12 col-sm-9 col-md-8 col-lg-7">
+                <input  name="idPelicula" id="idPelicula" type="hidden">
                 <div class="form-group">
-                    <input  name="tituloPelicula" id="tituloPelicula" type="text" placeholder="Titulo Pelicula" class="form-control">
+                    <div class="col-md-12">
+                        <input maxlength="100" name="tituloPelicula" id="tituloPelicula" type="text" placeholder="Titulo Pelicula" class="form-control">
+                        <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
+                        <span class="help-block"></span>    
+                    </div>                    
                 </div>											
                 <div class="form-group">
-                    <input  name="sinopsisPelicula" id="sinopsisPelicula" type="text" placeholder="Sinopsis" class="form-control">
+                    <div class="col-md-12">
+                        <textarea name="sinopsisPelicula" id="sinopsisPelicula" cols="30" rows="10" class="form-control text-descripcion" placeholder="Sinopsis"></textarea>
+                        <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
+                        <span class="help-block"></span>
+                    </div>
                 </div>
                 <table class="table">	
                     <span>Ficha técnica </span>								
@@ -65,7 +74,11 @@
                             <span>Genero: </span>
                         </td>
                         <td >
-                            <input  name="generoPelicula" id="generoPelicula" type="text"  class="form-control" placeholder="Indique Genero">
+                            <div class="col-lg-12">
+                                <input maxlength="50" name="generoPelicula" id="generoPelicula" type="text"  class="form-control" placeholder="Indique Genero">
+                                <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
+                                <span class="help-block"></span>    
+                            </div>                            
                         </td>
                     </tr>
                     <tr>
@@ -73,7 +86,11 @@
                             <span>Duracion: </span>
                         </td>
                         <td>
-                            <input name="duracionPelicula" id="duracionPelicula" type="text" class="form-control"  placeholder="Indique Duración">
+                            <div class="col-lg-12">
+                                <input name="duracionPelicula" id="duracionPelicula" type="text" class="form-control"  placeholder="Indique Duración">
+                                <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
+                                <span class="help-block"></span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -81,7 +98,11 @@
                             <span>Actores: </span>
                         </td>
                         <td>
-                            <input name="actoresPelicula" id="actoresPelicula" type="text" class="form-control"  placeholder="Indique Actores">
+                            <div class="col-lg-12">
+                                <input maxlength="150" name="actoresPelicula" id="actoresPelicula" type="text" class="form-control"  placeholder="Indique Actores">
+                                <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
+                                <span class="help-block"></span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -89,7 +110,11 @@
                             <span>Director: </span>
                         </td>
                         <td>
-                            <input name="directorPelicula" id="directorPelicula" type="text" class="form-control" placeholder="Indique Director">
+                            <div class="col-lg-12">
+                                <input maxlength="150" name="directorPelicula" id="directorPelicula" type="text" class="form-control" placeholder="Indique Director">
+                                <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
+                                <span class="help-block"></span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -97,17 +122,37 @@
                             <span>Clasificación: </span>
                         </td>
                         <td>
-                            <input name="clasificacionPelicula" id="clasificacionPelicula" type="text" class="form-control"  placeholder="Indique Clasificación">
+                            <div class="col-lg-12">
+                                <input maxlength="3" name="clasificacionPelicula" id="clasificacionPelicula" type="text" class="form-control"  placeholder="Indique Clasificación">
+                                <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
+                                <span class="help-block"></span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <span>Fecha de Estreno: </span>
                         </td>
-                        <td>			
-                            <input name="fechaEstrenoPelicula" id="fechaEstrenoPelicula" type="date" class="form-control"  placeholder="Indique fecha de estreno">
+                        <td>
+                            <div class="col-lg-12">	
+                                <input name="fechaEstrenoPelicula" id="fechaEstrenoPelicula" type="date" class="form-control"  placeholder="Indique fecha de estreno">
+                                <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
+                                <span class="help-block"></span>
+                            </div>
                         </td>
-                    </tr>															
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>Trailer: </span>
+                        </td>
+                        <td>
+                            <div class="col-lg-12">       
+                                <input maxlength="250" name="trailerPelicula" id="trailerPelicula" type="text" class="form-control"  placeholder="Ingrese la URL del Trailer">
+                                <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
+                                <span class="help-block"></span>
+                            </div>
+                        </td>
+                    </tr>														
                 </table>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
