@@ -2,6 +2,13 @@
 
 <div class="row peliculas">
     <h2 class="peliculas-Titulo">PELICULAS</h2>
+    <div class="col-xs-7 col-md-6 form-group">
+        <input id="txtPelicula" type="text" class="form-control" placeholder="Ingrese una pelicula">
+    </div>
+    <button type="button" id="btnBuscarPelicula" class="btn btn-primary">
+        <span class="glyphicon glyphicon-search"></span>
+        <span>Buscar</span>
+    </button>
 	<div id="btnAdd" class="pull-right addPelicula">
 		<span class="glyphicon glyphicon-plus"/>   	
     </div>

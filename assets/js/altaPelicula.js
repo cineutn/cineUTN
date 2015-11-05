@@ -7,6 +7,9 @@
         UPDATE: 'actions/actionPeliculas.php?action=modificar',
     };
 	
+    $txtPelicula = $("#txtPelicula");
+    $btnBuscarPelicula = $("#btnBuscarPelicula");
+
 	$idPelicula = $("#idPelicula");
 	$tituloPelicula = $("#tituloPelicula");
 	$duracionPelicula = $("#duracionPelicula");
@@ -33,7 +36,26 @@
             eliminarArchivos(archivo);
         });
     });
-	
+
+    $btnBuscarPelicula.on("click", function(){
+
+        var nombre = $txtPelicula.val();
+   
+        if(nombre == ""){
+            $( "div.app").css( "display", "block" );
+        }else{
+            $( "div.app").css( "display", "none" );
+            
+            //esta funcion permite buscar elementos con mayusculas.
+            jQuery.expr[':'].contains = function(a, i, m) {
+                return jQuery(a).text().toUpperCase()
+                .indexOf(m[3].toUpperCase()) >= 0;
+            };
+
+            $( "div.app:contains('"+ nombre +"')" ).css( "display", "block" );
+        }
+    });
+
     function subirArchivos() {
          
         var d = new Date();
@@ -527,7 +549,7 @@
           $fechaEstrenoPelicula.siblings(".help-block").html("Debe completar este campo");
           bRetorno = false;
         }else{
-          $fechaEstrenoPelicula.closest("<div class="col-lg-12"></div>").removeClass("has-error");
+          $fechaEstrenoPelicula.closest(".col-lg-12").removeClass("has-error");
           $fechaEstrenoPelicula.siblings(".glyphicon-remove").addClass("hide");
           $fechaEstrenoPelicula.siblings(".help-block").html("");          
         }
