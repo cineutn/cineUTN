@@ -8,6 +8,19 @@ class Peliculas
         $this->connection = ConnectionCine::getInstance();
     } 
 	
+    public function getFormatos(){
+        $query = "SELECT descripcion, subtitulada, idFormato FROM formato";  
+       
+        $formatos = array();
+        if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $formatos[] = $fila;
+            }
+            $result->free();
+        }
+        return $formatos;
+    }
+
 	public function addImage($imagen){
         
         /*$PeliculaID = $this->connection->real_escape_string($imagen['id']);
@@ -38,7 +51,23 @@ class Peliculas
     }
 
     public function getPeliculas(){
-        $query = "SELECT * FROM pelicula ORDER BY titulo";  
+        $query = "SELECT P.titulo,
+                        P.duracion,
+                        P.clasificacion, 
+                        P.genero, 
+                        P.estreno, 
+                        P.fechaBaja, 
+                        P.fechaAlta, 
+                        P.sinopsis, 
+                        P.imagen, 
+                        P.trailer, 
+                        P.actores, 
+                        P.director, 
+                        F.descripcion,
+                        F.subtitulada
+                    FROM pelicula P 
+                    INNER JOIN formato F ON P.idFormato = F.idFormato 
+                    ORDER BY titulo";  
        
         $peliculas = array();
         if( $result = $this->connection->query($query) ){

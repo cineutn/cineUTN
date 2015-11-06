@@ -159,7 +159,19 @@
                                 <span class="help-block"></span>
                             </div>
                         </td>
-                    </tr>														
+                    </tr>
+                     <tr>
+                        <td>
+                            <span>Formato: </span>
+                        </td>
+                        <td>
+                            <div class="col-lg-12">       
+                                <select name="cmbFormato" id="cmbFormato" class="form-control"></select>
+                                <span class="hide glyphicon glyphicon-remove form-control-feedback iconoError"></span>
+                                <span class="help-block"></span>
+                            </div>
+                        </td>
+                    </tr>   														
                 </table>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">

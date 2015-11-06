@@ -301,9 +301,29 @@ function modificarPelicula($request){
     }
 }
 
+function obtenerFormatos($request){
+    require("../models/peliculas.php");
+    $c = new Peliculas();
+    if($formatos = $c->getFormatos()){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $formatos
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener formatos. "
+        ));
+    }
+}
+
 $request = new Request();
 $action = $request->action;
-switch($action){   
+switch($action){
+    case "obtenerFormatos":
+        obtenerFormatos($request);
+        break;
     case "subir":
         subir($request);
         break;              

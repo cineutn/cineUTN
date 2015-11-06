@@ -5,6 +5,7 @@
         UPLOAD: 'actions/actionPeliculas.php?action=subir',
         REMOVE: 'actions/actionPeliculas.php?action=eliminar',
         UPDATE: 'actions/actionPeliculas.php?action=modificar',
+        GETFORMATOS : 'actions/actionPeliculas.php?action=obtenerFormatos'
     };
 	
     $txtPelicula = $("#txtPelicula");
@@ -28,14 +29,53 @@
 	$btnCerrar = $("#iconCerrar");
 	$contenedorPeliculas = $("#contenedorPeliculas");
 	
+    $cmbFormatos = $("#cmbFormato");
+
     $( document ).ready(function(){	   
         obtenerPeliculas();
+        obtenerFormatos();
         $("#archivos_subidos").on('click', '.eliminar_archivo', function() {
             var archivo = $(this).parents('.row').eq(0).find('span').text();
             archivo = $.trim(archivo);
             eliminarArchivos(archivo);
         });
     });
+
+    function obtenerFormatos(){   
+       var obtener = $.ajax({
+            url : URI.GETFORMATOS,
+            method : "GET",
+            dataType : 'json',
+        });
+       
+        obtener.done(function(res){
+            if(!res.error){
+                $formatos = '<option value="0">Seleccione un formato</option>';
+                //Borro el listado actual
+                $cmbFormatos.html("");
+                //Itero sobre la lista
+                res.data.forEach(function(item){
+                    var lenguaje;
+                    if (item.subtitulada == "1"){
+                        lenguaje = "Subtitulada";
+                    }else{
+                        lenguaje = "Castellano";
+                    }
+
+                    $formatos = $formatos + '<option value="'+item.idFormato+'">'+item.descripcion+ ' ' + lenguaje + '</option>';
+                });
+                //lo agrego al listado
+                $cmbFormatos.append($formatos);
+            }else{
+                event.preventDefault();
+                alert(res.mensaje);
+            }
+        });
+
+        obtener.fail(function(res){
+            alert(res.responseText)
+        });         
+    };
 
     $btnBuscarPelicula.on("click", function(){
 
@@ -193,6 +233,14 @@
                 $contenedorPeliculas.html("");
                 res.data.forEach(function(item){
 
+                    var formato;
+
+                    if (item.subtitulada == "1"){
+                        formato = item.descripcion + " Subtitulada";
+                    }else{
+                        formato = item.descripcion + " Castellano";
+                    }
+
                     var formattedDate = new Date(item.estreno);
                     var dia = formattedDate.getDate();
                     dia = dia = ("0" + dia).slice(-2);
@@ -231,6 +279,7 @@
                             '<tr><td><span>Clasificación: </span></td><td class="datosTabla"><label id="lblClasificacion">'+item.clasificacion+'</label></td></tr>'+
                             '<tr><td><span>Fecha de Estreno: </span></td><td class="datosTabla"><label id="lblFechaEstrenoPelicula">'+fechaEstreno+'</label></td></tr>'+
                             '<tr><td><span>Trailer: </span></td><td class="datosTabla"><label id="lblTrailerPelicula">'+item.trailer+'</label></td></tr>'+
+                            '<tr><td><span>Formato: </span></td><td class="datosTabla"><label id="lblFormatoPelicula">'+formato+'</label></td></tr>'+
                             '</table>'+
                         '</div>'+                            
                         '<div class="col-xs-12 col-sm-9 col-md-8 col-lg-1">'+

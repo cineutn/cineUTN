@@ -3,7 +3,7 @@
         SALAS: 'actions/actionAltaSala.php?action=obtener',	
         ELIMINAR: 'actions/actionAltaSala.php?action=eliminar',	
         DIAGRAMAR: 'actions/actionEsquemaSala.php?action=nueva',	
-        ELIMINARDIAGRAMA: 'actions/actionEsquemaSala.php?action=eliminar',	
+        ELIMINARDIAGRAMA: 'actions/actionEsquemaSala.php?action=eliminar'	
     };
 
 $salaNueva =$("#rowSala");
@@ -17,6 +17,7 @@ $tablaSala= $("#tablaSala");
 $(document ).ready(function(){	   
         obtenerSalas();
     });
+
 
 
 $("#btnAddRow" ).click(function() { 
