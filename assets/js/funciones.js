@@ -9,6 +9,12 @@ $nroSemana =$("#nroSemana").val();
 $contenedorPeliculas =$("#contenedorPeliculas");
 $contenedorSalas =$("#contenedorSalas");
 $contenedorSemana =$("#contenedorSemana");
+$contenedorHorarios =$("#contenedorHorarios");
+$idPeliculaSeleccionada='0';
+$duracionPelicula='0';
+$idSalaSeleccionada='0';
+$idSemanaSeleccionada=''
+
 
 $(document ).ready(function(){	  
     $fehaInicioSemana= obtenerInicioSemana();
@@ -200,26 +206,82 @@ function obtenerDias(){
     return fechaRetorno;
   }  
 
-function peliculaSeleccionada(idPelicula){    
+function peliculaSeleccionada(idPelicula){        
     
-    console.log($("#duracion_"+idPelicula).val());
     $(".peliculasLista li a").removeClass("opcionSeleccionada");  
     $(".salasLista li a").removeClass("opcionSeleccionada"); 
     $(".semanaLista li a").removeClass("opcionSeleccionada"); 
     $("#aPelicula_"+idPelicula).addClass("opcionSeleccionada");
+    
+    
+    $idPeliculaSeleccionada=idPelicula;
+    $duracionPelicula=$("#duracion_"+idPelicula).val();
+    $idSalaSeleccionada='0';
+    $idSemanaSeleccionada=''
 }
 
 function salaSeleccionada(idSala){
     
     $(".salasLista li a").removeClass("opcionSeleccionada");  
     $(".semanaLista li a").removeClass("opcionSeleccionada"); 
-    $("#aSala_"+idSala).addClass("opcionSeleccionada");
+    $("#aSala_"+idSala).addClass("opcionSeleccionada");    
+    $idSalaSeleccionada=idSala;
+    $idSemanaSeleccionada=''
 };
 
 function fechaSeleccionada(idSemana){
      
     $(".semanaLista li a").removeClass("opcionSeleccionada");    
     $("#afecha_"+idSemana).addClass("opcionSeleccionada");
+    $idSemanaSeleccionada=idSemana;
+    
+    console.log($idPeliculaSeleccionada);
+    console.log($duracionPelicula);
+    console.log($idSalaSeleccionada);
+    console.log($idSemanaSeleccionada);
+    
+    calcularHorarioFunciones($duracionPelicula);
+    
+    buscarFuncionesActivas($idSemanaSeleccionada,$idSalaSeleccionada);
+    
 };
+
+
+//busca en la semana para la sala seleccionada si hay funciones cargadas para esa sala.
+//las tinen que mostrar al costado de horarios y se podran modificar
+function buscarFuncionesActivas(idSemana,idSala){
+
+}
+
+//calcula los horarios sugeridos para la pelicula.
+//el cine abre a las 12 y hay 15' de preparar la sala y se le suma 10' a la duracion de la pelicula por las propagandas y trailers
+//ultima funcion a las 23
+function calcularHorarioFunciones(duracionPelicula){
+   
+    var duracionConTrailer=parseInt(duracionPelicula)+30;
+    //solo me interesa la hora en esta variable
+    var apertura = new Date("July 21, 1983 12:00:00");
+    var horaApertura = apertura.getHours();
+    //solo me interesa la hora en esta variable
+    var cierre = new Date("July 21, 1983 23:00:00");
+    var horaCierre = cierre.getHours();
+    var minutosApertura=0;
+    $contenedorHorarios.html("");
+    $row='';
+    
+    
+    while(horaApertura<horaCierre){
+        
+        
+        horaApertura = apertura.getHours();
+        minutosApertura= apertura.getMinutes();
+        console.log(horaApertura+':'+minutosApertura);        
+        $row=$row +'<li></input><a>'+horaApertura+':'+ minutosApertura+'</a></li>';                                 
+        apertura.setMinutes(apertura.getMinutes()+ parseInt(duracionConTrailer));
+    }
+    $contenedorHorarios.after($row);
+}
+
+
 
 
