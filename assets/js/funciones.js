@@ -57,8 +57,8 @@ function obtenerPeliculas($fehaInicioSemana){
             $row='';
             $contenedorPeliculas.html("");            
             res.data.forEach(function(item){                
-                $row=$row +'<li><input type="hidden" id="idPelicula" value='+item.idPelicula+' ></input><a>'+item.titulo+'</a></li>'+
-                                '<input type="hidden" id="duracion" value='+item.duracion+' >';
+                $row=$row +'<li></input><a id="aPelicula_'+item.idPelicula+'" onclick="peliculaSeleccionada('+item.idPelicula+')">'+item.titulo+'</a></li>'+
+                                '<input type="hidden" id="duracion_'+item.idPelicula+'" value='+item.duracion+' >';
             });
             $contenedorPeliculas.after($row);
         }else{
@@ -84,7 +84,7 @@ function obtenerSalas(){
            $row='';
             $contenedorSalas.html("");            
             res.data.forEach(function(item){                
-                $row=$row +'<li><input type="hidden" id="idPelicula" value='+item.idSala+' ></input><a>'+item.descripcion+'</a></li>';                                
+                $row=$row +'<li><input type="hidden" id="sala_'+item.idSala+'" value='+item.idSala+'></input><a id="aSala_'+item.idSala+'" onclick="salaSeleccionada('+item.idSala+')" >'+item.descripcion+'</a></li>';                                
             });
             $contenedorSalas.after($row);
         }else{
@@ -108,12 +108,11 @@ function obtenerDias(){
         dataType : 'json',
     });
     obtener.done(function(res){
-        if(!res.error){
-            console.log(res);
+        if(!res.error){            
            $row='';
             $contenedorSemana.html("");            
             res.data.forEach(function(item){                  
-                $row=$row +'<li><input type="hidden" id="idPelicula" value='+item.idSemana+' ></input><a>'+obtenerFecha(item.fecha) +'</a></li>';                                
+                $row=$row +'<li></input><a id="afecha_'+item.idSemana+'" onclick="fechaSeleccionada('+item.idSemana+')">'+obtenerFecha(item.fecha) +'</a></li>';                                
             });
             $contenedorSemana.after($row);
         }else{
@@ -200,3 +199,27 @@ function obtenerDias(){
 
     return fechaRetorno;
   }  
+
+function peliculaSeleccionada(idPelicula){    
+    
+    console.log($("#duracion_"+idPelicula).val());
+    $(".peliculasLista li a").removeClass("opcionSeleccionada");  
+    $(".salasLista li a").removeClass("opcionSeleccionada"); 
+    $(".semanaLista li a").removeClass("opcionSeleccionada"); 
+    $("#aPelicula_"+idPelicula).addClass("opcionSeleccionada");
+}
+
+function salaSeleccionada(idSala){
+    
+    $(".salasLista li a").removeClass("opcionSeleccionada");  
+    $(".semanaLista li a").removeClass("opcionSeleccionada"); 
+    $("#aSala_"+idSala).addClass("opcionSeleccionada");
+};
+
+function fechaSeleccionada(idSemana){
+     
+    $(".semanaLista li a").removeClass("opcionSeleccionada");    
+    $("#afecha_"+idSemana).addClass("opcionSeleccionada");
+};
+
+
