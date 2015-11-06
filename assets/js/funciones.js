@@ -233,13 +233,7 @@ function fechaSeleccionada(idSemana){
      
     $(".semanaLista li a").removeClass("opcionSeleccionada");    
     $("#afecha_"+idSemana).addClass("opcionSeleccionada");
-    $idSemanaSeleccionada=idSemana;
-    
-    console.log($idPeliculaSeleccionada);
-    console.log($duracionPelicula);
-    console.log($idSalaSeleccionada);
-    console.log($idSemanaSeleccionada);
-    
+    $idSemanaSeleccionada=idSemana;    
     calcularHorarioFunciones($duracionPelicula);
     
     buscarFuncionesActivas($idSemanaSeleccionada,$idSalaSeleccionada);
@@ -267,14 +261,12 @@ function calcularHorarioFunciones(duracionPelicula){
     var horaCierre = cierre.getHours();
     var minutosApertura=0;
     $contenedorHorarios.html("");
-    $row='';
+    $row='';    
     
-    
-    while(horaApertura<horaCierre){
-        
-        
+    while(horaApertura<horaCierre){     
         horaApertura = apertura.getHours();
-        minutosApertura= apertura.getMinutes();
+        minutosApertura= apertura.getMinutes();     
+        minutosApertura=(minutosApertura!=0)?minutosApertura:'00';
         console.log(horaApertura+':'+minutosApertura);        
         $row=$row +'<li></input><a>'+horaApertura+':'+ minutosApertura+'</a></li>';                                 
         apertura.setMinutes(apertura.getMinutes()+ parseInt(duracionConTrailer));
