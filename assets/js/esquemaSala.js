@@ -85,8 +85,7 @@ function obtenerSala(){
     } 
 
 $esquemaSala.on("click",".esbirro",function(){      
-    event.stopPropagation();
-//    $idButaca = $(this)[0].id;         
+    event.stopPropagation();      
     $estadoButaca = $(this).children('input').val();   
         if($estadoButaca==='libre'){
             $(this).children('img').attr('src',$pathSeleccionada);
@@ -105,11 +104,8 @@ $("#btnGuardarSala").click(function(){
         if($(this).children('input').val() ==='ocupada'){            
            $idButacaOcupadaFinal.push($(this)[0].id);            
           //si la butaca no esta en las seleccionadas inicilamente le cambio el estado a seleccionada
-          if($.inArray($(this)[0].id,$idButacaOcupadaInicial)==-1){
-          //guardo estado =2
-              console.log('guardo ' +$(this)[0].id);
-              
-                var editarEstado = $.ajax({
+          if($.inArray($(this)[0].id,$idButacaOcupadaInicial)==-1){          
+              var editarEstado = $.ajax({
                                 url : URI.EDITAR,
                                 method : "POST",
                                  data: {
@@ -133,9 +129,6 @@ $("#btnGuardarSala").click(function(){
     //si la butaca se deselecciono, le cambio el estado
     $.each($idButacaOcupadaInicial, function( index, value ){  
         if($.inArray(value,$idButacaOcupadaFinal)==-1){
-            //borro this  
-            console.log('borro '+ value);
-
              var editarEstado = $.ajax({
                             url : URI.EDITAR,
                             method : "POST",

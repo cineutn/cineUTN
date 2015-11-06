@@ -3,6 +3,7 @@
         INICIOSEMANA : 'actions/actionsemanaNueva.php?action=fechaInicioSemana',
         SALAS : 'actions/actionAltaSala.php?action=obtener',
         SEMANA : 'actions/actionsemanaNueva.php?action=diasSemana',     
+        FUNCION : 'actions/actionFunciones.php?action=nueva',     
     };
 
 $nroSemana =$("#nroSemana").val();
@@ -14,15 +15,14 @@ $idPeliculaSeleccionada='0';
 $duracionPelicula='0';
 $idSalaSeleccionada='0';
 $idSemanaSeleccionada=''
-
+//$dias = ["Jueves","Viernes","Sabado","Domingo","Lunes","Martes","Miercoles"];
 
 $(document ).ready(function(){	  
     $fehaInicioSemana= obtenerInicioSemana();
     obtenerPeliculas($fehaInicioSemana);
     obtenerSalas();
-    obtenerDias();
-    
-    });
+    obtenerDias();    
+});
 
 function obtenerInicioSemana(){   
     $fehaInicioSemana='';    
@@ -194,17 +194,55 @@ function calcularHorarioFunciones(duracionPelicula){
     $contenedorHorarios.html("");
     $row='';    
     
-    while(new Date(apertura) < new Date(cierre)){  
-        
+    while(new Date(apertura) < new Date(cierre)){        
         horaApertura = apertura.getHours();                   
         minutosApertura = ((apertura.getMinutes()<10)?'0':'')+apertura.getMinutes();
-        console.log(minutosApertura);
-        $row=$row +'<li><a>'+horaApertura+':'+ minutosApertura+'</a></li>';
-        apertura.setMinutes(apertura.getMinutes()+ parseInt(duracionConTrailer));
-        
+        horarioFuncion=horaApertura+':'+ minutosApertura;
+        $row=$row +'<li><a>'+horarioFuncion+'  <button type="button"  onclick="aceptarFuncion('+horaApertura+','+minutosApertura+')" class="btn btn-default btn-circle botonVerde"><i class="glyphicon glyphicon-plus textoBoton"></i></button></a></li>';       
+        apertura.setMinutes(apertura.getMinutes()+ parseInt(duracionConTrailer));        
     }
     $contenedorHorarios.append($row);
 }
+
+
+function aceptarFuncion(horaApertura,minutosApertura){
+
+    /*console.log(horaApertura);
+    console.log(minutosApertura);
+    console.log($idPeliculaSeleccionada);
+    console.log($duracionPelicula);
+    console.log($idSalaSeleccionada);
+    console.log($idSemanaSeleccionada);*/
+    
+   var guardarFuncion = $.ajax({
+                    url : URI.FUNCION,
+                    method : "POST",
+                     data: {
+                         idFuncion:0,
+                         idPelicula:$idPeliculaSeleccionada,
+                         idIdioma:1, //cambiarrrrr
+                         idTipoFuncion:1,//cambiarrrr
+                         estado:1,
+                         fechaAlta:0,//en el insert se pone dateTime=now
+                         idComplejo:1//cambiarrrr
+                     },
+                    dataType : 'json',
+                });
+    guardarFuncion.done(function(res){
+        if(!res.error){         
+                console.log(res);
+            }
+        else{
+                console.log(res);
+        }
+    });
+    guardarFuncion.fail(function(res){
+        alert(res.responseText)
+    });
+    
+    
+}
+
 
 
 

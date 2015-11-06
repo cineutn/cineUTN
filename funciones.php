@@ -29,21 +29,10 @@
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation" class="active"><a>Horario</a></li>
                 <ul class="nav nav-pills nav-stacked" id="contenedorHorarios"></ul>
-                
-                
-                
             </ul>
         </div>		
     </div>   
  </div>
-        <!--<div class="col-md-1"  >			   
-               <div class="row" >
-                    <input class="btn btn-success btn-Confirmar" id="Button3" type="button" value="Guardar" />
-                </div> 
-        </div>-->   
-
-
-
 <?php require("partials/footer.php"); ?>
 <!-- Modal forms-->
 <?php require("partials/login.php"); ?>	
