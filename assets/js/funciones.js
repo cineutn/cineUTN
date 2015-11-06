@@ -254,26 +254,26 @@ function calcularHorarioFunciones(duracionPelicula){
    
     var duracionConTrailer=parseInt(duracionPelicula)+30;
     //solo me interesa la hora en esta variable
-    var apertura = new Date("July 21, 1983 12:00:00");
-    var horaApertura = apertura.getHours();
+    var apertura = new Date("01/01/1985 12:00:00");
+    
     //solo me interesa la hora en esta variable
-    var cierre = new Date("July 21, 1983 23:00:00");
-    var horaCierre = cierre.getHours();
-    var minutosApertura=0;
+    var cierre = new Date("01/01/1985 23:00:00");
+    
+    
     $contenedorHorarios.html("");
     $row='';    
     
-    while(horaApertura<horaCierre){     
-        horaApertura = apertura.getHours();
-        minutosApertura= apertura.getMinutes();     
-        minutosApertura=(minutosApertura!=0)?minutosApertura:'00';
-        console.log(horaApertura+':'+minutosApertura);        
-        $row=$row +'<li></input><a>'+horaApertura+':'+ minutosApertura+'</a></li>';                                 
+    while(new Date(apertura) < new Date(cierre)){  
+        
+        horaApertura = apertura.getHours();                   
+        minutosApertura = ((apertura.getMinutes()<10)?'0':'')+apertura.getMinutes();
+        console.log(minutosApertura);
+        $row=$row +'<li></input><a>'+horaApertura+':'+ minutosApertura+'</a></li>';
         apertura.setMinutes(apertura.getMinutes()+ parseInt(duracionConTrailer));
+        
     }
     $contenedorHorarios.after($row);
 }
-
 
 
 
