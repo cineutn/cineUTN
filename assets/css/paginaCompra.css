@@ -212,3 +212,49 @@ thead tr th{
 #btnImprimir{
 	margin-right: 20px;
 }
+
+.contenedor-reloj{
+	margin-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.relojTitulo{
+	font-weight: bold;
+	font-size: 17px;
+}
+
+.reloj{
+	font-weight: bold;
+    width: 100%;
+    height: 100px;    
+    font-size: 4em;
+    color: #707070;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 100px;
+    border-top: 5px solid #7CB0FC;
+    background-image: linear-gradient(#f0f0f0, white);
+
+}
+
+.dash {
+    width: 110px;
+    height: 114px;
+    background: transparent url('../images/dash.png') 0 0 no-repeat;
+    float: left;
+    margin-left: 20px;
+    position: relative;
+}
+
+.dash .digit {
+    font-size: 55pt;
+    font-weight: bold;
+    float: left;
+    width: 55px;
+    text-align: center;
+    font-family: Times;
+    color: #555;
+    position: relative;
+}

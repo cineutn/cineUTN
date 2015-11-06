@@ -5,9 +5,9 @@
 
 
      require("partials/header.php"); 
-
-
 ?>
+
+
 <input type='hidden' id='idFuncionDetalle' value= <?php echo $idFuncionDetalle ?> ></input>
        <div class="row paginaCompra">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 path">
@@ -41,8 +41,13 @@
                        <label class="tituloDato">SALA</label>
                        <span class="datos" id="sala"></span>
                     </div>
-                </div>
+                </div>                
            </div>
+           <div class="contenedor-reloj pull-right">
+                <input type="hidden" id="fechaTermino">
+                  <span class="relojTitulo">Tiempo Restante:</span> <br>
+                  <span id="relojCuentaAtras" class="reloj">00:00</span>
+            </div>
        </div>
         <div class="row poster">
             <div class="sombra"></div>            
@@ -77,5 +82,6 @@
 <link rel="stylesheet" href="assets/css/paginaCompra.css"> 
 <script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="assets/js/vendor/jquery.countdown.js"></script>
 <script src="assets/js/peliculaCompra.js"></script>
 
