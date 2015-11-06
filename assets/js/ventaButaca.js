@@ -1,6 +1,7 @@
 var URI = {        
         SALA : 'actions/actionVentaButacas.php?action=obtener',
         BUTACA :'actions/actionVentaButacas.php?action=reservar',
+        FUNCION : 'actions/actionPeliculaCompra.php?action=obtener'
     };
     
     $esquemaSala=$("#esquemaSala");     
@@ -10,9 +11,19 @@ var URI = {
     $idFuncionDetalle=$('#idFuncionDetalle').val(); 
     $butacasSeleccionadas=0;
     
-    $(document ).ready(function(){	   
-        obtenerDetalleSala(); 
-        
+    $idFuncionDetalle = $("#idFuncionDetalle").val();
+    $tituloPelicula =$("#tituloPelicula");
+    $complejo =$("#complejo");
+    $diaFuncion =$("#diaFuncion");
+    $horarioFuncion =$("#horarioFuncion");
+    $sala =$("#sala");
+    $imagenPelicula=$("#imagenPelicula");
+    $idTipoFuncion=$("#idTipoFuncion").val();
+    $precios=$("#precios");
+
+    $(document ).ready(function(){
+        obtenerDetalleFuncion();
+        obtenerDetalleSala();        
         butacas = sessionStorage.getItem('butacas'); 
         if(butacas!=null){
          var arrayButaca = butacas.split(',');     
@@ -21,10 +32,42 @@ var URI = {
         }
         
     });
-
 	
-    function obtenerDetalleSala()
-    {   
+    function obtenerDetalleFuncion(){        
+        $funcionDetalleID=$idFuncionDetalle;
+        var obtener = $.ajax({
+            url : URI.FUNCION,
+            method : "GET",
+            async:false,
+            data: {idFuncion:$funcionDetalleID},
+            dataType : 'json',
+        });        
+
+        obtener.done(function(res){
+            if(!res.error){     
+                $("#tituloPelicula").text(res.data[0].titulo+'('+res.data[0].clasificacion+')');
+                $("#complejo").text(res.data[0].nombre);
+                $("#diaFuncion").text(res.data[0].dia);
+                $("#horarioFuncion").text(res.data[0].horario);
+                $("#sala").text(res.data[0].sala);               
+                $("#detalleCompra").text(res.data[0].titulo+' '+res.data[0].idioma+' ('+res.data[0].clasificacion+')');                
+                $("#idTipoFuncion").val(res.data[0].tipoFuncion);
+                 $imagen = '<img id="imagenPelicula" src='+res.data[0].imagen+' class="img-responsive" alt="Responsive image">';                
+                $imagenPelicula.append($imagen);                              
+            }else{
+                
+                alert(res.mensaje);
+            }
+        });
+
+        obtener.fail(function(res){
+            alert(res.responseText)
+        });
+
+    };   
+
+    function obtenerDetalleSala(){
+
          //$id = $idFuncion.val();
         $funcionID= $idFuncionDetalle;//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior
         var obtener = $.ajax({

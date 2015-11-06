@@ -21,28 +21,60 @@
 			           	>               
 			           <b>2. BUTACAS</b>
 			</div>
-			<div class="col-md-5">	               
-                <table class="esquema" id="esquemaSala">                    
-                    
-                </table>
-			</div>
-			<div class="col-md-6 compraPelicula" style="background-color:white;">
-				<br /><br />
-				<div>
-					 <div><img src="assets/img/butacaOcupada.png" /><p style="font-size:medium;">Butaca ocupada</p></div>
+			<input type='hidden' id='idFuncionDetalle' value= <?php echo $idFuncionDetalle ?> ></input>
+			<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" id="imagenPelicula">               
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 datosPelicula">
+                <input id="idTipoFuncion" name="idPelicula" type="hidden" class="hide" value="">                
+                <div class="row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <label class="tituloDato" >PELICULA</label>
+                        <span class="datos" id="tituloPelicula"></span>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                       <label class="tituloDato">CINE</label>
+                       <span class="datos" id="complejo"></span>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <label class="tituloDato">DIA</label>
+                        <span class="datos" id="diaFuncion"></span>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <label class="tituloDato" >HORARIO</label>
+                        <span class="datos" id="horarioFuncion"></span>   
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                       <label class="tituloDato">SALA</label>
+                       <span class="datos" id="sala"></span>
+                    </div>
+                </div>
+           </div>    
+           <div class="row col-md-12" style="margin-top:10px;">
+           		<div class="col-md-12 compraPelicula sombra">
+           			<div class="col-xs-8 col-md-4">
+           				<img src="assets/img/butacaOcupada.png" />
+						<p style="font-size:medium; display:inline-block;">Butaca ocupada</p>	
+           			</div>
+					<div class="col-xs-8 col-md-4">
+           				<img src="assets/img/butacaLibre.png" />
+           				<p style="font-size:medium; display:inline-block;">Butaca disponible</p>
+           			</div>
+           			<div class="col-xs-8 col-md-4">
+           				<img src="assets/img/butacaSeleccionada.png" />
+           				<p style="font-size:medium; display:inline-block;">Su butaca</p>
+           			</div>						
 				</div>
-			    <div>
-					 <div><img src="assets/img/butacaLibre.png" /><p style="font-size:medium;">Butaca disponible</p></div>
+	           	<div class="col-md-12">	               
+	                <table class="esquema" id="esquemaSala" style="margin-left:30%;">                    
+	                    
+	                </table>
 				</div>
-				<div>
-					 <div><img src="assets/img/butacaSeleccionada.png" /><p style="font-size:medium;">Su butaca</p></div>
-				</div>
-				<div class="divBotonButacas">
-					
+				<div class="col-md-12 divBotonButacas">						
 					<!--<button type="button" onclick="location.href='pagoEntradas.php';" class="btn btn-success btn-Confirmar pull-left">SIGUIENTE</button>-->
-                    <button type="button" onclick="reservarButaca()" class="btn btn-success btn-Confirmar pull-left">SIGUIENTE</button>
+	                <button type="button" onclick="reservarButaca()" class="btn btn-success btn-Confirmar pull-right" style="margin-bottom:10px;">SIGUIENTE</button>
 				</div>
-			</div>
+           </div>       
+			
 		</div> 
 
 <?php require("partials/footer.php"); ?>

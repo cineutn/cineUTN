@@ -423,21 +423,28 @@
       if (bValidar){
 
         $bCompra = $rbCompra.prop("checked");
-
-        if ($bCompra){
-          tipoCompra = "Compra";
-        }else{
-          tipoCompra = "Reserva";
-        }
-
+        
         perfil = sessionStorage.getItem('tipoUsuario');
 
         if (perfil == "cliente"){
           idCliente = sessionStorage.getItem('idUser');
           idVendedor = 0;
+
+          if ($bCompra){
+            tipoCompra = "CompraWeb";
+          }else{
+            tipoCompra = "Reserva";
+          }
+
         }else{
           idCliente = 0;
           idVendedor = sessionStorage.getItem('idUser');
+
+          if ($bCompra){
+            tipoCompra = "Compra";
+          }else{
+            tipoCompra = "Reserva";
+          }
         }
 
         var fecha = returnFormatfecha();

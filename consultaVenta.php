@@ -79,6 +79,11 @@
                       		<span class="glyphicon glyphicon-print"></span>
                             <span class="">Imprimir</span>
                       	</button>
+
+                      	<button style="margin-right: 15px;" type="button" name="btnActualizar" id="btnActualizar" class="btn btn-primary pull-right hide">
+                      		<span class="glyphicon glyphicon-pencil"></span>
+                            <span class="">Actualizar</span>
+                      	</button>
 				</div>
 				<div class="row">				
 					<table width="96%" align="center" border="0" cellpadding="0" cellspacing="0" style="color:#575756;font-size:14px;border-collapse:collapse;font-family:'Arial Narrow', Lucida Sans Unicode, Lucida Grande, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, 'Helvetica Neue', Helvetica, Arial, sans-serif;">

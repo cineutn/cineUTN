@@ -93,9 +93,33 @@ function obtenerButacas($request){
     }
 }
 
+function actualizarVenta($request){
+    require("../models/ventas.php");
+    $c = new Ventas();
+    $venta = array();   
+    $venta["ventaID"] = $request->idVenta;
+    $venta["tipoVenta"] = $request->tipoVenta;
+    $venta["vendedorID"] = $request->idVendedor;
+    $venta["fecha"] = $request->fecha;
+    if($c->updateVenta($venta)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "La venta se actualizo con exito."
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al actualizar la venta. "
+        ));
+    }
+}
+
 $request = new Request();
 $action = $request->action;
-switch($action){             
+switch($action){
+    case "actualizar":
+        actualizarVenta($request);
+        break;          
     case "vender":
         realizarVenta($request);
         break;

@@ -54,7 +54,7 @@ class Ventas
 
     public function getVenta($codigo){
 
-        $query = "SELECT V.idVenta, V.codigo, C.nombre AS Complejo, P.titulo AS pelicula, S.descripcion AS Sala, FH.dia AS Fecha, FH.horario, V.monto AS precioTotal
+        $query = "SELECT V.tipoVenta, V.idVenta, V.codigo, C.nombre AS Complejo, P.titulo AS pelicula, S.descripcion AS Sala, FH.dia AS Fecha, FH.horario, V.monto AS precioTotal
                     FROM venta V
                     INNER JOIN ventadetalle VD ON V.idVenta = VD.idVenta
                     INNER JOIN sala_funcion SF ON VD.idSalaFuncion = SF.idSalaFuncion
@@ -74,6 +74,24 @@ class Ventas
         }
         return $venta;
 
+    }
+
+    public function updateVenta($venta){
+        $ventaID = $this->connection->real_escape_string($venta['ventaID']);
+        $tipoVenta = $this->connection->real_escape_string($venta['tipoVenta']);
+        $vendedorID = $this->connection->real_escape_string($venta['vendedorID']);
+        $fecha = $this->connection->real_escape_string($venta['fecha']);
+        $query = "UPDATE venta SET 
+                    tipoVenta = '$tipoVenta',
+                    idVendedor = '$vendedorID',
+                    fecha = '$fecha'
+                    WHERE idVenta = '$ventaID'";
+
+        if($this->connection->query($query)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function getVentaButaca($idVenta){

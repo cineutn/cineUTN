@@ -17,8 +17,7 @@
         obtenerDetalleFuncion();  
       
     });
-	
-    
+	    
     function obtenerDetalleFuncion(){        
         $funcionDetalleID=$idFuncionDetalle;
         var obtener = $.ajax({

@@ -2,7 +2,8 @@
       
     var URI = {
         GETVENTA : 'actions/actionVenta.php?action=obtener',
-        GETBUTACAS : 'actions/actionVenta.php?action=obtenerButacas'
+        GETBUTACAS : 'actions/actionVenta.php?action=obtenerButacas',
+        UPDATE : 'actions/actionVenta.php?action=actualizar'
     };
    
     $divContenedorVenta = $('#contenedorVenta');
@@ -20,6 +21,7 @@
 
     $btnBuscar = $("#btnBuscarVenta");
     $btnImprimir = $("#btnImprimir");
+    $btnActualizar = $("#btnActualizar");
     $inputVentaID = $("#ventaID");
 
     $btnBuscar.on("click", function(){
@@ -30,7 +32,7 @@
         if ($.trim((codigo)) == ""){
             alert("Debe ingresar un codigo.");
         }else{
-
+            $btnActualizar.addClass('hide');
             $codigoVenta.text(codigo);
 
             updateQrCode();
@@ -43,6 +45,37 @@
         $("#ticket").removeClass("hide");
         $("#ticket").printArea();
         $("#ticket").addClass("hide"); 
+    });
+
+    $btnActualizar.on("click", function(){
+        
+        var idVenta;
+        idVenta =  $inputVentaID.val();
+
+        var vendedorID;
+        vendedorID =  sessionStorage.getItem('idUser');
+
+        var fecha = returnFormatfecha();
+
+        var actualizar = $.ajax({
+            url : URI.UPDATE,
+            method : "POST",
+            dataType : 'json',
+            data: {idVenta:idVenta,
+                   tipoVenta:"Compra",
+                   idVendedor:vendedorID,
+                   fecha:fecha}
+        });
+
+        actualizar.done(function(res){
+            if(!res.error){
+                event.preventDefault();
+                alert(res.mensaje);
+            }else{
+                event.preventDefault();
+                alert(res.mensaje);
+            }
+        }); 
     });
 
     function updateQrCode() {
@@ -85,6 +118,15 @@
 
          obtener.done(function(res){
             if(!res.error){
+                var tipoVenta = res.data[0].tipoVenta;
+
+                var tipoUsuario;
+                tipoUsuario =  sessionStorage.getItem('tipoUsuario');
+
+                if (tipoVenta == 'Reserva' && (tipoUsuario == "vendedor" || tipoUsuario == "administrador") ){
+                    $btnActualizar.removeClass('hide');
+                }
+
                 $inputVentaID.val(res.data[0].idVenta);
                 $complejo.text(res.data[0].Complejo);
                 $sala.text(res.data[0].Sala);
@@ -161,5 +203,23 @@
         $("#peliculaTicket").text("");
         $("#butacasTicket").text("");
     };
+
+    function returnFormatfecha(){
+        var dfecha = new Date();
+
+        var dMes = dfecha.getMonth() + 1;
+        dMes = ("0" + dMes).slice(-2);
+        var dDia = dfecha.getUTCDate();
+        dDia = ("0" + dDia).slice(-2);
+        var dHora = dfecha.getHours();
+        dHora = ("0" + dHora).slice(-2);
+        var dMinutos = dfecha.getMinutes();
+        dMinutos = ("0" + dMinutos).slice(-2);
+        var dSegundos = dfecha.getSeconds();
+        dSegundos = ("0" + dSegundos).slice(-2);
+        var dFechaEnvio = dfecha.getFullYear() +'-'+  dMes +'-'+ dDia + ' ' + dHora + ':' + dMinutos + ':' + dSegundos;
+          
+    return dFechaEnvio;
+  };
 
 })(jQuery)
