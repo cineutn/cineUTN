@@ -132,79 +132,56 @@ function obtenerDias(){
     });
 };
 
-
- function obtenerFecha(fecha){
+function obtenerFecha(fecha){
     var fechaRetorno = '';
 
-    var date1 = new Date(fecha);
-    var date2 = new Date();
+  var date1 = new Date(fecha);
+  var mes = date1.getMonth() + 1;
+  var dia = date1.getUTCDate();
 
-    var diff = date2.getTime() - date1.getTime();
+  switch(mes) {
+    case 1:
+        fechaRetorno = dia + ' de Ene.';
+        break;
+    case 2:
+        fechaRetorno = dia + ' de Feb.';
+        break;
+    case 3:
+        fechaRetorno = dia + ' de Mar.';
+        break;
+    case 4:
+        fechaRetorno = dia + ' de Abr.';
+        break;
+    case 5:
+        fechaRetorno = dia + ' de May.';
+        break;
+    case 6:
+        fechaRetorno = dia + ' de Jun.';
+        break;
+    case 7:
+        fechaRetorno = dia + ' de Jul.';
+        break;
+    case 8:
+        fechaRetorno = dia + ' de Ago.';
+        break;
+    case 9:
+        fechaRetorno = dia + ' de Sep.';
+        break;
+    case 10:
+        fechaRetorno = dia + ' de Oct.';
+        break;
+    case 11:
+        fechaRetorno = dia + ' de Nov.';
+        break;
+    case 12:
+        fechaRetorno = dia + ' de Dic.';
+        break;    
+  }
 
-    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -=  days * (1000 * 60 * 60 * 24);
-
-    var hours = Math.floor(diff / (1000 * 60 * 60));
-    diff -= hours * (1000 * 60 * 60);
-
-    var mins = Math.floor(diff / (1000 * 60));
-    diff -= mins * (1000 * 60);
-
-    var seconds = Math.floor(diff / (1000));
-    diff -= seconds * (1000);
-
-
-    if (days>0){
-      var mes = date1.getMonth() + 1;
-      var dia = date1.getUTCDate();
-     
-      switch(mes) {
-        case 1:
-            fechaRetorno = dia + ' de Ene.';
-            break;
-        case 2:
-            fechaRetorno = dia + ' de Feb.';
-            break;
-        case 3:
-            fechaRetorno = dia + ' de Mar.';
-            break;
-        case 4:
-            fechaRetorno = dia + ' de Abr.';
-            break;
-        case 5:
-            fechaRetorno = dia + ' de May.';
-            break;
-        case 6:
-            fechaRetorno = dia + ' de Jun.';
-            break;
-        case 7:
-            fechaRetorno = dia + ' de Jul.';
-            break;
-        case 8:
-            fechaRetorno = dia + ' de Ago.';
-            break;
-        case 9:
-            fechaRetorno = dia + ' de Sep.';
-            break;
-        case 10:
-            fechaRetorno = dia + ' de Oct.';
-            break;
-        case 11:
-            fechaRetorno = dia + ' de Nov.';
-            break;
-        case 12:
-            fechaRetorno = dia + ' de Dic.';
-            break;    
-      }
-
-    }else if(hours>0){
-      fechaRetorno = hours + ' h';
-    }else{
-      fechaRetorno = mins + ' min';
-    }
+   
 
     return fechaRetorno;
-  }  
+  } 
 
 function peliculaSeleccionada(idPelicula){        
     
