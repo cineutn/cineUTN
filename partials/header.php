@@ -42,10 +42,10 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                 <li>
-                                    <a href="#"><span style="font-size: 13px;" class="glyphicon glyphicon-link"></span> Cambiar Contraseña</a>
+                                    <a href="updatePass.php"><span style="font-size: 13px;" class="glyphicon glyphicon-link"></span> Cambiar Contraseña</a>
                                 </li>
                                 <li>
-                                    <a href="#"><span style="font-size: 13px;" class="glyphicon glyphicon-envelope"></span> Cambiar Email</a>
+                                    <a href="updateMail.php"><span style="font-size: 13px;" class="glyphicon glyphicon-envelope"></span> Cambiar Email</a>
                                 </li>
                                 <li>
                                     <a id="btnCerrarSesion"><span style="font-size: 13px;" class="glyphicon glyphicon-off"></span> Cerrar Sesión</a>

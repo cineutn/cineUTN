@@ -27,6 +27,55 @@ class Usuario
         return $r->fetch_assoc();
     }
 
+     public function validateEMail($user){
+        $usuarioID = $this->connection->real_escape_string($user['usuarioID']);
+        $email = $this->connection->real_escape_string($user['email']);
+        $query = "SELECT * 
+                    FROM usuario 
+                    WHERE email = '$email' AND idUsuario = '$usuarioID'";
+        $r = $this->connection->query($query);
+        return $r->fetch_assoc();
+    }
+
+    public function updateEmail($user){
+        $usuarioID = $this->connection->real_escape_string($user['usuarioID']);
+        $email = $this->connection->real_escape_string($user['email']);
+        $query = "UPDATE usuario SET 
+                    email = '$email'
+                    WHERE idUsuario = '$usuarioID'";
+
+        if($this->connection->query($query)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getUserByPassword($user){
+        $usuarioID = $this->connection->real_escape_string($user['usuarioID']);
+        $password = $this->connection->real_escape_string($user['password']);
+        $query = "SELECT * 
+                    FROM usuario 
+                    WHERE contraseña = '$password' AND idUsuario = '$usuarioID'";
+        $r = $this->connection->query($query);
+        return $r->fetch_assoc();
+    }
+
+    public function updatePassword($user){
+        $usuarioID = $this->connection->real_escape_string($user['usuarioID']);
+        $password = $this->connection->real_escape_string($user['password']);
+        $query = "UPDATE usuario SET 
+                    contraseña = '$password'
+                    WHERE idUsuario = '$usuarioID'";
+
+        if($this->connection->query($query)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
     public function validateUser($id,$password){
         $query = "SELECT U.idUsuario, U.nombre, U.apellido, TU.detalle AS tipoUsuario, E.perfil, U.email 
                     FROM usuario U 

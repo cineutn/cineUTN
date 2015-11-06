@@ -12,6 +12,84 @@ function redirect($url){
    die();
 }
 
+function validatePassword($request){
+    require("../models/usuarios.php");
+    $c = new Usuario();
+    $user = array();
+    $user["usuarioID"] = $request->usuarioID;
+    $user["password"] = $request->password;
+    if($usuario = $c->getUserByPassword($user)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $usuario
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener usuario"
+        ));
+    }
+}
+
+function updatePassword($request){
+    require("../models/usuarios.php");
+    $c = new Usuario();
+    $user = array();
+    $user["usuarioID"] = $request->usuarioID;
+    $user["password"] = $request->password;
+    if($c->updatePassword($user)){
+      sendResponse(array(
+            "error" => false,
+            "mensaje" => "Se modificó la contraseña. "
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al actualizar password. "
+        ));
+    }
+}
+
+function validateEmail($request){
+    require("../models/usuarios.php");
+    $c = new Usuario();
+    $user = array();
+    $user["usuarioID"] = $request->usuarioID;
+    $user["email"] = $request->email;
+    if($usuario = $c->validateEMail($user)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $usuario
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener usuario"
+        ));
+    }
+}
+
+function updateEmail($request){
+    require("../models/usuarios.php");
+    $c = new Usuario();
+    $user = array();
+    $user["usuarioID"] = $request->usuarioID;
+    $user["email"] = $request->email;
+    if($c->updateEmail($user)){
+      sendResponse(array(
+            "error" => false,
+            "mensaje" => "Se modificó el email. "
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al actualizar email. "
+        ));
+    }
+}
+
 function recoverPassword($request){
     require("../models/usuarios.php");
     $user = new Usuario();
@@ -119,6 +197,18 @@ function logoutUser($request){
 $request = new Request();
 $action = $request->action;
 switch($action){
+    case "validarMail":
+        validateEmail($request);
+        break;
+    case "actualizarMail":
+        updateEmail($request);
+        break;
+    case "validarPassword":
+        validatePassword($request);
+        break;
+    case "actualizarPassword":
+        updatePassword($request);
+        break;
     case "recover":
         recoverPassword($request);
         break;
