@@ -27,22 +27,13 @@
       </div>
        <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
-           <li role="presentation" class="active"><a>Horario</a></li>
-           <li id="contenedorHorarios" ></li>
-             <!--<li role="presentation"><a href="#">
-                <button type="button" class="btn btn-default btn-circle botonAzul"><i class="glyphicon glyphicon-pencil textoBoton"></i></button> 13:00</a>
-            </li>
-            <li><a href="#">
-                <button type="button" class="btn btn-default btn-circle botonAzul"><i  class="glyphicon glyphicon-pencil textoBoton" ></i></button> 15:00</i></a>
-           </li>
-            <li ><a href="#">
-                <button type="button" class="btn btn-default btn-circle botonAzul"><i class="glyphicon glyphicon-pencil textoBoton"></i></button> 17:00</a>
-            </li>
-            <li><a href="#"><button type="button" class="btn btn-default btn-circle botonAzul"><i class="glyphicon glyphicon-pencil textoBoton"></i></button> 19:00</a></li>
-            <li><a href="#"><button type="button" class="btn btn-default btn-circle botonAzul"><i class="glyphicon glyphicon-pencil textoBoton"></i></button> 20:00</a></li>
-            <li><a href="#"><button type="button" class="btn btn-default btn-circle botonAzul"><i class="glyphicon glyphicon-pencil textoBoton"></i></button> 22:00</a></li>-->
+                <li role="presentation" class="active"><a>Horario</a></li>
+                <ul class="nav nav-pills nav-stacked" id="contenedorHorarios"></ul>
+                
+                
+                
             </ul>
-              </div>		
+        </div>		
     </div>   
  </div>
         <!--<div class="col-md-1"  >			   
