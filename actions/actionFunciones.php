@@ -22,7 +22,7 @@ function nuevaFuncion($request){
 	$funcion["idTipoFuncion"] = $request->idTipoFuncion;
 	$funcion["estado"] = $request->estado;
 	$funcion["fechaAlta"] = $request->fechaAlta;
-	$funcion["idComplejo"] = $request->idComlejo;
+	$funcion["idComplejo"] = $request->idComplejo;
 					  
     if($nuevo = $f->createFuncion($funcion)){
         sendResponse(array(

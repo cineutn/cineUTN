@@ -23,7 +23,7 @@ class Funciones
 		$idComplejo =$this->connection->real_escape_string($funcion['idComplejo']);      
       
         $query = "INSERT INTO funcion(idFuncion, idPelicula,idIdioma,idTipoFuncion,estado,fechaAlta,idComplejo) VALUES 
-					(DEFAULT,$idPelicula,$idIdioma,$idTipoFuncion,$estado,'$fechaAlta',$idComplejo)";
+					(DEFAULT,$idPelicula,$idIdioma,$idTipoFuncion,$estado,now(),$idComplejo)";
       
         if($this->connection->query($query)){
               $funcion['idFuncion'] = $this->connection->insert_id;
