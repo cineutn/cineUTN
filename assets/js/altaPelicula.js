@@ -317,6 +317,7 @@
        $("#actoresPelicula").val("");   
        $("#directorPelicula").val("");  
        $("#fechaEstrenoPelicula").val("");
+       $("#cmbFormato").val("0");
 
         $("#vistaPrevia").addClass('hide');
         $("#vistaPrevia").css('opacity', '0.0');
@@ -346,6 +347,7 @@
         $peliculaClasificacion = $tablaBody.children('tr').children('.datosTabla').children('#lblClasificacion').text();
         $peliculaFechaEstreno = $tablaBody.children('tr').children('.datosTabla').children('#lblFechaEstrenoPelicula').text();
         $peliculaTrailer = $tablaBody.children('tr').children('.datosTabla').children('#lblTrailerPelicula').text();
+        $peliculaFormato = $tablaBody.children('tr').children('.datosTabla').children('#lblFormatoPelicula').text();
 
         $("#idPelicula").val($peliculaID);
         $("#tituloPelicula").val($peliculaTitulo);
@@ -364,6 +366,10 @@
 
         $("#nombreImagen").val($nombreImagen);        
         
+        var formato = $("#cmbFormato option:contains('"+$peliculaFormato+"')").val();
+      
+        $("#cmbFormato").val(formato);
+
         $("#vistaPrevia").removeClass('hide');
         $("#vistaPrevia").attr('src',$pathImagen);
         $("#vistaPrevia").css('opacity', '1.0');
@@ -415,7 +421,8 @@
 		$director = $directorPelicula.val();
 		$fechaEstreno = $fechaEstrenoPelicula.val();
         $urlimagen =  "assets/img/peliculas/" + $("#nombreImagen").val();
-	   
+	    $idFormato = $("#cmbFormato").val();
+
         var bValidar;
 
         bValidar = validarPelicula();
@@ -437,7 +444,8 @@
         						actoresPelicula:$actores,
         						directorPelicula:$director,
         						fechaEstrenoPelicula:$fechaEstreno,
-                                urlimagen:$urlimagen
+                                urlimagen:$urlimagen,
+                                idFormato:$idFormato
         				    },
                         dataType: 'json'
                     });
@@ -468,7 +476,8 @@
                                 actoresPelicula:$actores,
                                 directorPelicula:$director,
                                 fechaEstrenoPelicula:$fechaEstreno,
-                                urlimagen:$urlimagen
+                                urlimagen:$urlimagen,
+                                idFormato:$idFormato
                             },
                         dataType: 'json'
                     });
@@ -601,6 +610,18 @@
           $fechaEstrenoPelicula.closest(".col-lg-12").removeClass("has-error");
           $fechaEstrenoPelicula.siblings(".glyphicon-remove").addClass("hide");
           $fechaEstrenoPelicula.siblings(".help-block").html("");          
+        }
+
+        $idFormato = $("#cmbFormato").val();
+        if($idFormato == 0){
+          $("#cmbFormato").closest(".col-lg-12").addClass("has-error");
+          $("#cmbFormato").siblings(".glyphicon-remove").removeClass("hide");
+          $("#cmbFormato").siblings(".help-block").html("Debe completar este campo");
+          bRetorno = false;
+        }else{
+          $("#cmbFormato").closest(".col-lg-12").removeClass("has-error");
+          $("#cmbFormato").siblings(".glyphicon-remove").addClass("hide");
+          $("#cmbFormato").siblings(".help-block").html("");          
         }
 
         return bRetorno;

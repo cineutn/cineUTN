@@ -58,7 +58,7 @@ function nuevaPelicaula($request){
 	$pelicula["directorPelicula"] =$request->directorPelicula;
 	$pelicula["fechaEstrenoPelicula"] =$request->fechaEstrenoPelicula;
     $pelicula["urlimagen"] = $request->urlimagen;
-					  
+	$pelicula["idFormato"] = $request->idFormato;			  
     if($nuevo = $p->createpelicula($pelicula)){
         sendResponse(array(
             "error" => false,
@@ -288,6 +288,7 @@ function modificarPelicula($request){
     $pelicula["directorPelicula"] =$request->directorPelicula;
     $pelicula["fechaEstrenoPelicula"] =$request->fechaEstrenoPelicula;
     $pelicula["urlimagen"] = $request->urlimagen;
+    $pelicula["idFormato"] = $request->idFormato;
     if($p->updatePelicula($pelicula)){
         sendResponse(array(
             "error" => false,

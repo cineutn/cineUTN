@@ -9,7 +9,7 @@ class Peliculas
     } 
 	
     public function getFormatos(){
-        $query = "SELECT descripcion, subtitulada, idFormato FROM formato";  
+        $query = "SELECT descripcion, subtitulada, idFormato FROM formato ORDER BY descripcion";  
        
         $formatos = array();
         if( $result = $this->connection->query($query) ){
@@ -51,7 +51,9 @@ class Peliculas
     }
 
     public function getPeliculas(){
-        $query = "SELECT P.titulo,
+        $query = "SELECT 
+                        P.idPelicula,
+                        P.titulo,
                         P.duracion,
                         P.clasificacion, 
                         P.genero, 
@@ -90,7 +92,8 @@ class Peliculas
             $result->free();
         }
         return $peliculas;
-    } 
+    }
+
     public function getPeliculaByID($id){
         $query = "SELECT * FROM pelicula where idPelicula='$id'";  
        
@@ -153,7 +156,7 @@ inner join formato f on f.idTipoFuncion=d.idTipoFuncion where a.idPelicula='$id'
         $directorPelicula = $this->connection->real_escape_string($pelicula['directorPelicula']);   
         $fechaEstrenoPelicula = $this->connection->real_escape_string($pelicula['fechaEstrenoPelicula']);
         $urlimagen = $this->connection->real_escape_string( $pelicula["urlimagen"]);
-       
+        $idFormato = $this->connection->real_escape_string( $pelicula["idFormato"]);
         $query = "UPDATE pelicula SET 
                     titulo = '$tituloPelicula',
                     duracion = '$duracionPelicula',                                        
@@ -164,7 +167,8 @@ inner join formato f on f.idTipoFuncion=d.idTipoFuncion where a.idPelicula='$id'
                     imagen = '$urlimagen',
                     trailer = '$trailerPelicula',
                     actores = '$actoresPelicula',
-                    director = '$directorPelicula'
+                    director = '$directorPelicula',
+                    idFormato = '$idFormato'
                     WHERE idPelicula = '$id'";
 
         if($this->connection->query($query)){
@@ -193,8 +197,8 @@ inner join formato f on f.idTipoFuncion=d.idTipoFuncion where a.idPelicula='$id'
 		$directorPelicula = $this->connection->real_escape_string($pelicula['directorPelicula']);	
 		$fechaEstrenoPelicula = $this->connection->real_escape_string($pelicula['fechaEstrenoPelicula']);
 		$urlimagen = $this->connection->real_escape_string( $pelicula["urlimagen"]);
-        
-        $query = "INSERT INTO pelicula (idPelicula,titulo,duracion,clasificacion,genero,estreno,fechaAlta,sinopsis,imagen,trailer,actores,director) VALUES (                    
+        $idFormato = $this->connection->real_escape_string( $pelicula["idFormato"]);
+        $query = "INSERT INTO pelicula (idPelicula,titulo,duracion,clasificacion,genero,estreno,fechaAlta,sinopsis,imagen,trailer,actores,director, idFormato) VALUES (                    
 					DEFAULT,
                     '$tituloPelicula',
 					'$duracionPelicula',										
@@ -206,7 +210,8 @@ inner join formato f on f.idTipoFuncion=d.idTipoFuncion where a.idPelicula='$id'
                     '$urlimagen',
 					'$trailerPelicula',
 					'$actoresPelicula',
-					'$directorPelicula')";
+					'$directorPelicula',
+                    '$idFormato')";
         if($this->connection->query($query)){
               $pelicula['idPelicula'] = $this->connection->insert_id;
             return $pelicula;
