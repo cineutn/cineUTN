@@ -7,9 +7,6 @@
     $( document ).ready(function(){  
             otenerPeliculabyID();   
             otenerPeliculaFuncionbyID();
-            
-            
-        
     });
     
 

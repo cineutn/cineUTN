@@ -115,14 +115,38 @@ class Peliculas
     
     }
     public function getPeliculaFuncionByID($id){
-        $query = "select a.idComplejo,nombre as nombreComplejo, f.idTipoFuncion,dia,horario,f.descripcion as formato, subtitulada,idFuncionDetalle    
-from peliculacomplejo a
-inner join complejo b on b.idComplejo=a.idComplejo
-inner join pelicula c on a.idPelicula=c.idPelicula
-inner join funcion  d on d.idPelicula=c.idPelicula and d.idComplejo=a.idComplejo
-inner join funcionhorario e on e.idFuncion=d.idFuncion
-inner join formato f on f.idTipoFuncion=d.idTipoFuncion where a.idPelicula='$id'";  
+        /*$query = "SELECT 
+                    a.idComplejo,
+                    nombre as nombreComplejo, 
+                    f.idTipoFuncion,
+                    dia,
+                    horario,
+                    f.descripcion as formato, 
+                    subtitulada,
+                    idFuncionDetalle    
+                    FROM peliculacomplejo a
+                    INNER JOIN complejo b on b.idComplejo=a.idComplejo
+                    INNER JOIN pelicula c on a.idPelicula=c.idPelicula
+                    INNER JOIN funcion  d on d.idPelicula=c.idPelicula and d.idComplejo=a.idComplejo
+                    INNER JOIN funcionhorario e on e.idFuncion=d.idFuncion
+                    INNER JOIN formato f on f.idTipoFuncion=d.idTipoFuncion where a.idPelicula='$id'";  */
        
+        $query = "SELECT 
+                    F.idComplejo,
+                    C.nombre as nombreComplejo, 
+                    F.idTipoFuncion,
+                    FH.dia,
+                    FH.horario,
+                    FO.descripcion as formato, 
+                    FO.subtitulada,
+                    FH.idFuncionDetalle    
+                    FROM funcion F
+                    INNER JOIN complejo C on F.idComplejo = C.idComplejo
+                    INNER JOIN pelicula P on F.idPelicula = P.idPelicula
+                    INNER JOIN funcionhorario FH on F.idFuncion = FH.idFuncion
+                    INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion 
+                    WHERE F.idPelicula='$id'"; 
+
         $peliculas = array();
         
         try{
