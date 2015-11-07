@@ -74,7 +74,6 @@ function obtenerPeliculas($fehaInicioSemana){
             alert(res.mensaje);
         }
     });
-
     obtener.fail(function(res){
         alert(res.responseText)
     });
@@ -110,19 +109,15 @@ function obtenerDias(){
     var obtener = $.ajax({
         url : URI.SEMANA,
         method : "GET",   
-        data: {
-                numeroSemana:$nroSemana
-				  },
+        data: { numeroSemana:$nroSemana },
         dataType : 'json',
     });
     obtener.done(function(res){
         if(!res.error){            
            $row='';
             $contenedorSemana.html("");            
-            res.data.forEach(function(item){  
-                
-            var fechaDesc =obtenerFecha(item.fecha);                
-            $row=$row +'<li><a id="afecha_'+item.idSemana+'" onclick="fechaSeleccionada('+item.idSemana+')">'+fechaDesc +'</a><input type="hidden" id="feha_'+item.idSemana+'" value='+fechaDesc+' ></li>';                                
+            res.data.forEach(function(item){ 
+            $row=$row +'<li><a id="afecha_'+item.idSemana+'" onclick="fechaSeleccionada('+item.idSemana+')">'+obtenerFecha(item.fecha) +'</a><input type="hidden" id="feha_'+item.idSemana+'" value='+item.fecha+' ></li>';                                
             });
             $contenedorSemana.after($row);
         }else{
@@ -130,32 +125,26 @@ function obtenerDias(){
             alert(res.mensaje);
         }
     });
-
     obtener.fail(function(res){
         alert(res.responseText)
     });
 };
 
 
-function peliculaSeleccionada(idPelicula){        
-    
+function peliculaSeleccionada(idPelicula){            
     $(".peliculasLista li a").removeClass("opcionSeleccionada");  
     $(".salasLista li a").removeClass("opcionSeleccionada"); 
     $(".semanaLista li a").removeClass("opcionSeleccionada"); 
-    $("#aPelicula_"+idPelicula).addClass("opcionSeleccionada");
-    
+    $("#aPelicula_"+idPelicula).addClass("opcionSeleccionada");    
     $contenedorHorarios.html("");
     $idPeliculaSeleccionada=idPelicula;
     $duracionPelicula=$("#duracion_"+idPelicula).val();    
     $idSalaSeleccionada='0';
-    $idSemanaSeleccionada='';
-    
+    $idSemanaSeleccionada='';    
 }
 
-function salaSeleccionada(idSala){
-    
-    if($(".peliculasLista li a").hasClass("opcionSeleccionada")){
-    
+function salaSeleccionada(idSala){    
+    if($(".peliculasLista li a").hasClass("opcionSeleccionada")){    
         $(".salasLista li a").removeClass("opcionSeleccionada");  
         $(".semanaLista li a").removeClass("opcionSeleccionada"); 
         $("#aSala_"+idSala).addClass("opcionSeleccionada");    
@@ -171,7 +160,7 @@ function fechaSeleccionada(idSemana){
         $(".semanaLista li a").removeClass("opcionSeleccionada");    
         $("#afecha_"+idSemana).addClass("opcionSeleccionada");
         $idSemanaSeleccionada=idSemana;  
-        $fechaDesc=$("#feha_"+idSemana).val();
+        $fechaDesc=obtenerFecha($("#feha_"+idSemana).val());        
         buscarFuncionesActivas($idSemanaSeleccionada,$idSalaSeleccionada);
         calcularHorarioFunciones($duracionPelicula);
     }
@@ -187,18 +176,13 @@ function buscarFuncionesActivas(idSemana,idSala){
 //calcula los horarios sugeridos para la pelicula.
 //el cine abre a las 12 y hay 15' de preparar la sala y se le suma 10' a la duracion de la pelicula por las propagandas y trailers
 //ultima funcion a las 23
-function calcularHorarioFunciones(duracionPelicula){
-   
+function calcularHorarioFunciones(duracionPelicula){   
     var duracionConTrailer=parseInt(duracionPelicula)+30;
     //solo me interesa la hora en esta variable
     var apertura = new Date("01/01/1985 12:00:00");
-    
-    //solo me interesa la hora en esta variable
-    var cierre = new Date("01/01/1985 23:00:00");    
-    
+    var cierre = new Date("01/01/1985 23:00:00");  
     $contenedorHorarios.html("");
-    $row='';    
-    
+    $row='';        
     while(new Date(apertura) < new Date(cierre)){        
         horaApertura = apertura.getHours();                   
         minutosApertura = ((apertura.getMinutes()<10)?'0':'')+apertura.getMinutes();
@@ -210,15 +194,7 @@ function calcularHorarioFunciones(duracionPelicula){
 }
 
 
-function crearFuncion(horaApertura,minutosApertura){
-
-    /*console.log(horaApertura);
-    console.log(minutosApertura);
-    console.log($idPeliculaSeleccionada);
-    console.log($duracionPelicula);
-    console.log($idSalaSeleccionada);
-    console.log($idSemanaSeleccionada);*/
-    
+function crearFuncion(horaApertura,minutosApertura){    
    var guardarFuncion = $.ajax({
                     url : URI.FUNCION,
                     method : "POST",
@@ -233,11 +209,8 @@ function crearFuncion(horaApertura,minutosApertura){
                      },
                     dataType : 'json',
                 });
-    guardarFuncion.done(function(res){
-        
+    guardarFuncion.done(function(res){        
         if(!res.error){         
-            console.log(res.data.idFuncion);
-          
             alert(res.mensaje);
             crearFuncionHorario(res.data.idFuncion,horaApertura,minutosApertura);
             }
@@ -248,12 +221,9 @@ function crearFuncion(horaApertura,minutosApertura){
     guardarFuncion.fail(function(res){
         alert(res.responseText)
     });
-    
-    
 }
 
-function crearFuncionHorario(idFuncion,horaApertura,minutosApertura){
-   console.log($idSalaSeleccionada);
+function crearFuncionHorario(idFuncion,horaApertura,minutosApertura){   
    var guardarFuncionHorario = $.ajax({
                     url : URI.FUNCIONHORARIO,
                     method : "POST",
@@ -270,8 +240,7 @@ function crearFuncionHorario(idFuncion,horaApertura,minutosApertura){
                 });
     guardarFuncionHorario.done(function(res){
         
-        if(!res.error){         
-            console.log(res);
+        if(!res.error){                     
             alert(res.mensaje);
 
             }

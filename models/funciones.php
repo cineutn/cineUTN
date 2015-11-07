@@ -41,7 +41,7 @@ class Funciones
     $idSemana =$this->connection->real_escape_string($funcion['idSemana']);
       
     $query = "INSERT INTO funcionhorario(idFuncionDetalle,idFuncion,idSala,idSemana,dia,horario) VALUES 
-            (DEFAULT,$idFuncion,$idSala,$idSemana,$dia,$horario)";
+            (DEFAULT,$idFuncion,$idSala,$idSemana,'$dia','$horario')";
 
     if($this->connection->query($query)){
           $funcion['idFuncionDetalle'] = $this->connection->insert_id;
