@@ -38,13 +38,39 @@ function nuevaFuncion($request){
     }
 }
 
-
+function nuevaFuncionHorario($request){
+	require("../models/funciones.php");
+    $f = new Funciones();
+    $funcion = array();    
+	$funcion["idFuncionDetalle"] = $request->idFuncionDetalle;
+	$funcion["idFuncion"] = $request->idFuncion;
+	$funcion["idSala"] = $request->idSala;
+	$funcion["dia"] = $request->dia;
+	$funcion["horario"] = $request->horario;
+	$funcion["idSemana"] = $request->idSemana;
+					  
+    if($nuevo = $f->createFuncionHorario($funcion)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "horarrio creado con exito. ",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al crear horario"
+        ));
+    }
+}
     
 $request = new Request();
 $action = $request->action;
 switch($action){                  
     case "nueva":
         nuevaFuncion($request);
-      break;    
+      break;  
+    case "nuevoHorario":
+        nuevaFuncionHorario($request);
+      break;  
         
 }

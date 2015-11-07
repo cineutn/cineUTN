@@ -9,9 +9,6 @@ class Funciones
         $this->connection = ConnectionCine::getInstance();
     } 
     
-    
-    
-    
   public function createFuncion($funcion){        		
       
 		$idFuncion =$this->connection->real_escape_string($funcion['idFuncion']);
@@ -32,6 +29,27 @@ class Funciones
             return false;
         }
     }
+    
+     
+  public function createFuncionHorario($funcion){        		
+      
+    $idFuncionDetalle =$this->connection->real_escape_string($funcion['idFuncionDetalle']);
+    $idFuncion =$this->connection->real_escape_string($funcion['idFuncion']);
+    $idSala =$this->connection->real_escape_string($funcion['idSala']);
+    $dia=$this->connection->real_escape_string($funcion['dia']);
+    $horario =$this->connection->real_escape_string($funcion['horario']);
+    $idSemana =$this->connection->real_escape_string($funcion['idSemana']);
+      
+    $query = "INSERT INTO funcionhorario(idFuncionDetalle,idFuncion,idSala,idSemana,dia,horario) VALUES 
+            (DEFAULT,$idFuncion,$idSala,$idSemana,$dia,$horario)";
+
+    if($this->connection->query($query)){
+          $funcion['idFuncionDetalle'] = $this->connection->insert_id;
+        return $funcion;
+    }else{
+        return false;
+    }
+  }
     
     
 }
