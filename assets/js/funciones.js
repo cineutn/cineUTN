@@ -68,10 +68,11 @@ function obtenerPeliculas($fehaInicioSemana){
         if(!res.error){
             $row='';
             $contenedorPeliculas.html("");            
-            res.data.forEach(function(item){                    
+            res.data.forEach(function(item){ 
+                
                 var subtitulos=(item.subtitulada==1)?"Subtitulada":"Castellano";
                 $row=$row +'<li><a id="aPelicula_'+item.idPelicula+'" onclick="peliculaSeleccionada('+item.idPelicula+')">'+item.titulo+'  '+item.descripcion +'  '+subtitulos+'</a></li>'+
-                                '<input type="hidden" id="duracion_'+item.idPelicula+'" value='+item.duracion+' ><input type="hidden" id="formato_'+item.idPelicula+'"  value='+item.idTipoFucnion+'>';  
+                                '<input type="hidden" id="duracion_'+item.idPelicula+'" value='+item.duracion+' ><input type="hidden" id="formato_'+item.idPelicula+'"  value='+item.idTipoFuncion+'>';  
             });
             $contenedorPeliculas.after($row);
         }else{
@@ -146,7 +147,7 @@ function peliculaSeleccionada(idPelicula){
     $duracionPelicula=$("#duracion_"+idPelicula).val();    
     $idSalaSeleccionada='0';
     $idSemanaSeleccionada=''; 
-    $idTipoFuncion=  $("#formato_"+item.idPelicula).val();
+    $idTipoFuncion=  $("#formato_"+idPelicula).val();    
 }
 
 function salaSeleccionada(idSala){    
@@ -193,7 +194,7 @@ function calcularHorarioFunciones(duracionPelicula){
         horaApertura = apertura.getHours();                   
         minutosApertura = ((apertura.getMinutes()<10)?'0':'')+apertura.getMinutes();
         horarioFuncion=horaApertura+':'+ minutosApertura;
-        $row=$row +'<li><a>'+horarioFuncion+'  <button type="button"  onclick="crearFuncion('+horaApertura+','+minutosApertura+')" class="btn btn-default btn-circle botonVerde"><i class="glyphicon glyphicon-plus textoBoton"></i></button></a></li>';       
+        $row=$row +'<li><a>'+horarioFuncion+'  <button type="button" id="btn_'+$idPeliculaSeleccionada+'" onclick="crearFuncion('+horaApertura+','+minutosApertura+')" class="btn btn-default btn-circle botonVerde"><i id="img_'+$idPeliculaSeleccionada+'" class="glyphicon glyphicon-plus textoBoton"></i></button></a></li>';       
         apertura.setMinutes(apertura.getMinutes()+ parseInt(duracionConTrailer));        
     }
     $contenedorHorarios.append($row);
@@ -201,8 +202,10 @@ function calcularHorarioFunciones(duracionPelicula){
 
 
 function crearFuncion(horaApertura,minutosApertura){ 
-   //$('#modalLoading').modal('show');
-   var guardarFuncion = $.ajax({
+  
+ if($("#btn_"+$idPeliculaSeleccionada).hasClass('botonVerde')){
+    $('#modalLoading').modal('show');
+     var guardarFuncion = $.ajax({
                     url : URI.FUNCION,
                     method : "POST",
                      data: {
@@ -227,6 +230,8 @@ function crearFuncion(horaApertura,minutosApertura){
     guardarFuncion.fail(function(res){
         alert(res.responseText)
     });
+ 
+ }
 }
 
 function crearFuncionHorario(idFuncion,horaApertura,minutosApertura){   
@@ -269,13 +274,16 @@ function generarSalaFuncion(idFuncionDetalle,idFuncion){
     if(!res.error){               
         if(res.data[0].fila!=null){                                     
 
-            res.data.forEach(function(item){  
-                console.log(item);
+            res.data.forEach(function(item){                  
                 insertarSalaFuncion(idFuncion,item.columna,item.fila,item.habilitada,$idSalaSeleccionada,idFuncionDetalle);
             }); 
-            //$('#modalLoading').modal('hide');
+            $('#modalLoading').modal('hide');
             alert('Funcion creada con exito');
             //habilitar el boton de eliminar
+            $("#btn_"+$idPeliculaSeleccionada).removeClass('botonVerde');
+            $("#btn_"+$idPeliculaSeleccionada).addClass('botonRojo');
+            $("#img_"+$idPeliculaSeleccionada).removeClass('glyphicon-plus');
+            $("#img_"+$idPeliculaSeleccionada).addClass('glyphicon-remove');
         }
       }
     });    
@@ -302,7 +310,7 @@ var addSalaFuncion =  $.ajax({
     })
     addSalaFuncion.done(function(response){	 
           if(!response.error){  
-            console.log(response);
+            
           }        
     }); 
     addSalaFuncion.fail(function(response){
