@@ -9,7 +9,7 @@
 
 
 <input type='hidden' id='idFuncionDetalle' value= <?php echo $idFuncionDetalle ?> ></input>
-       <div class="row paginaCompra">
+      <div class="row paginaCompra">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 path">
                <div id="detalleCompra">EL CLAN CASTELLANO (P16)</div>
                > DETALLE DE COMPRA >
@@ -42,13 +42,8 @@
                        <span class="datos" id="sala"></span>
                     </div>
                 </div>                
-           </div>
-           <div class="contenedor-reloj pull-right">
-                <input type="hidden" id="fechaTermino">
-                  <span class="relojTitulo">Tiempo Restante:</span> <br>
-                  <span id="relojCuentaAtras" class="reloj">00:00</span>
-            </div>
-       </div>
+            </div>            
+      </div>
         <div class="row poster">
             <div class="sombra"></div>            
             <div class="table-responsive">
@@ -72,7 +67,7 @@
             </div>
            <div class="sombra ">
                 <!--<button type="button" onclick="location.href='ventaButacas.php';" class="btn btn-success btn-Confirmar pull-right">SIGUIENTE</button> -->
-               <button type="button" onclick="validarCompra()" class="btn btn-success btn-Confirmar pull-right">SIGUIENTE</button>
+               <button id="bntNext" type="button" class="btn btn-success btn-Confirmar pull-right">SIGUIENTE</button>
               
            </div>
 		</div>
@@ -82,6 +77,5 @@
 <link rel="stylesheet" href="assets/css/paginaCompra.css"> 
 <script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
-<script src="assets/js/vendor/jquery.countdown.js"></script>
 <script src="assets/js/peliculaCompra.js"></script>
 

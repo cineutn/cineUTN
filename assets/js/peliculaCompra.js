@@ -17,20 +17,6 @@
 
     $(document ).ready(function(){	   
         obtenerDetalleFuncion();
-
-        
-
-        $("#fechaTermino").val(fechaTermino);
-    });
-	    
-    $("#relojCuentaAtras").countdown({
-        var fechaInicial = new Date(); 
-        valorFecha = fechaInicial.valueOf();
-        valorFechaTermino = valorFecha +  (10 * 60 * 1000 ); 
-        fechaTermino = new Date(valorFechaTermino); 
-        
-          format: "mm:ss",
-          endTime: new Date(fechaTermino)
     });
     
     function obtenerDetalleFuncion(){        
@@ -105,6 +91,10 @@
     });
     };
 
+    $("#bntNext").on("click", function(){
+        validarCompra();
+    });
+
     function validarCompra(){
 
         var cantidades=[];
@@ -113,6 +103,7 @@
         var precioTotal=0;
         var idPrecio=[];
         var ids=[];
+
         $( ".comboCantidad option:selected" ).each(function() {   
             
             cantidad=cantidad+parseInt($(this).text());
@@ -136,7 +127,7 @@
                 ids.push(idPrecio[i])
             }
             
-        }
+        };
 
         if(cantidad>6){
         alert('Debe elegir menos de 6 entradas');
@@ -147,10 +138,8 @@
             sessionStorage.setItem('cantidadEntradas',cantidades);
             sessionStorage.setItem('preciosEntradas',precios);
             location.href='ventaButacas.php?cantidadEntradas='+cantidad+'&precio='+precioTotal+',&idFuncionDetalle='+$idFuncionDetalle;        
-        } 
-    };
+        }
 
-    function addMinutes(date, minutes) {
-        return new Date(date.getTime() + minutes*60000);
     }
+
 })(jQuery)
