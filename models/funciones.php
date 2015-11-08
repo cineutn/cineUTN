@@ -64,7 +64,7 @@ class Funciones
     $idFuncionDetalle =$this->connection->real_escape_string($funcion['idFuncionDetalle']);
       
     $query ="INSERT INTO sala_funcion(idSalaFuncion,idFuncion,columna,fila,habilitada,idSala,idFuncionDetalle) VALUES 
-            (DEFAULT,$idFucnion,'$columna',$fila,$habilitada,$idSala,$idFuncionDetalle)";      
+            (DEFAULT,$idFucnion,$columna,'$fila',$habilitada,$idSala,$idFuncionDetalle)";      
 
     if($this->connection->query($query)){
           $funcion['idSalaFuncion'] = $this->connection->insert_id;

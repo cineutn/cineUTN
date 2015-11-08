@@ -283,7 +283,8 @@ function generarSalaFuncion(idFuncionDetalle,idFuncion){
     });
 }
 
-function insertarSalaFuncion(idFucnion,columna,fila,habilitada,idSala,idFuncionDetalle){    
+function insertarSalaFuncion(idFucnion,columna,fila,habilitada,idSala,idFuncionDetalle){ 
+    
 var addSalaFuncion =  $.ajax({
         url: URI.ADDSALAFUNCION,
         type: 'POST',
@@ -300,9 +301,10 @@ var addSalaFuncion =  $.ajax({
     })
     addSalaFuncion.done(function(response){	 
           if(!response.error){  
-            alert(response.message);
+            console.log(response);
           }else{
-            alert(response.error);
+           
+              console.log('errror');
           }
         
     }); 
