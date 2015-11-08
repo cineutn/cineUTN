@@ -19,6 +19,7 @@ $duracionPelicula='0';
 $idSalaSeleccionada='0';
 $idSemanaSeleccionada=''
 $fechaDesc='';
+$idTipoFuncion='0';
 //$dias = ["Jueves","Viernes","Sabado","Domingo","Lunes","Martes","Miercoles"];
 
 $(document ).ready(function(){	  
@@ -54,6 +55,7 @@ function obtenerInicioSemana(){
 };
 
 function obtenerPeliculas($fehaInicioSemana){   
+    
     var obtener = $.ajax({
         url : URI.PELICULAS,
         method : "GET",
@@ -66,10 +68,10 @@ function obtenerPeliculas($fehaInicioSemana){
         if(!res.error){
             $row='';
             $contenedorPeliculas.html("");            
-            res.data.forEach(function(item){    
+            res.data.forEach(function(item){                    
                 var subtitulos=(item.subtitulada==1)?"Subtitulada":"Castellano";
                 $row=$row +'<li><a id="aPelicula_'+item.idPelicula+'" onclick="peliculaSeleccionada('+item.idPelicula+')">'+item.titulo+'  '+item.descripcion +'  '+subtitulos+'</a></li>'+
-                                '<input type="hidden" id="duracion_'+item.idPelicula+'" value='+item.duracion+' >';
+                                '<input type="hidden" id="duracion_'+item.idPelicula+'" value='+item.duracion+' ><input type="hidden" id="formato_'+item.idPelicula+'"  value='+item.idTipoFucnion+'>';  
             });
             $contenedorPeliculas.after($row);
         }else{
@@ -143,7 +145,8 @@ function peliculaSeleccionada(idPelicula){
     $idPeliculaSeleccionada=idPelicula;
     $duracionPelicula=$("#duracion_"+idPelicula).val();    
     $idSalaSeleccionada='0';
-    $idSemanaSeleccionada='';    
+    $idSemanaSeleccionada=''; 
+    $idTipoFuncion=  $("#formato_"+item.idPelicula).val();
 }
 
 function salaSeleccionada(idSala){    
@@ -197,15 +200,16 @@ function calcularHorarioFunciones(duracionPelicula){
 }
 
 
-function crearFuncion(horaApertura,minutosApertura){    
+function crearFuncion(horaApertura,minutosApertura){ 
+   //$('#modalLoading').modal('show');
    var guardarFuncion = $.ajax({
                     url : URI.FUNCION,
                     method : "POST",
                      data: {
                          idFuncion:0,
                          idPelicula:$idPeliculaSeleccionada,
-                         idIdioma:1, //cambiarrrrr
-                         idTipoFuncion:1,//cambiarrrr
+                         idIdioma:1, //no se esta usando el idioma, el formato ya indica sub o no
+                         idTipoFuncion:$idTipoFuncion,
                          estado:1,
                          fechaAlta:0,//en el insert se pone dateTime=now
                          idComplejo:1//cambiarrrr
@@ -268,11 +272,11 @@ function generarSalaFuncion(idFuncionDetalle,idFuncion){
             res.data.forEach(function(item){  
                 console.log(item);
                 insertarSalaFuncion(idFuncion,item.columna,item.fila,item.habilitada,$idSalaSeleccionada,idFuncionDetalle);
-            });        
+            }); 
+            //$('#modalLoading').modal('hide');
             alert('Funcion creada con exito');
+            //habilitar el boton de eliminar
         }
-        
-        //inserto en peliculaCompeljo
       }
     });    
     obtener.fail(function(res){
