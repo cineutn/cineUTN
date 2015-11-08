@@ -66,8 +66,9 @@ function obtenerPeliculas($fehaInicioSemana){
         if(!res.error){
             $row='';
             $contenedorPeliculas.html("");            
-            res.data.forEach(function(item){                
-                $row=$row +'<li><a id="aPelicula_'+item.idPelicula+'" onclick="peliculaSeleccionada('+item.idPelicula+')">'+item.titulo+'</a></li>'+
+            res.data.forEach(function(item){    
+                var subtitulos=(item.subtitulada==1)?"Subtitulada":"Castellano";
+                $row=$row +'<li><a id="aPelicula_'+item.idPelicula+'" onclick="peliculaSeleccionada('+item.idPelicula+')">'+item.titulo+'  '+item.descripcion +'  '+subtitulos+'</a></li>'+
                                 '<input type="hidden" id="duracion_'+item.idPelicula+'" value='+item.duracion+' >';
             });
             $contenedorPeliculas.after($row);
@@ -212,9 +213,8 @@ function crearFuncion(horaApertura,minutosApertura){
                     dataType : 'json',
                 });
     guardarFuncion.done(function(res){        
-        if(!res.error){         
-            alert(res.mensaje);
-            crearFuncionHorario(res.data.idFuncion,horaApertura,minutosApertura);
+        if(!res.error){
+                crearFuncionHorario(res.data.idFuncion,horaApertura,minutosApertura);
             }
         else{
             alert(res.error);
@@ -241,10 +241,8 @@ function crearFuncionHorario(idFuncion,horaApertura,minutosApertura){
                     dataType : 'json',
                 });
     guardarFuncionHorario.done(function(res){        
-        if(!res.error){                     
-            alert(res.mensaje);
-            console.log(res.data.idFuncionDetalle);
-            generarSalaFuncion(res.data.idFuncionDetalle,idFuncion);
+        if(!res.error){                                            
+                generarSalaFuncion(res.data.idFuncionDetalle,idFuncion);
             }
         else{
             alert(res.error);
@@ -257,10 +255,6 @@ function crearFuncionHorario(idFuncion,horaApertura,minutosApertura){
 
 
 function generarSalaFuncion(idFuncionDetalle,idFuncion){
-    //$idSalaSeleccionada
-    //buscar salaDetalle por idSala
-    //por cada row de salaDetalle insertar en salaFuncion sumando los parametros propios de la tabla
-    
     var obtener = $.ajax({
         url : URI.SALADETALLE,
         method : "GET",
@@ -274,8 +268,11 @@ function generarSalaFuncion(idFuncionDetalle,idFuncion){
             res.data.forEach(function(item){  
                 console.log(item);
                 insertarSalaFuncion(idFuncion,item.columna,item.fila,item.habilitada,$idSalaSeleccionada,idFuncionDetalle);
-            });         
+            });        
+            alert('Funcion creada con exito');
         }
+        
+        //inserto en peliculaCompeljo
       }
     });    
     obtener.fail(function(res){
@@ -302,11 +299,7 @@ var addSalaFuncion =  $.ajax({
     addSalaFuncion.done(function(response){	 
           if(!response.error){  
             console.log(response);
-          }else{
-           
-              console.log('errror');
-          }
-        
+          }        
     }); 
     addSalaFuncion.fail(function(response){
         alert(response.responseText)
