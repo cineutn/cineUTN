@@ -4,7 +4,9 @@
         SALAS : 'actions/actionAltaSala.php?action=obtener',
         SEMANA : 'actions/actionsemanaNueva.php?action=diasSemana',     
         FUNCION : 'actions/actionFunciones.php?action=nueva',     
-        FUNCIONHORARIO : 'actions/actionFunciones.php?action=nuevoHorario',     
+        FUNCIONHORARIO : 'actions/actionFunciones.php?action=nuevoHorario',    
+        SALADETALLE : 'actions/actionEsquemaSala.php?action=obtener',
+        ADDSALAFUNCION : 'actions/actionFunciones.php?action=nuevaSala',
     };
 
 $nroSemana =$("#nroSemana").val();
@@ -238,11 +240,11 @@ function crearFuncionHorario(idFuncion,horaApertura,minutosApertura){
                      },
                     dataType : 'json',
                 });
-    guardarFuncionHorario.done(function(res){
-        
+    guardarFuncionHorario.done(function(res){        
         if(!res.error){                     
             alert(res.mensaje);
-
+            console.log(res.data.idFuncionDetalle);
+            generarSalaFuncion(res.data.idFuncionDetalle,idFuncion);
             }
         else{
             alert(res.error);
@@ -251,7 +253,62 @@ function crearFuncionHorario(idFuncion,horaApertura,minutosApertura){
     guardarFuncionHorario.fail(function(res){
         alert(res.responseText)
     });
+}
 
+
+function generarSalaFuncion(idFuncionDetalle,idFuncion){
+    //$idSalaSeleccionada
+    //buscar salaDetalle por idSala
+    //por cada row de salaDetalle insertar en salaFuncion sumando los parametros propios de la tabla
+    
+    var obtener = $.ajax({
+        url : URI.SALADETALLE,
+        method : "GET",
+         data: {idSala:$idSalaSeleccionada},
+        dataType : 'json',
+    });   
+    obtener.done(function(res){
+    if(!res.error){               
+        if(res.data[0].fila!=null){                                     
+
+            res.data.forEach(function(item){  
+                console.log(item);
+                insertarSalaFuncion(idFuncion,item.columna,item.fila,item.habilitada,$idSalaSeleccionada,idFuncionDetalle);
+            });         
+        }
+      }
+    });    
+    obtener.fail(function(res){
+        alert(res.responseText)
+    });
+}
+
+function insertarSalaFuncion(idFucnion,columna,fila,habilitada,idSala,idFuncionDetalle){    
+var addSalaFuncion =  $.ajax({
+        url: URI.ADDSALAFUNCION,
+        type: 'POST',
+        data: {
+                idSalaFuncion:0,
+                idFucnion:idFucnion,
+                columna:columna,
+                fila:fila,				        
+                habilitada:habilitada,
+                idSala:idSala,
+                idFuncionDetalle:idFuncionDetalle
+          },
+        dataType: 'json',
+    })
+    addSalaFuncion.done(function(response){	 
+          if(!response.error){  
+            alert(response.message);
+          }else{
+            alert(response.error);
+          }
+        
+    }); 
+    addSalaFuncion.fail(function(response){
+        alert(response.responseText)
+    });
 }
 
 function obtenerFecha(fecha){

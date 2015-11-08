@@ -52,4 +52,27 @@ class Funciones
   }
     
     
+    
+  public function createSalaDetalle($funcion){        
+
+    $idSalaFuncion =$this->connection->real_escape_string($funcion['idSalaFuncion']);
+    $idFucnion =$this->connection->real_escape_string($funcion['idFucnion']);
+    $columna =$this->connection->real_escape_string($funcion['columna']);
+    $fila=$this->connection->real_escape_string($funcion['fila']);
+    $habilitada =$this->connection->real_escape_string($funcion['habilitada']);
+    $idSala =$this->connection->real_escape_string($funcion['idSala']);
+    $idFuncionDetalle =$this->connection->real_escape_string($funcion['idFuncionDetalle']);
+      
+    $query ="INSERT INTO sala_funcion(idSalaFuncion,idFuncion,columna,fila,habilitada,idSala,idFuncionDetalle) VALUES 
+            (DEFAULT,$idFucnion,'$columna',$fila,$habilitada,$idSala,$idFuncionDetalle)";      
+
+    if($this->connection->query($query)){
+          $funcion['idSalaFuncion'] = $this->connection->insert_id;
+        return $funcion;
+    }else{
+        return false;
+    }
+  }    
+    
+    
 }

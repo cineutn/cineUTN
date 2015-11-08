@@ -62,7 +62,34 @@ function nuevaFuncionHorario($request){
         ));
     }
 }
+
+function nuevaSalaFuncion($request){
+	require("../models/funciones.php");
+    $f = new Funciones();
+    $funcion = array();  
     
+	$funcion["idSalaFuncion"] = $request->idSalaFuncion;
+	$funcion["idFucnion"] = $request->idFucnion;
+	$funcion["columna"] = $request->columna;
+	$funcion["fila"] = $request->fila;
+	$funcion["habilitada"] = $request->habilitada;
+	$funcion["idSala"] = $request->idSala;
+	$funcion["idFuncionDetalle"] = $request->idFuncionDetalle;
+					  
+    if($nuevo = $f->createSalaDetalle($funcion)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "sala funcion creada con exito. ",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al crear salafuncion"
+        ));
+    }
+}
+        
 $request = new Request();
 $action = $request->action;
 switch($action){                  
@@ -72,5 +99,7 @@ switch($action){
     case "nuevoHorario":
         nuevaFuncionHorario($request);
       break;  
-        
+    case "nuevaSala":
+        nuevaSalaFuncion($request);
+      break;           
 }
