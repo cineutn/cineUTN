@@ -42,7 +42,8 @@
                        <span class="datos" id="sala"></span>
                     </div>
                 </div>                
-            </div>            
+            </div> 
+           <?php require("partials/reloj.php"); ?>     
       </div>
         <div class="row poster">
             <div class="sombra"></div>            
@@ -77,5 +78,6 @@
 <link rel="stylesheet" href="assets/css/paginaCompra.css"> 
 <script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="assets/js/reloj.js"></script>
 <script src="assets/js/peliculaCompra.js"></script>
 

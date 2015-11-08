@@ -48,7 +48,8 @@
                        <span class="datos" id="sala"></span>
                     </div>
                 </div>
-           </div>    
+           </div>
+            <?php require("partials/reloj.php"); ?> 
            <div class="row col-md-12" style="margin-top:10px;">
            		<div class="col-md-12 compraPelicula sombra">
            			<div class="col-xs-8 col-md-4">
@@ -82,4 +83,5 @@
 <link rel="stylesheet" href="assets/css/ventaButacas.css">     
 <script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="assets/js/reloj.js"></script>
 <script src="assets/js/ventaButaca.js"></script>

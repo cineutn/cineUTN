@@ -1,37 +1,40 @@
 (function($){
       
     var URI = {
-        LOGIN : 'actions/actions.php?action=validar'
+        ACTUALIZAR : 'actions/actions.php?action=validar'
     };
 
-    $formLogin = $("#login_form");
+    $(document).ready(function() {     
+        setInterval(function(){ calcularTiempoDosFechas() }, 1000);
+    });  
+    
+    function calcularTiempoDosFechas(){
 
-    $formLogin.on("submit",function(e){
+        var fechaTermino = sessionStorage.getItem('fechaTermino');
+
+        start_actual_time = new Date();
+
+        end_actual_time = new Date(fechaTermino);
+
+        var interval = end_actual_time - start_actual_time;
+
+        var msecPerMinute = 1000 * 60;
+
+        var MM = Math.floor(interval / msecPerMinute);
         
-        var loginUser = $.ajax({
-            url : URI.LOGIN,
-            method : "GET",
-            dataType : 'json',
-            async: false,
-            data : $formLogin.serialize()
-        });
+        interval = interval - (MM * msecPerMinute );
 
-        loginUser.done(function(res){
-            if(!res.error){
-                sessionStorage.setItem('idUser', res.data.idUsuario);
-                sessionStorage.setItem('tipoUsuario', res.data.tipoUsuario);
-                sessionStorage.setItem('nombre', res.data.nombre);
-                sessionStorage.setItem('apellido', res.data.apellido);
-                sessionStorage.setItem('email', res.data.email);
-            }else{
-                alert(res.mensaje);
-            }
-        });
+        var SS = Math.floor(interval / 1000 );
 
-        loginUser.fail(function(res){
-            alert(res.responseText)
-        });
+        //var formatted = ((HH < 10)?("0" + HH):HH) + ":" + ((MM < 10)?("0" + MM):MM)
+        var formatted = ((MM < 10)?("0" + MM):MM) + ":" + ((SS < 10)?("0" + SS):SS);
 
-    });
+        if (formatted == "00:00"){
+            window.location.href = "index.php";
+        }else{
+            $("#relojCuentaAtras").text(formatted);
+        }
+
+    };
     
 })(jQuery)

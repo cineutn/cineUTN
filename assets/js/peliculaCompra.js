@@ -17,8 +17,17 @@
 
     $(document ).ready(function(){	   
         obtenerDetalleFuncion();
+
+        var fechaTermino = new Date();
+
+        fechaTermino = addMinutes(fechaTermino,10);
+        sessionStorage.setItem('fechaTermino', fechaTermino);
     });
-    
+
+    function addMinutes(date, minutes) {
+        return new Date(date.getTime() + minutes*60000);
+    };
+
     function obtenerDetalleFuncion(){        
         $funcionDetalleID=$idFuncionDetalle;
         var obtener = $.ajax({

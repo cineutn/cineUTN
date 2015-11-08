@@ -46,7 +46,7 @@
                        <span class="datos" id="sala"></span>
                     </div>
                 </div>
-           	</div>
+           	</div>            
             <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 datosPelicula">
                 <div class="row">
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -63,6 +63,7 @@
                     </div>
                 </div>
            </div>
+           <?php require("partials/reloj.php"); ?> 
         </div>
         <div class="row confirmarOperacion">
             <div class="sombra"></div>            
@@ -194,4 +195,5 @@
 <link rel="stylesheet" href="assets/css/paginaCompra.css">     
 <script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="assets/js/reloj.js"></script>
 <script src="assets/js/pagoEntradas.js"></script>
