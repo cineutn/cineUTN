@@ -82,7 +82,7 @@
     
      $( document ).ready(function(){
         $('#email').on('change',function(){
-           
+           $('#signupform .alert.alert-danger.mail').remove();
             var validaMail = $.ajax({
                 url: URI.VALIDARMAIL,
                 method: "POST",
@@ -90,7 +90,7 @@
                 dataType: 'json'
             });
             validaMail.done(function(e){
-                if(e.error){  $('<div class="alert alert-danger">    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>    <strong>Atencion!</strong> El email '+ $('#email').val()+ ' ya esta en uso.</div>').insertAfter($('#email').parent().parent());
+                if(e.error){  $('<div class="alert alert-danger mail">    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>    <strong>Atencion!</strong> El email '+ $('#email').val()+ ' ya esta en uso.</div>').insertAfter($('#email').parent().parent());
                             
                 
                     $('#email').val('');
@@ -104,6 +104,7 @@
         }); 
 		
         $('#usuario').on('change',function(){
+            $('#signupform .alert.alert-danger.usuario').remove();
            
             var validaMail = $.ajax({
                 url: URI.VALIDARUSERNAME,
@@ -112,10 +113,12 @@
                 dataType: 'json'
             });
             validaMail.done(function(e){
-                  $('<div class="alert alert-danger">    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>    <strong>Atencion!</strong> El usuario '+ $('#usuario').val()+ ' ya esta en uso.</div>').insertAfter($('#usuario').parent().parent());
+                if(e.error){
+                  $('<div class="alert alert-danger usuario">    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>    <strong>Atencion!</strong> El usuario '+ $('#usuario').val()+ ' ya esta en uso.</div>').insertAfter($('#usuario').parent().parent());
                             
                 
                     $('#usuario').val('');
+                }
              });
             
         
