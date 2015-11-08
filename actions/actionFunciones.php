@@ -89,7 +89,29 @@ function nuevaSalaFuncion($request){
         ));
     }
 }
-        
+
+function funcionesActivas($request){
+	require("../models/funciones.php");
+    $f = new Funciones();
+    $funcion = array();  
+    
+	$funcion["idSemana"] = $request->idSemana;
+	$funcion["idSala"] = $request->idSala;
+					  
+    if($nuevo = $f->obtenerFuncionesActivas($funcion)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "true",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener funciones"
+        ));
+    }
+}
+
 $request = new Request();
 $action = $request->action;
 switch($action){                  
@@ -101,5 +123,10 @@ switch($action){
       break;  
     case "nuevaSala":
         nuevaSalaFuncion($request);
-      break;           
+      break; 
+    case "funcionesActivas":
+        funcionesActivas($request);
+      break;         
+        
+        
 }

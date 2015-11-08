@@ -13,7 +13,7 @@
                 <li id="contenedorPeliculas" ></li>
             </ul>
       </div>
-       <div class="col-md-3">
+       <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked salasLista">
               <li role="presentation" class="active"><a>Sala</a></li>
                 <li id="contenedorSalas" ></li>
@@ -25,7 +25,7 @@
                 <li id="contenedorSemana" ></li>          
             </ul>
       </div>
-       <div class="col-md-2">
+       <div class="col-md-4">
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation" class="active"><a>Horario</a></li>
                 <ul class="nav nav-pills nav-stacked" id="contenedorHorarios"></ul>

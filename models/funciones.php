@@ -72,7 +72,29 @@ class Funciones
     }else{
         return false;
     }
-  }    
+  }
     
+  public function obtenerFuncionesActivas($funcion){      
+
+    $idSemana =$this->connection->real_escape_string($funcion['idSemana']);
+    $idSala =$this->connection->real_escape_string($funcion['idSala']);
+      
+      
+    $query ="select fn.idfuncion,pel.titulo,pel.duracion,fm.descripcion,fm.subtitulada,fh.horario 
+    from funcionhorario fh inner join funcion fn on fh.idfuncion =fn.idfuncion
+	inner join pelicula pel on pel.idpelicula=fn.idpelicula
+	inner join formato fm on pel.idformato =fm.idformato
+	where fh.idSemana =$idSemana    
+    and fh.idSala =$idSala";
+
+    $funciones = array();      
+      if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $funciones[] = $fila;
+            }
+            $result->free();
+        }
+        return $funciones;
+  }    
     
 }
