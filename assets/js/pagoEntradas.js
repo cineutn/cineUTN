@@ -80,9 +80,11 @@
             if(!res.error){   
               butacas = butacas + ' ' + res.data[0].butaca;
                 
-            }else{
-                
-                alert(res.mensaje);
+            }else{                
+              //alert(res.mensaje);
+              $('#msgBoxTitulo').text('UTN Cine');
+              $('#msgBoxMensaje').text(res.mensaje);
+              $('#modalMsgBox').modal('show');
             }
           });
 
@@ -126,10 +128,13 @@
             if(!res.error){   
               entradas = entradas + ' ' + cantidad + ' X ' + res.data[0].detalle + '<br>';
                 
-            }else{
-                
-                alert(res.mensaje);
+            }else{                
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('UTN Cine');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
+
           });
 
         }
@@ -162,14 +167,19 @@
                 $("#idTipoFuncion").val(res.data[0].idTipoFuncion);                
                 $imagenPelicula.attr("src" , res.data[0].imagen);                
                                
-            }else{
-                
-                alert(res.mensaje);
+            }else{                
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('UTN Cine');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
         obtener.fail(function(res){
-            alert(res.responseText)
+            //alert(res.responseText);
+            $('#msgBoxTitulo').text('UTN Cine');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         });
   };
 
@@ -193,12 +203,18 @@
                 $cmbTarjetas.append($tarjetas);
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('UTN Cine');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
         obtener.fail(function(res){
-            alert(res.responseText)
+            //alert(res.responseText);
+            $('#msgBoxTitulo').text('UTN Cine');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         });              
   };
   
@@ -237,7 +253,10 @@
               $codigoSeguridad.attr('maxlength',codigo);
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('UTN Cine');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
     }     
@@ -334,12 +353,18 @@
 
               if (res.data.bloqueado == "1"){
                 bRetorno = false;
-                alert("Su usuario ha sido bloqueado para la reserva de entradas");
+                //alert("Su usuario ha sido bloqueado para la reserva de entradas");
+                $('#msgBoxTitulo').text('UTN Cine');
+                $('#msgBoxMensaje').text('Su usuario ha sido bloqueado para la reserva de entradas');
+                $('#modalMsgBox').modal('show');
               }
 
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('UTN Cine');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
     }
@@ -504,11 +529,13 @@
             if(!res.error){
               var idVenta;
               idVenta = res.data.idVenta;
-
               crearDetalleVenta(idVenta);
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('UTN Cine');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });  
 
@@ -587,7 +614,10 @@
     if (sMensaje == " " ){
       $frmResumenCompra.submit();
     }else{
-      alert(sMensaje);
+      //alert(sMensaje);
+      $('#msgBoxTitulo').text('UTN Cine');
+      $('#msgBoxMensaje').text(sMensaje);
+      $('#modalMsgBox').modal('show');
     }
 
   };
@@ -607,7 +637,10 @@
         if(!res.error){   
                           
         }else{                
-            alert(res.mensaje);
+            //alert(res.mensaje);
+            $('#msgBoxTitulo').text('UTN Cine');
+            $('#msgBoxMensaje').text(res.mensaje);
+            $('#modalMsgBox').modal('show');
         }
     });
   };

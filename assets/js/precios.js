@@ -67,12 +67,18 @@
                 $cmbFormatos.append($formatos);
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Precios');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
         obtener.fail(function(res){
-            alert(res.responseText)
+            //alert(res.responseText);
+            $('#msgBoxTitulo').text('Precios');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         });         
     };
     
@@ -137,12 +143,18 @@
                 $contenedorPrecios.append($precios);
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Precios');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
         obtener.fail(function(res){
-            alert(res.responseText)
+            //alert(res.responseText);
+            $('#msgBoxTitulo').text('Precios');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         });
                
     };
@@ -239,8 +251,15 @@
                 })
 
                 addPrecio.done(function(response){
-                    $form.addClass("hide");
-                    obtenerPrecios();
+                    if(!response.error){
+                        $form.addClass("hide");
+                        obtenerPrecios();
+                    }else{          
+                          //alert(res.mensaje);
+                          $('#msgBoxTitulo').text('Precios');
+                          $('#msgBoxMensaje').text(response.mensaje);
+                          $('#modalMsgBox').modal('show');
+                    }                    
                 });
 
             }else{
@@ -257,8 +276,15 @@
                 })
 
                 updatePrecio.done(function(response){
-                    $form.addClass("hide");
-                    obtenerPrecios();
+                    if(!response.error){
+                        $form.addClass("hide");
+                        obtenerPrecios();
+                    }else{          
+                          //alert(res.mensaje);
+                          $('#msgBoxTitulo').text('Precios');
+                          $('#msgBoxMensaje').text(response.mensaje);
+                          $('#modalMsgBox').modal('show');
+                    } 
                 });
             }
 

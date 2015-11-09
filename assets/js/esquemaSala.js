@@ -57,17 +57,26 @@ function obtenerSala(){
                     $pantalla=$pantalla+ $fila;
                     $esquemaSala.append($pantalla);                    
                 }else{
-                alert('No hay sala');
+                    //alert('No hay sala');
+                    $('#msgBoxTitulo').text('Esquema Sala');
+                    $('#msgBoxMensaje').text('No hay Sala. ');
+                    $('#modalMsgBox').modal('show');
                 }
               }
          }else{
-             alert(res.mensaje);
+            //alert(res.mensaje);
+            $('#msgBoxTitulo').text('Esquema Sala');
+            $('#msgBoxMensaje').text(res.mensaje);
+            $('#modalMsgBox').modal('show');
          }
 
          });
     obtener.fail(function(res){
-        alert(res.responseText)
-        });
+        //alert(res.responseText);
+        $('#msgBoxTitulo').text('Esquema Sala');
+        $('#msgBoxMensaje').text(res.responseText);
+        $('#modalMsgBox').modal('show');
+    });
 }
 
 
@@ -118,9 +127,12 @@ $("#btnGuardarSala").click(function(){
                             });        
 
                 editarEstado.done(function(res){
-                if(res.error){     
-                    $error=true;
-                    alert(res.mensaje);
+                    if(res.error){     
+                        $error=true;
+                        //alert(res.mensaje);
+                        $('#msgBoxTitulo').text('Esquema Sala');
+                        $('#msgBoxMensaje').text(res.mensaje);
+                        $('#modalMsgBox').modal('show');
                     }
                 });
               
@@ -142,9 +154,12 @@ $("#btnGuardarSala").click(function(){
                         });        
 
             editarEstado.done(function(res){
-            if(res.error){         
-                $error=true;
-                alert(res.mensaje);
+                if(res.error){         
+                    $error=true;
+                    //alert(res.mensaje);
+                    $('#msgBoxTitulo').text('Esquema Sala');
+                    $('#msgBoxMensaje').text(res.mensaje);
+                    $('#modalMsgBox').modal('show');
                 };
             });
 
@@ -152,7 +167,10 @@ $("#btnGuardarSala").click(function(){
     });
     
     if(!$error){
-        alert('Esquema guardado!');
+        //alert('Esquema guardado!');
+        $('#msgBoxTitulo').text('Esquema Sala');
+        $('#msgBoxMensaje').text('Esquema Guardado. ');
+        $('#modalMsgBox').modal('show');
       location.href='altaSala.php';
     
     }

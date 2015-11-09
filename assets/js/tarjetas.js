@@ -90,12 +90,18 @@
                 $contenedorTarjetas.append($tarjetas);
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Tarjetas');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
         obtener.fail(function(res){
-            alert(res.responseText)
+            //alert(res.responseText);
+            $('#msgBoxTitulo').text('Tarjetas');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         });        
     };
 
@@ -149,8 +155,16 @@
             })
 
             deleteTarjeta.done(function(response){
-                $form.addClass("hide");
-                obtenerTarjetas();
+               if(!res.error){
+                    $form.addClass("hide");
+                    obtenerTarjetas();
+                }else{
+                    event.preventDefault();
+                    //alert(res.mensaje);
+                    $('#msgBoxTitulo').text('Tarjetas');
+                    $('#msgBoxMensaje').text(res.mensaje);
+                    $('#modalMsgBox').modal('show');
+                } 
             });
 
         }
@@ -186,8 +200,16 @@
                 })
 
                 addTarjeta.done(function(response){
-                    $form.addClass("hide");
-                    obtenerTarjetas();
+                    if(!res.error){
+                        $form.addClass("hide");
+                        obtenerTarjetas();
+                    }else{
+                        event.preventDefault();
+                        //alert(res.mensaje);
+                        $('#msgBoxTitulo').text('Tarjetas');
+                        $('#msgBoxMensaje').text(res.mensaje);
+                        $('#modalMsgBox').modal('show');
+                    }                    
                 });
 
             }else{
@@ -204,8 +226,16 @@
                 })
 
                 updateTarjeta.done(function(response){
-                    $form.addClass("hide");
-                    obtenerTarjetas();
+                    if(!res.error){
+                        $form.addClass("hide");
+                        obtenerTarjetas();
+                    }else{
+                        event.preventDefault();
+                        //alert(res.mensaje);
+                        $('#msgBoxTitulo').text('Tarjetas');
+                        $('#msgBoxMensaje').text(res.mensaje);
+                        $('#modalMsgBox').modal('show');
+                    } 
                 });
             }
 

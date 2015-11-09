@@ -130,10 +130,16 @@
        
             modificar.done(function(res){
                 if(!res.error){
-                   alert(res.mensaje);
+                    //alert(res.mensaje);
+                    $('#msgBoxTitulo').text('Modificar Contraseña');
+                    $('#msgBoxMensaje').text(res.mensaje);
+                    $('#modalMsgBox').modal('show');
                 }else{
                     event.preventDefault();
-                    alert(res.mensaje);
+                    //alert(res.mensaje);
+                    $('#msgBoxTitulo').text('Modificar Contraseña');
+                    $('#msgBoxMensaje').text(res.mensaje);
+                    $('#modalMsgBox').modal('show');
                 }
             });
         }

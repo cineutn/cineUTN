@@ -95,12 +95,18 @@
                 $contenedorCines.append($complejos);
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Complejos');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
         obtener.fail(function(res){
-            alert(res.responseText)
+            alert(res.responseText);
+            $('#msgBoxTitulo').text('Complejos');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         });
                
     };
@@ -133,8 +139,11 @@
                 contentType: false
             })
 
-            uploadImage.done(function(response){
-                alert(response.mensaje);
+            uploadImage.done(function(response){                
+                //alert(response.mensaje);
+                $('#msgBoxTitulo').text('Complejos');
+                $('#msgBoxMensaje').text(response.mensaje);
+                $('#modalMsgBox').modal('show');
             });
 
             uploadImage.always(function(response){
@@ -143,7 +152,10 @@
             });
 
         }else{
-             alert("Debes primero dar de alta el complejo para colocarle una imagen.");
+            //alert("Debes primero dar de alta el complejo para colocarle una imagen.");
+            $('#msgBoxTitulo').text('Complejos');
+            $('#msgBoxMensaje').text('Debes primero dar de alta el complejo para colocarle una imagen.');
+            $('#modalMsgBox').modal('show');
         }
         
     };    

@@ -72,12 +72,18 @@
                 $cmbFormatos.append($formatos);
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Peliculas');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
         obtener.fail(function(res){
-            alert(res.responseText)
+            //alert(res.responseText)
+            $('#msgBoxTitulo').text('Peliculas');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         });         
     };
 
@@ -299,12 +305,18 @@
                 $contenedorPeliculas.append($peliculas);
 			}else{
 				event.preventDefault();
-				alert(res.mensaje);
+				//alert(res.mensaje);
+                $('#msgBoxTitulo').text('Peliculas');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
 			}
 		});
 
 		obtener.fail(function(res){
-			alert(res.responseText)
+			//alert(res.responseText);
+            $('#msgBoxTitulo').text('Peliculas');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
 		});			   
 	};    
     
@@ -384,7 +396,7 @@
         $("#iconButton").removeClass('glyphicon-plus');
         $("#iconButton").addClass('glyphicon-pencil');
 
-        validarPelicula()
+        validarPelicula();
     });
 	
     $contenedorPeliculas.on("click",".cruz",function(event){
@@ -461,7 +473,10 @@
                             $("#respuesta").html("");
                             obtenerPeliculas();
                         }else{
-                            alert(response.mensaje);
+                            //alert(response.mensaje);
+                            $('#msgBoxTitulo').text('Peliculas');
+                            $('#msgBoxMensaje').text(response.mensaje);
+                            $('#modalMsgBox').modal('show');
                         }
                     });
             }else{
@@ -493,7 +508,10 @@
                             $("#respuesta").html("");
                             obtenerPeliculas();
                         }else{
-                            alert(response.mensaje);
+                            //alert(response.mensaje);
+                            $('#msgBoxTitulo').text('Peliculas');
+                            $('#msgBoxMensaje').text(response.mensaje);
+                            $('#modalMsgBox').modal('show');
                         }
                     });
             }

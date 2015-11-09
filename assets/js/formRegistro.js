@@ -3,8 +3,7 @@
     
     //$('title').html("Regístrate en CineUTN");
 
-  var URI = {
-      
+  var URI = {     
     
         SIGNIN : 'actions/actions.php?action=nuevoUser',
         VALIDARMAIL : "actions/api.php?action=validarMail",

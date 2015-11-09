@@ -77,7 +77,10 @@
                 sessionStorage.removeItem("cantidadEntradas");
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Resumen de la Compra');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
@@ -109,7 +112,10 @@
                 $entradas.text(butacas);
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Resumen de la Compra');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
     };
@@ -156,7 +162,10 @@
                     
                 }else{
                     event.preventDefault();
-                    alert(res.mensaje);
+                    //alert(res.mensaje);
+                    $('#msgBoxTitulo').text('Resumen de la Compra');
+                    $('#msgBoxMensaje').text(res.mensaje);
+                    $('#modalMsgBox').modal('show');
                 }
             });
         }

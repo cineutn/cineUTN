@@ -38,7 +38,10 @@
                             sessionStorage.removeItem("butacas");
                             sessionStorage.removeItem("cantidadEntradas");       
                         }else{                
-                            alert(res.mensaje);
+                            //alert(res.mensaje);
+                            $('#msgBoxTitulo').text('UTN Cines');
+                            $('#msgBoxMensaje').text(res.mensaje);
+                            $('#modalMsgBox').modal('show');
                         }
                     });
 

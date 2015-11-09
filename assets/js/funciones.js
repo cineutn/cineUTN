@@ -47,11 +47,17 @@ function obtenerInicioSemana(){
             $fehaInicioSemana =res.data.fecha;            
         }else{
             event.preventDefault();
-            alert(res.mensaje);
+            //alert(res.mensaje);
+            $('#msgBoxTitulo').text('Funciones');
+            $('#msgBoxMensaje').text(res.mensaje);
+            $('#modalMsgBox').modal('show');
         }
     });
     obtener.fail(function(res){
-        alert(res.responseText)
+        //alert(res.responseText);
+        $('#msgBoxTitulo').text('Funciones');
+        $('#msgBoxMensaje').text(res.responseText);
+        $('#modalMsgBox').modal('show');
     });
     return $fehaInicioSemana;
 };
@@ -79,11 +85,17 @@ function obtenerPeliculas($fehaInicioSemana){
             $contenedorPeliculas.after($row);
         }else{
             event.preventDefault();
-            alert(res.mensaje);
+            //alert(res.mensaje);
+            $('#msgBoxTitulo').text('Funciones');
+            $('#msgBoxMensaje').text(res.mensaje);
+            $('#modalMsgBox').modal('show');
         }
     });
     obtener.fail(function(res){
-        alert(res.responseText)
+        //alert(res.responseText);
+        $('#msgBoxTitulo').text('Funciones');
+        $('#msgBoxMensaje').text(res.responseText);
+        $('#modalMsgBox').modal('show');
     });
 
 };
@@ -104,12 +116,18 @@ function obtenerSalas(){
             $contenedorSalas.after($row);
         }else{
             event.preventDefault();
-            alert(res.mensaje);
+            //alert(res.mensaje);
+            $('#msgBoxTitulo').text('Funciones');
+            $('#msgBoxMensaje').text(res.mensaje);
+            $('#modalMsgBox').modal('show');
         }
     });
 
     obtener.fail(function(res){
-        alert(res.responseText)
+        //alert(res.responseText);
+        $('#msgBoxTitulo').text('Funciones');
+        $('#msgBoxMensaje').text(res.mensaje);
+        $('#modalMsgBox').modal('show');
     });
 };
 
@@ -130,11 +148,17 @@ function obtenerDias(){
             $contenedorSemana.after($row);
         }else{
             event.preventDefault();
-            alert(res.mensaje);
+            //alert(res.mensaje);
+            $('#msgBoxTitulo').text('Funciones');
+            $('#msgBoxMensaje').text(res.mensaje);
+            $('#modalMsgBox').modal('show');
         }
     });
     obtener.fail(function(res){
-        alert(res.responseText)
+        //alert(res.responseText);
+        $('#msgBoxTitulo').text('Funciones');
+        $('#msgBoxMensaje').text(res.mensaje);
+        $('#modalMsgBox').modal('show');
     });
 };
 
@@ -201,7 +225,10 @@ function buscarFuncionesActivas(idSemana,idSala){
     });
 
     obtener.fail(function(res){
-        alert(res.responseText)
+        //alert(res.responseText);
+        $('#msgBoxTitulo').text('Funciones');
+        $('#msgBoxMensaje').text(res.responseText);
+        $('#modalMsgBox').modal('show');
     });
     
 
@@ -284,11 +311,17 @@ $contenedorHorarios.on("click",".esbirro",function(){
                     crearFuncionHorario(res.data.idFuncion,horaApertura,minutosApertura);            
                 }
             else{
-                alert(res.error);
+                //alert(res.error);
+                $('#msgBoxTitulo').text('Funciones');
+                $('#msgBoxMensaje').text(res.error);
+                $('#modalMsgBox').modal('show');
             }
         });
         guardarFuncion.fail(function(res){
-            alert(res.responseText)
+            //alert(res.responseText);
+            $('#msgBoxTitulo').text('Funciones');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         }); 
     
     });
@@ -320,11 +353,17 @@ function crearFuncionHorario(idFuncion,horaApertura,minutosApertura){
                 generarSalaFuncion(res.data.idFuncionDetalle,idFuncion);
             }
         else{
-            alert(res.error);
+            //alert(res.error);
+            $('#msgBoxTitulo').text('Funciones');
+            $('#msgBoxMensaje').text(res.error);
+            $('#modalMsgBox').modal('show');
         }
     });
     guardarFuncionHorario.fail(function(res){
-        alert(res.responseText)
+        //alert(res.responseText);
+        $('#msgBoxTitulo').text('Funciones');
+        $('#msgBoxMensaje').text(res.mensaje);
+        $('#modalMsgBox').modal('show');
     });
 }
 
@@ -344,13 +383,19 @@ function generarSalaFuncion(idFuncionDetalle,idFuncion){
                 insertarSalaFuncion(idFuncion,item.columna,item.fila,item.habilitada,$idSalaSeleccionada,idFuncionDetalle);
             });             
             $('#modalLoading').modal('hide');
-            alert('Funcion creada con exito');
+            //alert('Funcion creada con exito');
+            $('#msgBoxTitulo').text('Funciones');
+            $('#msgBoxMensaje').text('Funcion Creada con Exito. ');
+            $('#modalMsgBox').modal('show');
         }
             buscarFuncionesActivas($idSemanaSeleccionada,$idSalaSeleccionada);
       }
     });    
     obtener.fail(function(res){
-        alert(res.responseText)
+        //alert(res.responseText);
+        $('#msgBoxTitulo').text('Funciones');
+        $('#msgBoxMensaje').text(res.mensaje);
+        $('#modalMsgBox').modal('show');
     });
 }
 
@@ -376,7 +421,10 @@ var addSalaFuncion =  $.ajax({
           }        
     }); 
     addSalaFuncion.fail(function(response){
-        alert(response.responseText)
+        //alert(response.responseText);
+        $('#msgBoxTitulo').text('Funciones');
+        $('#msgBoxMensaje').text(res.responseText);
+        $('#modalMsgBox').modal('show');
     });
 }
 
