@@ -1,11 +1,15 @@
 (function($){
+
+    $('title').html("Peliculas");
+
     var URI = {        
         ADD : 'actions/actionPeliculas.php?action=nueva',
 		PELICULAS : 'actions/actionPeliculas.php?action=obtener',
         UPLOAD: 'actions/actionPeliculas.php?action=subir',
         REMOVE: 'actions/actionPeliculas.php?action=eliminar',
         UPDATE: 'actions/actionPeliculas.php?action=modificar',
-        GETFORMATOS : 'actions/actionPeliculas.php?action=obtenerFormatos'
+        GETFORMATOS : 'actions/actionPeliculas.php?action=obtenerFormatos',
+        VALIDAR : 'actions/actionPeliculas.php?action=validar'
     };
 	
     $txtPelicula = $("#txtPelicula");
@@ -499,6 +503,9 @@
     function validarPelicula(){
         var bRetorno = true;
 
+        $id = $idPelicula.val();
+        $idFormato = $("#cmbFormato").val();
+        
         $titulo = $tituloPelicula.val();
         if($titulo.length == 0){
           $tituloPelicula.closest(".form-group").addClass("has-error");
@@ -506,9 +513,31 @@
           $tituloPelicula.siblings(".help-block").html("Debe ingresar un titulo para la pelicula");
           bRetorno = false;
         }else{
-          $tituloPelicula.closest(".form-group").removeClass("has-error");
-          $tituloPelicula.siblings(".glyphicon-remove").addClass("hide");
-          $tituloPelicula.siblings(".help-block").html("");          
+
+            var validar =  $.ajax({
+                    url: URI.VALIDAR,
+                    type: 'GET',
+                    data: {idPelicula:$id,
+                           tituloPelicula:$titulo,
+                           idFormato:$idFormato},
+                    dataType: 'json',
+                    async: false
+                   
+                })
+
+                validar.done(function(response){
+                     if(response.error){
+                        $tituloPelicula.closest(".form-group").addClass("has-error");
+                        $tituloPelicula.siblings(".glyphicon-remove").removeClass("hide");
+                        $tituloPelicula.siblings(".help-block").html(response.mensaje);
+                        bRetorno = false;
+                    }else{
+                        $tituloPelicula.closest(".form-group").removeClass("has-error");
+                        $tituloPelicula.siblings(".glyphicon-remove").addClass("hide");
+                        $tituloPelicula.siblings(".help-block").html(""); 
+                    }
+
+                });          
         }
 
         $duracion = parseInt($duracionPelicula.val());

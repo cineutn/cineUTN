@@ -1,11 +1,14 @@
 (function($){
       
+    $('title').html("Precios");
+
     var URI = {
         GET : 'actions/actionPrecios.php?action=obtener',
         GETFORMATOS : 'actions/actionPrecios.php?action=obtenerFormatos',
         UPDATE : 'actions/actionPrecios.php?action=modificar',
         ADD : 'actions/actionPrecios.php?action=nuevo',
         REMOVE : 'actions/actionPrecios.php?action=eliminar',
+        VALIDAR : 'actions/actionPrecios.php?action=validar'
     };
 
     $contenedorPrecios = $("#contenedorPrecios");
@@ -269,6 +272,8 @@
     function validarPrecio(){
         var bRetorno = true;
 
+        $id = $idPrecio.val();
+
         var formato = $cmbFormatos.val();
         if(formato == 0){
           $cmbFormatos.closest(".form-group").addClass("has-error");
@@ -288,9 +293,32 @@
           $descripcionPrecio.siblings(".help-block").html("Debe completar este campo");
           bRetorno = false;
         }else{
-          $descripcionPrecio.closest(".form-group").removeClass("has-error");
-          $descripcionPrecio.siblings(".glyphicon-remove").addClass("hide");
-          $descripcionPrecio.siblings(".help-block").html("");          
+
+            var validar =  $.ajax({
+                    url: URI.VALIDAR,
+                    type: 'GET',
+                    data: {idPrecio:$id,
+                           descripcionPrecio:descripcion,
+                           formato:formato},
+                    dataType: 'json',
+                    async: false
+                   
+                })
+
+                validar.done(function(response){
+                     if(response.error){
+                        $descripcionPrecio.closest(".form-group").addClass("has-error");
+                        $descripcionPrecio.siblings(".glyphicon-remove").removeClass("hide");
+                        $descripcionPrecio.siblings(".help-block").html(response.mensaje);
+                        bRetorno = false;
+                    }else{
+                        $descripcionPrecio.closest(".form-group").removeClass("has-error");
+                        $descripcionPrecio.siblings(".glyphicon-remove").addClass("hide");
+                        $descripcionPrecio.siblings(".help-block").html("");   
+                    }
+
+                }); 
+                 
         }
 
         var valor = parseFloat($valorPrecio.val());

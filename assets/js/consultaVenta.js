@@ -1,5 +1,7 @@
 (function($){
       
+    $('title').html("Consulta de Entradas");
+
     var URI = {
         GETVENTA : 'actions/actionVenta.php?action=obtener',
         GETBUTACAS : 'actions/actionVenta.php?action=obtenerButacas',

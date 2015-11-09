@@ -1,3 +1,6 @@
+
+$('title').html("Salas");
+
  var URI = {        
         ADD : 'actions/actionAltaSala.php?action=nueva',
         SALAS: 'actions/actionAltaSala.php?action=obtener',	

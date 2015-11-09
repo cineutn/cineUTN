@@ -1,11 +1,14 @@
 (function($){
       
+      $('title').html("Complejos");
+
     var URI = {
         COMPLEJOS : 'actions/actionComplejos.php?action=obtener',
         UPLOAD : 'actions/actionComplejos.php?action=subir',
         ADD : 'actions/actionComplejos.php?action=nuevo',
         UPDATE : 'actions/actionComplejos.php?action=modificar',
-        REMOVE : 'actions/actionComplejos.php?action=eliminar'
+        REMOVE : 'actions/actionComplejos.php?action=eliminar',
+        VALIDAR : 'actions/actionComplejos.php?action=validar'
     };
 
     $contenedorCines = $("#contenedorCines");
@@ -305,6 +308,8 @@
     function validarComplejo(){
         var bRetorno = true;
 
+        $id = $idComplejo.val();
+
         var nombre = $nombreComplejo.val();
         if(nombre.length == 0){
           $nombreComplejo.closest(".form-group").addClass("has-error");
@@ -312,9 +317,29 @@
           $nombreComplejo.siblings(".help-block").html("Debe completar este campo");
           bRetorno = false;
         }else{
-          $nombreComplejo.closest(".form-group").removeClass("has-error");
-          $nombreComplejo.siblings(".glyphicon-remove").addClass("hide");
-          $nombreComplejo.siblings(".help-block").html("");          
+
+            var validar =  $.ajax({
+                    url: URI.VALIDAR,
+                    type: 'GET',
+                    data: {idComplejo:$id,
+                           nombreComplejo:nombre},
+                    dataType: 'json',
+                    async: false
+                   
+                })
+
+                validar.done(function(response){
+                     if(response.error){
+                        $nombreComplejo.closest(".form-group").addClass("has-error");
+                        $nombreComplejo.siblings(".glyphicon-remove").removeClass("hide");
+                        $nombreComplejo.siblings(".help-block").html(response.mensaje);
+                        bRetorno = false;
+                    }else{
+                        $nombreComplejo.closest(".form-group").removeClass("has-error");
+                        $nombreComplejo.siblings(".glyphicon-remove").addClass("hide");
+                        $nombreComplejo.siblings(".help-block").html("");
+                    }
+                });             
         }
 
         var direccion = $direccionComplejo.val();

@@ -1,3 +1,6 @@
+
+$('title').html("Funciones");
+
  var URI = {        
         SEMANAS : 'actions/actionsemanaNueva.php?action=obtenerNumerosemanas',       
         ULTIMA:'actions/actionsemanaNueva.php?action=obtenerUltima',

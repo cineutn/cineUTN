@@ -8,6 +8,26 @@ class Peliculas
         $this->connection = ConnectionCine::getInstance();
     } 
 	
+    public function validateNombrePelicula($pelicula){
+        $id = $this->connection->real_escape_string($pelicula['idPelicula']);
+        $titulo = $this->connection->real_escape_string($pelicula['tituloPelicula']);
+        $idFormato = $this->connection->real_escape_string($pelicula['idFormato']);
+        $query = "SELECT * 
+                    FROM pelicula
+                    WHERE UPPER(titulo) = UPPER('$titulo')
+                    AND idFormato = '$idFormato'
+                    AND idPelicula != '$id' ";  
+       
+        $peliculas = array();
+        if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $peliculas[] = $fila;
+            }
+            $result->free();
+        }
+        return $peliculas;
+    }
+
     public function getFormatos(){
         $query = "SELECT descripcion, subtitulada, idFormato FROM formato ORDER BY descripcion";  
        

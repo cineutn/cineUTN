@@ -1,7 +1,7 @@
 
 (function ($) {
     
-    $('title').html("Regístrate en CineUTN");
+    //$('title').html("Regístrate en CineUTN");
 
   var URI = {
       

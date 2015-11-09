@@ -1,3 +1,5 @@
+$('title').html("Diagramar Sala");
+
  var URI = {        
         SALA: 'actions/actionEsquemaSala.php?action=obtener',	        
         EDITAR: 'actions/actionEsquemaSala.php?action=editar',

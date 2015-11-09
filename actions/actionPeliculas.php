@@ -10,6 +10,27 @@ function sendResponse($response){
     echo json_encode($response);
 }
 
+function validarTitulo($request){
+    require("../models/peliculas.php");
+    $p = new Peliculas();
+    $pelicula = array();    
+    $pelicula["idPelicula"] = $request->idPelicula;
+    $pelicula["tituloPelicula"] = $request->tituloPelicula;  
+    $pelicula["idFormato"] = $request->idFormato;             
+    if($nuevo = $p->validateNombrePelicula($pelicula)){
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "El Titulo de la pelicula ya se encuentra en uso",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => ""
+        ));
+    }
+}
+
 function obtenerPeliculas($request){
     require("../models/peliculas.php");
     $p = new Peliculas();
@@ -358,7 +379,10 @@ switch($action){
     case "obtenerHorariosxPeliculaxComplejo":
         obtenerHorariosxPeliculaxComplejo($request);
         break;
-     case "obtenerPeliculasActivas":
+    case "obtenerPeliculasActivas":
         obtenerPeliculasActivas($request);
+        break;
+    case "validar":
+        validarTitulo($request);
         break;
 }
