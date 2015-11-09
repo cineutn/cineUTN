@@ -78,7 +78,7 @@
                                     '<div id="btnUpdate" class="updateTarjeta lapiz">'+
                                         '<span class="glyphicon glyphicon-pencil"></span>'+    
                                     '</div>'+
-                                    '<div id="btnRemove" class="removeTarjeta cruz">'+
+                                    '<div id="btnRemove" class="removeTarjeta cruz" data-toggle="confirmation" data-placement="bottom">'+
                                         '<span class="glyphicon glyphicon-remove"></span>'+    
                                     '</div>'+                            
                                 '</li>'+
@@ -139,7 +139,7 @@
         
         validarTarjeta();   
     });
-    
+
     $contenedorTarjetas.on("click",".cruz",function(event){
         event.preventDefault();
 
