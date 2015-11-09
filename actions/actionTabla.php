@@ -12,15 +12,13 @@ function redirect($url){
 }
 
 
-function getUsuarios($request){
+function getUsuarios(){
     require("../models/tabla.php");
     $c = new Tabla();
    
-    if($c->getUsuarios()){
+    if($usuarios = $c->getUsuarios()){
 		 sendResponse(array(
-            "error" => false,
-            "mensaje" => "",
-            "data" => $c
+            "data" => $usuarios
         ));
     }else{
         sendResponse(array(
@@ -32,6 +30,27 @@ function getUsuarios($request){
     
 }
 
+function setState($request){
+    require("../models/tabla.php");
+    $s = new Tabla();
+    	
+    $state = array();
+    $state["id"] = $request->id;
+    $state["state"] = $request->newstate;
+    
+    if($res = $s->setState($state)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $res
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error"
+        ));
+    }
+}
 
 $request = new Request();
 $action = $request->action;
@@ -39,6 +58,9 @@ switch($action){
     case "getUsuarios":
         getUsuarios();
         break;
+    case "setState":
+        setState($request);
+        break;    
     case "getPersonal":
         redirecRegistro();
         break;
