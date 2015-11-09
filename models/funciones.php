@@ -85,7 +85,7 @@ class Funciones
 	inner join pelicula pel on pel.idpelicula=fn.idpelicula
 	inner join formato fm on pel.idformato =fm.idformato
 	where fh.idSemana =$idSemana    
-    and fh.idSala =$idSala";
+    and fh.idSala =$idSala order by 6";
 
     $funciones = array();      
       if( $result = $this->connection->query($query) ){

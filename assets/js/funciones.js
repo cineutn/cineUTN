@@ -153,13 +153,14 @@ function peliculaSeleccionada(idPelicula){
 }
 
 function salaSeleccionada(idSala){    
-    if($(".peliculasLista li a").hasClass("opcionSeleccionada")){    
+    if($(".peliculasLista li a").hasClass("opcionSeleccionada")){            
         $(".salasLista li a").removeClass("opcionSeleccionada");  
         $(".semanaLista li a").removeClass("opcionSeleccionada"); 
         $("#aSala_"+idSala).addClass("opcionSeleccionada");    
-        $idSalaSeleccionada=idSala;
+        $idSalaSeleccionada=idSala;        
         $idSemanaSeleccionada='';
         $contenedorHorarios.html("");
+        
     }
 };
 
@@ -170,8 +171,7 @@ function fechaSeleccionada(idSemana){
         $("#afecha_"+idSemana).addClass("opcionSeleccionada");
         $idSemanaSeleccionada=idSemana;  
         $fechaDesc=obtenerFecha($("#feha_"+idSemana).val());        
-        buscarFuncionesActivas($idSemanaSeleccionada,$idSalaSeleccionada);
-        //calcularHorarioFunciones($duracionPelicula);
+        buscarFuncionesActivas($idSemanaSeleccionada,$idSalaSeleccionada);        
     }
 };
 
@@ -191,7 +191,7 @@ function buscarFuncionesActivas(idSemana,idSala){
     obtener.done(function(res){
         if(!res.error){            
         $funcionesCargadas=[];
-             res.data.forEach(function(item){                  
+             res.data.forEach(function(item){                   
                 $funcionesCargadas.push(item);
             }); 
             calcularHorarioFunciones();
@@ -207,6 +207,7 @@ function buscarFuncionesActivas(idSemana,idSala){
 
 }
 
+
 //calcula los horarios sugeridos para la pelicula.
 //el cine abre a las 12 y hay 15' de preparar la sala y se le suma 10' a la duracion de la pelicula por las propagandas y trailers
 //ultima funcion a las 23
@@ -220,35 +221,33 @@ function calcularHorarioFunciones(){
     $contenedorHorarios.html("");
     $row='';        
     while(new Date(apertura) < new Date(cierre)){
-            if($funcionesCargadas.length>0){
-        
-console.log($funcionesCargadas);
+            if($funcionesCargadas.length>0){        
+
             peliculaCompleta.setMinutes(apertura.getMinutes()+ parseInt(duracionConTrailer));  
             var primeraFuncion = $funcionesCargadas[0].horario;
             var hr = new Date("01/01/1985 " + primeraFuncion);           
-            if(new Date(peliculaCompleta)<new Date(hr)){
+            if(new Date(peliculaCompleta) <= new Date(hr)){
               
                 horaApertura = apertura.getHours();                   
                 minutosApertura = ((apertura.getMinutes()<10)?'0':'')+apertura.getMinutes();
                 horarioFuncion=horaApertura+':'+ minutosApertura;
-                $row=$row +'<li><a>'+horarioFuncion+'  <button type="button" id="btn_'+$idPeliculaSeleccionada+'" onclick="crearFuncion('+horaApertura+','+minutosApertura+')" class="btn                     btn-default btn-circle botonVerde"><i id="img_'+$idPeliculaSeleccionada+'" class="glyphicon glyphicon-plus textoBoton"></i></button></a></li>';       
+                $row=$row +'<li><a>'+horarioFuncion+'<button type="button" class="btn btn-default btn-circle botonVerde esbirro"><i class="glyphicon glyphicon-plus textoBoton"></i></button></a></li>';       
                 apertura.setMinutes(apertura.getMinutes()+ parseInt(duracionConTrailer));   
                 
             }else{                
                 horaApertura = hr.getHours();                   
                 minutosApertura = ((hr.getMinutes()<10)?'0':'')+hr.getMinutes();
                 horarioFuncion=horaApertura+':'+ minutosApertura;
-                $row=$row +'<li><a>'+horarioFuncion+'  '+ $funcionesCargadas[0].titulo+' '+ $funcionesCargadas[0].descripcion   + '<button type="button" class="btn btn-default btn-circle botonRojo"><i id="img_'+$idPeliculaSeleccionada+'" class="glyphicon glyphicon-remove textoBoton"></i></button></a></li>';       
+                $row=$row +'<li><input type="hidden" value='+hr.idFuncion+' ><a>'+horarioFuncion+'  '+ $funcionesCargadas[0].titulo+' '+ $funcionesCargadas[0].descripcion + '<button type="button" class="btn btn-default btn-circle botonRojo esbirroRojo"><i class="glyphicon glyphicon-remove textoBoton"></i></button></a></li>';       
                 apertura.setMinutes(hr.getMinutes()+ parseInt(duracionConTrailer));                 
-                $funcionesCargadas = $funcionesCargadas.slice(1)
-                console.log($funcionesCargadas);
+                $funcionesCargadas = $funcionesCargadas.slice(1)                
             }
     }else{
         
         horaApertura = apertura.getHours();                   
         minutosApertura = ((apertura.getMinutes()<10)?'0':'')+apertura.getMinutes();
         horarioFuncion=horaApertura+':'+ minutosApertura;
-        $row=$row +'<li><a>'+horarioFuncion+'  <button type="button" id="btn_'+$idPeliculaSeleccionada+'" onclick="crearFuncion('+horaApertura+','+minutosApertura+')" class="btn btn-default btn-circle botonVerde"><i id="img_'+$idPeliculaSeleccionada+'" class="glyphicon glyphicon-plus textoBoton"></i></button></a></li>';       
+        $row=$row +'<li><a>'+horarioFuncion+'  <button type="button"  class="btn btn-default btn-circle botonVerde esbirro"><i class="glyphicon glyphicon-plus textoBoton"></i></button></a></li>';       
         apertura.setMinutes(apertura.getMinutes()+ parseInt(duracionConTrailer));  
         
         }                
@@ -256,38 +255,51 @@ console.log($funcionesCargadas);
     $contenedorHorarios.append($row);
 }
 
-function crearFuncion(horaApertura,minutosApertura){ 
-  
- if($("#btn_"+$idPeliculaSeleccionada).hasClass('botonVerde')){
-    $('#modalLoading').modal('show');
-     var guardarFuncion = $.ajax({
-                    url : URI.FUNCION,
-                    method : "POST",
-                     data: {
-                         idFuncion:0,
-                         idPelicula:$idPeliculaSeleccionada,
-                         idIdioma:1, //no se esta usando el idioma, el formato ya indica sub o no
-                         idTipoFuncion:$idTipoFuncion,
-                         estado:1,
-                         fechaAlta:0,//en el insert se pone dateTime=now
-                         idComplejo:1//cambiarrrr
-                     },
-                    dataType : 'json',
-                });
-    guardarFuncion.done(function(res){        
-        if(!res.error){
-                crearFuncionHorario(res.data.idFuncion,horaApertura,minutosApertura);
+
+$contenedorHorarios.on("click",".esbirro",function(){       
+    event.stopPropagation();
+    var hora=$(this)[0].parentNode.text;
+    var horaSplit = hora.split(':');
+    horaApertura=horaSplit[0];
+    minutosApertura=horaSplit[1];
+    $(this).removeAttr('class','botonVerde');
+    $(this).attr('class','botonRojo');
+     $('#modalLoading').modal('show');
+         var guardarFuncion = $.ajax({
+                        url : URI.FUNCION,
+                        method : "POST",
+                         data: {
+                             idFuncion:0,
+                             idPelicula:$idPeliculaSeleccionada,
+                             idIdioma:1, //no se esta usando el idioma, el formato ya indica sub o no
+                             idTipoFuncion:$idTipoFuncion,
+                             estado:1,
+                             fechaAlta:0,//en el insert se pone dateTime=now
+                             idComplejo:1//cambiarrrr
+                         },
+                        dataType : 'json',
+                    });
+        guardarFuncion.done(function(res){        
+            if(!res.error){
+                    crearFuncionHorario(res.data.idFuncion,horaApertura,minutosApertura);            
+                }
+            else{
+                alert(res.error);
             }
-        else{
-            alert(res.error);
-        }
+        });
+        guardarFuncion.fail(function(res){
+            alert(res.responseText)
+        }); 
+    
     });
-    guardarFuncion.fail(function(res){
-        alert(res.responseText)
+
+$contenedorHorarios.on("click",".esbirroRojo",function(){       
+    event.stopPropagation();
+    //var hora=$(this)[0].parentNode.text;
+   
+    console.log($(this));
     });
- 
- }
-}
+
 
 function crearFuncionHorario(idFuncion,horaApertura,minutosApertura){   
    var guardarFuncionHorario = $.ajax({
@@ -299,8 +311,7 @@ function crearFuncionHorario(idFuncion,horaApertura,minutosApertura){
                          idSala:$idSalaSeleccionada,
                          dia: $fechaDesc,
                          horario:(horaApertura+':'+minutosApertura),
-                         idSemana:$idSemanaSeleccionada
-                       
+                         idSemana:$idSemanaSeleccionada                       
                      },
                     dataType : 'json',
                 });
@@ -331,15 +342,11 @@ function generarSalaFuncion(idFuncionDetalle,idFuncion){
 
             res.data.forEach(function(item){                  
                 insertarSalaFuncion(idFuncion,item.columna,item.fila,item.habilitada,$idSalaSeleccionada,idFuncionDetalle);
-            }); 
+            });             
             $('#modalLoading').modal('hide');
             alert('Funcion creada con exito');
-            //habilitar el boton de eliminar
-            $("#btn_"+$idPeliculaSeleccionada).removeClass('botonVerde');
-            $("#btn_"+$idPeliculaSeleccionada).addClass('botonRojo');
-            $("#img_"+$idPeliculaSeleccionada).removeClass('glyphicon-plus');
-            $("#img_"+$idPeliculaSeleccionada).addClass('glyphicon-remove');
         }
+            buscarFuncionesActivas($idSemanaSeleccionada,$idSalaSeleccionada);
       }
     });    
     obtener.fail(function(res){
