@@ -78,7 +78,7 @@
                                     '<div id="btnUpdate" class="updateTarjeta lapiz">'+
                                         '<span class="glyphicon glyphicon-pencil"></span>'+    
                                     '</div>'+
-                                    '<div id="btnRemove" class="removeTarjeta cruz" data-toggle="confirmation" data-placement="bottom">'+
+                                    '<div id="btnRemove" class="removeTarjeta cruz" data-toggle="confirmation-singleton">'+
                                         '<span class="glyphicon glyphicon-remove"></span>'+    
                                     '</div>'+                            
                                 '</li>'+
@@ -143,34 +143,47 @@
     $contenedorTarjetas.on("click",".cruz",function(event){
         event.preventDefault();
 
-        if(confirm("¿Desea eliminar la tarjeta seleccionada?")){
-            $divPadre = $(this).closest('.objeto-tarjeta');
-            $tarjetaID =  $divPadre.children('#tarjeta-idTarjeta').val();
-        
-            var deleteTarjeta =  $.ajax({
-                url: URI.REMOVE,
-                type: 'POST',
-                data: {idTarjeta:$tarjetaID},
-                dataType: 'json',
-            })
+        $(this).confirmation({
+            title: '¿Desea eliminar la tarjeta seleccionada?',
+            placement: 'bottom',
+            singleton: true,
+            popout: false,
+            href: '',
+            btnOkLabel: 'Si',
+            onConfirm: function() {
+                $divPadre = $(this).closest('.objeto-tarjeta');
+                $tarjetaID =  $divPadre.children('#tarjeta-idTarjeta').val();
+    
+                var deleteTarjeta =  $.ajax({
+                    url: URI.REMOVE,
+                    type: 'POST',
+                    data: {idTarjeta:$tarjetaID},
+                    dataType: 'json',
+                })
 
-            deleteTarjeta.done(function(response){
-               if(!res.error){
-                    $form.addClass("hide");
-                    obtenerTarjetas();
-                }else{
-                    event.preventDefault();
-                    //alert(res.mensaje);
-                    $('#msgBoxTitulo').text('Tarjetas');
-                    $('#msgBoxMensaje').text(res.mensaje);
-                    $('#modalMsgBox').modal('show');
-                } 
-            });
+                deleteTarjeta.done(function(response){
+                   if(!response.error){
+                        $form.addClass("hide");
+                        obtenerTarjetas();
+                    }else{
+                        event.preventDefault();
+                        //alert(res.mensaje);
+                        $('#msgBoxTitulo').text('Tarjetas');
+                        $('#msgBoxMensaje').text(response.mensaje);
+                        $('#modalMsgBox').modal('show');
+                    } 
+                });
+            }
+        });
+        $(this).confirmation('show')
+
+       /* if(confirm("¿Desea eliminar la tarjeta seleccionada?")){
+            
 
         }
         else{
             return false;
-        }
+        }*/
     });
 
     $btnAltaModificacion.on("click", function(){
@@ -200,14 +213,14 @@
                 })
 
                 addTarjeta.done(function(response){
-                    if(!res.error){
+                    if(!response.error){
                         $form.addClass("hide");
                         obtenerTarjetas();
                     }else{
                         event.preventDefault();
                         //alert(res.mensaje);
                         $('#msgBoxTitulo').text('Tarjetas');
-                        $('#msgBoxMensaje').text(res.mensaje);
+                        $('#msgBoxMensaje').text(response.mensaje);
                         $('#modalMsgBox').modal('show');
                     }                    
                 });
@@ -226,14 +239,14 @@
                 })
 
                 updateTarjeta.done(function(response){
-                    if(!res.error){
+                    if(!response.error){
                         $form.addClass("hide");
                         obtenerTarjetas();
                     }else{
                         event.preventDefault();
                         //alert(res.mensaje);
                         $('#msgBoxTitulo').text('Tarjetas');
-                        $('#msgBoxMensaje').text(res.mensaje);
+                        $('#msgBoxMensaje').text(response.mensaje);
                         $('#modalMsgBox').modal('show');
                     } 
                 });

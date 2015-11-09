@@ -85,7 +85,7 @@
                             '<div class="pull-right lapiz">'+
                                 '<span class="glyphicon glyphicon-pencil"></span>'+   
                             '</div>'+
-                            '<div class="pull-right cruz">'+
+                            '<div id="btnRemove" class="pull-right cruz" data-toggle="confirmation-singleton">'+
                                 '<span class="glyphicon glyphicon-remove"></span>'+   
                             '</div>'+                         
                         '</div>'+    
@@ -237,26 +237,46 @@
     $contenedorCines.on("click",".cruz",function(event){
         event.preventDefault();
         
-        if(confirm("¿Desea eliminar el complejo seleccionado?")){
-            $divPadre = $(this).closest('.cine');
-            $complejoID =  $divPadre.children('#idComplejo').text();
+        $(this).confirmation({
+            title: '¿Desea eliminar el complejo seleccionado?',
+            placement: 'bottom',
+            singleton: true,
+            popout: false,
+            href: '',
+            btnOkLabel: 'Si',
+            onConfirm: function() {
+                $divPadre = $(this).closest('.cine');
+                $complejoID =  $divPadre.children('#idComplejo').text();
         
-            var deleteComplejo =  $.ajax({
-                url: URI.REMOVE,
-                type: 'POST',
-                data: {idComplejo:$complejoID},
-                dataType: 'json',
-            })
+                var deleteComplejo =  $.ajax({
+                    url: URI.REMOVE,
+                    type: 'POST',
+                    data: {idComplejo:$complejoID},
+                    dataType: 'json',
+                });
 
-            deleteComplejo.done(function(response){
-                $form.addClass("hide");
-                obtenerComplejos();
-            });
+                deleteComplejo.done(function(response){
+                    if(!response.error){
+                        $formComplejo.addClass("hide");
+                        obtenerComplejos();
+                    }else{
+                        event.preventDefault();
+                        //alert(res.mensaje);
+                        $('#msgBoxTitulo').text('Complejos');
+                        $('#msgBoxMensaje').text(response.mensaje);
+                        $('#modalMsgBox').modal('show');
+                    }  
+                });
+            }
+        });
+        $(this).confirmation('show')
 
+        /*if(confirm("¿Desea eliminar el complejo seleccionado?")){
+           
         }
         else{
             return false;
-        }     
+        }*/
     });
 
     $btnCerrar.on("click",function(){
@@ -291,8 +311,16 @@
                 })
 
                 addComplejo.done(function(response){
-                    $formComplejo.addClass("hide");
-                    obtenerComplejos();
+                    if(!response.error){
+                        $formComplejo.addClass("hide");
+                        obtenerComplejos();
+                    }else{
+                        event.preventDefault();
+                        //alert(res.mensaje);
+                        $('#msgBoxTitulo').text('Complejos');
+                        $('#msgBoxMensaje').text(response.mensaje);
+                        $('#modalMsgBox').modal('show');
+                    }  
                 });
 
             }else{
@@ -309,8 +337,16 @@
                 })
 
                 updateComplejo.done(function(response){
-                     $formComplejo.addClass("hide");
-                    obtenerComplejos();
+                    if(!response.error){
+                        $formComplejo.addClass("hide");
+                        obtenerComplejos();
+                    }else{
+                        event.preventDefault();
+                        //alert(res.mensaje);
+                        $('#msgBoxTitulo').text('Complejos');
+                        $('#msgBoxMensaje').text(response.mensaje);
+                        $('#modalMsgBox').modal('show');
+                    }                     
                 });
             }
         }

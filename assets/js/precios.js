@@ -131,7 +131,7 @@
                                     '<div id="btnUpdate" class="updatePrecio lapiz">'+
                                         '<span class="glyphicon glyphicon-pencil "></span>'+    
                                     '</div>'+
-                                    '<div id="btnRemove" class="removePrecio cruz">'+
+                                    '<div id="btnRemove" class="removePrecio cruz" data-toggle="confirmation-singleton">'+
                                         '<span class="glyphicon glyphicon-remove "></span>'+    
                                     '</div>'+                            
                                 '</li>'+
@@ -202,26 +202,46 @@
     $contenedorPrecios.on("click",".cruz",function(event){
         event.preventDefault();
 
-        if(confirm("¿Desea eliminar el precio seleccionado?")){
-            $divPadre = $(this).closest('.objeto-precio');
-            $precioID =  $divPadre.children('#idPrecio').val();
+        $(this).confirmation({
+            title: '¿Desea eliminar el precio seleccionado?',
+            placement: 'bottom',
+            singleton: true,
+            popout: false,
+            href: '',
+            btnOkLabel: 'Si',
+            onConfirm: function() {
+                $divPadre = $(this).closest('.objeto-precio');
+                $precioID =  $divPadre.children('#idPrecio').val();
         
-            var deletePrecio =  $.ajax({
-                url: URI.REMOVE,
-                type: 'POST',
-                data: {idPrecio:$precioID},
-                dataType: 'json',
-            })
+                var deletePrecio =  $.ajax({
+                    url: URI.REMOVE,
+                    type: 'POST',
+                    data: {idPrecio:$precioID},
+                    dataType: 'json',
+                })
 
-            deletePrecio.done(function(response){
-                $form.addClass("hide");
-                obtenerPrecios();
-            });
+                deletePrecio.done(function(response){
+                    if(!response.error){
+                        $form.addClass("hide");
+                        obtenerPrecios();
+                    }else{
+                        event.preventDefault();
+                        //alert(res.mensaje);
+                        $('#msgBoxTitulo').text('Precios');
+                        $('#msgBoxMensaje').text(response.mensaje);
+                        $('#modalMsgBox').modal('show');
+                    }  
+                });
+            }
+        });
+        $(this).confirmation('show')
+
+        /*if(confirm("¿Desea eliminar el precio seleccionado?")){
 
         }
         else{
             return false;
-        }
+        }*/
     });
 
     $btnAltaModificacion.on("click", function(){

@@ -296,7 +296,7 @@
                             '<div class="pull-right lapiz">'+
                                 '<span class="glyphicon glyphicon-pencil"></span>'+
                             '</div>'+
-                            '<div class="pull-right cruz">'+
+                            '<div id="btnRemove" class="pull-right cruz" data-toggle="confirmation-singleton">'+
                                 '<span class="glyphicon glyphicon-remove"></span>'+
                             '</div>'+
                         '</div>'+
@@ -402,26 +402,46 @@
     $contenedorPeliculas.on("click",".cruz",function(event){
         event.preventDefault();
         
-        if(confirm("¿Desea eliminar la Pelicula seleccionada?")){
-            $divPadre = $(this).closest('.app');
-            $peliculaID =  $divPadre.children('.datos').children('#idPelicula').text();
+         $(this).confirmation({
+            title: '¿Desea eliminar la Pelicula seleccionada?',
+            placement: 'bottom',
+            singleton: true,
+            popout: false,
+            href: '',
+            btnOkLabel: 'Si',
+            onConfirm: function() {
+                $divPadre = $(this).closest('.app');
+                $peliculaID =  $divPadre.children('.datos').children('#idPelicula').text();
            
-            var deletePelicula =  $.ajax({
-                url: URI.REMOVE,
-                type: 'POST',
-                data: {idPelicula:$peliculaID},
-                dataType: 'json'
-            })
+                var deletePelicula =  $.ajax({
+                    url: URI.REMOVE,
+                    type: 'POST',
+                    data: {idPelicula:$peliculaID},
+                    dataType: 'json'
+                })
 
-            deletePelicula.done(function(response){
-                $formPelicula.addClass("hide");
-                obtenerPeliculas();
-            });
+                deletePelicula.done(function(response){
+                    if(!response.error){
+                        $formPelicula.addClass("hide");
+                        obtenerPeliculas();
+                    }else{
+                        event.preventDefault();
+                        //alert(res.mensaje);
+                        $('#msgBoxTitulo').text('Peliculas');
+                        $('#msgBoxMensaje').text(response.mensaje);
+                        $('#modalMsgBox').modal('show');
+                    }  
+                });
+            }
+        });
+        $(this).confirmation('show')
+
+        /*if(confirm("¿Desea eliminar la Pelicula seleccionada?")){
 
         }
         else{
             return false;
-        }
+        }*/
     });
 	
     $btnAltaModificacion.on("click",function(){
