@@ -8,7 +8,7 @@
 	</div>
 	<div class="empleadoHeader">
 		<label id="salaTicket2">SALA 8</label>
-		<label id="fechaTicket"><span id="diaTicket">Viernes 30</span>, <span id="añoTicket">2012</span> | <span id="horaTicket">07:00 PM</span></label>
+		<label id="fechaTicket"><span id="diaTicket">Viernes 30</span>, <span id="añoTicket"></span> | <span id="horaTicket">07:00 PM</span></label>
 		<label id="peliculaTicket">Sherlock Holmes: Juego de sombras</label>
 	</div >
 	<div class="clienteFooter">

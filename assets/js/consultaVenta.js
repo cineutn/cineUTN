@@ -47,9 +47,18 @@
     });
 
     $btnImprimir.on("click", function(){
-        $("#ticket").removeClass("hide");
-        $("#ticket").printArea();
-        $("#ticket").addClass("hide"); 
+        $VentaID = parseInt($inputVentaID.val());
+
+        if ($VentaID > 0){
+            $("#ticket").removeClass("hide");
+            $("#ticket").printArea();
+            $("#ticket").addClass("hide"); 
+        }else{
+            $('#msgBoxTitulo').text('Consulta Entrada');
+            $('#msgBoxMensaje').text('Debe obtener una venta para poder imprimir. ');
+            $('#modalMsgBox').modal('show');
+        }
+        
     });
 
     $btnActualizar.on("click", function(){

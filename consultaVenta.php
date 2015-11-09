@@ -20,7 +20,7 @@
                     </div>           		
            </form>
        <div class="confirmarOperacion" id="contenedorVenta">
-       		<input name="ventaID" id="ventaID" type="hidden" value="">
+       		<input name="ventaID" id="ventaID" type="hidden" value="0">
             <div class="container">
 				<div class="row">
 					<input id="idVenta" type="hidden">					
