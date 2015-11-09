@@ -8,7 +8,8 @@
         DETALLEVENTA : 'actions/actionVenta.php?action=venderDetalle',
         BUTACA : 'actions/actionVentaButacas.php?action=butaca',
         UPDATEBUTACA : 'actions/actionVentaButacas.php?action=reservar',
-        DETALLEPRECIO: 'actions/actionPrecios.php?action=detalle'
+        DETALLEPRECIO: 'actions/actionPrecios.php?action=detalle',
+        BLOQUEO: 'actions/actions.php?action=obtenerBloqueo'
     };
 
   $imagenPelicula  = $("#imagenPelicula");
@@ -317,6 +318,30 @@
 
     }else{
       $tipoCompra = "Reserva";
+
+      $id = sessionStorage.getItem('idUser');
+
+      var obtenerBloqueo = $.ajax({
+            url : URI.BLOQUEO,
+            method : "GET",
+            dataType : 'json',
+            data : {idUsuario:$id},
+            async:false
+        });
+
+        obtenerBloqueo.done(function(res){
+            if(!res.error){ 
+
+              if (res.data.bloqueado == "1"){
+                bRetorno = false;
+                alert("Su usuario ha sido bloqueado para la reserva de entradas");
+              }
+
+            }else{
+                event.preventDefault();
+                alert(res.mensaje);
+            }
+        });
     }
 
      var mail = $inputEmail.val();

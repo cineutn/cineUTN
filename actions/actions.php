@@ -194,6 +194,44 @@ function logoutUser($request){
     redirect("../index.php");
 }
 
+function obtenerBloqueo($request){
+    require("../models/usuarios.php");
+    $c = new Usuario();
+    $user = array();
+    $user["usuarioID"] = $request->idUsuario;
+    if($bloqueo = $c->getBloqueo($user)){
+      sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data"=> $bloqueo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener el campo bloqueado"
+        ));
+    }
+}
+
+function actualizarEstado($request){
+    require("../models/usuarios.php");
+    $c = new Usuario();
+    $user = array();
+    $user["usuarioID"] = $request->idUsuario;
+    $user["estado"] = $request->estado;
+    if($c->updateEstado($user)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => ""
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al actualizar el campo estado"
+        ));
+    }
+}
+
 $request = new Request();
 $action = $request->action;
 switch($action){
@@ -226,7 +264,13 @@ switch($action){
         break;
     case "logout":
         logoutUser($request);
-        break;   
+        break;
+    case "obtenerBloqueo":
+        obtenerBloqueo($request);
+        break;
+    case "actualizarEstado":
+        actualizarEstado($request);
+        break; 
     default:
         listar($request);
         break;
