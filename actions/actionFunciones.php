@@ -112,6 +112,67 @@ function funcionesActivas($request){
     }
 }
 
+
+function borrarFuncion($request){
+	require("../models/funciones.php");
+    $f = new Funciones();
+    $funcion = array();    
+	$funcion["idFuncion"] = $request->idFuncion;					  
+    if($nuevo = $f->borrarFuncion($funcion)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "true",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al eliminar funcion"
+        ));
+    }
+}
+
+function borrarFuncionHorario($request){
+	require("../models/funciones.php");
+    $f = new Funciones();
+    $funcion = array();    
+	$funcion["idFuncion"] = $request->idFuncion;					  
+    if($nuevo = $f->borrarFuncionHorario($funcion)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "true",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al eliminar funcion horario"
+        ));
+    }
+}
+
+
+function borrarSalaFuncion($request){
+require("../models/funciones.php");
+    $f = new Funciones();
+    $funcion = array();    
+	$funcion["idFuncion"] = $request->idFuncion;					  
+    if($nuevo = $f->borrarSalaFuncion($funcion)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "true",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al eliminar Sala"
+        ));
+    }
+}
+
+
+
 $request = new Request();
 $action = $request->action;
 switch($action){                  
@@ -126,7 +187,18 @@ switch($action){
       break; 
     case "funcionesActivas":
         funcionesActivas($request);
-      break;         
+      break;
+    case "borrar":
+        borrarFuncion($request);
+      break;
+    case "borrarDetalle":
+        borrarFuncionHorario($request);
+      break;        
+    case "borrarSala":
+        borrarSalaFuncion($request);
+      break;
+        
+        
         
         
 }

@@ -95,6 +95,44 @@ class Funciones
             $result->free();
         }
         return $funciones;
-  }    
+  }
+    
+  public function borrarFuncion($funcion){    
+
+    $idFuncion =$this->connection->real_escape_string($funcion['idFuncion']);
+    $query ="DELETE FROM funcion where idFuncion=$idFuncion";          
+      if( $result = $this->connection->query($query) ){
+         return true;
+        }else{
+        return false;
+      }
+      
+  } 
+    
+  public function borrarFuncionHorario($funcion){    
+
+    $idFuncion =$this->connection->real_escape_string($funcion['idFuncion']);
+    $query ="DELETE FROM funcionHorario where idFuncion=$idFuncion";          
+      if( $result = $this->connection->query($query) ){
+         return true;
+        }else{
+        return false;
+      }
+      
+  } 
+    
+    public function borrarSalaFuncion($funcion){    
+
+    $idFuncion =$this->connection->real_escape_string($funcion['idFuncion']);
+    $query ="DELETE FROM sala_funcion where idFuncion=$idFuncion";          
+      if( $result = $this->connection->query($query) ){
+         return true;
+        }else{
+        return false;
+      }
+      
+  }  
+    
+    
     
 }

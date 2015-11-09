@@ -8,6 +8,10 @@
         SALADETALLE : 'actions/actionEsquemaSala.php?action=obtener',
         ADDSALAFUNCION : 'actions/actionFunciones.php?action=nuevaSala',
         FUNCIONESACTIVAS : 'actions/actionFunciones.php?action=funcionesActivas',
+        BORRARFUNCION : 'actions/actionFunciones.php?action=borrar',     
+        BORRARFUNCIONHORARIO : 'actions/actionFunciones.php?action=borrarDetalle',     
+        BORRARSALAFUNCION : 'actions/actionFunciones.php?action=borrarSala',     
+     
     };
 
 $nroSemana =$("#nroSemana").val();
@@ -22,6 +26,7 @@ $idSemanaSeleccionada=''
 $fechaDesc='';
 $idTipoFuncion='0';
 $funcionesCargadas= [];
+$idFuncionActiva='0';
 //$dias = ["Jueves","Viernes","Sabado","Domingo","Lunes","Martes","Miercoles"];
 
 $(document ).ready(function(){	  
@@ -46,15 +51,13 @@ function obtenerInicioSemana(){
         if(!res.error){          
             $fehaInicioSemana =res.data.fecha;            
         }else{
-            event.preventDefault();
-            //alert(res.mensaje);
+            event.preventDefault();            
             $('#msgBoxTitulo').text('Funciones');
             $('#msgBoxMensaje').text(res.mensaje);
             $('#modalMsgBox').modal('show');
         }
     });
-    obtener.fail(function(res){
-        //alert(res.responseText);
+    obtener.fail(function(res){        
         $('#msgBoxTitulo').text('Funciones');
         $('#msgBoxMensaje').text(res.responseText);
         $('#modalMsgBox').modal('show');
@@ -84,15 +87,13 @@ function obtenerPeliculas($fehaInicioSemana){
             });
             $contenedorPeliculas.after($row);
         }else{
-            event.preventDefault();
-            //alert(res.mensaje);
+            event.preventDefault();            
             $('#msgBoxTitulo').text('Funciones');
             $('#msgBoxMensaje').text(res.mensaje);
             $('#modalMsgBox').modal('show');
         }
     });
-    obtener.fail(function(res){
-        //alert(res.responseText);
+    obtener.fail(function(res){        
         $('#msgBoxTitulo').text('Funciones');
         $('#msgBoxMensaje').text(res.responseText);
         $('#modalMsgBox').modal('show');
@@ -115,16 +116,14 @@ function obtenerSalas(){
             });
             $contenedorSalas.after($row);
         }else{
-            event.preventDefault();
-            //alert(res.mensaje);
+            event.preventDefault();            
             $('#msgBoxTitulo').text('Funciones');
             $('#msgBoxMensaje').text(res.mensaje);
             $('#modalMsgBox').modal('show');
         }
     });
 
-    obtener.fail(function(res){
-        //alert(res.responseText);
+    obtener.fail(function(res){        
         $('#msgBoxTitulo').text('Funciones');
         $('#msgBoxMensaje').text(res.mensaje);
         $('#modalMsgBox').modal('show');
@@ -154,8 +153,7 @@ function obtenerDias(){
             $('#modalMsgBox').modal('show');
         }
     });
-    obtener.fail(function(res){
-        //alert(res.responseText);
+    obtener.fail(function(res){        
         $('#msgBoxTitulo').text('Funciones');
         $('#msgBoxMensaje').text(res.mensaje);
         $('#modalMsgBox').modal('show');
@@ -183,8 +181,7 @@ function salaSeleccionada(idSala){
         $("#aSala_"+idSala).addClass("opcionSeleccionada");    
         $idSalaSeleccionada=idSala;        
         $idSemanaSeleccionada='';
-        $contenedorHorarios.html("");
-        
+        $contenedorHorarios.html("");        
     }
 };
 
@@ -224,14 +221,11 @@ function buscarFuncionesActivas(idSemana,idSala){
         }
     });
 
-    obtener.fail(function(res){
-        //alert(res.responseText);
+    obtener.fail(function(res){        
         $('#msgBoxTitulo').text('Funciones');
         $('#msgBoxMensaje').text(res.responseText);
         $('#modalMsgBox').modal('show');
     });
-    
-
 }
 
 
@@ -264,8 +258,8 @@ function calcularHorarioFunciones(){
             }else{                
                 horaApertura = hr.getHours();                   
                 minutosApertura = ((hr.getMinutes()<10)?'0':'')+hr.getMinutes();
-                horarioFuncion=horaApertura+':'+ minutosApertura;
-                $row=$row +'<li><input type="hidden" value='+hr.idFuncion+' ><a>'+horarioFuncion+'  '+ $funcionesCargadas[0].titulo+' '+ $funcionesCargadas[0].descripcion + '<button type="button" class="btn btn-default btn-circle botonRojo esbirroRojo"><i class="glyphicon glyphicon-remove textoBoton"></i></button></a></li>';       
+                horarioFuncion=horaApertura+':'+ minutosApertura;                
+                $row=$row +'<li><input type="hidden" value='+$funcionesCargadas[0].idfuncion+' ><a>'+horarioFuncion+'  '+ $funcionesCargadas[0].titulo+' '+ $funcionesCargadas[0].descripcion + '<button type="button" class="btn btn-default btn-circle botonRojo esbirroRojo"><i class="glyphicon glyphicon-remove textoBoton"></i></button></a></li>';       
                 apertura.setMinutes(hr.getMinutes()+ parseInt(duracionConTrailer));                 
                 $funcionesCargadas = $funcionesCargadas.slice(1)                
             }
@@ -274,7 +268,7 @@ function calcularHorarioFunciones(){
         horaApertura = apertura.getHours();                   
         minutosApertura = ((apertura.getMinutes()<10)?'0':'')+apertura.getMinutes();
         horarioFuncion=horaApertura+':'+ minutosApertura;
-        $row=$row +'<li><a>'+horarioFuncion+'  <button type="button"  class="btn btn-default btn-circle botonVerde esbirro"><i class="glyphicon glyphicon-plus textoBoton"></i></button></a></li>';       
+        $row=$row +'<li><a>'+horarioFuncion+'  <button type="button" class="btn btn-default btn-circle botonVerde esbirro"><i class="glyphicon glyphicon-plus textoBoton"></i></button></a></li>';       
         apertura.setMinutes(apertura.getMinutes()+ parseInt(duracionConTrailer));  
         
         }                
@@ -289,8 +283,6 @@ $contenedorHorarios.on("click",".esbirro",function(){
     var horaSplit = hora.split(':');
     horaApertura=horaSplit[0];
     minutosApertura=horaSplit[1];
-    $(this).removeAttr('class','botonVerde');
-    $(this).attr('class','botonRojo');
      $('#modalLoading').modal('show');
          var guardarFuncion = $.ajax({
                         url : URI.FUNCION,
@@ -310,15 +302,13 @@ $contenedorHorarios.on("click",".esbirro",function(){
             if(!res.error){
                     crearFuncionHorario(res.data.idFuncion,horaApertura,minutosApertura);            
                 }
-            else{
-                //alert(res.error);
+            else{                
                 $('#msgBoxTitulo').text('Funciones');
                 $('#msgBoxMensaje').text(res.error);
                 $('#modalMsgBox').modal('show');
             }
         });
-        guardarFuncion.fail(function(res){
-            //alert(res.responseText);
+        guardarFuncion.fail(function(res){            
             $('#msgBoxTitulo').text('Funciones');
             $('#msgBoxMensaje').text(res.responseText);
             $('#modalMsgBox').modal('show');
@@ -326,11 +316,16 @@ $contenedorHorarios.on("click",".esbirro",function(){
     
     });
 
-$contenedorHorarios.on("click",".esbirroRojo",function(){       
+$contenedorHorarios.on("click",".esbirroRojo",function(){   
     event.stopPropagation();
-    //var hora=$(this)[0].parentNode.text;
-   
-    console.log($(this));
+    $idFuncionActiva= $(this)[0].parentNode.parentNode.childNodes[0].value;
+    $('#modalEliminarFuncion').modal('show');
+    
+});
+
+ $("#elinarFuncion").click(function() {       
+        borrarFuncion($idFuncionActiva);
+        $('#modalEliminarFuncion').modal('hide');      
     });
 
 
@@ -352,15 +347,13 @@ function crearFuncionHorario(idFuncion,horaApertura,minutosApertura){
         if(!res.error){                                            
                 generarSalaFuncion(res.data.idFuncionDetalle,idFuncion);
             }
-        else{
-            //alert(res.error);
+        else{            
             $('#msgBoxTitulo').text('Funciones');
             $('#msgBoxMensaje').text(res.error);
             $('#modalMsgBox').modal('show');
         }
     });
-    guardarFuncionHorario.fail(function(res){
-        //alert(res.responseText);
+    guardarFuncionHorario.fail(function(res){        
         $('#msgBoxTitulo').text('Funciones');
         $('#msgBoxMensaje').text(res.mensaje);
         $('#modalMsgBox').modal('show');
@@ -382,8 +375,7 @@ function generarSalaFuncion(idFuncionDetalle,idFuncion){
             res.data.forEach(function(item){                  
                 insertarSalaFuncion(idFuncion,item.columna,item.fila,item.habilitada,$idSalaSeleccionada,idFuncionDetalle);
             });             
-            $('#modalLoading').modal('hide');
-            //alert('Funcion creada con exito');
+            $('#modalLoading').modal('hide');            
             $('#msgBoxTitulo').text('Funciones');
             $('#msgBoxMensaje').text('Funcion Creada con Exito. ');
             $('#modalMsgBox').modal('show');
@@ -391,8 +383,7 @@ function generarSalaFuncion(idFuncionDetalle,idFuncion){
             buscarFuncionesActivas($idSemanaSeleccionada,$idSalaSeleccionada);
       }
     });    
-    obtener.fail(function(res){
-        //alert(res.responseText);
+    obtener.fail(function(res){        
         $('#msgBoxTitulo').text('Funciones');
         $('#msgBoxMensaje').text(res.mensaje);
         $('#modalMsgBox').modal('show');
@@ -420,13 +411,58 @@ var addSalaFuncion =  $.ajax({
             
           }        
     }); 
-    addSalaFuncion.fail(function(response){
-        //alert(response.responseText);
+    addSalaFuncion.fail(function(response){        
         $('#msgBoxTitulo').text('Funciones');
         $('#msgBoxMensaje').text(res.responseText);
         $('#modalMsgBox').modal('show');
     });
 }
+
+function borrarFuncion(idFuncionActiva){    
+    var eliminarFuncion =  $.ajax({
+        url: URI.BORRARFUNCION,
+        type: 'POST',
+        data: {
+                idFuncion:idFuncionActiva
+          },
+        dataType: 'json',               
+    })
+    eliminarFuncion.done(function(response){	
+        borrarFuncionHorario(idFuncionActiva);
+    });        
+}
+
+function borrarFuncionHorario(idFuncionActiva){
+
+    var eliminarFuncionHorario =  $.ajax({
+        url: URI.BORRARFUNCIONHORARIO,
+        type: 'POST',
+        data: {
+                idFuncion:idFuncionActiva
+          },
+        dataType: 'json',               
+    })
+    eliminarFuncionHorario.done(function(response){	
+        borrarSalaFuncion(idFuncionActiva);
+    });
+
+}
+
+function borrarSalaFuncion(idFuncionActiva){    
+ var eliminarSalaFuncion =  $.ajax({
+        url: URI.BORRARSALAFUNCION,
+        type: 'POST',
+        data: {
+                idFuncion:idFuncionActiva
+          },
+        dataType: 'json',               
+    })
+    eliminarSalaFuncion.done(function(response){	
+        buscarFuncionesActivas($idSemanaSeleccionada,$idSalaSeleccionada);
+        
+    });
+}
+
 
 function obtenerFecha(fecha){
     var fechaRetorno = '';
