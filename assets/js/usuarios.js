@@ -1,4 +1,4 @@
-    var URI = {        
+var URI = {        
         USUARIOS : {
             url : 'actions/actionTabla.php?action=getUsuarios',
             columns : [
@@ -8,14 +8,15 @@
                 {   "data": "nombre" },
                 {   "data": "apellido" },
                 {   "data": "dni" },
-                {   "data": "sexo" },
-                {   "data": "fechaNacimiento",
-                    "name": "Fecha de nacimiento"
+                {   
+                    "data": "Fecha de nacimiento"
                 },
                 {   "data": "email" },
                 {   "data": "usuario" },
                 {   "data": "pass" },
-                {   "data": "telefono" },
+                {   "data": "Total Compras" },
+                {   "data": "Total Reservas vencidas"
+                },
                 {   "data": "bloqueado",
                     "render" : function(data, type, full, meta){
                         var boton = "<button id='btn"+full.id+"' newState='1' type=button class='btn'>Bloquear</button>";
@@ -25,7 +26,8 @@
                         
                         return boton;
                     }
-                }
+                },
+                {   "data":"Fecha Ultima Funcion"}
                  
             ]
          },
@@ -50,7 +52,8 @@
             "columns": URISELECTED.columns,
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-            }
+            },
+              "scrollX": true
         });
         $('body').on('click','table button',function(e){
             e.stopPropagation();
