@@ -11,6 +11,27 @@ function sendResponse($response){
     echo json_encode($response);
 }
 
+function validarDescripcion($request){
+    require("../models/precios.php");
+    $c = new Precios();
+    $precio = array();   
+    $precio["idPrecio"] = $request->idPrecio;
+    $precio["formato"] = $request->formato;
+    $precio["descripcionPrecio"] = $request->descripcionPrecio;  
+    if($nuevo = $c->validateDescripcionPrecio($precio)){
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "La descripcion ingresada ya se encuentra en uso",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => ""
+        ));
+    }
+}
+
 function nuevoPrecio($request){
     require("../models/precios.php");
     $c = new Precios();
@@ -143,6 +164,9 @@ switch($action){
         break;
     case "detalle":
         obtenerDetallePrecio($request);
+        break;
+    case "validar":
+        validarDescripcion($request);
         break;
     default:
         obtenerPrecios($request);

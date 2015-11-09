@@ -49,55 +49,65 @@
                  $imagen = '<img id="imagenPelicula" src='+res.data[0].imagen+' class="img-responsive" alt="Responsive image">';                
                 $imagenPelicula.append($imagen);                
                 obtenerPrecioFuncion();                
-            }else{
-                
-                alert(res.mensaje);
+            }else{                
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('UTN Cines');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
         obtener.fail(function(res){
-            alert(res.responseText)
+            //alert(res.responseText);
+            $('#msgBoxTitulo').text('UTN Cines');
+            $('#msgBoxMensaje').text(res.mensaje);
+            $('#modalMsgBox').modal('show');
         });
     };    
     
-    function obtenerPrecioFuncion(){           
-    $TipoFuncionid = $("#idTipoFuncion").val();        
-    var obtener = $.ajax({
-        url : URI.PRECIOS,
-        method : "GET",
-         data: {tipoFuncionID:$TipoFuncionid},
-        dataType : 'json',
-    });        
+    function obtenerPrecioFuncion(){
 
-    obtener.done(function(res){
-        if(!res.error){		
-            $precio='';                
-            res.data.forEach(function(item){
-            $precio =$precio +
-                 '<tr><td class="columnaEntradaDescripcion"><SPAN>'+item.descripcion +'<SPAN></td >'+
-                  '<th class="columnaCantidad"><select name="" class="form-control comboCantidad">'+
-                            '<option value="0">0</option>'+
-                            '<option value="1">1</option>'+
-                            '<option value="2">2</option>'+
-                            '<option value="3">3</option>'+
-                            '<option value="4">4</option>'+
-                            '<option value="5">5</option>'+
-                            '<option value="6">6</option>'+
-                        '</select></th><input type="hidden" value="'+item.idPrecio+'"><th class="columnaPrecio">'+item.valor+'$</th></tr>';               
-            
-            });
-            $precios.append($precio);
-            
-            
-        }else{
-            
-            alert(res.mensaje);
-        }
-    });
+        $TipoFuncionid = $("#idTipoFuncion").val();        
+        var obtener = $.ajax({
+            url : URI.PRECIOS,
+            method : "GET",
+             data: {tipoFuncionID:$TipoFuncionid},
+            dataType : 'json',
+        });        
 
-    obtener.fail(function(res){
-        alert(res.responseText)
-    });
+        obtener.done(function(res){
+            if(!res.error){		
+                $precio='';                
+                res.data.forEach(function(item){
+                $precio =$precio +
+                     '<tr><td class="columnaEntradaDescripcion"><SPAN>'+item.descripcion +'<SPAN></td >'+
+                      '<th class="columnaCantidad"><select name="" class="form-control comboCantidad">'+
+                                '<option value="0">0</option>'+
+                                '<option value="1">1</option>'+
+                                '<option value="2">2</option>'+
+                                '<option value="3">3</option>'+
+                                '<option value="4">4</option>'+
+                                '<option value="5">5</option>'+
+                                '<option value="6">6</option>'+
+                            '</select></th><input type="hidden" value="'+item.idPrecio+'"><th class="columnaPrecio">'+item.valor+'$</th></tr>';               
+                
+                });
+                $precios.append($precio);               
+                
+            }else{                
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('UTN Cines');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
+            }
+        });
+
+        obtener.fail(function(res){
+            //alert(res.responseText);
+            $('#msgBoxTitulo').text('UTN Cines');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
+        });
     };
 
     $("#bntNext").on("click", function(){
@@ -113,7 +123,7 @@
         var idPrecio=[];
         var ids=[];
 
-        $( ".comboCantidad option:selected" ).each(function() {   
+        $( ".comboCantidad option:selected" ).each(function() {
             
             cantidad=cantidad+parseInt($(this).text());
             cantidades.push($(this).text());
@@ -123,7 +133,6 @@
         $('#precios tr').each(function() {  
             idPrecio.push($(this).children('input').val());        
             precios.push($(this).find(".columnaPrecio").html());
-
             
         });
 
@@ -139,7 +148,10 @@
         };
 
         if(cantidad>6){
-        alert('Debe elegir menos de 6 entradas');
+            //alert('Debe elegir menos de 6 entradas');
+            $('#msgBoxTitulo').text('UTN Cines');
+            $('#msgBoxMensaje').text('Debe elegir menos de 6 entradas');
+            $('#modalMsgBox').modal('show');
             return;
         }
         else if(cantidad>0){            

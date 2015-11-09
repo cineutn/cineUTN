@@ -1,11 +1,14 @@
 (function($){
       
+    $('title').html("Precios");
+
     var URI = {
         GET : 'actions/actionPrecios.php?action=obtener',
         GETFORMATOS : 'actions/actionPrecios.php?action=obtenerFormatos',
         UPDATE : 'actions/actionPrecios.php?action=modificar',
         ADD : 'actions/actionPrecios.php?action=nuevo',
         REMOVE : 'actions/actionPrecios.php?action=eliminar',
+        VALIDAR : 'actions/actionPrecios.php?action=validar'
     };
 
     $contenedorPrecios = $("#contenedorPrecios");
@@ -64,12 +67,18 @@
                 $cmbFormatos.append($formatos);
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Precios');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
         obtener.fail(function(res){
-            alert(res.responseText)
+            //alert(res.responseText);
+            $('#msgBoxTitulo').text('Precios');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         });         
     };
     
@@ -134,12 +143,18 @@
                 $contenedorPrecios.append($precios);
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Precios');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
         obtener.fail(function(res){
-            alert(res.responseText)
+            //alert(res.responseText);
+            $('#msgBoxTitulo').text('Precios');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         });
                
     };
@@ -236,8 +251,15 @@
                 })
 
                 addPrecio.done(function(response){
-                    $form.addClass("hide");
-                    obtenerPrecios();
+                    if(!response.error){
+                        $form.addClass("hide");
+                        obtenerPrecios();
+                    }else{          
+                          //alert(res.mensaje);
+                          $('#msgBoxTitulo').text('Precios');
+                          $('#msgBoxMensaje').text(response.mensaje);
+                          $('#modalMsgBox').modal('show');
+                    }                    
                 });
 
             }else{
@@ -254,8 +276,15 @@
                 })
 
                 updatePrecio.done(function(response){
-                    $form.addClass("hide");
-                    obtenerPrecios();
+                    if(!response.error){
+                        $form.addClass("hide");
+                        obtenerPrecios();
+                    }else{          
+                          //alert(res.mensaje);
+                          $('#msgBoxTitulo').text('Precios');
+                          $('#msgBoxMensaje').text(response.mensaje);
+                          $('#modalMsgBox').modal('show');
+                    } 
                 });
             }
 
@@ -268,6 +297,8 @@
 
     function validarPrecio(){
         var bRetorno = true;
+
+        $id = $idPrecio.val();
 
         var formato = $cmbFormatos.val();
         if(formato == 0){
@@ -288,9 +319,32 @@
           $descripcionPrecio.siblings(".help-block").html("Debe completar este campo");
           bRetorno = false;
         }else{
-          $descripcionPrecio.closest(".form-group").removeClass("has-error");
-          $descripcionPrecio.siblings(".glyphicon-remove").addClass("hide");
-          $descripcionPrecio.siblings(".help-block").html("");          
+
+            var validar =  $.ajax({
+                    url: URI.VALIDAR,
+                    type: 'GET',
+                    data: {idPrecio:$id,
+                           descripcionPrecio:descripcion,
+                           formato:formato},
+                    dataType: 'json',
+                    async: false
+                   
+                })
+
+                validar.done(function(response){
+                     if(response.error){
+                        $descripcionPrecio.closest(".form-group").addClass("has-error");
+                        $descripcionPrecio.siblings(".glyphicon-remove").removeClass("hide");
+                        $descripcionPrecio.siblings(".help-block").html(response.mensaje);
+                        bRetorno = false;
+                    }else{
+                        $descripcionPrecio.closest(".form-group").removeClass("has-error");
+                        $descripcionPrecio.siblings(".glyphicon-remove").addClass("hide");
+                        $descripcionPrecio.siblings(".help-block").html("");   
+                    }
+
+                }); 
+                 
         }
 
         var valor = parseFloat($valorPrecio.val());

@@ -54,14 +54,19 @@ var URI = {
                 $("#idTipoFuncion").val(res.data[0].tipoFuncion);
                  $imagen = '<img id="imagenPelicula" src='+res.data[0].imagen+' class="img-responsive" alt="Responsive image">';                
                 $imagenPelicula.append($imagen);                              
-            }else{
-                
-                alert(res.mensaje);
+            }else{                
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('UTN Cines');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
         obtener.fail(function(res){
-            alert(res.responseText)
+            //alert(res.responseText);
+            $('#msgBoxTitulo').text('UTN Cines');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         });
 
     };   
@@ -116,16 +121,24 @@ var URI = {
                     $esquemaSala.append($pantalla);
                }
                 else{
-                alert('No hay sala');
+                    //alert('No hay sala');
+                    $('#msgBoxTitulo').text('UTN Cines');
+                    $('#msgBoxMensaje').text('No hay Sala.');
+                    $('#modalMsgBox').modal('show');
                 }
-            }else{
-                
-                alert(res.mensaje);
+            }else{                
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('UTN Cines');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
         obtener.fail(function(res){
-            alert(res.responseText)
+            //alert(res.responseText);
+            $('#msgBoxTitulo').text('UTN Cines');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         });
     };     
 
@@ -190,21 +203,24 @@ function reservarButaca(){
     if(butacas!==null){
         var arrayButaca = butacas.split(',')
         
-        $.each(arrayButaca, function( index, value ){        
+        $.each(arrayButaca, function( index, value ){
+
             var reservar = $.ajax({
                             url : URI.BUTACA,
                             method : "POST",
                              data: {idSalaFuncion:value,hanilitada:1},
                             dataType : 'json',
-                        });        
+            });        
 
             reservar.done(function(res){
-            if(!res.error){            
-                
-            }
-            else{
-                alert(res.error);
-                };
+                if(!res.error){            
+                    
+                }else{
+                    //alert(res.error);
+                    $('#msgBoxTitulo').text('UTN Cines');
+                    $('#msgBoxMensaje').text(res.error);
+                    $('#modalMsgBox').modal('show');
+                }
             });
 
         });
@@ -212,31 +228,36 @@ function reservarButaca(){
         
         
     //guardo las butacas seleccionadas        
-    $.each($idSalaFuncion, function( index, value ){        
+    $.each($idSalaFuncion, function( index, value ){
+
         var reservar = $.ajax({
                         url : URI.BUTACA,
                         method : "POST",
                          data: {idSalaFuncion:value,hanilitada:3},
                         dataType : 'json',
-                    });        
+        });        
 
         reservar.done(function(res){
-        if(!res.error){            
-            sessionStorage.setItem('butacas',$idSalaFuncion);
-            
-            location.href='pagoEntradas.php?idFuncionDetalle='+$idFuncionDetalle;
-            
-            
-        }
-        else{
-            alert(res.error);
-            };
+            if(!res.error){
+
+                sessionStorage.setItem('butacas',$idSalaFuncion);                
+                location.href='pagoEntradas.php?idFuncionDetalle='+$idFuncionDetalle;               
+                
+            }else{
+                //alert(res.error);
+                $('#msgBoxTitulo').text('UTN Cines');
+                $('#msgBoxMensaje').text(res.error);
+                $('#modalMsgBox').modal('show');
+            }
         });
         
     });
     }
     else{    
-        alert('Aun debe elegir '+$cantidadEntradas+' entradas');
+        //alert('Aun debe elegir '+$cantidadEntradas+' entradas');
+        $('#msgBoxTitulo').text('UTN Cines');
+        $('#msgBoxMensaje').text('Aun debe elegir '+$cantidadEntradas+' entradas');
+        $('#modalMsgBox').modal('show');
     }
     
 }

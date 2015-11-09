@@ -45,6 +45,7 @@
 </div>
 	
 <?php require("partials/footer.php"); ?>
+<?php require("partials/msgBox.php"); ?>
 
 <link rel="stylesheet" href="assets/css/paginaInicio.css">
 <link rel="stylesheet" href="assets/css/paginaCompra.css">     

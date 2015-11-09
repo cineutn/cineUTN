@@ -159,6 +159,7 @@
 	
 <?php require("partials/footer.php"); ?>
 <?php require("partials/entrada.php"); ?>
+<?php require("partials/msgBox.php"); ?>
 
 <link href="assets/css/entradaPrint.css" type="text/css" media="print" />
 <link rel="stylesheet" href="assets/css/paginaInicio.css">

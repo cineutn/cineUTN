@@ -1,11 +1,14 @@
 (function($){
       
+      $('title').html("Complejos");
+
     var URI = {
         COMPLEJOS : 'actions/actionComplejos.php?action=obtener',
         UPLOAD : 'actions/actionComplejos.php?action=subir',
         ADD : 'actions/actionComplejos.php?action=nuevo',
         UPDATE : 'actions/actionComplejos.php?action=modificar',
-        REMOVE : 'actions/actionComplejos.php?action=eliminar'
+        REMOVE : 'actions/actionComplejos.php?action=eliminar',
+        VALIDAR : 'actions/actionComplejos.php?action=validar'
     };
 
     $contenedorCines = $("#contenedorCines");
@@ -92,12 +95,18 @@
                 $contenedorCines.append($complejos);
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Complejos');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
         obtener.fail(function(res){
-            alert(res.responseText)
+            alert(res.responseText);
+            $('#msgBoxTitulo').text('Complejos');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         });
                
     };
@@ -130,8 +139,11 @@
                 contentType: false
             })
 
-            uploadImage.done(function(response){
-                alert(response.mensaje);
+            uploadImage.done(function(response){                
+                //alert(response.mensaje);
+                $('#msgBoxTitulo').text('Complejos');
+                $('#msgBoxMensaje').text(response.mensaje);
+                $('#modalMsgBox').modal('show');
             });
 
             uploadImage.always(function(response){
@@ -140,7 +152,10 @@
             });
 
         }else{
-             alert("Debes primero dar de alta el complejo para colocarle una imagen.");
+            //alert("Debes primero dar de alta el complejo para colocarle una imagen.");
+            $('#msgBoxTitulo').text('Complejos');
+            $('#msgBoxMensaje').text('Debes primero dar de alta el complejo para colocarle una imagen.');
+            $('#modalMsgBox').modal('show');
         }
         
     };    
@@ -305,6 +320,8 @@
     function validarComplejo(){
         var bRetorno = true;
 
+        $id = $idComplejo.val();
+
         var nombre = $nombreComplejo.val();
         if(nombre.length == 0){
           $nombreComplejo.closest(".form-group").addClass("has-error");
@@ -312,9 +329,29 @@
           $nombreComplejo.siblings(".help-block").html("Debe completar este campo");
           bRetorno = false;
         }else{
-          $nombreComplejo.closest(".form-group").removeClass("has-error");
-          $nombreComplejo.siblings(".glyphicon-remove").addClass("hide");
-          $nombreComplejo.siblings(".help-block").html("");          
+
+            var validar =  $.ajax({
+                    url: URI.VALIDAR,
+                    type: 'GET',
+                    data: {idComplejo:$id,
+                           nombreComplejo:nombre},
+                    dataType: 'json',
+                    async: false
+                   
+                })
+
+                validar.done(function(response){
+                     if(response.error){
+                        $nombreComplejo.closest(".form-group").addClass("has-error");
+                        $nombreComplejo.siblings(".glyphicon-remove").removeClass("hide");
+                        $nombreComplejo.siblings(".help-block").html(response.mensaje);
+                        bRetorno = false;
+                    }else{
+                        $nombreComplejo.closest(".form-group").removeClass("has-error");
+                        $nombreComplejo.siblings(".glyphicon-remove").addClass("hide");
+                        $nombreComplejo.siblings(".help-block").html("");
+                    }
+                });             
         }
 
         var direccion = $direccionComplejo.val();

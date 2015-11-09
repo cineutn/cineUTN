@@ -52,3 +52,14 @@
     background: url(../img/billboard-shadow.png) repeat-x left top;
     padding-top: 15px;
 }
+
+.explicacion{
+    margin-bottom: 15px;
+    margin-left: 100px;
+    text-align: center;
+}
+
+#lblExplicacion {
+    font-size: 18px;
+    color: #565655;
+}

@@ -1,10 +1,13 @@
 (function($){
       
+    $('title').html("Tarjetas");
+
     var URI = {
         GET : 'actions/actionTarjetas.php?action=obtener',
         UPDATE : 'actions/actionTarjetas.php?action=modificar',
         ADD : 'actions/actionTarjetas.php?action=nuevo',
         REMOVE : 'actions/actionTarjetas.php?action=eliminar',
+        VALIDAR : 'actions/actionTarjetas.php?action=validar'
     };
 
     $contenedorTarjetas = $("#contenedorTarjetas");
@@ -87,12 +90,18 @@
                 $contenedorTarjetas.append($tarjetas);
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Tarjetas');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 
         obtener.fail(function(res){
-            alert(res.responseText)
+            //alert(res.responseText);
+            $('#msgBoxTitulo').text('Tarjetas');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         });        
     };
 
@@ -146,8 +155,16 @@
             })
 
             deleteTarjeta.done(function(response){
-                $form.addClass("hide");
-                obtenerTarjetas();
+               if(!res.error){
+                    $form.addClass("hide");
+                    obtenerTarjetas();
+                }else{
+                    event.preventDefault();
+                    //alert(res.mensaje);
+                    $('#msgBoxTitulo').text('Tarjetas');
+                    $('#msgBoxMensaje').text(res.mensaje);
+                    $('#modalMsgBox').modal('show');
+                } 
             });
 
         }
@@ -183,8 +200,16 @@
                 })
 
                 addTarjeta.done(function(response){
-                    $form.addClass("hide");
-                    obtenerTarjetas();
+                    if(!res.error){
+                        $form.addClass("hide");
+                        obtenerTarjetas();
+                    }else{
+                        event.preventDefault();
+                        //alert(res.mensaje);
+                        $('#msgBoxTitulo').text('Tarjetas');
+                        $('#msgBoxMensaje').text(res.mensaje);
+                        $('#modalMsgBox').modal('show');
+                    }                    
                 });
 
             }else{
@@ -201,8 +226,16 @@
                 })
 
                 updateTarjeta.done(function(response){
-                    $form.addClass("hide");
-                    obtenerTarjetas();
+                    if(!res.error){
+                        $form.addClass("hide");
+                        obtenerTarjetas();
+                    }else{
+                        event.preventDefault();
+                        //alert(res.mensaje);
+                        $('#msgBoxTitulo').text('Tarjetas');
+                        $('#msgBoxMensaje').text(res.mensaje);
+                        $('#modalMsgBox').modal('show');
+                    } 
                 });
             }
 
@@ -216,6 +249,8 @@
     function validarTarjeta(){
         var bRetorno = true;
 
+        $id = $idTarjeta.val();
+
         var nombreEmpresa = $empresa.val();
         if(nombreEmpresa.length == 0){
           $empresa.closest(".form-group").addClass("has-error");
@@ -223,9 +258,31 @@
           $empresa.siblings(".help-block").html("Debe completar este campo");
           bRetorno = false;
         }else{
-          $empresa.closest(".form-group").removeClass("has-error");
-          $empresa.siblings(".glyphicon-remove").addClass("hide");
-          $empresa.siblings(".help-block").html("");          
+
+            var validar =  $.ajax({
+                    url: URI.VALIDAR,
+                    type: 'GET',
+                    data: {idTarjeta:$id,
+                           empresa:nombreEmpresa},
+                    dataType: 'json',
+                    async: false
+                   
+                })
+
+                validar.done(function(response){
+                     if(response.error){
+                        $empresa.closest(".form-group").addClass("has-error");
+                        $empresa.siblings(".glyphicon-remove").removeClass("hide");
+                        $empresa.siblings(".help-block").html(response.mensaje);
+                        bRetorno = false;
+                    }else{
+                        $empresa.closest(".form-group").removeClass("has-error");
+                        $empresa.siblings(".glyphicon-remove").addClass("hide");
+                        $empresa.siblings(".help-block").html("");  
+                    }
+
+                }); 
+                   
         }
 
         var cantNumerosTarjeta = parseInt($cantNumeros.val());

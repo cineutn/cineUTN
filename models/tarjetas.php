@@ -9,6 +9,24 @@ class Tarjetas
         $this->connection = ConnectionCine::getInstance();
     }   
 
+    public function validateEmpresaTarjeta($tarjeta){
+        $id = $this->connection->real_escape_string($tarjeta['idTarjeta']);
+        $empresa = $this->connection->real_escape_string($tarjeta['empresa']);
+        $query = "SELECT * 
+                    FROM tarjeta
+                    WHERE UPPER(empresa) = UPPER('$empresa')
+                    AND idTarjeta != '$id' ";  
+       
+        $tarjetas = array();
+        if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $tarjetas[] = $fila;
+            }
+            $result->free();
+        }
+        return $tarjetas;
+    }
+
     public function getTarjetas(){
         $query = "SELECT 
                     idTarjeta,

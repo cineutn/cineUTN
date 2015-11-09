@@ -1,7 +1,8 @@
 (function($){
       
     var URI = {
-        LOGIN : 'actions/actions.php?action=validar'
+        LOGIN : 'actions/actions.php?action=validar',
+        UPDATE: 'actions/actions.php?action=actualizarEstado'
     };
 
     $formLogin = $("#login_form");
@@ -23,6 +24,24 @@
                 sessionStorage.setItem('nombre', res.data.nombre);
                 sessionStorage.setItem('apellido', res.data.apellido);
                 sessionStorage.setItem('email', res.data.email);
+
+                var updateEstado =  $.ajax({
+                    url: URI.UPDATE,
+                    type: 'POST',
+                    data: {idUsuario:res.data.idUsuario,
+                           estado:"online"},
+                    dataType: 'json',
+                    async:false
+                });
+
+                updateEstado.done(function(response){
+                    if(response.error){
+                        sessionStorage.clear();
+                        window.location.href='index.php'; 
+                    }
+                });
+
+                
             }else{
                 alert(res.mensaje);
             }

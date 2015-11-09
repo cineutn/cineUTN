@@ -9,6 +9,26 @@ class Precios
         $this->connection = ConnectionCine::getInstance();
     }   
 
+    public function validateDescripcionPrecio($precio){
+        $id = $this->connection->real_escape_string($precio['idPrecio']);
+        $descripcion = $this->connection->real_escape_string($precio['descripcionPrecio']);
+        $formato = $this->connection->real_escape_string($precio['formato']);
+        $query = "SELECT * 
+                    FROM precios
+                    WHERE UPPER(descripcion) = UPPER('$descripcion')
+                    AND formato = '$formato'
+                    AND idPrecio != '$id' ";  
+       
+        $precios = array();
+        if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $precios[] = $fila;
+            }
+            $result->free();
+        }
+        return $precios;
+    } 
+
     public function getPrecios(){
         $query = "SELECT 
                     P.formato AS Formato, 

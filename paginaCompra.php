@@ -74,6 +74,7 @@
 		</div>
 
  <?php require("partials/footer.php"); ?>
+ <?php require("partials/msgBox.php"); ?>
           
 <link rel="stylesheet" href="assets/css/paginaCompra.css"> 
 <script src="assets/js/vendor/jquery-1.11.3.min.js"></script>

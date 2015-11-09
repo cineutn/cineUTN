@@ -11,6 +11,25 @@ function sendResponse($response){
     echo json_encode($response);
 }
 
+function validarEmpresa($request){
+    require("../models/tarjetas.php");
+    $c = new Tarjetas();
+    $tarjeta = array();
+    $tarjeta["idTarjeta"] = $request->idTarjeta;
+    $tarjeta["empresa"] = $request->empresa;
+    if($nuevo = $c->validateEmpresaTarjeta($tarjeta)){
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "La empresa ingresada ya se encuentra en uso",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => ""
+        ));
+    }
+}
 
 function nuevaTarjeta($request){
     require("../models/tarjetas.php");
@@ -125,6 +144,9 @@ switch($action){
         break;
     case "obtenerDatos":
         obtenerDatos($request);
+        break;
+    case "validar":
+        validarEmpresa($request);
         break;
     default:
         obtenerTarjetas($request);

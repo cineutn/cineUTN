@@ -143,10 +143,16 @@
        
             modificar.done(function(res){
                 if(!res.error){
-                   alert(res.mensaje);
+                    //alert(res.mensaje);
+                    $('#msgBoxTitulo').text('Modificar Email');
+                    $('#msgBoxMensaje').text(res.mensaje);
+                    $('#modalMsgBox').modal('show');
                 }else{
                     event.preventDefault();
-                    alert(res.mensaje);
+                    //alert(res.mensaje);
+                    $('#msgBoxTitulo').text('Modificar Email');
+                    $('#msgBoxMensaje').text(res.mensaje);
+                    $('#modalMsgBox').modal('show');
                 }
             });
         }

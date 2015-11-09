@@ -40,7 +40,10 @@
             }else{
                 
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('UTN Cine');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
              
              
@@ -48,7 +51,10 @@
         });
 
         obtener.fail(function(res){
-            alert(res.responseText);
+            //alert(res.responseText);
+            $('#msgBoxTitulo').text('UTN Cine');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
         });
     
     };
@@ -154,7 +160,10 @@
             }else{
                 
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('UTN Cine');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
 

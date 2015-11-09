@@ -1,5 +1,7 @@
 (function($){
       
+    $('title').html("Consulta de Entradas");
+
     var URI = {
         GETVENTA : 'actions/actionVenta.php?action=obtener',
         GETBUTACAS : 'actions/actionVenta.php?action=obtenerButacas',
@@ -30,7 +32,10 @@
         codigo = $inputCodigo.val();
 
         if ($.trim((codigo)) == ""){
-            alert("Debe ingresar un codigo.");
+            //alert("Debe ingresar un codigo.");
+            $('#msgBoxTitulo').text('Consulta Entrada');
+            $('#msgBoxMensaje').text('Debe ingresar un Codigo.');
+            $('#modalMsgBox').modal('show');
         }else{
             $btnActualizar.addClass('hide');
             $codigoVenta.text(codigo);
@@ -70,10 +75,16 @@
         actualizar.done(function(res){
             if(!res.error){
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Consulta Entrada');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Consulta Entrada');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         }); 
     });
@@ -148,7 +159,10 @@
                 obtenerButacas();
             }else{
                 event.preventDefault();
-                alert("El Codigo ingresado es incorrecto. ");
+                //alert("El Codigo ingresado es incorrecto. ");
+                $('#msgBoxTitulo').text('Consulta Entrada');
+                $('#msgBoxMensaje').text('El Codigo ingresado es incorrecto. ');
+                $('#modalMsgBox').modal('show');
             }
         });
     };
@@ -180,7 +194,10 @@
                 $("#butacasTicket").text(butacas);
             }else{
                 event.preventDefault();
-                alert(res.mensaje);
+                //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Consulta Entrada');
+                $('#msgBoxMensaje').text(res.mensaje);
+                $('#modalMsgBox').modal('show');
             }
         });
     };

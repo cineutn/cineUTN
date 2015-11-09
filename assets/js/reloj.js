@@ -1,8 +1,4 @@
 (function($){
-      
-    var URI = {
-        ACTUALIZAR : 'actions/actions.php?action=validar'
-    };
 
     $(document).ready(function() {     
         setInterval(function(){ calcularTiempoDosFechas() }, 1000);
@@ -29,8 +25,8 @@
         //var formatted = ((HH < 10)?("0" + HH):HH) + ":" + ((MM < 10)?("0" + MM):MM)
         var formatted = ((MM < 10)?("0" + MM):MM) + ":" + ((SS < 10)?("0" + SS):SS);
 
-        if (formatted == "00:00"){
-            window.location.href = "index.php";
+        if (formatted == "00:00" || MM < 0 || SS < 0  ){
+            window.location.href = "timeOut.php";
         }else{
             $("#relojCuentaAtras").text(formatted);
         }

@@ -21,6 +21,15 @@ class Usuario
         return $r->fetch_assoc();
     }
 
+    public function getBloqueo($user){
+        $usuarioID = $this->connection->real_escape_string($user['usuarioID']);
+        $query = "SELECT bloqueado 
+                    FROM usuario
+                    WHERE idUsuario = '$usuarioID' ";
+        $r = $this->connection->query($query);
+        return $r->fetch_assoc();
+    }
+
     public function getUserByMail($mail){  
         $query = "SELECT * FROM usuario WHERE email = '".$mail."'";
         $r = $this->connection->query($query);
@@ -42,6 +51,20 @@ class Usuario
         $email = $this->connection->real_escape_string($user['email']);
         $query = "UPDATE usuario SET 
                     email = '$email'
+                    WHERE idUsuario = '$usuarioID'";
+
+        if($this->connection->query($query)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function updateEstado($user){
+        $usuarioID = $this->connection->real_escape_string($user['usuarioID']);
+        $estado = $this->connection->real_escape_string($user['estado']);
+        $query = "UPDATE usuario SET 
+                    estado = '$estado'
                     WHERE idUsuario = '$usuarioID'";
 
         if($this->connection->query($query)){

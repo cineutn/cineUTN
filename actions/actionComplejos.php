@@ -90,6 +90,26 @@ function obtenerComplejo($request){
     }
 }
 
+function validarNombre($request){
+    require("../models/complejos.php");
+    $c = new Complejos();
+    $complejo = array();
+    $complejo["idComplejo"] = $request->idComplejo;
+    $complejo["nombreComplejo"] = $request->nombreComplejo;
+    if($complejos = $c->validateNombreComplejo($complejo)){
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "El nombre ingresado ya se encuentra en uso",
+            "data" => $complejos
+        ));
+    }else{
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => ""
+        ));
+    }
+}
+
 function guardarArchivo($file, $imgId){
     $uploaddir = "../files/complejos/";
     $imgDir = $uploaddir . $imgId;
@@ -166,6 +186,9 @@ switch($action){
         break;
     case "obtener":
         obtenerComplejo($request);
+        break;
+    case "validar":
+        validarNombre($request);
         break;
     default:
         obtenerComplejo($request);

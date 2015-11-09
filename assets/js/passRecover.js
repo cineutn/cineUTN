@@ -47,12 +47,18 @@
               if(!res.error){
 
               }else{          
-                  alert(res.mensaje);
+                  //alert(res.mensaje);
+                  $('#msgBoxTitulo').text('Recuperación de contraseña');
+                  $('#msgBoxMensaje').text(res.mensaje);
+                  $('#modalMsgBox').modal('show');
               }
             });
 
         }else{          
-            alert(res.mensaje);
+            //alert(res.mensaje);
+            $('#msgBoxTitulo').text('Recuperación de contraseña');
+            $('#msgBoxMensaje').text(res.mensaje);
+            $('#modalMsgBox').modal('show');
         }
       });
     }

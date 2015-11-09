@@ -1,4 +1,5 @@
 var URI = {        
+
         USUARIOS : {
             url : 'actions/actionTabla.php?action=getUsuarios',
             columns : [
