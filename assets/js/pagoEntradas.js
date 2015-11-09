@@ -597,7 +597,7 @@
     var updateButaca = $.ajax({
         url : URI.UPDATEBUTACA,
         async: false,
-        method : "GET",
+        method : "POST",
         data: {idSalaFuncion:idButaca,
                hanilitada:2},
         dataType : 'json'
