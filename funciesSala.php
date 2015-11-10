@@ -6,7 +6,7 @@
 require("partials/header.php"); ?>
 
 <div class="row" style="background-color:white"> 
-  <button type="button" id="btnVolver" class="btn btn-primary">     
+  <button type="button" id="btnVolver" class="btn btn-primary glyphicon glyphicon-arrow-left">     
       <span>Volver</span>
   </button>
   <input type='hidden' id='nroSemana' value= <?php echo $numeroSemana ?> ></input>
