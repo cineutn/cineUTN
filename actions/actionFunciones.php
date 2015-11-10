@@ -193,6 +193,27 @@ function funcionesPorSemana($request){
 }
 
 
+function funcionesPorSala($request){
+	require("../models/funciones.php");
+    $f = new Funciones();
+    $funcion = array();  
+    
+	$funcion["nroSemana"] = $request->numeroSemana;	
+					  
+    if($nuevo = $f->obtenerFuncionesPorSala($funcion)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "true",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener funciones"
+        ));
+    }
+}
+
 $request = new Request();
 $action = $request->action;
 switch($action){                  
@@ -219,5 +240,8 @@ switch($action){
       break;
     case "obtenerPorSemana":
         funcionesPorSemana($request);
+      break;
+    case "funcionesPorSala":
+        funcionesPorSala($request);
       break;        
 }

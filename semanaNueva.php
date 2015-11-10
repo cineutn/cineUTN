@@ -14,6 +14,7 @@
                 <th>Fecha Inicio</th> 
                <th>Cantidad de Funciones</th>                       
                <th>Cargar funciones</th>
+                <th>Ver funciones</th>
             </tr>
           </thead>                    
           <tbody id="tablaSemana">              

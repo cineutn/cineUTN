@@ -148,4 +148,23 @@ class Funciones
         return $funciones;
   }        
     
+    
+ public function obtenerFuncionesPorSala($funcion){          
+    $nroSemana =$this->connection->real_escape_string($funcion['nroSemana']); 
+     
+    $query ="SELECT sl.descripcion as Sala,pl.titulo,fm.descripcion,fm.subtitulada,fh.dia,fh.horario FROM `semana` se inner join funcionhorario fh  on se.idsemana=fh.idsemana
+    inner join funcion fn on fn.idfuncion=fh.idfuncion inner join pelicula pl on pl.idPelicula = fn.idPelicula 
+    inner join sala sl on sl.idsala=fh.idsala inner join formato fm on fm.idformato=pl.idFormato
+    where se.numerosemana=$nroSemana";      
+
+    $funciones = array();      
+      if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $funciones[] = $fila;
+            }
+            $result->free();
+        }
+        return $funciones;
+  } 
+    
 }

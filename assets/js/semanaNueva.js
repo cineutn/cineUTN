@@ -31,7 +31,7 @@ function obtenerSemanas(){
             res.data.forEach(function(item){                
                 $row=$row +
                 '<tr id="rowSala"><td class="form-group"><span>'+item.numeroSemana+'</span></td><td class="form-group"><span>'+item.nombreDia+' ' +obtenerFecha(item.fecha)+'</span></td><td class="form-group"><span>'+obtenerFunciones(item.numeroSemana)+'</span></td>'+
-                '<td><button  class="botonAzul" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button></td></tr>';      
+                '<td><button  class="botonAzul" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button></td><td><button class="botonVerde" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button></td></tr>';      
             });
             $contenedorSemana.append($row);
         }else{
@@ -119,7 +119,11 @@ function generarSemana(ultimaFecha,ultimaSemana){
     location.href='funciones.php?numeroSemana='+$numeroSemana;
     });
 
-
+  $contenedorSemanas.on("click",".botonVerde",function(event){
+    event.preventDefault();        
+    $numeroSemana= $(this).parent().parent()[0].childNodes[0].children[0].textContent;
+    location.href='funciesSala.php?numeroSemana='+$numeroSemana;
+    });
 function obtenerFunciones(numeroSemana){
 var nroFunciones ='1';
     var obtener = $.ajax({
