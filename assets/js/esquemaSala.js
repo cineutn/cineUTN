@@ -121,7 +121,7 @@ $("#btnGuardarSala").click(function(){
                                 method : "POST",
                                  data: {
                                      idSalaDetalle:$(this)[0].id,
-                                     habilitada:2
+                                     habilitada:0
                                  },
                                 dataType : 'json',
                             });        
