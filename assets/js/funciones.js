@@ -396,6 +396,7 @@ function insertarSalaFuncion(idFucnion,columna,fila,habilitada,idSala,idFuncionD
 var addSalaFuncion =  $.ajax({
         url: URI.ADDSALAFUNCION,
         type: 'POST',
+        async: false,
         data: {
                 idSalaFuncion:0,
                 idFucnion:idFucnion,
