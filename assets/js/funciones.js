@@ -141,7 +141,7 @@ function obtenerDias(){
            $row='';
             $contenedorSemana.html("");            
             res.data.forEach(function(item){ 
-            $row=$row +'<li><a id="afecha_'+item.idSemana+'" onclick="fechaSeleccionada('+item.idSemana+')">'+obtenerFecha(item.fecha) +'</a><input type="hidden" id="feha_'+item.idSemana+'" value='+item.fecha+' ></li>';                                
+            $row=$row +'<li><a id="afecha_'+item.idSemana+'" onclick="fechaSeleccionada('+item.idSemana+')">'+item.nombreDia +' '+obtenerFecha(item.fecha) +'</a><input type="hidden" id="feha_'+item.idSemana+'" value='+item.fecha+' ><input type="hidden" id="dia_'+item.idSemana+'" value='+item.nombreDia+' ></li>';                                
             });
             $contenedorSemana.after($row);
         }else{
@@ -184,13 +184,13 @@ function salaSeleccionada(idSala){
     }
 };
 
-function fechaSeleccionada(idSemana){
-     
+function fechaSeleccionada(idSemana){     
     if($(".salasLista li a").hasClass("opcionSeleccionada")){
         $(".semanaLista li a").removeClass("opcionSeleccionada");    
         $("#afecha_"+idSemana).addClass("opcionSeleccionada");
-        $idSemanaSeleccionada=idSemana;  
-        $fechaDesc=obtenerFecha($("#feha_"+idSemana).val());        
+        $idSemanaSeleccionada=idSemana;          
+        
+        $fechaDesc=$("#dia_"+idSemana).val()+' '+obtenerFecha($("#feha_"+idSemana).val()); 
         buscarFuncionesActivas($idSemanaSeleccionada,$idSalaSeleccionada);        
     }
 };
@@ -364,8 +364,7 @@ function crearFuncionHorario(idFuncion,horaApertura,minutosApertura){
 function generarSalaFuncion(idFuncionDetalle,idFuncion){
     var obtener = $.ajax({
         url : URI.SALADETALLE,
-        method : "GET",
-        async: false,
+        method : "GET",        
          data: {idSala:$idSalaSeleccionada},
         dataType : 'json',
     });   
