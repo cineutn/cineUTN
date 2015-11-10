@@ -214,6 +214,27 @@ function funcionesPorSala($request){
     }
 }
 
+function bajaFuncionesPorSemana($request){
+	require("../models/funciones.php");
+    $f = new Funciones();
+    $funcion = array();  
+    
+	$funcion["nroSemana"] = $request->numeroSemana;	
+					  
+    if($nuevo = $f->bajaFuncionesPorSemana($funcion)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "true",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener funciones"
+        ));
+    }
+}
+
 $request = new Request();
 $action = $request->action;
 switch($action){                  
@@ -243,5 +264,9 @@ switch($action){
       break;
     case "funcionesPorSala":
         funcionesPorSala($request);
-      break;        
+      break;  
+    case "cerrar":
+        bajaFuncionesPorSemana($request);
+      break;          
+        
 }

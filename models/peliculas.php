@@ -165,7 +165,8 @@ class Peliculas
                     INNER JOIN pelicula P on F.idPelicula = P.idPelicula
                     INNER JOIN funcionhorario FH on F.idFuncion = FH.idFuncion
                     INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion 
-                    WHERE F.idPelicula='$id'"; 
+                    WHERE F.idPelicula='$id'
+                    and F.fechaBaja ='0000-00-00 00:00:00'"; 
 
         $peliculas = array();
         

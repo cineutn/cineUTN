@@ -5,7 +5,8 @@ $('title').html("Funciones");
         SEMANAS : 'actions/actionsemanaNueva.php?action=obtenerNumerosemanas',       
         ULTIMA:'actions/actionsemanaNueva.php?action=obtenerUltima',
         ADD : 'actions/actionsemanaNueva.php?action=nueva',       
-        FUNCIONES : 'actions/actionFunciones.php?action=obtenerPorSemana',       
+        FUNCIONES : 'actions/actionFunciones.php?action=obtenerPorSemana',  
+        CERRAR: 'actions/actionFunciones.php?action=cerrar',  
     };
 
 $contenedorSemana =$("#tablaSemana");
@@ -31,7 +32,7 @@ function obtenerSemanas(){
             res.data.forEach(function(item){                
                 $row=$row +
                 '<tr id="rowSala"><td class="form-group"><span>'+item.numeroSemana+'</span></td><td class="form-group"><span>'+item.nombreDia+' ' +obtenerFecha(item.fecha)+'</span></td><td class="form-group"><span>'+obtenerFunciones(item.numeroSemana)+'</span></td>'+
-                '<td><button  class="botonAzul" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button></td><td><button class="botonVerde" type="button"><i class="glyphicon glyphicon glyphicon-arrow-right textoBoton"></i></button></td></tr>';      
+                '<td><button  class="botonAzul" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button></td><td><button class="botonVerde" type="button"><i class="glyphicon glyphicon glyphicon-arrow-right textoBoton"></i></button></td><td><button class="botonRojo" type="button"><i class="glyphicon glyphicon glyphicon-remove textoBoton"></i></button></td></tr>';      
             });
             $contenedorSemana.append($row);
         }else{
@@ -124,6 +125,29 @@ function generarSemana(ultimaFecha,ultimaSemana){
     $numeroSemana= $(this).parent().parent()[0].childNodes[0].children[0].textContent;
     location.href='funciesSala.php?numeroSemana='+$numeroSemana;
     });
+
+$contenedorSemanas.on("click",".botonRojo",function(event){
+    event.preventDefault();        
+    $numeroSemana= $(this).parent().parent()[0].childNodes[0].children[0].textContent;
+    
+    
+     var cerrarSemana =  $.ajax({
+            url: URI.CERRAR,
+            async: false,
+            type: 'POST',
+            data: {                    
+                    numeroSemana:$numeroSemana                    
+              },
+            dataType: 'json',
+        });
+        cerrarSemana.done(function(response){                
+        obtenerSemanas();
+        });
+    
+    });
+
+
+
 function obtenerFunciones(numeroSemana){
 var nroFunciones ='1';
     var obtener = $.ajax({
@@ -131,7 +155,7 @@ var nroFunciones ='1';
         method : "GET",
         async:false, 
           data: {
-                    nroSemana:numeroSemana                             
+            nroSemana:numeroSemana                             
             },
         dataType : 'json',
     });

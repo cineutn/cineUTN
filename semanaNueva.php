@@ -11,10 +11,11 @@
           <thead>
             <tr>
                <th>Semana número</th> 
-                <th>Fecha Inicio</th> 
+               <th>Fecha Inicio</th> 
                <th>Cantidad de Funciones</th>                       
                <th>Cargar funciones</th>
-                <th>Ver funciones</th>
+               <th>Ver funciones</th>
+               <th>Cerrar funciones</th>
             </tr>
           </thead>                    
           <tbody id="tablaSemana">              

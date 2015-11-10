@@ -85,7 +85,8 @@ class Funciones
 	inner join pelicula pel on pel.idpelicula=fn.idpelicula
 	inner join formato fm on pel.idformato =fm.idformato
 	where fh.idSemana =$idSemana    
-    and fh.idSala =$idSala order by 6";
+    and fh.idSala =$idSala
+    and fn.fechaBaja ='0000-00-00 00:00:00'  order by 6";
 
     $funciones = array();      
       if( $result = $this->connection->query($query) ){
@@ -100,7 +101,9 @@ class Funciones
   public function borrarFuncion($funcion){    
 
     $idFuncion =$this->connection->real_escape_string($funcion['idFuncion']);
-    $query ="DELETE FROM funcion where idFuncion=$idFuncion";          
+    $query ="UPDATE funcion SET fechaBaja= NOW() WHERE idFuncion=$idFuncion";
+      
+      //$query ="DELETE FROM funcion where idFuncion=$idFuncion";          
       if( $result = $this->connection->query($query) ){
          return true;
         }else{
@@ -136,7 +139,8 @@ class Funciones
  public function obtenerFuncionesPorSemana($funcion){          
     $nroSemana =$this->connection->real_escape_string($funcion['nroSemana']);     
       
-    $query ="SELECT count(*) cantidad FROM semana se inner JOIN funcionhorario fh on se.idsemana=fh.idSemana  WHERE numeroSemana =$nroSemana";
+    $query ="SELECT count(*) cantidad FROM semana se inner JOIN funcionhorario fh on se.idsemana=fh.idSemana 
+    inner join funcion f on f.idfuncion=fh.idfuncion  WHERE numeroSemana =$nroSemana AND f.fechaBaja ='0000-00-00 00:00:00'";
 
     $funciones = array();      
       if( $result = $this->connection->query($query) ){
@@ -166,5 +170,19 @@ class Funciones
         }
         return $funciones;
   } 
+    
+ public function bajaFuncionesPorSemana($funcion){          
+    $nroSemana =$this->connection->real_escape_string($funcion['nroSemana']); 
+    
+     $query ="UPDATE funcion SET fechabaja=now()where idFuncion in(
+select fh.idFuncion from funcionhorario fh inner join semana se on fh.idsemana =se.idsemana   where se.numerosemana=$nroSemana)"; 
+
+    $funciones = array();      
+      if( $result = $this->connection->query($query) ){
+             return true;
+        }else{
+        return false;
+        }
+  }     
     
 }

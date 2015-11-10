@@ -473,7 +473,8 @@ function borrarFuncion(idFuncionActiva){
         dataType: 'json',               
     })
     eliminarFuncion.done(function(response){	
-        borrarFuncionHorario(idFuncionActiva);
+        //borrarFuncionHorario(idFuncionActiva);
+        buscarFuncionesActivas($idSemanaSeleccionada,$idSalaSeleccionada);
     });        
 }
 
