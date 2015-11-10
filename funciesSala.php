@@ -5,10 +5,14 @@
     
 require("partials/header.php"); ?>
 
-<div class="row" style="background-color:white">            
+<div class="row" style="background-color:white"> 
+  <button type="button" id="btnVolver" class="btn btn-primary">     
+      <span>Volver</span>
+  </button>
   <input type='hidden' id='nroSemana' value= <?php echo $numeroSemana ?> ></input>
     <div class="col-md-12" id="funcionesSemana">    
-    </div>             
+    </div> 
+
 </div>
 
 <?php require("partials/footer.php"); ?>

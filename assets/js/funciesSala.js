@@ -60,5 +60,8 @@ function obtenerFunciones(){
     obtener.fail(function(res){
         alert(res.responseText)
     });
-
 };
+
+$("#btnVolver").click(function() { 
+   location.href='semanaNueva.php';
+});
