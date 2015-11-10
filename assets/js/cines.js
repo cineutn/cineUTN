@@ -1,6 +1,6 @@
 (function($){
       
-      $('title').html("Complejos");
+    $('title').html("Complejos");
 
     var URI = {
         COMPLEJOS : 'actions/actionComplejos.php?action=obtener',

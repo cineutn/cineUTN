@@ -1,3 +1,5 @@
+ $('title').html("Usuarios");
+
 var URI = {        
 
         USUARIOS : {
