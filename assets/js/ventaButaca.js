@@ -9,8 +9,7 @@ var URI = {
     $pathLibre="assets/img/butacaLibre.png";
     $cantidadEntradas=$('#idCantidadEntradas').val(); 
     $idFuncionDetalle=$('#idFuncionDetalle').val(); 
-    $butacasSeleccionadas=0;
-    
+    $butacasSeleccionadas=0;    
     $idFuncionDetalle = $("#idFuncionDetalle").val();
     $tituloPelicula =$("#tituloPelicula");
     $complejo =$("#complejo");
@@ -22,13 +21,26 @@ var URI = {
     $precios=$("#precios");
 
     $(document ).ready(function(){
+        
+             
+        if($idFuncionDetalle!=''){
+            sessionStorage.setItem('idFuncionDetalleSesion',$idFuncionDetalle);
+        }
+        else{
+            $idFuncionDetalle= sessionStorage.getItem("idFuncionDetalleSesion");
+        }
+        if($cantidadEntradas!=''){
+            sessionStorage.setItem('cantidadEntradasSesion',$cantidadEntradas);
+        }
+        else{
+            $cantidadEntradas= sessionStorage.getItem("cantidadEntradasSesion");
+        }
         obtenerDetalleFuncion();
         obtenerDetalleSala();        
         butacas = sessionStorage.getItem('butacas'); 
         if(butacas!=null){
-         var arrayButaca = butacas.split(',');     
-         $butacasSeleccionadas = arrayButaca.length;
-         console.log($butacasSeleccionadas);
+            var arrayButaca = butacas.split(',');     
+            $butacasSeleccionadas = arrayButaca.length;        
         }
         
     });
