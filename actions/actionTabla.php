@@ -69,6 +69,28 @@ function setState($request){
     }
 }
 
+function deletePersonal($request){
+    require("../models/tabla.php");
+    $s = new Tabla();
+    	
+    $state = array();
+    $state["id"] = $request->id;
+    
+    
+    if($res = $s->deletePersonal($state)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $res
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error"
+        ));
+    }
+}
+
 $request = new Request();
 $action = $request->action;
 switch($action){
@@ -81,5 +103,8 @@ switch($action){
     case "getPersonal":
         getPersonal($request);
         break;
+    case "deletePersonal":
+        deletePersonal($request);
+        break; 
     
 }

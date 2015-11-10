@@ -14,12 +14,12 @@ var URI = {
                 {   "data": "Pass" },
                 {   "data": "Total Ventas" },
                 {   "data": "Borrado"},
-                {   "data": "Fecha Baja"},
+                {   "data": "Fecha Modificacion"},
                 {   "data": "Edicion",
                     "render" : function(data, type, full, meta){
                        var boton = '';
                        
-                            boton='<span  class="glyphicon glyphicon-pencil lapiz"></span><span class="glyphicon glyphicon-remove cruz"></span>'
+                            boton='<span  class="glyphicon glyphicon-pencil lapiz"></span><span id="btn'+full.id+'" class="glyphicon glyphicon-remove cruz"></span>'
                         
                         
                         return boton;
@@ -28,7 +28,7 @@ var URI = {
                  
             ]
          },
-        CAMBIAESTADO : 'actions/actionTabla.php?action=deletePersonal'
+        DELETE : 'actions/actionTabla.php?action=deletePersonal'
     };
     var URISELECTED=[];
     var table;
@@ -64,47 +64,40 @@ var URI = {
                        
                         
                     });
-                    $('#grid-basic_wrapper .col-sm-12').on('click','.lapiz',function(event){
-                        event.stopPropagation();
-                        
-                        alert("editar");
-                        
-                    });
-                    $('#grid-basic_wrapper .col-sm-12').on('click','.cruz',function(event){
-                        event.stopPropagation();
-                        
-                        alert("borrar");
-                        
-                    });
+                    
                     
                 } );
         
         
         $('#grid-basic_wrapper .col-sm-12').prepend('<button class="btn btn-default" type="submit">Agregar</button>');
-        
-        $('body').on('click','table button',function(e){
-            e.stopPropagation();
-            
+        $('body').on('click','.lapiz',function(event){
+            event.stopPropagation();
+
+            alert("editar");
+
+        });
+        $('body').on('click','.cruz',function(event){
+            event.stopPropagation();
+
             data = {
-                id : e.toElement.id.replace('btn',''),
-                newstate : e.toElement.getAttribute('newState')
+                id : event.toElement.id.replace('btn','')
             }
-            
-            
+
+
             cambiarEstadoUsuario(data);
-        }); 
+
+        });
+        
+         
         
     } );
    
     function cambiarEstadoUsuario(data){
         $.ajax({
-            url : URI.CAMBIAESTADO,
+            url : URI.DELETE,
             method : "GET",
             dataType : 'json',
             data : data,
-            beforeSend : function(){
-                $('#btn'+data.id).append('<i class="fa fa-spinner fa-spin"></i>');
-            },
             success : function(){
                 
                 table.ajax.reload();
