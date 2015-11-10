@@ -37,14 +37,15 @@
 
     $( document ).ready(function(){	   
         obtenerPeliculas();
-        obtenerFormatos();
+        obtenerFormatos();        
         $("#archivos_subidos").on('click', '.eliminar_archivo', function() {
             var archivo = $(this).parents('.row').eq(0).find('span').text();
             archivo = $.trim(archivo);
             eliminarArchivos(archivo);
         });
     });
-
+ 
+    
     function obtenerFormatos(){   
        var obtener = $.ajax({
             url : URI.GETFORMATOS,

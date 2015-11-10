@@ -1,6 +1,10 @@
 <?php require("partials/header.php"); ?>
 
     <div class="row" id="contenedor">
+         <div class="box verdeClaro" id="divComplejos">
+            <span id="iconAvatar" class="glyphicon glyphicon-home icon"></span>
+            <label class="box-titulo">Complejos</label>
+        </div>
         <div class="box celeste" id="divFunciones">
             <span id="iconAvatar" class="glyphicon glyphicon-time icon"></span>
             <label class="box-titulo">Funciones</label>
@@ -20,11 +24,7 @@
         <div class="box violeta" id="divPersonal">
             <span id="iconAvatar" class="glyphicon glyphicon-user icon"></span>
             <label class="box-titulo">Personal</label>
-        </div>
-        <!--<div class="box verdeClaro" id="divComplejos">
-            <span id="iconAvatar" class="glyphicon glyphicon-home icon"></span>
-            <label class="box-titulo">Complejos</label>
-        </div>-->
+        </div>       
         <div class="box verdeOscuro" id="divPrecios">
             <span id="iconAvatar" class="glyphicon glyphicon-usd icon"></span>
             <label class="box-titulo">Precios</label>
@@ -52,4 +52,4 @@
 <link rel="stylesheet" href="assets/css/menuInicioAdmin.css">
 <script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
-<script src="assets/js/menuInicioAdmin.js"></script>
+<script src="assets/js/menuInicioSuperAdmin.js"></script>

@@ -7,7 +7,7 @@
     $divFunciones = $("#divFunciones");
     $divSalas = $("#divSalas");
     $divFormatos = $("#divFormatos");
-    //$divComplejos = $("#divComplejos");
+    $divComplejos = $("#divComplejos");
     $divPrecios = $("#divPrecios");
     $divPeliculas = $("#divPeliculas");
     $divTarjetas = $("#divTarjetas");
@@ -28,9 +28,9 @@
         window.location.href = "formatos.php";
     });
 
-    /*$divComplejos.on("click",function(){
+    $divComplejos.on("click",function(){
         window.location.href = "cines.php";
-    });*/
+    });
 
     $divPrecios.on("click",function(){
         window.location.href = "precios.php";

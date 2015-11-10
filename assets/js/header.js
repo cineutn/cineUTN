@@ -34,7 +34,10 @@
                 $itemHome.prop("href", "menuInicioAdmin.php");
             }else if($tipoUsuario == "vendedor"){   
                 $liEntradas.removeClass("hide");
-            }       
+            }   
+            else if($tipoUsuario == "superAdministrador"){
+                $itemHome.prop("href", "menuInicioSuperAdmin.php");
+            }
         }else{
 
             $divUserLogueado.addClass("hide");

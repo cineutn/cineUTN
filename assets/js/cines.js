@@ -39,7 +39,7 @@
 
         $tipoUsuario = sessionStorage.getItem('tipoUsuario');
 
-        if ($tipoUsuario == "administrador"){
+        if ($tipoUsuario == "superAdministrador"){
             $(".lapiz").removeClass("hide");
             $(".cruz").removeClass("hide");
             $botonAddComplejo.removeClass("hide");

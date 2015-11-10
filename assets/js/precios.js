@@ -36,7 +36,7 @@
 
         $tipoUsuario = sessionStorage.getItem('tipoUsuario');
 
-        if ($tipoUsuario == "administrador"){
+        if ($tipoUsuario == "administrador" ||$tipoUsuario == "superAdministrador"){
             $(".updatePrecio").removeClass("hide");
             $(".removePrecio").removeClass("hide");
             $botonAddPrecio.removeClass("hide");
