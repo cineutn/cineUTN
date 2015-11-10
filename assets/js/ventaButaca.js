@@ -74,12 +74,7 @@ var URI = {
             $cantidadEntradas= sessionStorage.getItem("cantidadEntradasSesion");
         }
         obtenerDetalleFuncion();
-        obtenerDetalleSala();        
-        /*butacas = sessionStorage.getItem('butacas'); 
-        if(butacas!=null){
-            var arrayButaca = butacas.split(',');     
-            $butacasSeleccionadas = arrayButaca.length;        
-        }*/
+        obtenerDetalleSala();    
         
     });
 	

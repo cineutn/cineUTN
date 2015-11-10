@@ -53,6 +53,7 @@ function nuevaSemana($request){
     $semana["fecha"] = $request->fecha;
 	$semana["numeroSemana"] = $request->numeroSemana;
     $semana["dias"] = $request->dias;
+    $semana["nombreDia"] = $request->nombreDia;   
 	
     if($nuevo = $s->addSemana($semana)){
         sendResponse(array(

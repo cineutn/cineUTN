@@ -131,8 +131,21 @@ class Funciones
         return false;
       }
       
-  }  
+  }
     
-    
+ public function obtenerFuncionesPorSemana($funcion){          
+    $nroSemana =$this->connection->real_escape_string($funcion['nroSemana']);     
+      
+    $query ="SELECT count(*) cantidad FROM semana se inner JOIN funcionhorario fh on se.idsemana=fh.idSemana  WHERE numeroSemana =$nroSemana";
+
+    $funciones = array();      
+      if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $funciones[] = $fila;
+            }
+            $result->free();
+        }
+        return $funciones;
+  }        
     
 }

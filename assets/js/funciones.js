@@ -27,7 +27,6 @@ $fechaDesc='';
 $idTipoFuncion='0';
 $funcionesCargadas= [];
 $idFuncionActiva='0';
-//$dias = ["Jueves","Viernes","Sabado","Domingo","Lunes","Martes","Miercoles"];
 
 $(document ).ready(function(){	  
     $fehaInicioSemana= obtenerInicioSemana();
@@ -302,7 +301,8 @@ $contenedorHorarios.on("click",".esbirro",function(){
             if(!res.error){
                     crearFuncionHorario(res.data.idFuncion,horaApertura,minutosApertura);            
                 }
-            else{                
+            else{      
+                alert(res.error);
                 $('#msgBoxTitulo').text('Funciones');
                 $('#msgBoxMensaje').text(res.error);
                 $('#modalMsgBox').modal('show');

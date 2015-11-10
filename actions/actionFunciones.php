@@ -171,6 +171,26 @@ require("../models/funciones.php");
     }
 }
 
+function funcionesPorSemana($request){
+	require("../models/funciones.php");
+    $f = new Funciones();
+    $funcion = array();  
+    
+	$funcion["nroSemana"] = $request->nroSemana;	
+					  
+    if($nuevo = $f->obtenerFuncionesPorSemana($funcion)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "true",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener funciones"
+        ));
+    }
+}
 
 
 $request = new Request();
@@ -197,8 +217,7 @@ switch($action){
     case "borrarSala":
         borrarSalaFuncion($request);
       break;
-        
-        
-        
-        
+    case "obtenerPorSemana":
+        funcionesPorSemana($request);
+      break;        
 }

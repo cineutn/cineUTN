@@ -10,7 +10,8 @@
         <table class="table table-condensed" id="contenedorSemanas" >
           <thead>
             <tr>
-               <th>Semana número</th>               
+               <th>Semana número</th> 
+                <th>Fecha Inicio</th> 
                <th>Cantidad de Funciones</th>                       
                <th>Cargar funciones</th>
             </tr>

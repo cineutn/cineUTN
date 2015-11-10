@@ -10,7 +10,7 @@ class Semanas
     } 
     
   public function getNumeroSemanas(){
-     $query ="SELECT distinct(numeroSemana) FROM semana";
+     $query ="SELECT numeroSemana,fecha,nombreDia FROM semana WHERE nombreDia='jueves'";
      $semanas= array();
       
        if( $result = $this->connection->query($query) ){
@@ -41,8 +41,10 @@ class Semanas
        $fecha =$this->connection->real_escape_string($semana['fecha']);      
        $numeroSemana =$this->connection->real_escape_string($semana['numeroSemana']);  
        $dias =$this->connection->real_escape_string($semana['dias']);  
+       $nombreDia =$this->connection->real_escape_string($semana['nombreDia']);  
           
-       $query = " INSERT INTO semana(idSemana,numeroSemana,fecha) VALUES (DEFAULT,$numeroSemana,ADDDATE('$fecha', INTERVAL $dias DAY))";
+          
+       $query = " INSERT INTO semana(idSemana,numeroSemana,fecha,nombreDia) VALUES (DEFAULT,$numeroSemana,ADDDATE('$fecha', INTERVAL $dias DAY),'$nombreDia')";
 
         if($this->connection->query($query)){
             $semana['idSemana'] = $this->connection->insert_id;
