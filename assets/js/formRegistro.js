@@ -20,6 +20,7 @@
   	$password = $("#password");
 	$passwordConfirmation = $("#passwordConfirmation");
   	$dni = $("#dni");
+    $complejo = $("#complejo");
    
     $('#signupform').submit(function(e) { 
          $('#signupform [data-toggle="tooltip"]').tooltip('hide');
@@ -47,13 +48,17 @@
                 dataType: 'json'
             });
             loginSignup.done(function(res){
-            if(!res.error){
+            if(!res.error && res.data.perfil==1 ){
                 sessionStorage.setItem('idUser', res.data.usuarioID);
                 sessionStorage.setItem('tipoUsuario', res.data.perfil);
                 sessionStorage.setItem('nombre', res.data.nombre);
                 sessionStorage.setItem('apellido', res.data.apellido);  
+                sessionStorage.setItem('complejo', res.data.apellido); 
                  location.reload();
-            }else{
+            }else if(res.data.perfil==2 || res.data.perfil==3){
+                table.ajax.reload();
+                $('#modalSignup').modal('hide');
+            } else{
                 alert(res.mensaje);
 
             }

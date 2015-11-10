@@ -46,7 +46,38 @@ order by 'Total Reservas vencidas' desc,'Total Compras' desc";
         return $usuarios;
     
     }
- 
+
+      public function getPersonal($idComplejo){
+          
+           $complejo = $this->connection->real_escape_string($idComplejo['idComplejo']);
+          
+        $query = "SELECT idUsuario id , nombre Nombre, apellido Apellido, dni DNI, email Mail, usuario User, contraseña as Pass, sum(case when lower(tipoVenta)<>'reserva' then 1 else 0 end) as 'Total Ventas',borrado as Borrado,fechaBaja as 'Fecha Baja',NULL as Edicion
+FROM  usuario a
+left join venta b on a.idUsuario=b.idCliente
+where tipousuario=2 and a.idComplejo=$complejo
+group by id  , nombre, apellido, dni,  email, usuario, contraseña, telefono,bloqueado,borrado,fechaBaja";  
+        
+        
+        
+       
+        $usuarios = array();
+        
+        try{
+            if( $result = $this->connection->query($query) ){
+                while($fila = $result->fetch_assoc()){
+                    $usuarios[] = $fila;
+                }
+                $result->free();
+            }
+        }
+        catch(Exception $e) {
+            throw new Exception ($e->getMessage());
+        }
+       
+        return $usuarios;
+    
+    }
+    
     public function setState($state){
         
         $id = $this->connection->real_escape_string($state['id']);

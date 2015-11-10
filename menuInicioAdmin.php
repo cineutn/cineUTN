@@ -15,7 +15,11 @@
         </div>
         <div class="box violeta" id="divUsuarios">
             <span id="iconAvatar" class="glyphicon glyphicon-user icon"></span>
-            <label class="box-titulo">Usuarios</label>
+            <label class="box-titulo">Clientes</label>
+        </div>
+        <div class="box violeta" id="divPersonal">
+            <span id="iconAvatar" class="glyphicon glyphicon-user icon"></span>
+            <label class="box-titulo">Personal</label>
         </div>
         <div class="box verdeClaro" id="divComplejos">
             <span id="iconAvatar" class="glyphicon glyphicon-home icon"></span>

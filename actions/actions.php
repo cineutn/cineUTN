@@ -135,6 +135,7 @@ function nuevoUser($request){
     $user = array();
        
     $user["perfil"] = $request->perfil;
+    $user["complejo"] = $request->complejo;
     $user["email"] = $request->email;
     $user["nombre"] = $request->nombre;
     $user["apellido"] = $request->apellido;

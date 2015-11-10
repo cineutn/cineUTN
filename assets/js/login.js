@@ -24,6 +24,7 @@
                 sessionStorage.setItem('nombre', res.data.nombre);
                 sessionStorage.setItem('apellido', res.data.apellido);
                 sessionStorage.setItem('email', res.data.email);
+                sessionStorage.setItem('idcomplejo', res.data.idComplejo);
 
                 var updateEstado =  $.ajax({
                     url: URI.UPDATE,

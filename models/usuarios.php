@@ -100,9 +100,8 @@ class Usuario
 
 
     public function validateUser($id,$password){
-        $query = "SELECT U.idUsuario, U.nombre, U.apellido, TU.detalle AS tipoUsuario, E.perfil, U.email 
+        $query = "SELECT U.idUsuario, U.nombre, U.apellido, TU.detalle AS tipoUsuario, U.email,idComplejo 
                     FROM usuario U 
-                    LEFT JOIN empleado E ON U.idUsuario = E.idUsuario 
                     INNER JOIN tipousuario TU ON U.tipoUsuario = TU.id
                     WHERE  U.usuario = '".$id."' AND U.contraseña = '". $password . "'";  
         $r = $this->connection->query($query);
@@ -133,10 +132,11 @@ class Usuario
         $telefono =  $this->connection->real_escape_string($user['telefono']);
         $genero = $this->connection->real_escape_string($user['genero']);
          $dni = $this->connection->real_escape_string($user['dni']);
+        $complejo = $this->connection->real_escape_string($user['complejo']);
 
             
         $query = " INSERT INTO `usuario` 
-            (`idUsuario`, `nombre`, `apellido`, `dni`, `sexo`, `fechaNacimiento`, `email`, `usuario`, `contraseña`, `telefono`, `estado`, `tipoUsuario`)              VALUES (NULL, '$nombre', '$apellido', '$dni', '$genero', '$fechaNacimiento', '$email', '$usuario', '$password', '$telefono', 'online', '$perfil')";
+            (`idUsuario`, `nombre`, `apellido`, `dni`, `sexo`, `fechaNacimiento`, `email`, `usuario`, `contraseña`, `telefono`, `estado`, `tipoUsuario`,`idComplejo`)              VALUES (NULL, '$nombre', '$apellido', '$dni', '$genero', '$fechaNacimiento', '$email', '$usuario', '$password', '$telefono', 'online', '$perfil', '$complejo')";
         
         if($this->connection->query($query)){
             $user['usuarioID'] = $this->connection->insert_id;

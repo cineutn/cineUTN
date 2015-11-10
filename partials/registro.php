@@ -8,7 +8,8 @@
 		  </div>
 		  <div class="modal-body">
 			<form id="signupform" role="form" class="form-horizontal">
-                <input name="perfil" type="hidden" id="perfil"  value="1"> 
+                <input name="perfil" type="hidden" id="perfil"  value="1">
+                <input name="complejo" type="hidden" id="complejo"  value="0">
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 					<div class="col-sm-10">

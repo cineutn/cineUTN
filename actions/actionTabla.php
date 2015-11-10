@@ -25,10 +25,27 @@ function getUsuarios(){
             "error" => true,
             "mensaje" => "Error al obtener peliculas. "
         ));
-    }
-    
-    
+    }  
 }
+function getPersonal($request){
+    require("../models/tabla.php");
+    $c = new Tabla();
+    
+     $ar = array();
+    $ar["idComplejo"] = $request->idComplejo;
+   
+    if($usuarios = $c->getPersonal($ar)){
+		 sendResponse(array(
+            "data" => $usuarios
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener peliculas. "
+        ));
+    }  
+}
+
 
 function setState($request){
     require("../models/tabla.php");
@@ -62,7 +79,7 @@ switch($action){
         setState($request);
         break;    
     case "getPersonal":
-        redirecRegistro();
+        getPersonal($request);
         break;
     
 }

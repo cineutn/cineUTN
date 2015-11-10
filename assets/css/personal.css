@@ -1,0 +1,38 @@
+.addPersonal {
+    margin-right: 25px;
+    margin-bottom: 10px;
+    background-color: #21CE5C;
+    color: white;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 20px;
+    border: #0DAB43 2px solid;
+    cursor: pointer;
+}
+.addPersonal span{
+    margin-top: 6px;
+    margin-left: 1px;
+    font-size: 20px;
+}
+
+.lapiz, .cruz{
+    margin-right: 2px;
+    margin-bottom: 2px;
+    color: white;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border-radius: 20px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-left: 1px;
+}
+.lapiz {
+    background-color: #28B1D2;
+    border: #0981B7 2px solid;
+}
+.cruz {
+    background-color: #FF3B04;
+    border: #B70909 2px solid;
+}
