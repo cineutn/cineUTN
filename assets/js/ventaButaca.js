@@ -22,13 +22,51 @@ var URI = {
 
     $(document ).ready(function(){
         
-             
+        butacas = sessionStorage.getItem('butacas'); 
         if($idFuncionDetalle!=''){
-            sessionStorage.setItem('idFuncionDetalleSesion',$idFuncionDetalle);
+            sessionStorage.setItem('idFuncionDetalleSesion',$idFuncionDetalle); 
+            if(butacas!=null){
+                      
+                
+                var arrayButaca = butacas.split(',')
+
+                $.each(arrayButaca, function( index, value ){
+
+                    var reservar = $.ajax({
+                                    url : URI.BUTACA,
+                                    method : "POST",
+                                     data: {idSalaFuncion:value,hanilitada:1},
+                                    dataType : 'json',
+                    });        
+
+                    reservar.done(function(res){
+                        if(!res.error){            
+
+                        }else{
+                            //alert(res.error);
+                            $('#msgBoxTitulo').text('UTN Cines');
+                            $('#msgBoxMensaje').text(res.error);
+                            $('#modalMsgBox').modal('show');
+                        }
+                    });
+
+                });
+                
+                
+                
+            }
         }
         else{
             $idFuncionDetalle= sessionStorage.getItem("idFuncionDetalleSesion");
+            
+            if(butacas!=null){
+                var arrayButaca = butacas.split(',');     
+                $butacasSeleccionadas = arrayButaca.length;        
+            }
         }
+        
+        
+        
         if($cantidadEntradas!=''){
             sessionStorage.setItem('cantidadEntradasSesion',$cantidadEntradas);
         }
@@ -37,11 +75,11 @@ var URI = {
         }
         obtenerDetalleFuncion();
         obtenerDetalleSala();        
-        butacas = sessionStorage.getItem('butacas'); 
+        /*butacas = sessionStorage.getItem('butacas'); 
         if(butacas!=null){
             var arrayButaca = butacas.split(',');     
             $butacasSeleccionadas = arrayButaca.length;        
-        }
+        }*/
         
     });
 	
