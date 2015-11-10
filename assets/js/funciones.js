@@ -233,13 +233,57 @@ function buscarFuncionesActivas(idSemana,idSala){
 //ultima funcion a las 23
 function calcularHorarioFunciones(){
     
+    $contenedorHorarios.html("");
+    $row='';   
     var duracionConTrailer=parseInt($duracionPelicula)+30;
+    if( $("#dia_"+$idSemanaSeleccionada).val()=='Sabado' || $("#dia_"+$idSemanaSeleccionada).val() =='Domingo'){ 
+              console.log($("#dia_"+$idSemanaSeleccionada).val());    
+              var apertura = new Date("01/01/1985 00:00:00");
+              var cierre = new Date("01/01/1985 04:00:00");  
+              var peliculaCompleta = new Date("01/01/1985 00:00:00");
+
+              while(new Date(apertura) < new Date(cierre)){
+                if($funcionesCargadas.length>0){        
+
+                peliculaCompleta.setMinutes(apertura.getMinutes()+ parseInt(duracionConTrailer));  
+                var primeraFuncion = $funcionesCargadas[0].horario;
+                var hr = new Date("01/01/1985 " + primeraFuncion);           
+                if(new Date(peliculaCompleta) <= new Date(hr)){
+
+                    horaApertura = apertura.getHours();                   
+                    minutosApertura = ((apertura.getMinutes()<10)?'0':'')+apertura.getMinutes();
+                    horarioFuncion=horaApertura+':'+ minutosApertura;
+                    $row=$row +'<li><a>'+horarioFuncion+'<button type="button" class="btn btn-default btn-circle botonVerde esbirro"><i class="glyphicon glyphicon-plus textoBoton"></i></button></a></li>';       
+                    apertura.setMinutes(apertura.getMinutes()+ parseInt(duracionConTrailer));   
+
+                }else{                
+                    horaApertura = hr.getHours();                   
+                    minutosApertura = ((hr.getMinutes()<10)?'0':'')+hr.getMinutes();
+                    horarioFuncion=horaApertura+':'+ minutosApertura;                
+                    $row=$row +'<li><input type="hidden" value='+$funcionesCargadas[0].idfuncion+' ><a>'+horarioFuncion+'  '+ $funcionesCargadas[0].titulo+' '+ $funcionesCargadas[0].descripcion + '<button type="button" class="btn btn-default btn-circle botonRojo esbirroRojo"><i class="glyphicon glyphicon-remove textoBoton"></i></button></a></li>';       
+                    apertura.setMinutes(hr.getMinutes()+ parseInt(duracionConTrailer));                 
+                    $funcionesCargadas = $funcionesCargadas.slice(1)                
+                }
+        }else{
+
+            horaApertura = apertura.getHours();                   
+            minutosApertura = ((apertura.getMinutes()<10)?'0':'')+apertura.getMinutes();
+            horarioFuncion=horaApertura+':'+ minutosApertura;
+            $row=$row +'<li><a>'+horarioFuncion+'  <button type="button" class="btn btn-default btn-circle botonVerde esbirro"><i class="glyphicon glyphicon-plus textoBoton"></i></button></a></li>';       
+            apertura.setMinutes(apertura.getMinutes()+ parseInt(duracionConTrailer));  
+
+            }                
+        }
+        
+    
+    }
+    //var duracionConTrailer=parseInt($duracionPelicula)+30;
     //solo me interesa la hora en esta variable
     var apertura = new Date("01/01/1985 12:00:00");
     var cierre = new Date("01/01/1985 23:00:00");  
     var peliculaCompleta = new Date("01/01/1985 12:00:00");
-    $contenedorHorarios.html("");
-    $row='';        
+   // $contenedorHorarios.html("");
+    //$row='';        
     while(new Date(apertura) < new Date(cierre)){
             if($funcionesCargadas.length>0){        
 
