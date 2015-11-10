@@ -15,7 +15,14 @@
     $idTipoFuncion=$("#idTipoFuncion").val();
     $precios=$("#precios");
 
-    $(document ).ready(function(){	   
+    $(document ).ready(function(){	
+        if($idFuncionDetalle!=''){
+            sessionStorage.setItem('idFuncionDetalleSesion',$idFuncionDetalle);
+        }
+        else{
+            $idFuncionDetalle= sessionStorage.getItem("idFuncionDetalleSesion");
+        }
+        
         obtenerDetalleFuncion();
 
         var fechaTermino = new Date();

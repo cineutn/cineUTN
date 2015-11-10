@@ -253,8 +253,7 @@ function reservarButaca(){
         
     });
     }
-    else{    
-        //alert('Aun debe elegir '+$cantidadEntradas+' entradas');
+    else{            
         $('#msgBoxTitulo').text('UTN Cines');
         $('#msgBoxMensaje').text('Aun debe elegir '+$cantidadEntradas+' entradas');
         $('#modalMsgBox').modal('show');
