@@ -86,7 +86,7 @@ function obtenerSala(){
         if(estado==1){
             $imagen='<input type="hidden" value="libre"><img src="assets/img/butacaLibre.png" />';        
         }
-        if(estado==2){
+        if(estado==0){
             $imagen='<input type="hidden" value="ocupada"><img src="assets/img/butacaOcupada.png" />'; 
             //guardo el esado inicial de las butacas seleccionadas
             $idButacaOcupadaInicial.push(id);
@@ -119,6 +119,7 @@ $("#btnGuardarSala").click(function(){
               var editarEstado = $.ajax({
                                 url : URI.EDITAR,
                                 method : "POST",
+                                async: false,
                                  data: {
                                      idSalaDetalle:$(this)[0].id,
                                      habilitada:0
@@ -146,6 +147,7 @@ $("#btnGuardarSala").click(function(){
              var editarEstado = $.ajax({
                             url : URI.EDITAR,
                             method : "POST",
+                            async: false,
                              data: {
                                  idSalaDetalle:value,
                                  habilitada:1

@@ -40,6 +40,7 @@ $tablaSala.on("click",".botonNegro",function(event){
 
 
 $btnAltaModificacion.on("click",function(){
+    $('#modalLoading').modal('show');
      bValidar="false";
      $nombreSala =$("#nombreSala");
      $fila =$("#fila");
@@ -49,6 +50,7 @@ $btnAltaModificacion.on("click",function(){
            var addSala =  $.ajax({
                 url: URI.ADD,
                 type: 'POST',
+                async: false,
                 data: {
                         idSala:0,
 						nombreSala:$nombreSala.val(),
@@ -60,13 +62,15 @@ $btnAltaModificacion.on("click",function(){
             })
             addSala.done(function(response){	                
                 diagramarSalaDetalle($fila.val(),$columna.val(),response.data.idSala)
-                $salaNueva.addClass("rowHide");                
+                $salaNueva.addClass("rowHide");
+                $('#modalLoading').modal('hide');
                 obtenerSalas();
             }); 
       } 
  });
 
-function obtenerSalas(){       
+function obtenerSalas(){   
+    $contenedorSalas.html("");
     var obtener = $.ajax({
         url : URI.SALAS,
         method : "GET",
@@ -113,6 +117,7 @@ function obtenerSalas(){
        var eliminarSala =  $.ajax({
                 url: URI.ELIMINAR,
                 type: 'POST',
+                async: false,
                 data: {
                         idSala:$("#idSalaEliminar").val()
 				  },
@@ -127,7 +132,7 @@ function obtenerSalas(){
         $("#fila").val("");
         $("#columna").val("");
         $('#modalEliminarSala').modal('hide');
-      
+        
     });
 
 //diagramar sala
