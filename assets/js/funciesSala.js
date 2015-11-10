@@ -34,13 +34,15 @@ function obtenerFunciones(){
                     $row=$row+'<h3>Sala: '+$salaActual+'</h3><br/>';
                 if($salaActual!=$salaIteracion){
                     //comienza tabla
-                    $row=$row+'<table class="table table-condensed"><thead><tr><th>Titulo</th><th>Formato</th><th>Dia</th><th>Horario</th></tr></thead><tbody>';
+                    $row=$row+'<table class="table table-condensed"><thead><tr><th>Titulo</th><th>Formato</th><th>Dia</th><th>Horario</th><th>Estado</th></tr></thead><tbody>';
                 res.data.forEach(function(datosSala){
                     if($salaActual==datosSala.Sala){
                         //dibujo row de tabla                                           
                         $salaIteracion=datosSala.Sala;
+                        console.log(datosSala.fechaBaja);
+                        $activa =(datosSala.fechaBaja!='0000-00-00 00:00:00')?'Inactiva':'Activa';
                         $idioma= (datosSala.subtitulada==1)?'Subtitulada':'Castellano';
-                        $row=$row+'<tr><td>'+datosSala.titulo+'</td><td>'+datosSala.descripcion+' '+$idioma+'</td><td>'+datosSala.dia+'</td><td>'+datosSala.horario+'</td></tr>';
+                        $row=$row+'<tr><td>'+datosSala.titulo+'</td><td>'+datosSala.descripcion+' '+$idioma+'</td><td>'+datosSala.dia+'</td><td>'+datosSala.horario+'</td><td>'+$activa+'</td></tr>';
                     }                    
                     }); 
                     //cierro tabla

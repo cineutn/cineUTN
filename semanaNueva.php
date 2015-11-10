@@ -12,7 +12,7 @@
             <tr>
                <th>Semana número</th> 
                <th>Fecha Inicio</th> 
-               <th>Cantidad de Funciones</th>                       
+               <th>Funciones Activas</th>                       
                <th>Cargar funciones</th>
                <th>Ver funciones</th>
                <th>Cerrar funciones</th>
