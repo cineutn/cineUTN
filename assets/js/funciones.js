@@ -365,6 +365,7 @@ function generarSalaFuncion(idFuncionDetalle,idFuncion){
     var obtener = $.ajax({
         url : URI.SALADETALLE,
         method : "GET",
+        async: false,
          data: {idSala:$idSalaSeleccionada},
         dataType : 'json',
     });   

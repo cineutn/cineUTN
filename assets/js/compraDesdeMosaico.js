@@ -107,7 +107,7 @@
                                 
                         }else{
                         //si es distinto dia
-                            tem.dias.push(
+                            tem[0].dias.push(
                                 {
                                     dia : item.dia,
                                     formatos : [{
