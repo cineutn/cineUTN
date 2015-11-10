@@ -45,7 +45,22 @@ function getPersonal($request){
         ));
     }  
 }
-
+function getAdmins(){
+    require("../models/tabla.php");
+    $c = new Tabla();
+    
+       
+    if($usuarios = $c->getAdmins()){
+		 sendResponse(array(
+            "data" => $usuarios
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener Administradores. "
+        ));
+    }  
+}
 
 function setState($request){
     require("../models/tabla.php");
@@ -106,5 +121,9 @@ switch($action){
     case "deletePersonal":
         deletePersonal($request);
         break; 
+    case "getAdmins":
+        getAdmins();
+        break;     
+        
     
 }

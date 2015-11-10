@@ -14,7 +14,7 @@
     $divEntradas = $("#divEntradas");
     $divWeb = $("#divWeb");
     $divUsuarios = $("#divUsuarios");
-    $divPersonal = $("#divPersonal");
+    $divAdministrador = $("#divAdministrador");
 	
     $divFunciones.on("click",function(){
         window.location.href = "semanaNueva.php";
@@ -55,8 +55,7 @@
 	$divUsuarios.on("click",function(){
         window.location.href = "usuarios.php";
     });
-    $divPersonal.on("click",function(){
-        window.location.href = "personal.php";
+    $divAdministrador.on("click",function(){
+        window.location.href = "administradores.php";
     });
-    
 })(jQuery)
