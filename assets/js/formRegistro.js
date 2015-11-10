@@ -7,7 +7,8 @@
     
         SIGNIN : 'actions/actions.php?action=nuevoUser',
         VALIDARMAIL : "actions/api.php?action=validarMail",
-        VALIDARUSERNAME : "actions/api.php?action=validarUserName"
+        VALIDARUSERNAME : "actions/api.php?action=validarUserName",
+        EDIT : 'actions/actions.php?action=editUser'
     };
 
     $perfil = $("#perfil");
@@ -74,6 +75,55 @@
         }
     });
     
+     $('#editform').submit(function(e) { 
+         $('#editform [data-toggle="tooltip"]').tooltip('hide');
+        e.preventDefault();
+    
+        //se traen todos los inputs del formulario
+        var $inputs = $('#editform :input');
+        var error=false;
+        debugger;
+        $inputs.each(function() {
+            var encontro_error = validar($(this)); //uses dependence ok
+            if (encontro_error){
+                e.preventDefault();
+                $(eval($(this).attr('id'))).tooltip('show');
+                error=true;
+                return false;
+            }         
+        }); 
+        if(!error){
+            debugger;
+            var edit = $.ajax({
+                url: URI.EDIT,
+                method: "POST",
+                data: $('#editform').serialize(),
+                dataType: 'json'
+            });
+            edit.done(function(res){
+            if(!res.error ){
+                table.ajax.reload();
+                $('#modalEdit .modal-body').append('<div class="alert alert-success" role="alert"><strong>Edicion exitosa!</strong> Puede cerrar esta ventana.</div>');
+                
+                
+                
+            }else{
+                alert(res.mensaje);
+
+            }
+        });
+            
+         edit.fail(function(){
+         
+            alert("error");
+         });   
+            
+            
+            
+        }
+         $('#modalEdit').modal('hide');
+    });
+    
     function validar(elemento){        
         switch(elemento.attr('id')) {
             case 'passwordConfirmation':
@@ -81,10 +131,15 @@
                     return true;
                 }
                 break;
+            case 'passwordConfirmationEdit':
+                if($('#passwordEdit').val()!=$('#passwordConfirmationEdit').val()){
+                    return true;
+                }
+                break;    
         }
     }
     
-     $( document ).ready(function(){
+    $( document ).ready(function(){
         $('#email').on('change',function(){
            $('#signupform .alert.alert-danger.mail').remove();
             var validaMail = $.ajax({
@@ -127,6 +182,7 @@
             
         
         }); 	
+        
       });
 	 
 

@@ -145,7 +145,35 @@ class Usuario
             return false;
         }
     }
+    public function editUser($user){
+       
+        $id =  $this->connection->real_escape_string($user['id']);
+        $email =  $this->connection->real_escape_string($user['email']);
+        $nombre =  $this->connection->real_escape_string($user['nombre']);
+        $apellido =  $this->connection->real_escape_string($user['apellido']);
+       
+        $usuario =  $this->connection->real_escape_string($user['usuario']);
+        $password =  $this->connection->real_escape_string($user['password']);
+        $telefono =  $this->connection->real_escape_string($user['telefono']);
+       
+         $dni = $this->connection->real_escape_string($user['dni']);
+        $complejo = $this->connection->real_escape_string($user['complejo']);
 
+            
+        $query = " UPDATE `usuario` set 
+            `nombre`='$nombre', `apellido`='$apellido', `dni`='$dni', `contraseña`='$password', `telefono`='$telefono' where idUsuario=$id            
+            ";
+        
+        
+        if($this->connection->query($query)){
+            $user['usuarioID'] = $this->connection->insert_id;
+            return $user;
+        }else{
+            return false;
+        }
+    }
+    
+    
     public function updateUser($user){
         $usuarioID = $this->connection->real_escape_string($user['usuarioID']);
         $nombreCompleto = $this->connection->real_escape_string($user['nombreCompleto']);

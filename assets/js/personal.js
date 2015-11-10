@@ -9,6 +9,7 @@ var URI = {
                 {   "data": "Nombre" },
                 {   "data": "Apellido" },
                 {   "data": "DNI" },
+                {   "data": "Telefono" },
                 {   "data": "Mail" },
                 {   "data": "User" },
                 {   "data": "Pass" },
@@ -19,7 +20,7 @@ var URI = {
                     "render" : function(data, type, full, meta){
                        var boton = '';
                        
-                            boton='<span  class="glyphicon glyphicon-pencil lapiz"></span><span id="btn'+full.id+'" class="glyphicon glyphicon-remove cruz"></span>'
+                            boton='<span id="btnEdit'+full.id+'"  class="glyphicon glyphicon-pencil lapiz"></span><span id="btn'+full.id+'" class="glyphicon glyphicon-remove cruz"></span>'
                         
                         
                         return boton;
@@ -54,7 +55,13 @@ var URI = {
                     }
                 })
              .on('xhr.dt', function ( e, settings, json, xhr ) {
-                    $('#grid-basic_wrapper .col-sm-12').prepend('<div id="btnAgregar" class="pull-right addPersonal"><span class="glyphicon glyphicon-plus"></span>    </div>');
+             
+                    
+                    if($('#btnAgregar').attr('id')!='btnAgregar'){
+                        $('#grid-basic_wrapper .col-sm-12').prepend('<div id="btnAgregar" class="pull-right addPersonal"><span class="glyphicon glyphicon-plus"></span>    </div>');  
+                    }
+             
+             
                     $('#grid-basic_wrapper .col-sm-12').on('click','.addPersonal',function(event){
                         event.stopPropagation();
                         
@@ -69,11 +76,33 @@ var URI = {
                 } );
         
         
-        $('#grid-basic_wrapper .col-sm-12').prepend('<button class="btn btn-default" type="submit">Agregar</button>');
+        
         $('body').on('click','.lapiz',function(event){
             event.stopPropagation();
-
-            alert("editar");
+            $('#modalEdit .modal-body .alert-success').remove();
+            
+            data = {
+                id : event.toElement.id.replace('btnEdit','')
+            }
+            var rowEdit=table.data().filter(function(x) { if(x.id==data.id)return x; });
+            
+            $('#perfil').val('2');
+            $('#complejo').val(sessionStorage.idcomplejo);
+            $('#idEdit').val(rowEdit[0].id);
+            $('#emailEdit').val(rowEdit[0].Mail);
+            $('#nombreEdit').val(rowEdit[0].Nombre);
+            $('#apellidoEdit').val(rowEdit[0].Apellido);
+            $('#dniEdit').val(rowEdit[0].DNI);
+            $('#usuarioEdit').val(rowEdit[0].User);
+            $('#passwordEdit').val(rowEdit[0].Pass);
+            $('#passwordConfirmationEdit').val(rowEdit[0].Pass);
+            $('#telefonoEdit').val(rowEdit[0].Telefono);
+            
+                    
+            $('#modalEdit').modal('show');
+            
+            
+            
 
         });
         $('body').on('click','.cruz',function(event){

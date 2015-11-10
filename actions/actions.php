@@ -163,6 +163,39 @@ function nuevoUser($request){
     }
 }
 
+function editUser($request){
+    require("../models/usuarios.php");
+    $c = new Usuario();
+    $user = array();
+       
+    $user["id"] = $request->idEdit;
+    $user["perfil"] = $request->perfil;
+    $user["complejo"] = $request->complejo;
+    $user["email"] = $request->emailEdit;
+    $user["nombre"] = $request->nombreEdit;
+    $user["apellido"] = $request->apellidoEdit;
+    $user["usuario"] = $request->usuarioEdit;
+    $user["password"] = $request->passwordEdit;
+    $user["telefono"] = $request->telefonoEdit;
+    $user["dni"] = $request->dniEdit;
+    
+    
+    if($usuario = $c->editUser($user)){
+      //$c = $user->validateUser($user["usuario"],$user["password"]);
+      sendResponse(array(
+            "error" => false,
+            "mensaje" => "Usuario Editado.",
+            "data"=> $usuario
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al editar el usuario."
+        ));
+        
+    }
+}
+
 function updateUser($request){
     require("../models/usuarios.php");
     $c = new Usuario();
@@ -257,6 +290,9 @@ switch($action){
     case "nuevoUser":
         nuevoUser($request);
         break;
+    case "editUser":
+        editUser($request);
+        break;    
     case "validar":
         validateUser($request);
         break;
