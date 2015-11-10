@@ -1,6 +1,6 @@
 var URI = {        
  
-    
+        COMPLEJOS : 'actions/actionComplejos.php?action=obtenerComplejo',
         PERSONAL : {
             url : 'actions/actionTabla.php?action=getAdmins',
             columns : [
@@ -36,6 +36,52 @@ var URI = {
     
     $(document).ready(function() {
         
+        
+        
+        
+        
+        
+        
+        $('<div class="form-group">					<label for="inputEmail3" class="col-sm-2 control-label">Complejo</label>					<div class="col-sm-10">						<select id="cmbComplejo" class="form-control"></select>					</div>				    </div>').insertAfter($('#modalSignup #generoMasculino').parent().parent().parent());
+        
+        $('<div class="form-group">					<label for="inputEmail3" class="col-sm-2 control-label">Complejo</label>					<div class="col-sm-10">						<select id="cmbComplejoEdit" class="form-control"></select>					</div>				    </div>').insertAfter($('#modalEdit #telefonoEdit').parent().parent());
+        
+        
+         var selectComplejos =  $.ajax({
+                url: URI.COMPLEJOS,
+                type: 'POST' ,               
+                dataType: 'json'
+               
+            })
+        
+         selectComplejos.done(function(response){
+                
+                response.data.forEach(function(item){
+                    $('#cmbComplejo').append(
+                        $('<option/>',{
+                            value   :  item.idComplejo 
+                        }).append(item.nombre)
+                    );
+                    
+                    $('#cmbComplejoEdit').append(
+                        $('<option/>',{
+                            value   :  item.idComplejo 
+                        }).append(item.nombre)
+                    );
+                    
+                });
+                
+            }); 
+        
+        $('body').on('change','#cmbComplejo',function(){
+           $('#complejo').val($( "#cmbComplejo option:selected" ).val());
+        
+        });
+         $('body').on('change','#cmbComplejoEdit',function(){
+            $('#complejoEdit').val($( "#cmbComplejoEdit option:selected" ).val());
+        
+        });
+        
         URISELECTED.url=URI.PERSONAL.url+"&idComplejo="+sessionStorage.idcomplejo;
         URISELECTED.columns=URI.PERSONAL.columns;
         
@@ -65,8 +111,8 @@ var URI = {
                     $('#grid-basic_wrapper .col-sm-12').on('click','.addPersonal',function(event){
                         event.stopPropagation();
                         
-                        $('#perfil').val('2');
-                        $('#complejo').val(sessionStorage.idcomplejo);
+                        $('#perfil').val('3');
+                        
                         $('#modalSignup').modal('show');
                        
                         
@@ -86,8 +132,9 @@ var URI = {
             }
             var rowEdit=table.data().filter(function(x) { if(x.id==data.id)return x; });
             
-            $('#perfil').val('2');
-            $('#complejo').val(sessionStorage.idcomplejo);
+            $('#cmbComplejoEdit').val(rowEdit[0].idComplejo)
+            $('#complejoEdit').val(rowEdit[0].idComplejo);
+            $('#perfilEdit').val('2');
             $('#idEdit').val(rowEdit[0].id);
             $('#emailEdit').val(rowEdit[0].Mail);
             $('#nombreEdit').val(rowEdit[0].Nombre);

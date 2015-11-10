@@ -77,12 +77,12 @@ group by id  , nombre, apellido, dni,  email, usuario, contraseña, telefono,bor
         return $usuarios;
     
     }
-     public function getAdmins(){
+    public function getAdmins(){
           
     
           
         $query = "
-SELECT idUsuario id , a.nombre Nombre, apellido Apellido, dni DNI, email Mail, usuario User, contraseña as Pass,telefono as Telefono,b.nombre as Complejo,borrado as Borrado,fechaBaja as 'Fecha Modificacion',NULL as Edicion
+SELECT idUsuario id , a.nombre Nombre, apellido Apellido, dni DNI, email Mail, usuario User, contraseña as Pass,telefono as Telefono,b.nombre as Complejo,a.idComplejo,borrado as Borrado,fechaBaja as 'Fecha Modificacion',NULL as Edicion
 FROM  usuario a
 inner join complejo b on a.idComplejo=b.idComplejo
 where tipousuario=3";  

@@ -87,7 +87,7 @@
 	  </div>
 	</div>
 
-<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+<div class="modal fade" id="modalEdit" tabindex="-2" role="dialog" aria-labelledby="myModalLabel2">
 	  <div class="modal-dialog" role="document">
 		<div class="modal-content">
 		  <div class="modal-header">
@@ -96,8 +96,8 @@
 		  </div>
 		  <div class="modal-body">
 			<form id="editform" role="form" class="form-horizontal">
-                <input name="perfil" type="hidden" id="perfil"  value="1">
-                <input name="complejo" type="hidden" id="complejo"  value="0">
+                <input name="perfilEdit" type="hidden" id="perfilEdit"  value="1">
+                <input name="complejoEdit" type="hidden" id="complejoEdit"  value="0">
                 <input name="idEdit" type="hidden" id="idEdit"  value="0">
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Email</label>

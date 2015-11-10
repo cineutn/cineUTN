@@ -161,7 +161,7 @@ class Usuario
 
             
         $query = " UPDATE `usuario` set 
-            `nombre`='$nombre', `apellido`='$apellido', `dni`='$dni', `contraseña`='$password', `telefono`='$telefono' where idUsuario=$id            
+            `nombre`='$nombre', `apellido`='$apellido', `dni`='$dni', `contraseña`='$password', `telefono`='$telefono', `idComplejo`=$complejo  where idUsuario=$id            
             ";
         
         

@@ -169,8 +169,8 @@ function editUser($request){
     $user = array();
        
     $user["id"] = $request->idEdit;
-    $user["perfil"] = $request->perfil;
-    $user["complejo"] = $request->complejo;
+    $user["perfil"] = $request->perfilEdit;
+    $user["complejo"] = $request->complejoEdit;
     $user["email"] = $request->emailEdit;
     $user["nombre"] = $request->nombreEdit;
     $user["apellido"] = $request->apellidoEdit;

@@ -86,8 +86,8 @@ var URI = {
             }
             var rowEdit=table.data().filter(function(x) { if(x.id==data.id)return x; });
             
-            $('#perfil').val('2');
-            $('#complejo').val(sessionStorage.idcomplejo);
+            $('#perfilEdit').val('2');
+            $('#complejoEdit').val(sessionStorage.idcomplejo);
             $('#idEdit').val(rowEdit[0].id);
             $('#emailEdit').val(rowEdit[0].Mail);
             $('#nombreEdit').val(rowEdit[0].Nombre);
