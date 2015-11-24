@@ -34,7 +34,7 @@
 
         $tipoUsuario = sessionStorage.getItem('tipoUsuario');
 
-        if ($tipoUsuario == "administrador"){
+        if ($tipoUsuario == "superAdministrador"){
             $(".updateTarjeta").removeClass("hide");
             $(".removeTarjeta").removeClass("hide");
             $botonAddPrecio.removeClass("hide");
@@ -146,8 +146,8 @@
         $(this).confirmation({
             title: '¿Desea eliminar la tarjeta seleccionada?',
             placement: 'bottom',
-            singleton: true,
-            popout: false,
+            btnOkClass: 'btn-success',
+            btnCancelClass: 'btn-danger',
             href: '',
             btnOkLabel: 'Si',
             onConfirm: function() {

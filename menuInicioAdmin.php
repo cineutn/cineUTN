@@ -20,15 +20,16 @@
             <label class="box-titulo">Complejos</label>
         </div>-->
         
-        <div class="box amarillo" id="divPeliculas">
+        <!--<div class="box amarillo" id="divPeliculas">
             <span id="iconAvatar" class="glyphicon glyphicon-film icon"></span>
             <label class="box-titulo">Peliculas</label>
-        </div>
+        </div>-->
         
-        <!--<div class="box rojoClaro" id="divEntradas">
+        <div class="box rojoClaro" id="divEntradas">
             <span id="iconAvatar" class="glyphicon glyphicon-qrcode icon"></span>
             <label class="box-titulo">Entradas</label>
-        </div>-->
+        </div>
+        
         <div class="box rojoOscuro" id="divWeb">
             <span id="iconAvatar" class="glyphicon glyphicon-globe icon"></span>
             <label class="box-titulo">Web</label>

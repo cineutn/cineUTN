@@ -1,12 +1,17 @@
 <?php require("partials/header.php"); ?>
 
     <div class="row" id="contenedor">
-         <div class="box verdeClaro" id="divComplejos">
+        
+        <div class="box verdeClaro" id="divComplejos">
             <span id="iconAvatar" class="glyphicon glyphicon-home icon"></span>
             <label class="box-titulo">Complejos</label>
         </div>
         
-        
+        <div class="box amarillo" id="divPeliculas">
+            <span id="iconAvatar" class="glyphicon glyphicon-film icon"></span>
+            <label class="box-titulo">Peliculas</label>
+        </div>
+                
         <div class="box lila" id="divFormatos">
             <span id="iconAvatar" class="glyphicon glyphicon-hd-video icon"></span>
             <label class="box-titulo">Formatos</label>
@@ -33,7 +38,7 @@
             <label class="box-titulo">Web</label>
         </div>
         <div class="box azul" id="divReportes">
-            <span id="iconAvatar" class="glyphicon glyphicon-user icon"></span>
+            <span id="iconAvatar" class="glyphicon glyphicon-list-alt icon"></span>
             <label class="box-titulo">Reportes</label>
         </div>
     </div>

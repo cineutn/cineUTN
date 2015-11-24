@@ -90,6 +90,25 @@ function obtenerComplejo($request){
     }
 }
 
+function obtenerFuncionesPorComplejo($request){
+    require("../models/complejos.php");
+    $c = new Complejos();
+    $complejo = array();
+    $complejo["idComplejo"] = $request->idComplejo;
+    if($funciones = $c->getFuncionesByComplejo($complejo)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $funciones
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener las funciones del complejo. "
+        ));
+    }
+}
+
 function validarNombre($request){
     require("../models/complejos.php");
     $c = new Complejos();
@@ -186,6 +205,9 @@ switch($action){
         break;
     case "obtener":
         obtenerComplejo($request);
+        break;
+    case "obtenerFunciones":
+        obtenerFuncionesPorComplejo($request);
         break;
     case "validar":
         validarNombre($request);

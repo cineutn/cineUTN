@@ -38,6 +38,24 @@ class Complejos
         return $complejos;
     }   
 
+    public function getFuncionesByComplejo($complejo){
+        $id = $this->connection->real_escape_string($complejo['idComplejo']);
+
+        $query = "SELECT * 
+                    FROM funcion F
+                    INNER JOIN complejo C ON C.idComplejo = F.idComplejo
+                    WHERE F.idComplejo = '$id' ";  
+       
+        $complejos = array();
+        if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $complejos[] = $fila;
+            }
+            $result->free();
+        }
+        return $complejos;
+    }
+
     public function validateNombreComplejo($complejo){
         $id = $this->connection->real_escape_string($complejo['idComplejo']);
         $nombre = $this->connection->real_escape_string($complejo['nombreComplejo']);

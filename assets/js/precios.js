@@ -36,7 +36,7 @@
 
         $tipoUsuario = sessionStorage.getItem('tipoUsuario');
 
-        if ($tipoUsuario == "administrador" ||$tipoUsuario == "superAdministrador"){
+        if ($tipoUsuario == "administrador" || $tipoUsuario == "superAdministrador"){
             $(".updatePrecio").removeClass("hide");
             $(".removePrecio").removeClass("hide");
             $botonAddPrecio.removeClass("hide");
@@ -131,7 +131,7 @@
                                     '<div id="btnUpdate" class="updatePrecio lapiz">'+
                                         '<span class="glyphicon glyphicon-pencil "></span>'+    
                                     '</div>'+
-                                    '<div id="btnRemove" class="removePrecio cruz" data-toggle="confirmation-singleton">'+
+                                    '<div id="btnRemove" class="removePrecio cruz" data-toggle="confirmation-popout">'+
                                         '<span class="glyphicon glyphicon-remove "></span>'+    
                                     '</div>'+                            
                                 '</li>'+
@@ -205,8 +205,10 @@
         $(this).confirmation({
             title: '¿Desea eliminar el precio seleccionado?',
             placement: 'bottom',
-            singleton: true,
-            popout: false,
+            btnOkClass: 'btn-success',
+            btnCancelClass: 'btn-danger',
+            singleton: false,
+            popout: true,
             href: '',
             btnOkLabel: 'Si',
             onConfirm: function() {

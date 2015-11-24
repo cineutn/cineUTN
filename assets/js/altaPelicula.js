@@ -299,7 +299,7 @@
                             '</div>'+
                             '<div id="btnRemove" class="pull-right cruz" data-toggle="confirmation-singleton">'+
                                 '<span class="glyphicon glyphicon-remove"></span>'+
-                            '</div>'+
+                            '</div>'+                            
                         '</div>'+
                     '</div>';
                 });
@@ -404,10 +404,12 @@
         event.preventDefault();
         
          $(this).confirmation({
-            title: '¿Desea eliminar la Pelicula seleccionada?',
+            title: '¿Desea eliminar la Pelicula?',
             placement: 'bottom',
             singleton: true,
-            popout: false,
+            popout: true,
+            btnOkClass: 'btn-success',
+            btnCancelClass: 'btn-danger',
             href: '',
             btnOkLabel: 'Si',
             onConfirm: function() {

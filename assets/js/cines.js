@@ -8,7 +8,8 @@
         ADD : 'actions/actionComplejos.php?action=nuevo',
         UPDATE : 'actions/actionComplejos.php?action=modificar',
         REMOVE : 'actions/actionComplejos.php?action=eliminar',
-        VALIDAR : 'actions/actionComplejos.php?action=validar'
+        VALIDAR : 'actions/actionComplejos.php?action=validar',
+        FUNCIONES: 'actions/actionComplejos.php?action=obtenerFunciones'
     };
 
     $contenedorCines = $("#contenedorCines");
@@ -85,8 +86,8 @@
                             '<div class="pull-right lapiz">'+
                                 '<span class="glyphicon glyphicon-pencil"></span>'+   
                             '</div>'+
-                            '<div id="btnRemove" class="pull-right cruz" data-toggle="confirmation-singleton">'+
-                                '<span class="glyphicon glyphicon-remove"></span>'+   
+                            '<div id="btnRemove" class="pull-right cruz" data-toggle="confirmation" data-singleton="true">'+
+                                '<span class="glyphicon glyphicon-remove"></span>'+                                    
                             '</div>'+                         
                         '</div>'+    
                     '</div>';
@@ -237,22 +238,45 @@
     $contenedorCines.on("click",".cruz",function(event){
         event.preventDefault();
         
+        $divPadre = $(this).closest('.cine');
+        $complejoID =  $divPadre.children('#idComplejo').text();
+        $mensaje = "";
+
+        var obtenerFunciones =  $.ajax({
+                    url: URI.FUNCIONES,
+                    type: 'GET',
+                    data: {idComplejo:$complejoID},
+                    dataType: 'json',
+                    async: false
+        });
+
+        obtenerFunciones.done(function(response){
+            if(!response.error){
+               $mensaje = "El complejo seleccionado contiene Funciones Asociadas. ¿Desea Eliminarlo de todos modos?";
+            }else{
+               $mensaje = "¿Desea eliminar el complejo seleccionado?";
+            }  
+        });
+
+        
+
         $(this).confirmation({
-            title: '¿Desea eliminar el complejo seleccionado?',
+            title: $mensaje,
             placement: 'bottom',
             singleton: true,
-            popout: false,
+            popout: true,
+            btnOkClass: 'btn-success',
+            btnCancelClass: 'btn-danger',
             href: '',
             btnOkLabel: 'Si',
             onConfirm: function() {
-                $divPadre = $(this).closest('.cine');
-                $complejoID =  $divPadre.children('#idComplejo').text();
+                
         
                 var deleteComplejo =  $.ajax({
                     url: URI.REMOVE,
                     type: 'POST',
                     data: {idComplejo:$complejoID},
-                    dataType: 'json',
+                    dataType: 'json'
                 });
 
                 deleteComplejo.done(function(response){
