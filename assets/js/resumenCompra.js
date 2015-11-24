@@ -9,7 +9,7 @@
     $divContenedorVenta = $('#contenedorVenta');
     $divContenedor = $('#contenedorQR');
     $codigoVenta = $('#codigo');
-    $complejo = $('#complejo');
+    $complejo = $('#cineNombre');
     $sala = $('#sala');
     $pelicula = $('#pelicula');
     $fecha = $('#fecha');

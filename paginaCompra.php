@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                        <label class="tituloDato">CINE</label>
-                       <span class="datos" id="complejo"></span>
+                       <span class="datos" id="nombreComplejo"></span>
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <label class="tituloDato">DIA</label>

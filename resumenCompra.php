@@ -46,7 +46,7 @@
 							</tr>
 							<tr>
 							  <td>Cine:</td>
-							  <td id="complejo"></td>
+							  <td id="cineNombre"></td>
 							</tr>
 							<tr>
 							  <td >Sala:</td>

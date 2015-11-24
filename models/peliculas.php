@@ -102,7 +102,13 @@ class Peliculas
     }
 
     public function getPeliculasCartelera(){
-        $query = "SELECT idPelicula,titulo,imagen FROM `pelicula` WHERE `fechaBaja`='0000-00-00 00:00:00' order by fechaAlta";  
+        $query = "SELECT P.idPelicula,
+                         P.titulo,
+                         P.imagen 
+                   FROM pelicula P
+                   INNER JOIN funcion F ON F.idPelicula = P.idPelicula
+                   WHERE P.fechaBaja = '0000-00-00 00:00:00' 
+                   ORDER BY P.fechaAlta";  
        
         $peliculas = array();
         if( $result = $this->connection->query($query) ){
@@ -265,18 +271,28 @@ class Peliculas
         }
     }
     public function getPeliculaxComplejo($idComplejo){
-        $query = "select idFuncion,concat(c.titulo ,' - ' ,f.descripcion,' - ',case subtitulada when 0 then 'Español' else 'Subtitulada' end ) as titulo
-from peliculacomplejo a
-inner join complejo b on b.idComplejo=a.idComplejo
-inner join pelicula c on a.idPelicula=c.idPelicula
-inner join funcion  d on d.idPelicula=c.idPelicula and d.idComplejo=a.idComplejo
-inner join formato f on f.idTipoFuncion=d.idTipoFuncion
-where b.idComplejo='$idComplejo' and (c.fechaBaja=0 or c.fechaBaja>now())
-and (d.fechaBaja=0 or d.fechaBaja>now()) ";
+        /*$query = "SELECT idFuncion,
+                        CONCAT(c.titulo ,' - ' ,f.descripcion,' - ',case subtitulada when 0 then 'Español' else 'Subtitulada' end ) AS titulo
+                    FROM peliculacomplejo a
+                    INNER JOIN complejo b on b.idComplejo=a.idComplejo
+                    INNER JOIN pelicula c on a.idPelicula=c.idPelicula
+                    INNER JOIN funcion  d on d.idPelicula=c.idPelicula and d.idComplejo=a.idComplejo
+                    INNER JOIN formato f on f.idTipoFuncion=d.idTipoFuncion
+                    WHERE b.idComplejo = '$idComplejo' 
+                    AND (c.fechaBaja = 0 or c.fechaBaja>now())
+                    AND (d.fechaBaja = 0 or d.fechaBaja>now()) ";*/
             
-            
+        $query = "SELECT idFuncion,
+                         CONCAT(P.titulo ,' - ' ,FO.descripcion,' - ',case FO.subtitulada when 0 then 'Español' else 'Subtitulada' end ) AS titulo
+                    FROM funcion F
+                    INNER JOIN complejo C on F.idComplejo = C.idComplejo
+                    INNER JOIN pelicula P on F.idPelicula = P.idPelicula
+                    INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion 
+                    WHERE C.idComplejo = '$idComplejo' 
+                    AND (P.fechaBaja = 0 or P.fechaBaja>now())
+                    AND (F.fechaBaja = 0 or F.fechaBaja>now()) ";
              
-       
+                   
         $peliculas = array();
         
         try{
