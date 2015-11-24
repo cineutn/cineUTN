@@ -52,14 +52,12 @@ order by 'Total Reservas vencidas' desc,'Total Compras' desc";
            $complejo = $this->connection->real_escape_string($idComplejo['idComplejo']);
           
         $query = "SELECT idUsuario id , nombre Nombre, apellido Apellido, dni DNI, email Mail, usuario User, contraseña as Pass,telefono as Telefono, sum(case when lower(tipoVenta)<>'reserva' then 1 else 0 end) as 'Total Ventas',borrado as Borrado,fechaBaja as 'Fecha Modificacion',NULL as Edicion
-FROM  usuario a
-left join venta b on a.idUsuario=b.idCliente
-where tipousuario=2 and a.idComplejo=$complejo
-group by id  , nombre, apellido, dni,  email, usuario, contraseña, telefono,borrado,fechaBaja";  
-        
-        
-        echo
-       
+                    FROM  usuario a
+                    left join venta b on a.idUsuario = b.idCliente
+                    where tipousuario = 2 
+                    and a.idComplejo=$complejo
+                    group by id  , nombre, apellido, dni,  email, usuario, contraseña, telefono,borrado,fechaBaja";         
+
         $usuarios = array();
         
         try{
@@ -77,18 +75,13 @@ group by id  , nombre, apellido, dni,  email, usuario, contraseña, telefono,bor
         return $usuarios;
     
     }
-    public function getAdmins(){
+    public function getAdmins(){  
           
-    
-          
-        $query = "
-SELECT idUsuario id , a.nombre Nombre, apellido Apellido, dni DNI, email Mail, usuario User, contraseña as Pass,telefono as Telefono,b.nombre as Complejo,a.idComplejo,borrado as Borrado,fechaBaja as 'Fecha Modificacion',NULL as Edicion
-FROM  usuario a
-inner join complejo b on a.idComplejo=b.idComplejo
-where tipousuario=3";  
+        $query = "SELECT idUsuario id , a.nombre Nombre, apellido Apellido, dni DNI, email Mail, usuario User, contraseña as Pass,telefono as Telefono,b.nombre as Complejo,a.idComplejo,borrado as Borrado,fechaBaja as 'Fecha Modificacion',NULL as Edicion
+                    FROM  usuario a
+                    inner join complejo b on a.idComplejo=b.idComplejo
+                    where tipousuario=3";  
         
-        
-       
         $usuarios = array();
         
         try{
@@ -135,6 +128,7 @@ where tipousuario=3";
         return $usuarios;
     
     }
+
     public function deletePersonal($state){
         
         $id = $this->connection->real_escape_string($state['id']);
