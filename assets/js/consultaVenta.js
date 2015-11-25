@@ -158,13 +158,10 @@
 
                 var numeroSala = res.data[0].Sala;
                 numeroSala = numeroSala.replace("Sala ", " ");
-                /*numeroSala = parseInt(numeroSala);*/
-
-                numeroSala = "Norberto Napolitano";
+                /*numeroSala = parseInt(numeroSala);*/               
 
                 $("#salaTicket").text(numeroSala);
                 $("#salaTicket2").text(res.data[0].Sala);
-                $("#salaTicket2").text(numeroSala);
                 $("#diaTicket").text(res.data[0].Fecha);
                 $("#horaTicket").text(res.data[0].horario);
                 $("#peliculaTicket").text(res.data[0].pelicula);

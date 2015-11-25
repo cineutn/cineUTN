@@ -9,7 +9,8 @@
         REMOVE: 'actions/actionPeliculas.php?action=eliminar',
         UPDATE: 'actions/actionPeliculas.php?action=modificar',
         GETFORMATOS : 'actions/actionPeliculas.php?action=obtenerFormatos',
-        VALIDAR : 'actions/actionPeliculas.php?action=validar'
+        VALIDAR : 'actions/actionPeliculas.php?action=validar',
+        VALIDARFUNCION : 'actions/actionPeliculas.php?action=obtenerPeliculaFuncionById'    
     };
 	
     $txtPelicula = $("#txtPelicula");
@@ -402,43 +403,67 @@
 	
     $contenedorPeliculas.on("click",".cruz",function(event){
         event.preventDefault();
-        
-         $(this).confirmation({
-            title: '¿Desea eliminar la Pelicula?',
-            placement: 'bottom',
-            singleton: true,
-            popout: true,
-            btnOkClass: 'btn-success',
-            btnCancelClass: 'btn-danger',
-            href: '',
-            btnOkLabel: 'Si',
-            onConfirm: function() {
-                $divPadre = $(this).closest('.app');
-                $peliculaID =  $divPadre.children('.datos').children('#idPelicula').text();
-           
-                var deletePelicula =  $.ajax({
-                    url: URI.REMOVE,
-                    type: 'POST',
-                    data: {idPelicula:$peliculaID},
-                    dataType: 'json'
-                })
+        var bMostrarMensaje = false;
 
-                deletePelicula.done(function(response){
-                    if(!response.error){
-                        $formPelicula.addClass("hide");
-                        obtenerPeliculas();
-                    }else{
-                        event.preventDefault();
-                        //alert(res.mensaje);
-                        $('#msgBoxTitulo').text('Peliculas');
-                        $('#msgBoxMensaje').text(response.mensaje);
-                        $('#modalMsgBox').modal('show');
-                    }  
-                });
-            }
+        $divPadre = $(this).closest('.app');
+        $peliculaID =  $divPadre.children('.datos').children('#idPelicula').text();
+
+        var validarFuncion =  $.ajax({
+                    url: URI.VALIDARFUNCION,
+                    type: 'GET',
+                    data: {id:$peliculaID},
+                    dataType: 'json',
+                    async: false
         });
-        $(this).confirmation('show')
 
+        validarFuncion.done(function(response){
+            if(!response.error){
+                var mensaje = "La Pelicula que intenta eliminar esta asociada con una funcion, no es posible eliminarla."
+               //alert(res.mensaje);
+                $('#msgBoxTitulo').text('Peliculas');
+                $('#msgBoxMensaje').text(mensaje);
+                $('#modalMsgBox').modal('show');
+            }else{
+                   bMostrarMensaje = true;                
+            }            
+        });       
+
+        if (bMostrarMensaje){
+            $(this).confirmation({
+                    title: '¿Desea eliminar la Pelicula seleccionada?',
+                    placement: 'bottom',
+                    singleton: true,
+                    popout: false,
+                    btnOkClass: 'btn-success',
+                    btnCancelClass: 'btn-danger',
+                    href: '',
+                    btnOkLabel: 'Si',
+                    onConfirm: function() {
+                           
+                        var deletePelicula =  $.ajax({
+                            url: URI.REMOVE,
+                            type: 'POST',
+                            data: {idPelicula:$peliculaID},
+                            dataType: 'json'
+                        })
+
+                        deletePelicula.done(function(response){
+                            if(!response.error){
+                                $formPelicula.addClass("hide");
+                                obtenerPeliculas();
+                            }else{
+                                event.preventDefault();
+                                //alert(res.mensaje);
+                                $('#msgBoxTitulo').text('Peliculas');
+                                $('#msgBoxMensaje').text(response.mensaje);
+                                $('#modalMsgBox').modal('show');
+                            }  
+                        });
+                    }
+            });
+                
+            $(this).confirmation('show')
+        }
         /*if(confirm("¿Desea eliminar la Pelicula seleccionada?")){
 
         }

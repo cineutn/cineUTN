@@ -166,7 +166,12 @@ function obtenerPeliculaFuncionById($request){
                 "mensaje" => "",
                 "data" => $pelicula
             ));
-        }   
+        }else{
+            sendResponse(array(
+                "error" => true,
+                "mensaje" => 'Error al obtener la pelicula. '
+            ));
+        }
     }
     catch(Exception $e){
         sendResponse(array(

@@ -140,6 +140,7 @@ class Peliculas
         return $peliculas;
     
     }
+    
     public function getPeliculaFuncionByID($id){
         /*$query = "SELECT 
                     a.idComplejo,
@@ -310,10 +311,11 @@ class Peliculas
         return $peliculas;
     
     }
+    
     public function getDiasxPeliculaxComplejo($id){
-        $query = "select distinct dia
-from funcionhorario a
-where idFuncion='$id'";  
+        $query = "SELECT distinct dia
+                    FROM funcionhorario a
+                    WHERE idFuncion = '$id'";  
        
         $peliculas = array();
         
@@ -332,13 +334,15 @@ where idFuncion='$id'";
         return $peliculas;
     
     }
+    
     public function getHorariosxPeliculaxComplejo($datos){
         $idFuncion = $this->connection->real_escape_string($datos['idFuncion']);
         $dia = $datos['dia'];
         
-        $query = "  select idFuncionDetalle,horario 
-                    from funcionhorario
-                    where idFuncion=$idFuncion and dia='$dia'";  
+        $query = "SELECT idFuncionDetalle,horario 
+                    FROM funcionhorario
+                    WHERE idFuncion = $idFuncion 
+                    AND dia = '$dia'";  
        
         $peliculas = array();
         
@@ -359,28 +363,27 @@ where idFuncion='$id'";
     }
     
     
- public function getPeliculasDetalle($fechaSemana){    
+    public function getPeliculasDetalle($fechaSemana){    
       
-     $query ="SELECT pel.idPelicula,pel.titulo,pel.duracion,frm.descripcion,frm.subtitulada,frm.idTipoFuncion FROM pelicula pel
-    inner join formato frm on pel.idFormato=frm.idFormato
-    WHERE pel.fechaBaja='0000-00-00 00:00:00'
-    AND estreno < '$fechaSemana'
-    order by fechaAlta";
+        $query ="SELECT pel.idPelicula,pel.titulo,pel.duracion,frm.descripcion,frm.subtitulada,frm.idTipoFuncion 
+                    FROM pelicula pel
+                    INNER JOIN formato frm ON pel.idFormato = frm.idFormato
+                    WHERE pel.fechaBaja='0000-00-00 00:00:00'
+                    AND estreno < '$fechaSemana'
+                    ORDER BY fechaAlta";
      
-     //$query ="SELECT idPelicula,titulo,duracion FROM pelicula WHERE fechaBaja='0000-00-00 00:00:00' AND estreno < '$fechaSemana' order by fechaAlta";
-     $peliculas= array();
+        //$query ="SELECT idPelicula,titulo,duracion FROM pelicula WHERE fechaBaja='0000-00-00 00:00:00' AND estreno < '$fechaSemana' order by fechaAlta";
+        $peliculas= array();
       
-       if( $result = $this->connection->query($query) ){
+        if( $result = $this->connection->query($query) ){
             while($fila = $result->fetch_assoc()){
                 $peliculas[] = $fila;
             }
             $result->free();
         }
+        
         return $peliculas;
-  
-  } 
-    
-    
+    }    
     
     
 }

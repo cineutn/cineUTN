@@ -256,9 +256,7 @@
             }else{
                $mensaje = "¿Desea eliminar el complejo seleccionado?";
             }  
-        });
-
-        
+        });       
 
         $(this).confirmation({
             title: $mensaje,
