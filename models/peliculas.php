@@ -102,12 +102,14 @@ class Peliculas
     }
 
     public function getPeliculasCartelera(){
-        $query = "SELECT P.idPelicula,
+        $query = "SELECT 
+                        DISTINCT P.idPelicula,
                          P.titulo,
                          P.imagen 
                    FROM pelicula P
                    INNER JOIN funcion F ON F.idPelicula = P.idPelicula
                    WHERE P.fechaBaja = '0000-00-00 00:00:00' 
+                   GROUP BY P.titulo
                    ORDER BY P.fechaAlta";  
        
         $peliculas = array();
@@ -138,7 +140,6 @@ class Peliculas
         }
        
         return $peliculas;
-    
     }
     
     public function getPeliculaFuncionByID($id){
@@ -194,7 +195,6 @@ class Peliculas
         }
        
         return $peliculas;
-    
     }
 
     public function updatePelicula($pelicula){
@@ -272,6 +272,7 @@ class Peliculas
             return false;
         }
     }
+
     public function getPeliculaxComplejo($idComplejo){
         /*$query = "SELECT idFuncion,
                         CONCAT(c.titulo ,' - ' ,f.descripcion,' - ',case subtitulada when 0 then 'Español' else 'Subtitulada' end ) AS titulo
@@ -284,8 +285,8 @@ class Peliculas
                     AND (c.fechaBaja = 0 or c.fechaBaja>now())
                     AND (d.fechaBaja = 0 or d.fechaBaja>now()) ";*/
             
-        $query = "SELECT idFuncion,
-                         CONCAT(P.titulo ,' - ' ,FO.descripcion,' - ',case FO.subtitulada when 0 then 'Español' else 'Subtitulada' end ) AS titulo
+        $query = "SELECT 
+                        DISTINCT CONCAT(P.titulo ,' - ' ,FO.descripcion,' - ',case FO.subtitulada when 0 then 'Español' else 'Subtitulada' end ) AS titulo
                     FROM funcion F
                     INNER JOIN complejo C on F.idComplejo = C.idComplejo
                     INNER JOIN pelicula P on F.idPelicula = P.idPelicula
@@ -310,14 +311,25 @@ class Peliculas
         }
        
         return $peliculas;
-    
     }
     
-    public function getDiasxPeliculaxComplejo($id){
-        $query = "SELECT distinct dia
+    public function getDiasxPeliculaxComplejo($datos){
+        $idComplejo = $this->connection->real_escape_string($datos['idComplejo']);
+        $pelicula = $this->connection->real_escape_string($datos['pelicula']);
+        
+        /*$query = "SELECT distinct dia
                     FROM funcionhorario a
-                    WHERE idFuncion = '$id'";  
-       
+                    WHERE idFuncion = '$id'";*/
+        
+        $query = "SELECT distinct FH.dia
+                    FROM pelicula P
+                    INNER JOIN funcion F ON P.idPelicula = F.idPelicula
+                    INNER JOIN funcionhorario FH ON F.idFuncion = FH.idFuncion
+                    INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion
+                    INNER JOIN complejo C on F.idComplejo = C.idComplejo
+                    WHERE CONCAT(P.titulo ,' - ' ,FO.descripcion,' - ',case FO.subtitulada when 0 then 'Español' else 'Subtitulada' end ) = '$pelicula'
+                    AND C.idComplejo = '$idComplejo' ";
+
         $peliculas = array();
         
         try{
@@ -333,18 +345,29 @@ class Peliculas
         }
        
         return $peliculas;
-    
     }
     
     public function getHorariosxPeliculaxComplejo($datos){
-        $idFuncion = $this->connection->real_escape_string($datos['idFuncion']);
+        $idComplejo = $this->connection->real_escape_string($datos['idComplejo']);
+        $pelicula = $this->connection->real_escape_string($datos['pelicula']);
         $dia = $datos['dia'];
         
-        $query = "SELECT idFuncionDetalle,horario 
+        /*$query = "SELECT idFuncionDetalle,horario 
                     FROM funcionhorario
                     WHERE idFuncion = $idFuncion 
-                    AND dia = '$dia'";  
-       
+                    AND dia = '$dia'";*/
+
+        $query = "SELECT FH.idFuncionDetalle,
+                         FH.horario
+                    FROM pelicula P
+                    INNER JOIN funcion F ON P.idPelicula = F.idPelicula
+                    INNER JOIN funcionhorario FH ON F.idFuncion = FH.idFuncion
+                    INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion
+                    INNER JOIN complejo C on F.idComplejo = C.idComplejo
+                    WHERE CONCAT(P.titulo ,' - ' ,FO.descripcion,' - ',case FO.subtitulada when 0 then 'Español' else 'Subtitulada' end ) = '$pelicula'
+                    AND FH.dia = '$dia'
+                    AND C.idComplejo = '$idComplejo' ";
+
         $peliculas = array();
         
         try{
@@ -360,10 +383,8 @@ class Peliculas
         }
        
         return $peliculas;
-    
     }
-    
-    
+        
     public function getPeliculasDetalle($fechaSemana){    
       
         $query ="SELECT pel.idPelicula,pel.titulo,pel.duracion,frm.descripcion,frm.subtitulada,frm.idTipoFuncion 
@@ -385,6 +406,5 @@ class Peliculas
         
         return $peliculas;
     }    
-    
-    
+        
 }

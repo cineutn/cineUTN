@@ -51,7 +51,8 @@
                 case 'cmbPeliculas':
                     limpiaCombos('cmbPeliculas');
                     url=URI.DIASPELICULA;
-                    data.idFuncion=$( "#cmbPeliculas option:selected" ).val();
+                    data.idComplejo=$( "#cmbComplejos option:selected" ).val();
+                    data.pelicula=$( "#cmbPeliculas option:selected" ).text();
                     $('#cmbDias').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
                     break;
                     
@@ -59,10 +60,12 @@
                     
                     limpiaCombos('cmbDias');
                     url=URI.HORARIOSDIAPELICULA;
-                    data.idFuncion=$('#cmbDias option:selected').val();
+                    data.idComplejo=$( "#cmbComplejos option:selected" ).val();
+                    data.pelicula=$( "#cmbPeliculas option:selected" ).text();
                     data.dia=$('#cmbDias option:selected').text();
                     $('#cmbHorarios').prepend($('<option/>',{value:-1,selected:''}).html('Cargando...'));
                     break;
+                    
                 case 'cmbHorarios':
                     //si cambia el combo horarios, habilito boton
                     $('.menuFiltros button').prop('disabled',false);
@@ -99,7 +102,7 @@
                             resultado.data.forEach(function(item){
                                  $('#cmbPeliculas').append(
                                     $('<option/>',{
-                                        value   :   item.idFuncion
+                                        value   :   2/*item.idFuncion*/
                                     }).append(item.titulo)
                                 );
                             });
@@ -122,7 +125,7 @@
                             resultado.data.forEach(function(item){
                                  $('#cmbDias').append(
                                     $('<option/>',{
-                                        value   :   data.idFuncion
+                                        value   :   2/*data.idFuncion*/
                                     }).append(item.dia)
                                 );
                             });
@@ -169,22 +172,15 @@
         
         $('.menuFiltros button').on('click',function(){
             
-            $idUsuario =   sessionStorage.getItem('idUser');
+            $idUsuario = sessionStorage.getItem('idUser');
 
                 if ($idUsuario > 0 ){
                     
                     $(location).attr('href', 'paginaCompra.php?idFuncionDetalle=' + $('#cmbHorarios option:selected').val());    
                     
-                }else{
-                     
-                    
+                }else{                                         
                     $('#modalLogin').modal('show');
-
-                }
-            
-            
-            
-        
+                }                  
         });
         
     });

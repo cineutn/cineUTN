@@ -47,6 +47,7 @@ function obtenerPeliculas($request){
         ));
     }
 }
+
 function obtenerPeliculasCartelera($request){
     require("../models/peliculas.php");
     $p = new Peliculas();
@@ -63,6 +64,7 @@ function obtenerPeliculasCartelera($request){
         ));
     }
 }
+
 function nuevaPelicaula($request){
 	require("../models/peliculas.php");
     $p = new Peliculas();
@@ -93,6 +95,7 @@ function nuevaPelicaula($request){
         ));
     }
 }
+
 function subir($request){
     require("../models/peliculas.php");
     
@@ -136,6 +139,7 @@ function subir($request){
             "files" => json_encode($_FILES)  ));
     }
 }
+
 function obtenerPeliculaById($request){
     require("../models/peliculas.php");
     $p = new Peliculas();
@@ -156,6 +160,7 @@ function obtenerPeliculaById($request){
         ));
     }
 }
+
 function obtenerPeliculaFuncionById($request){
     require("../models/peliculas.php");
     $p = new Peliculas();
@@ -180,6 +185,7 @@ function obtenerPeliculaFuncionById($request){
         ));
     }
 }
+
 function obtenerPeliculaxComplejo($request){
     require("../models/peliculas.php");
     $p = new Peliculas();
@@ -205,11 +211,17 @@ function obtenerPeliculaxComplejo($request){
         ));
     }
 }
+
 function obtenerDiasxPeliculaxComplejo($request){
     require("../models/peliculas.php");
     $p = new Peliculas();
+
+    $pelicula = array();    
+    $pelicula["idComplejo"] = $request->idComplejo;
+    $pelicula["pelicula"] = $request->pelicula;
+    
     try{
-        if($pelicula = $p->getDiasxPeliculaxComplejo($request->idFuncion)){
+        if($pelicula = $p->getDiasxPeliculaxComplejo($pelicula)){
             sendResponse(array(
                 "error" => false,
                 "mensaje" => "",
@@ -230,14 +242,15 @@ function obtenerDiasxPeliculaxComplejo($request){
         ));
     }
 }
+
 function obtenerHorariosxPeliculaxComplejo($request){
     require("../models/peliculas.php");
      $p = new Peliculas();
     
     $pelicula = array();    
-	$pelicula["idFuncion"] = $request->idFuncion;
+	$pelicula["idComplejo"] = $request->idComplejo;
+    $pelicula["pelicula"] = $request->pelicula;
 	$pelicula["dia"] = $request->dia; 
-    
     
     try{
         if($horarios = $p->getHorariosxPeliculaxComplejo($pelicula)){
@@ -261,7 +274,6 @@ function obtenerHorariosxPeliculaxComplejo($request){
         ));
     }
 }
-
 
 function obtenerPeliculasActivas($request){
     require("../models/peliculas.php");
