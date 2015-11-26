@@ -28,7 +28,7 @@ $idTipoFuncion='0';
 $funcionesCargadas= [];
 $idFuncionActiva='0';
 
-$(document ).ready(function(){	  
+$(document ).ready(function(){	      
     $fehaInicioSemana= obtenerInicioSemana();
     obtenerPeliculas($fehaInicioSemana);
     obtenerSalas();
@@ -326,6 +326,10 @@ $contenedorHorarios.on("click",".esbirro",function(){
     var horaSplit = hora.split(':');
     horaApertura=horaSplit[0];
     minutosApertura=horaSplit[1];
+    
+    idComplejoUsuario = sessionStorage.getItem('idcomplejo');
+
+    
      $('#modalLoading').modal('show');
          var guardarFuncion = $.ajax({
                         url : URI.FUNCION,
@@ -337,7 +341,7 @@ $contenedorHorarios.on("click",".esbirro",function(){
                              idTipoFuncion:$idTipoFuncion,
                              estado:1,
                              fechaAlta:0,//en el insert se pone dateTime=now
-                             idComplejo:1//cambiarrrr
+                             idComplejo:idComplejoUsuario//cambiarrrr
                          },
                         dataType : 'json',
                     });
@@ -472,8 +476,7 @@ function borrarFuncion(idFuncionActiva){
           },
         dataType: 'json',               
     })
-    eliminarFuncion.done(function(response){	
-        //borrarFuncionHorario(idFuncionActiva);
+    eliminarFuncion.done(function(response){	        
         buscarFuncionesActivas($idSemanaSeleccionada,$idSalaSeleccionada);
     });        
 }
