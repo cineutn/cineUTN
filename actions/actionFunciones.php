@@ -240,7 +240,7 @@ function funcionesPorComplejo($request){
     $f = new Funciones();
     $funcion = array();  
     
-	$funcion["nroSemana"] = $request->numeroSemana;	
+	$funcion["nroSemana"] = $request->nroSemana;	
 	$funcion["idComplejo"] = $request->idComplejo;	
 					  
     if($nuevo = $f->obtenerFuncionesPorComplejo($funcion)){

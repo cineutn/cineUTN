@@ -155,39 +155,39 @@ $contenedorSemanas.on("click",".botonRojo",function(event){
 
 function obtenerFunciones(numeroSemana){
 var nroFunciones ='0';
-    if($tipoUsuarioLogueado==3){
-    //muestro por complejo
-        
+   alert($idComplejoUsuario);
+    if($tipoUsuarioLogueado=='administrador'){
+    //muestro por complejo        
+        alert('asdasddasdsad');
      var obtenerPorComplejo = $.ajax({
             url : URI.FUNCIONESCOMPLEJO,
             method : "GET",
             async:false, 
-              data: {
-                  idComplejo:$idComplejoUsuario ,
-                   nroSemana:numeroSemana                             
+              data: {                                    
+                   nroSemana:numeroSemana                             ,
+                  idComplejo:$idComplejoUsuario
                 },
             dataType : 'json',
         });
 
        obtenerPorComplejo.done(function(res){
+           console.log(res);
             if(!res.error){	
-                nroFunciones=res.data[0].cantidad;                                 
+                nroFunciones=res.data[0].cantidad; 
+                console.log('asdasdadas');
+                console.log(res.data[0].cantidad);
             }else{
                 event.preventDefault();            
 
             }
         });
-        obtener.fail(function(res){        
+        obtenerPorComplejo.fail(function(res){        
             $('#msgBoxTitulo').text('Nueva Semana');
             $('#msgBoxMensaje').text(res.responseText);
             $('#modalMsgBox').modal('show');
-        });
-        
-        
-        
-        
+        });        
     }
-    else if($tipoUsuarioLogueado==4){
+    else if($tipoUsuarioLogueado=='superAdministrador'){
     //muestro total de funciones        
          var obtener = $.ajax({
             url : URI.FUNCIONES,

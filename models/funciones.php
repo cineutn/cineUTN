@@ -185,16 +185,15 @@ select fh.idFuncion from funcionhorario fh inner join semana se on fh.idsemana =
         }
   } 
  
-public function obtenerFuncionesPorComplejo($funcion){          
-    $nroSemana =$this->connection->real_escape_string($funcion['nroSemana']); 
+ public function obtenerFuncionesPorComplejo($funcion){          
+    $nroSemana =$this->connection->real_escape_string($funcion['nroSemana']);     
     $idComplejo=$this->connection->real_escape_string($funcion['idComplejo']); 
-     
-    $query ="SELECT sl.descripcion as Sala,pl.titulo,fm.descripcion,fm.subtitulada,fh.dia,fh.horario,fn.fechaBaja FROM `semana` se inner join funcionhorario fh  on se.idsemana=fh.idsemana
-    inner join funcion fn on fn.idfuncion=fh.idfuncion inner join pelicula pl on pl.idPelicula = fn.idPelicula 
-    inner join sala sl on sl.idsala=fh.idsala inner join formato fm on fm.idformato=pl.idFormato
-    inner join complejo cl on cl.idComplejo=sl.idcomplejo
-  where se.numerosemana=$nroSemana  
-  and cl.idcomplejo=$idcomplejo";      
+     $query ="SELECT count(*) cantidad FROM semana se inner JOIN funcionhorario fh on se.idsemana=fh.idSemana 
+    inner join funcion f on f.idfuncion=fh.idfuncion
+    inner join complejo cl on cl.idComplejo=f.idcomplejo
+    WHERE numeroSemana =$nroSemana 
+    AND f.fechaBaja ='0000-00-00 00:00:00'
+    AND cl.idComplejo =$idComplejo";
 
     $funciones = array();      
       if( $result = $this->connection->query($query) ){
@@ -204,7 +203,6 @@ public function obtenerFuncionesPorComplejo($funcion){
             $result->free();
         }
         return $funciones;
-  } 
-    
+  }
     
 }
