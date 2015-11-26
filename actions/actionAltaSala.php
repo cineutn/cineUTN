@@ -98,7 +98,28 @@ function obtenerSala($request){
     }
 					  
 }
+
+function validarFuncionesExistentes($request){
+    require("../models/salas.php");
+    $s = new Salas();
+    $sala = array();    
+	$idSala = $request->idSala;	
     
+    if($nuevo = $s->validarFunciones($idSala)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "sala .",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al validar funciones"
+        ));
+    }
+					  
+}
+
 $request = new Request();
 $action = $request->action;
 switch($action){                  
@@ -114,5 +135,7 @@ switch($action){
     case "obtenerUna":
         obtenerSala($request);
         break;
-        
+    case "validar":
+        validarFuncionesExistentes($request);
+        break; 
 }

@@ -6,7 +6,8 @@ $('title').html("Salas");
         SALAS: 'actions/actionAltaSala.php?action=obtener',	
         ELIMINAR: 'actions/actionAltaSala.php?action=eliminar',	
         DIAGRAMAR: 'actions/actionEsquemaSala.php?action=nueva',	
-        ELIMINARDIAGRAMA: 'actions/actionEsquemaSala.php?action=eliminar'	
+        ELIMINARDIAGRAMA: 'actions/actionEsquemaSala.php?action=eliminar',
+        VALIDAR: 'actions/actionAltaSala.php?action=validar'
     };
 
 $salaNueva =$("#rowSala");
@@ -16,6 +17,7 @@ $nombreSala =$("#nombreSala");
 $fila =$("#fila");
 $columna =$("#columna");
 $tablaSala= $("#tablaSala");
+ $idComplejoUsuario = sessionStorage.getItem('idcomplejo');
 
 $(document ).ready(function(){	   
         obtenerSalas();   
@@ -41,7 +43,7 @@ $btnAltaModificacion.on("click",function(){
      $nombreSala =$("#nombreSala");
      $fila =$("#fila");
      $columna =$("#columna");
-     $idComplejoUsuario = sessionStorage.getItem('idcomplejo');
+    
      bValidar = validarDatos();      
       if (bValidar){          
            var addSala =  $.ajax({
@@ -72,6 +74,7 @@ function obtenerSalas(){
     var obtener = $.ajax({
         url : URI.SALAS,
         method : "GET",
+         data: { idComplejo:$idComplejoUsuario },
         dataType : 'json',
     });
 
@@ -106,9 +109,36 @@ function obtenerSalas(){
         event.preventDefault();        
         $idSala =$(this).parent().parent()[0].childNodes[0].children[0].value;
         $nombreSala =$(this).parent().parent()[0].childNodes[0].children[1].outerText;
-        $("#idSalaEliminar").val($idSala);        
-        $('#modalEliminarSala').modal('show');
+        $("#idSalaEliminar").val($idSala); 
+      validarFuncionesExistntes($idSala);
+       // $('#modalEliminarSala').modal('show');
     });
+
+
+function validarFuncionesExistntes($idSala){
+    
+      var validar =  $.ajax({
+                url: URI.VALIDAR,
+                type: 'POST',                
+                data: {
+                        idSala:$idSala
+				  },
+                dataType: 'json',
+               
+            })
+            validar.done(function(response){	
+               console.log(response.data.cant);
+                if(response.data.cant>0){
+                //no se puede eliminar noEliminarSala
+                    $('#noEliminarSala').modal('show');
+                }
+                else{
+                $('#modalEliminarSala').modal('show');
+                }
+            });
+    
+
+};
 
 
  $("#elinarSala").click(function() {       

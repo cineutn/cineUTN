@@ -70,5 +70,22 @@ class Salas
         return $salas;
   }
     
+ public function validarFunciones($idSala){
+    $id = (int) $this->connection->real_escape_string($idSala);
+    $query = "select count(*) as cant from funcion fn inner join funcionhorario fh on fn.idfuncion=fh.idfuncion
+              where fn.fechabaja='0000-00-00 00:00:00'
+              and fh.idsala=$id";       
+   
+     $salas= '';      
+       if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $salas = $fila;
+            }
+            $result->free();
+        }
+        return $salas;
+  }
+        
+    
     
 }
