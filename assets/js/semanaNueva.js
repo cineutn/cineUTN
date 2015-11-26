@@ -7,12 +7,17 @@ $('title').html("Funciones");
         ADD : 'actions/actionsemanaNueva.php?action=nueva',       
         FUNCIONES : 'actions/actionFunciones.php?action=obtenerPorSemana',  
         CERRAR: 'actions/actionFunciones.php?action=cerrar',  
+        FUNCIONESCOMPLEJO: 'actions/actionFunciones.php?action=obtenerPorComplejo',  
     };
 
 $contenedorSemana =$("#tablaSemana");
 $btnAddRow=$("#btnAddRow");
 $contenedorSemanas=$("#contenedorSemanas");
 $dias = ["Jueves","Viernes","Sabado","Domingo","Lunes","Martes","Miercoles"];
+$idComplejoUsuario = sessionStorage.getItem('idcomplejo');
+$tipoUsuarioLogueado = sessionStorage.getItem('tipoUsuario');
+ 
+
 $(document ).ready(function(){	   
         obtenerSemanas();
     });
@@ -149,30 +154,66 @@ $contenedorSemanas.on("click",".botonRojo",function(event){
 
 
 function obtenerFunciones(numeroSemana){
-var nroFunciones ='1';
-    var obtener = $.ajax({
-        url : URI.FUNCIONES,
-        method : "GET",
-        async:false, 
-          data: {
-            nroSemana:numeroSemana                             
-            },
-        dataType : 'json',
-    });
+var nroFunciones ='0';
+    if($tipoUsuarioLogueado==3){
+    //muestro por complejo
+        
+     var obtenerPorComplejo = $.ajax({
+            url : URI.FUNCIONESCOMPLEJO,
+            method : "GET",
+            async:false, 
+              data: {
+                  idComplejo:$idComplejoUsuario ,
+                   nroSemana:numeroSemana                             
+                },
+            dataType : 'json',
+        });
 
-   obtener.done(function(res){
-        if(!res.error){	
-            nroFunciones=res.data[0].cantidad;                                 
-        }else{
-            event.preventDefault();            
-            
-        }
-    });
-    obtener.fail(function(res){        
-        $('#msgBoxTitulo').text('Nueva Semana');
-        $('#msgBoxMensaje').text(res.responseText);
-        $('#modalMsgBox').modal('show');
-    });     
+       obtenerPorComplejo.done(function(res){
+            if(!res.error){	
+                nroFunciones=res.data[0].cantidad;                                 
+            }else{
+                event.preventDefault();            
+
+            }
+        });
+        obtener.fail(function(res){        
+            $('#msgBoxTitulo').text('Nueva Semana');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
+        });
+        
+        
+        
+        
+    }
+    else if($tipoUsuarioLogueado==4){
+    //muestro total de funciones        
+         var obtener = $.ajax({
+            url : URI.FUNCIONES,
+            method : "GET",
+            async:false, 
+              data: {
+                nroSemana:numeroSemana                             
+                },
+            dataType : 'json',
+        });
+
+       obtener.done(function(res){
+            if(!res.error){	
+                nroFunciones=res.data[0].cantidad;                                 
+            }else{
+                event.preventDefault();            
+
+            }
+        });
+        obtener.fail(function(res){        
+            $('#msgBoxTitulo').text('Nueva Semana');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
+        }); 
+    }
+  
   return nroFunciones;
 }
 

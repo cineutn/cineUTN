@@ -235,6 +235,28 @@ function bajaFuncionesPorSemana($request){
     }
 }
 
+function funcionesPorComplejo($request){
+	require("../models/funciones.php");
+    $f = new Funciones();
+    $funcion = array();  
+    
+	$funcion["nroSemana"] = $request->numeroSemana;	
+	$funcion["idComplejo"] = $request->idComplejo;	
+					  
+    if($nuevo = $f->obtenerFuncionesPorComplejo($funcion)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "true",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener funciones"
+        ));
+    }
+}
+
 $request = new Request();
 $action = $request->action;
 switch($action){                  
@@ -267,6 +289,9 @@ switch($action){
       break;  
     case "cerrar":
         bajaFuncionesPorSemana($request);
-      break;          
+      break; 
+    case "obtenerPorComplejo":  
+        funcionesPorComplejo($request);
+        break;
         
 }
