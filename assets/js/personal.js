@@ -1,3 +1,5 @@
+$('title').html("Personal");
+
 var URI = {        
  
     

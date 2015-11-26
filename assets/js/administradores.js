@@ -1,3 +1,5 @@
+$('title').html("Administradores");
+
 var URI = {        
  
         COMPLEJOS : 'actions/actionComplejos.php?action=obtenerComplejo',

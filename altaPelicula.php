@@ -60,6 +60,12 @@
             <input type="hidden" id="nombreImagen"></input>
             <div class="col-xs-12 col-sm-9 col-md-8 col-lg-7">
                 <input  name="idPelicula" id="idPelicula" type="hidden">
+                <div id="checkCrear" class="form-group">
+                    <div id="divCheckCrear" class="col-md-12">
+                        <input class="" type="checkbox" id="rbCrearPelicula">    
+                        <span>Crear la misma pelicula con distinto formato</span>    
+                    </div>                    
+                </div>
                 <div class="form-group">
                     <div class="col-md-12">
                         <input maxlength="100" name="tituloPelicula" id="tituloPelicula" type="text" placeholder="Titulo Pelicula" class="form-control">

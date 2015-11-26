@@ -164,6 +164,7 @@ class Peliculas
                     F.idTipoFuncion,
                     FH.dia,
                     FH.horario,
+                    FO.idFormato,
                     FO.descripcion as formato, 
                     FO.subtitulada,
                     FH.idFuncionDetalle    

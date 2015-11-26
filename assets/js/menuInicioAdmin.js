@@ -1,5 +1,7 @@
 (function($){
-      
+    
+    $('title').html("Home");
+
     var URI = {
         LOGIN : 'actions/actions.php?action=validar'
     };

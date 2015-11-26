@@ -323,7 +323,9 @@
 	};    
     
     $botonAddPelicula.on("click",function(){
-       $formPelicula.removeClass("hide");          
+       $formPelicula.removeClass("hide");
+       $("#checkCrear").addClass("hide");  
+       $("#rbCrearPelicula").prop('checked', false);       
        $("#idPelicula").val("0");
        $("#tituloPelicula").val("");
        $("#duracionPelicula").val("");
@@ -350,6 +352,7 @@
     $contenedorPeliculas.on("click",".lapiz",function(event){
         event.preventDefault();
         $formPelicula.removeClass("hide");  
+        $("#checkCrear").removeClass("hide");
 
         $divPadre = $(this).closest('.app');
         $peliculaID =  $divPadre.children('.datos').children('#idPelicula').text();        
@@ -398,6 +401,7 @@
         $("#iconButton").removeClass('glyphicon-plus');
         $("#iconButton").addClass('glyphicon-pencil');
 
+        $("#rbCrearPelicula").prop('checked', false);
         validarPelicula();
     });
 	
@@ -474,7 +478,14 @@
 	
     $btnAltaModificacion.on("click",function(){
 
-		$id = $idPelicula.val();
+        var bCheck = $("#rbCrearPelicula").prop("checked");
+        
+        if (bCheck){
+            $id = "0";
+        }else{
+            $id = $idPelicula.val();
+        }
+		
 		$titulo = $tituloPelicula.val();
 		$duracion = $duracionPelicula.val();
 		$clasificacion = $clasificacionPelicula.val();
@@ -566,10 +577,30 @@
         }
     });
     
-    function validarPelicula(){
-        var bRetorno = true;
+    $("#rbCrearPelicula").on("click", function(){
+        $bCheck = $("#rbCrearPelicula").prop("checked");
+        if ($bCheck){
+            $btnText.text("Crear");
+            $("#iconButton").addClass('glyphicon-plus');
+            $("#iconButton").removeClass('glyphicon-pencil');
+        }else{
+            $btnText.text("Modificar");
+            $("#iconButton").removeClass('glyphicon-plus');
+            $("#iconButton").addClass('glyphicon-pencil');
+        }
+  });
 
-        $id = $idPelicula.val();
+    function validarPelicula(){
+        var bRetorno = true;      
+        
+        var bCheck = $("#rbCrearPelicula").prop("checked");
+
+        if (bCheck){
+            $id = "0";
+        }else{
+            $id = $idPelicula.val();
+        }
+
         $idFormato = $("#cmbFormato").val();
         
         $titulo = $tituloPelicula.val();
@@ -714,9 +745,37 @@
           $("#cmbFormato").siblings(".help-block").html("Debe completar este campo");
           bRetorno = false;
         }else{
-          $("#cmbFormato").closest(".col-lg-12").removeClass("has-error");
-          $("#cmbFormato").siblings(".glyphicon-remove").addClass("hide");
-          $("#cmbFormato").siblings(".help-block").html("");          
+
+            var validarFuncion =  $.ajax({
+                    url: URI.VALIDARFUNCION,
+                    type: 'GET',
+                    data: {id:$id},
+                    dataType: 'json',
+                    async: false
+            });
+
+            validarFuncion.done(function(response){
+                if(!response.error){
+
+                    var idFormato = response.data[0].idFormato;
+
+                    if (idFormato == $idFormato ){
+                        $("#cmbFormato").closest(".col-lg-12").removeClass("has-error");
+                        $("#cmbFormato").siblings(".glyphicon-remove").addClass("hide");
+                        $("#cmbFormato").siblings(".help-block").html("");
+                    }else{
+                        $("#cmbFormato").closest(".col-lg-12").addClass("has-error");
+                        $("#cmbFormato").siblings(".glyphicon-remove").removeClass("hide");
+                        $("#cmbFormato").siblings(".help-block").html("La Pelicula que intenta modificar esta asociada con una funcion");
+                        bRetorno = false;
+                    }
+                                        
+                }else{
+                    $("#cmbFormato").closest(".col-lg-12").removeClass("has-error");
+                    $("#cmbFormato").siblings(".glyphicon-remove").addClass("hide");
+                    $("#cmbFormato").siblings(".help-block").html("");                 
+                }            
+            });           
         }
 
         return bRetorno;

@@ -211,7 +211,8 @@ function sendMail($request){
       $mail->Port = 465;
       $mail->Username = "cineutn@gmail.com";
       $mail->Password = "cineutn2015";
-
+      $mail->CharSet = 'UTF-8';
+      
       $mail->From = "cineutn@gmail.com";
       $mail->FromName = "Cines UTN";
       $mail->Subject = "UTN Cines";
