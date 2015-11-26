@@ -19,6 +19,9 @@ function nuevaSala($request){
 	$sala["nombreSala"] = $request->nombreSala;
 	$sala["filas"] = $request->filas;  
 	$sala["columnas"] = $request->columnas;
+	$sala["idComplejo"] = $request->idComplejo;
+					  
+					  
 					  
     if($nuevo = $s->createSala($sala)){
         sendResponse(array(
@@ -36,8 +39,11 @@ function nuevaSala($request){
 
 function obtenerSalas($request){
     require("../models/salas.php");
+    $s = new Salas();
+    $sala = array();    
+	$sala["idComplejo"] = $request->idComplejo;	
      $s = new Salas();
-    if($salas = $s->getSalas()){
+    if($salas = $s->getSalas($sala)){
         sendResponse(array(
             "error" => false,
             "mensaje" => "",

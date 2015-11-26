@@ -18,10 +18,8 @@ $columna =$("#columna");
 $tablaSala= $("#tablaSala");
 
 $(document ).ready(function(){	   
-        obtenerSalas();
+        obtenerSalas();   
     });
-
-
 
 $("#btnAddRow" ).click(function() { 
     $salaNueva.removeClass("rowHide"); 
@@ -34,10 +32,8 @@ $("#btnAddRow" ).click(function() {
 
 $tablaSala.on("click",".botonNegro",function(event){
     event.preventDefault();    
-    $salaNueva.addClass("rowHide"); 
-  
+    $salaNueva.addClass("rowHide");   
 });
-
 
 $btnAltaModificacion.on("click",function(){
     $('#modalLoading').modal('show');
@@ -45,6 +41,7 @@ $btnAltaModificacion.on("click",function(){
      $nombreSala =$("#nombreSala");
      $fila =$("#fila");
      $columna =$("#columna");
+     $idComplejoUsuario = sessionStorage.getItem('idcomplejo');
      bValidar = validarDatos();      
       if (bValidar){          
            var addSala =  $.ajax({
@@ -55,7 +52,8 @@ $btnAltaModificacion.on("click",function(){
                         idSala:0,
 						nombreSala:$nombreSala.val(),
 				        filas:$fila.val(),				        
-						columnas:$columna.val()
+						columnas:$columna.val(),
+                        idComplejo:$idComplejoUsuario
 				  },
                 dataType: 'json',
                

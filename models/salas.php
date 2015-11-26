@@ -17,9 +17,10 @@ class Salas
 		$nombreSala =$this->connection->real_escape_string($sala['nombreSala']);
 		$fila =$this->connection->real_escape_string($sala['filas']);
 		$columna =$this->connection->real_escape_string($sala['columnas']);      
+		$idComplejo =$this->connection->real_escape_string($sala['idComplejo']);      
       
-        $query = "INSERT INTO sala(idSala,descripcion,filas, columnas) values
-        (DEFAULT,'$nombreSala','$fila','$columna')";
+        $query = "INSERT INTO sala(idSala,descripcion,filas, columnas,IdComplejo) values
+        (DEFAULT,'$nombreSala','$fila','$columna','$idComplejo')";
       
         if($this->connection->query($query)){
               $sala['idSala'] = $this->connection->insert_id;
@@ -30,8 +31,9 @@ class Salas
     }
     
   
-  public function getSalas(){
-     $query ="SELECT * FROM sala";
+  public function getSalas($sala){
+     $idComplejo =$this->connection->real_escape_string($sala['idComplejo']);
+     $query ="SELECT * FROM sala where IdComplejo = $idComplejo";
      $salas= array();
       
        if( $result = $this->connection->query($query) ){

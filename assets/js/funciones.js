@@ -100,10 +100,12 @@ function obtenerPeliculas($fehaInicioSemana){
 
 };
 
-function obtenerSalas(){           
+function obtenerSalas(){
+    $idComplejoUsuario = sessionStorage.getItem('idcomplejo');
     var obtener = $.ajax({
         url : URI.SALAS,
-        method : "GET",     
+        method : "GET", 
+        data: { idComplejo:$idComplejoUsuario },
         dataType : 'json',
     });
     obtener.done(function(res){
@@ -327,7 +329,7 @@ $contenedorHorarios.on("click",".esbirro",function(){
     horaApertura=horaSplit[0];
     minutosApertura=horaSplit[1];
     
-    idComplejoUsuario = sessionStorage.getItem('idcomplejo');
+    $idComplejoUsuario = sessionStorage.getItem('idcomplejo');
 
     
      $('#modalLoading').modal('show');
@@ -341,7 +343,7 @@ $contenedorHorarios.on("click",".esbirro",function(){
                              idTipoFuncion:$idTipoFuncion,
                              estado:1,
                              fechaAlta:0,//en el insert se pone dateTime=now
-                             idComplejo:idComplejoUsuario//cambiarrrr
+                             idComplejo:$idComplejoUsuario//cambiarrrr
                          },
                         dataType : 'json',
                     });
