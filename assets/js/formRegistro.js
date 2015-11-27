@@ -25,7 +25,7 @@
    
     $('#signupform').submit(function(e) { 
          $('#signupform [data-toggle="tooltip"]').tooltip('hide');
-        e.preventDefault();
+        
     
         //se traen todos los inputs del formulario
         var $inputs = $('#signupform :input');
@@ -46,43 +46,42 @@
                 url: URI.SIGNIN,
                 method: "POST",
                 data: $('#signupform').serialize(),
-                dataType: 'json'
+                dataType: 'json',
+                beforeSend : function(){
+                     $('#modalSignup .modal-body').append('<div class="alert alert-success" role="alert"><strong>Procesando...</strong> Espere por favor.</div>');
+                }
             });
             loginSignup.done(function(res){
-            if(!res.error && res.data.perfil==1 ){
-                sessionStorage.setItem('idUser', res.data.usuarioID);
-                sessionStorage.setItem('tipoUsuario', res.data.perfil);
-                sessionStorage.setItem('nombre', res.data.nombre);
-                sessionStorage.setItem('apellido', res.data.apellido);  
-                sessionStorage.setItem('complejo', res.data.apellido); 
-                 location.reload();
-            }else if(res.data.perfil==2 || res.data.perfil==3){
-                table.ajax.reload();
-                $('#modalSignup').modal('hide');
-            } else{
-                alert(res.mensaje);
+                if(!res.error && res.data.perfil==1 ){
+                    sessionStorage.setItem('idUser', res.data.usuarioID);
+                    sessionStorage.setItem('tipoUsuario', res.data.perfil);
+                    sessionStorage.setItem('nombre', res.data.nombre);
+                    sessionStorage.setItem('apellido', res.data.apellido);  
+                    sessionStorage.setItem('complejo', res.data.apellido); 
+                     location.reload();
+                }else if(res.data.perfil==2 || res.data.perfil==3){
+                    table.ajax.reload();
+                } else{
+                    alert(res.mensaje);
+                }
+            });
+            
+             loginSignup.fail(function(){
 
-            }
-        });
-            
-         loginSignup.fail(function(){
-         
-            alert("error");
-         });   
-            
-            
-            
+                alert("error");
+             });   
         }
+        e.preventDefault();
     });
     
      $('#editform').submit(function(e) { 
          $('#editform [data-toggle="tooltip"]').tooltip('hide');
-        e.preventDefault();
+         
     
         //se traen todos los inputs del formulario
         var $inputs = $('#editform :input');
         var error=false;
-        debugger;
+       
         $inputs.each(function() {
             var encontro_error = validar($(this)); //uses dependence ok
             if (encontro_error){
@@ -93,36 +92,34 @@
             }         
         }); 
         if(!error){
-            debugger;
+            
             var edit = $.ajax({
                 url: URI.EDIT,
                 method: "POST",
                 data: $('#editform').serialize(),
-                dataType: 'json'
+                dataType: 'json',
+                beforeSend : function(){
+                     $('#modalEdit .modal-body').append('<div class="alert alert-success" role="alert"><strong>Editando...</strong> Espere por favor.</div>');
+                }
             });
             edit.done(function(res){
-            if(!res.error ){
-                table.ajax.reload();
-                $('#modalEdit .modal-body').append('<div class="alert alert-success" role="alert"><strong>Edicion exitosa!</strong> Puede cerrar esta ventana.</div>');
-                
-                
-                
-            }else{
-                alert(res.mensaje);
-
-            }
-        });
+                if(!res.error ){
+                    table.ajax.reload();
+                   
+                    
+                }else{
+                    alert(res.mensaje);
+                }
+            });
             
-         edit.fail(function(){
-         
-            alert("error");
-         });   
-            
-            
-            
+             edit.fail(function(){
+                alert("error");
+             });      
         }
-         $('#modalEdit').modal('hide');
+    e.preventDefault();    
     });
+    
+    
     
     function validar(elemento){        
         switch(elemento.attr('id')) {

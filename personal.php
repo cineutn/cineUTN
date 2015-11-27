@@ -1,5 +1,5 @@
 <?php require("partials/header.php"); ?>
- <link rel="stylesheet" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
+ <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
  <link rel="stylesheet" href="assets/css/tabla.css">
 <link rel="stylesheet" href="assets/css/personal.css">
 

@@ -53,12 +53,13 @@ var URI = {
                 "ajax": URISELECTED.url,
                 "columns": URISELECTED.columns,
                 "language": {
-                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                    "url": "assets/Spanish.json"
                     }
                 })
              .on('xhr.dt', function ( e, settings, json, xhr ) {
              
-                    
+                    $('#modalEdit').modal('hide');
+                    $('#modalSignup').modal('hide');
                     if($('#btnAgregar').attr('id')!='btnAgregar'){
                         $('#grid-basic_wrapper .col-sm-12').prepend('<div id="btnAgregar" class="pull-right addPersonal"><span class="glyphicon glyphicon-plus"></span>    </div>');  
                     }
@@ -109,7 +110,8 @@ var URI = {
         });
         $('body').on('click','.cruz',function(event){
             event.stopPropagation();
-
+            $('#modalSignup .modal-body .alert-success').remove();
+            
             data = {
                 id : event.toElement.id.replace('btn','')
             }
