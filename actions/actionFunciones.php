@@ -257,6 +257,28 @@ function funcionesPorComplejo($request){
     }
 }
 
+function funcionesPorSalaComplejo($request){
+	require("../models/funciones.php");
+    $f = new Funciones();
+    $funcion = array();  
+    
+	$funcion["nroSemana"] = $request->numeroSemana;	
+	$funcion["idComplejo"] = $request->idComplejo;	
+					  
+    if($nuevo = $f->obtenerFuncionesPorSalaComplejo($funcion)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "true",
+            "data" => $nuevo
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener funciones"
+        ));
+    }
+}
+
 $request = new Request();
 $action = $request->action;
 switch($action){                  
@@ -293,5 +315,10 @@ switch($action){
     case "obtenerPorComplejo":  
         funcionesPorComplejo($request);
         break;
+    case "funcionesPorSalaComplejo":  
+        funcionesPorSalaComplejo($request);
+        break;        
+        
+        
         
 }

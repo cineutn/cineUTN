@@ -1,9 +1,13 @@
  var URI = {        
-        FUNCIONES : 'actions/actionFunciones.php?action=funcionesPorSala',    
+        FUNCIONES : 'actions/actionFunciones.php?action=funcionesPorSala',  
+        FUNCIONESCOMPLEJO : 'actions/actionFunciones.php?action=funcionesPorSalaComplejo',  
+     
     };
 
 $funcionesSemana =$("#funcionesSemana");
-
+$idComplejoUsuario = sessionStorage.getItem('idcomplejo');
+$tipoUsuarioLogueado = sessionStorage.getItem('tipoUsuario');
+ 
 $(document ).ready(function(){	   
         obtenerFunciones();
     });
@@ -11,6 +15,7 @@ $(document ).ready(function(){
 
 function obtenerFunciones(){   
    
+    if($tipoUsuarioLogueado=='superAdministrador'){
     var obtener = $.ajax({
         url : URI.FUNCIONES,
         method : "GET",
@@ -19,7 +24,18 @@ function obtenerFunciones(){
 				  },
         dataType : 'json',
     });
-
+    }else if($tipoUsuarioLogueado=='administrador'){
+        var obtener = $.ajax({
+        url : URI.FUNCIONESCOMPLEJO,
+        method : "GET",
+        data: {
+                numeroSemana:$("#nroSemana").val(),
+                idComplejo:$idComplejoUsuario
+				  },
+        dataType : 'json',
+    });
+    
+    }
     obtener.done(function(res){
         if(!res.error){				            
             $row='';

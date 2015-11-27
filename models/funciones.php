@@ -204,5 +204,26 @@ select fh.idFuncion from funcionhorario fh inner join semana se on fh.idsemana =
         }
         return $funciones;
   }
+
+public function obtenerFuncionesPorSalaComplejo($funcion){          
+    $nroSemana =$this->connection->real_escape_string($funcion['nroSemana']); 
+    $idComplejo =$this->connection->real_escape_string($funcion['idComplejo']); 
+     
+    $query ="SELECT sl.descripcion as Sala,pl.titulo,fm.descripcion,fm.subtitulada,fh.dia,fh.horario,fn.fechaBaja FROM `semana` se inner join funcionhorario fh  on se.idsemana=fh.idsemana
+    inner join funcion fn on fn.idfuncion=fh.idfuncion inner join pelicula pl on pl.idPelicula = fn.idPelicula 
+    inner join sala sl on sl.idsala=fh.idsala inner join formato fm on fm.idformato=pl.idFormato
+    inner join complejo cl on cl.idcomplejo=sl.idcomplejo
+    where se.numerosemana=$nroSemana
+    and cl.idcomplejo=$idComplejo";      
+
+    $funciones = array();      
+      if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $funciones[] = $fila;
+            }
+            $result->free();
+        }
+        return $funciones;
+  } 
     
 }
