@@ -103,8 +103,10 @@ var URI = {
                     }
                 })
              .on('xhr.dt', function ( e, settings, json, xhr ) {
-             
+                    $('#modalEdit').modal('hide');
+                    $('#modalSignup').modal('hide');
                     
+             
                     if($('#btnAgregar').attr('id')!='btnAgregar'){
                         $('#grid-basic_wrapper .col-sm-12').prepend('<div id="btnAgregar" class="pull-right addPersonal"><span class="glyphicon glyphicon-plus"></span>    </div>');  
                     }
@@ -116,7 +118,8 @@ var URI = {
                         $('#perfil').val('3');
                         
                         $('#modalSignup').modal('show');
-                       
+                        $('#modalSignup .modal-body .alert-success').remove();
+                         $('#modalSignup form input.form-control').val('')
                         
                     });
                     
@@ -156,6 +159,7 @@ var URI = {
         });
         $('body').on('click','.cruz',function(event){
             event.stopPropagation();
+            $('#modalSignup .modal-body .alert-success').remove();
 
             data = {
                 id : event.toElement.id.replace('btn','')
