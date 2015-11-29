@@ -153,7 +153,45 @@ order by 'Total Reservas vencidas' desc,'Total Compras' desc";
     
     }
     
-   
+    public function getRecaudacionPelicula($fechas){
+
+        $fInicio = $this->connection->real_escape_string($fechas["fInicio"]);
+        $fFin = $this->connection->real_escape_string($fechas["fFin"]);
+
+        $query = "select pel.titulo Titulo ,
+        fm.descripcion as Formato,
+        DATE_FORMAT(pel.estreno,'%d-%m-%Y') Estreno,
+        DATE_FORMAT(fn.fechaBaja,'%d-%m-%Y') Baja,
+        sum(vd.precio) as Recaudado,
+        count(*) Espectadores
+        from pelicula pel 
+        inner join formato fm on pel.idformato=fm.idformato 
+        inner join funcion fn on fn.idpelicula=pel.idpelicula 
+        inner join sala_funcion sf on sf.idfuncion=fn.idFuncion
+        inner join ventadetalle vd on vd.idSalaFuncion=sf.idsalafuncion 
+        inner join venta v on v.idventa=vd.idventa
+        where v.tipoventa!='Reserva' and pel.estreno between '$fInicio'  and '$fFin'
+        group by pel.titulo ,fm.descripcion ,pel.estreno,fn.fechaBaja 
+        order by Recaudado desc";  
+
+        $res = array();
+        
+        try{
+            if( $result = $this->connection->query($query) ){
+                while($fila = $result->fetch_assoc()){
+                    $res[] = $fila;
+                }
+                $result->free();
+            }
+        }
+        catch(Exception $e) {
+            throw new Exception ($e->getMessage());
+        }
+       
+        return $res;
+
+
+    }
     
     
 }

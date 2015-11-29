@@ -17,7 +17,13 @@
     $divWeb = $("#divWeb");
     $divUsuarios = $("#divUsuarios");
     $divAdministrador = $("#divAdministrador");
+    $divReportes = $("#divReportes");
 	
+    
+    $divReportes.on("click",function(){
+        window.location.href = "reportesSuperAdmin.php";
+    });
+    
     $divFunciones.on("click",function(){
         window.location.href = "semanaNueva.php";
     });

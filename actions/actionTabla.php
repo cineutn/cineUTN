@@ -83,6 +83,27 @@ function setState($request){
         ));
     }
 }
+function getRecaudacionPelicula($request){
+    require("../models/tabla.php");
+    $s = new Tabla();
+    	
+    $fechas = array();
+    $fechas["fInicio"] = $request->fInicio;
+    $fechas["fFin"] = $request->fFin;
+    
+    if($res = $s->getRecaudacionPelicula($fechas)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $res
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error"
+        ));
+    }
+}
 
 function deletePersonal($request){
     require("../models/tabla.php");
@@ -123,6 +144,9 @@ switch($action){
         break; 
     case "getAdmins":
         getAdmins();
+        break;     
+    case "getRecaudacionPelicula":
+        getRecaudacionPelicula($request);
         break;     
         
     
