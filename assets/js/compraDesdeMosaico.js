@@ -1,7 +1,7 @@
 (function($){
     var URI = {        
-        PELICULA : 'actions/actionPeliculas.php?action=obtenerPeliculaById',
-        PELICULAFUNCION : 'actions/actionPeliculas.php?action=obtenerPeliculaFuncionById'
+        PELICULA : 'actions/actionPeliculas.php?action=obtenerPeliculaByNombre',
+        PELICULAFUNCION : 'actions/actionPeliculas.php?action=obtenerPeliculaFuncionByNombre'
     }; 
     
     $( document ).ready(function(){  

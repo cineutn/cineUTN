@@ -269,11 +269,11 @@
                    
                     var peliculaCartelera = 
                         $('<a/>',   {
-                            'href'   :  'compraDesdeMosaico.php?idPelicula='+ item.idPelicula
+                            'href'   :  'compraDesdeMosaico.php?idPelicula='+ item.titulo
                         }).append(
                             $('<img/>', {
                                 'class' :   'pelicula',
-                                'id'    :   'pelicula' + item.idPelicula,
+                                'id'    :   'pelicula' + item.titulo,
                                 'src'   :   item.imagen,
                                 'data-toggle':  "tooltipCartelera",
                                 'title' :   item.titulo

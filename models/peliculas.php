@@ -102,16 +102,15 @@ class Peliculas
     }
 
     public function getPeliculasCartelera(){
-        $query = "SELECT 
-                        DISTINCT P.idPelicula,
-                         P.titulo,
-                         P.imagen 
-                   FROM pelicula P
-                   INNER JOIN funcion F ON F.idPelicula = P.idPelicula
-                   WHERE P.fechaBaja = '0000-00-00 00:00:00' 
-                   GROUP BY P.titulo
-                   ORDER BY P.fechaAlta";  
-       
+        $query = "
+                  SELECT DISTINCT 
+                        P.titulo,
+                        P.imagen 
+                FROM pelicula P
+                INNER JOIN funcion F ON F.idPelicula = P.idPelicula
+                WHERE P.fechaBaja = '0000-00-00 00:00:00'
+                ORDER BY P.fechaAlta";  
+
         $peliculas = array();
         if( $result = $this->connection->query($query) ){
             while($fila = $result->fetch_assoc()){
@@ -125,6 +124,28 @@ class Peliculas
     public function getPeliculaByID($id){
         $query = "SELECT * FROM pelicula where idPelicula='$id'";  
        
+        $peliculas = array();
+        
+        try{
+            if( $result = $this->connection->query($query) ){
+                while($fila = $result->fetch_assoc()){
+                    $peliculas[] = $fila;
+                }
+                $result->free();
+            }
+        }
+        catch(Exception $e) {
+            throw new Exception ($e->getMessage());
+        }
+       
+        return $peliculas;
+    }
+    
+    public function getPeliculaByNombre($id){
+        $query = "SELECT distinct titulo,imagen,sinopsis,genero,duracion,actores,director,clasificacion,trailer
+FROM pelicula where titulo='$id'";  
+       
+        
         $peliculas = array();
         
         try{
@@ -175,6 +196,46 @@ class Peliculas
                     INNER JOIN funcionhorario FH on F.idFuncion = FH.idFuncion
                     INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion 
                     WHERE F.idPelicula='$id'
+                    and F.fechaBaja ='0000-00-00 00:00:00'"; 
+
+        $peliculas = array();
+        
+        try{
+            if( $result = $this->connection->query($query) ){
+                while($fila = $result->fetch_assoc()){
+                    $peliculas[] = $fila;
+                }
+                $result->free();
+            }
+            else {
+                    throw new Exception ($e->getMessage());
+           }
+        }
+        catch(Exception $e) {
+            throw new Exception ($e->getMessage());
+        }
+       
+        return $peliculas;
+    }
+    
+    public function getPeliculaFuncionByNombre($id){
+              
+        $query = "SELECT 
+                    F.idComplejo,
+                    C.nombre as nombreComplejo, 
+                    F.idTipoFuncion,
+                    FH.dia,
+                    FH.horario,
+                    FO.idFormato,
+                    FO.descripcion as formato, 
+                    FO.subtitulada,
+                    FH.idFuncionDetalle    
+                    FROM funcion F
+                    INNER JOIN complejo C on F.idComplejo = C.idComplejo
+                    INNER JOIN pelicula P on F.idPelicula = P.idPelicula
+                    INNER JOIN funcionhorario FH on F.idFuncion = FH.idFuncion
+                    INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion 
+                    WHERE P.titulo='$id'
                     and F.fechaBaja ='0000-00-00 00:00:00'"; 
 
         $peliculas = array();

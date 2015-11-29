@@ -160,12 +160,56 @@ function obtenerPeliculaById($request){
         ));
     }
 }
+function obtenerPeliculaByNombre($request){
+    require("../models/peliculas.php");
+    $p = new Peliculas();
+    try{
+        if($pelicula = $p->getPeliculaByNombre($request->id)){
+            sendResponse(array(
+                "error" => false,
+                "mensaje" => "",
+                "data" => $pelicula
+            ));
+        }
+    
+    }
+    catch(Exception $e){
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => 'Error al obtener la pelicula. ' . $e->getMessage()
+        ));
+    }
+}
 
 function obtenerPeliculaFuncionById($request){
     require("../models/peliculas.php");
     $p = new Peliculas();
     try{
         if($pelicula = $p->getPeliculaFuncionByID($request->id)){
+            sendResponse(array(
+                "error" => false,
+                "mensaje" => "",
+                "data" => $pelicula
+            ));
+        }else{
+            sendResponse(array(
+                "error" => true,
+                "mensaje" => 'Error al obtener la pelicula. '
+            ));
+        }
+    }
+    catch(Exception $e){
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => 'Error al obtener la pelicula. ' . $e->getMessage()
+        ));
+    }
+}
+function obtenerPeliculaFuncionByNombre($request){
+    require("../models/peliculas.php");
+    $p = new Peliculas();
+    try{
+        if($pelicula = $p->getPeliculaFuncionByNombre($request->id)){
             sendResponse(array(
                 "error" => false,
                 "mensaje" => "",
@@ -384,9 +428,15 @@ switch($action){
     case "obtenerPeliculaById":
         obtenerPeliculaById($request);
         break;
+    case "obtenerPeliculaByNombre":
+        obtenerPeliculaByNombre($request);
+        break;    
     case "obtenerPeliculaFuncionById":
         obtenerPeliculaFuncionById($request);
         break;
+    case "obtenerPeliculaFuncionByNombre":
+        obtenerPeliculaFuncionByNombre($request);
+        break;    
     case "obtenerPeliculaxComplejo":
         obtenerPeliculaxComplejo($request);
         break;    

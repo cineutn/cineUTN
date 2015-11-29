@@ -2,12 +2,12 @@
 
     require("utils/request.php");
     $request = new Request();
-    $idPelicula = $request->idPelicula;
+    $nombrePelicula = $request->idPelicula;
 
     require("partials/header.php"); 
 ?>
 
-    <input type='hidden' id='idPelicula' value=<?php echo $idPelicula ?>></input>
+    <input type='hidden' id='idPelicula' value='<?php echo $nombrePelicula ?>'></input>
 
         <div class="row detallesPelicula">
 			<div class="col-md-2">
