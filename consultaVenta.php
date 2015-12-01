@@ -164,8 +164,6 @@
 <link href="assets/css/entradaPrint.css" type="text/css" media="print" />
 <link rel="stylesheet" href="assets/css/paginaInicio.css">
 <link rel="stylesheet" href="assets/css/paginaCompra.css">     
-<script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
-<script src="assets/js/vendor/bootstrap.min.js"></script>
 <script src="assets/js/vendor/jquery.qrcode-0.12.0.js"></script>
 <script src="assets/js/vendor/jquery.PrintArea.js"></script>
 <script src="assets/js/consultaVenta.js"></script>

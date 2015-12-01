@@ -158,9 +158,3 @@
 		</div>
 	  </div>
 	</div>
-
-	
-<script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
-<script src="assets/js/vendor/bootstrap.min.js"></script>
-<script src="assets/js/formRegistro.js"></script>
-	

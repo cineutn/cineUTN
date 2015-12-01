@@ -20,9 +20,6 @@
 	
 <?php require("partials/footer.php"); ?>
 
-  
-<script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
-<script src="assets/js/vendor/bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script>
 

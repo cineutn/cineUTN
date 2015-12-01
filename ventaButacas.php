@@ -85,7 +85,5 @@
 <?php require("partials/msgBox.php"); ?>
 
 <link rel="stylesheet" href="assets/css/ventaButacas.css">     
-<script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
-<script src="assets/js/vendor/bootstrap.min.js"></script>
 <script src="assets/js/reloj.js"></script>
 <script src="assets/js/ventaButaca.js"></script>

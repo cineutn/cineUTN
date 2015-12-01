@@ -39,6 +39,4 @@
 <?php require("partials/footer.php"); ?>
 
 <link rel="stylesheet" href="assets/css/menuInicioAdmin.css">
-<script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
-<script src="assets/js/vendor/bootstrap.min.js"></script>
 <script src="assets/js/menuInicioAdmin.js"></script>

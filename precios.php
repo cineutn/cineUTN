@@ -51,8 +51,7 @@
 <?php require("partials/msgBox.php"); ?>
 
 <link rel="stylesheet" href="assets/css/precios.css">
-<script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
-<script src="assets/js/vendor/bootstrap.min.js"></script>
+
 <script src="assets/js/vendor/bootstrap-tooltip.js"></script>
 <script src="assets/js/vendor/bootstrap-confirmation.min.js"></script>
 <script src="assets/js/precios.js"></script>

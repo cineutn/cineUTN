@@ -68,7 +68,5 @@
 <?php require("partials/msgBox.php"); ?>
 
 <link rel="stylesheet" href="assets/css/cines.css">
-<script src="assets/js/vendor/jquery-1.11.3.min.js"></script>
-<script src="assets/js/vendor/bootstrap.min.js"></script>
 <script src="assets/js/vendor/bootstrap-confirmation.min.js"></script>
 <script src="assets/js/cines.js"></script>
