@@ -3,19 +3,19 @@
  <link rel="stylesheet" href="assets/css/tabla.css">
 
     <div id="menuReportes" class="row">
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Dropdown
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </div>
+        <ul class="nav nav-pills">
+            <li role="presentation"><a href="#">Fecha Desde: <input type="date" id="fechaDesde"></a></li>
+            <li role="presentation"><a href="#">Fecha Hasta: <input type="date" id="fechaHasta"></a></li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  Reportes <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a id="recaudacionXPelicula" href="#">Recaudacion por Peliculas</a></li>
+                    <li><a href="#">Another action</a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
  
          

@@ -1,6 +1,6 @@
 $('title').html("Reportes");
 
-var URI = {        
+    var URI = {        
  
        RECAUDACIONPELICULA : {
             url : 'actions/actionTabla.php?action=getRecaudacionPelicula',
@@ -23,12 +23,37 @@ var URI = {
     var table;
     
     $(document).ready(function() {
-       
-          
-        URISELECTED.url=URI.RECAUDACIONPELICULA.url+"&fInicio=2015-08-27&fFin=2015-11-29";
-        URISELECTED.columns=URI.RECAUDACIONPELICULA.columns;
+        $('#fechaDesde').val('2015-08-27');
+        $('#fechaHasta').val('2015-11-29');
+        $('#menuReportes .dropdown-menu a').on('click',function(e){
+            llamaReporte(e);
         
-        URISELECTED.columns.forEach(function(e){
+        });     
+    } );
+
+function llamaReporte(e){
+   
+    
+    switch(e.delegateTarget.id) {
+        case "recaudacionXPelicula":
+             URISELECTED.url=URI.RECAUDACIONPELICULA.url+"&fInicio="+$('#fechaDesde').val()+"&fFin=2015-11-29";
+             URISELECTED.columns=URI.RECAUDACIONPELICULA.columns;
+            armaTabla();
+            
+            break;
+    }
+    
+
+}
+function armaTabla(){
+    $("#grid-basic thead tr th").remove();
+    
+    if(table){
+         table.destroy();
+    }
+   
+    
+    URISELECTED.columns.forEach(function(e){
             $("#grid-basic thead tr").append(
                 $('<th/>').append(e.data)
             );
@@ -45,27 +70,13 @@ var URI = {
                 })
              .on('xhr.dt', function ( e, settings, json, xhr ) {
                      //aca agrego los botones de fomra dinamica               
-             
-                    /*if($('#btnAgregar').attr('id')!='btnAgregar'){
-                        $('#grid-basic_wrapper .col-sm-12').prepend('<div id="btnAgregar" class="pull-right addPersonal"><span class="glyphicon glyphicon-plus"></span>    </div>');  
-                    }*/
-             
+                        
                     //aca bindeo las funciones a los botones    
-                    /*$('#grid-basic_wrapper .col-sm-12').on('click','.addPersonal',function(event){
-                        event.stopPropagation();
-                        
-                        $('#perfil').val('3');
-                        
-                        $('#modalSignup').modal('show');
-                        $('#modalSignup .modal-body .alert-success').remove();
-                         $('#modalSignup form input.form-control').val('')
-                        
-                    });*/
+                    
                     
                     
                 } );
-            
-         
-        
-    } );
+
+
+}
    
