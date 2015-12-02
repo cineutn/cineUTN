@@ -83,15 +83,16 @@ function setState($request){
         ));
     }
 }
-function getRecaudacionPelicula($request){
+function getReporte($request){
     require("../models/tabla.php");
     $s = new Tabla();
-    	
-    $fechas = array();
-    $fechas["fInicio"] = $request->fInicio;
-    $fechas["fFin"] = $request->fFin;
+    $res = array();	
+    $arr = array();
+    $arr["fInicio"] = $request->fInicio;
+    $arr["fFin"] = $request->fFin;
+    $arr["tipoReporte"] = $request->tipoReporte;
     
-    if($res = $s->getRecaudacionPelicula($fechas)){
+    if($res = $s->getReporte($arr)){
         sendResponse(array(
             "error" => false,
             "mensaje" => "",
@@ -99,8 +100,9 @@ function getRecaudacionPelicula($request){
         ));
     }else{
         sendResponse(array(
-            "error" => true,
-            "mensaje" => "Error"
+            "error" => false,
+            "mensaje" => "Error" ,
+            "data" => $res
         ));
     }
 }
@@ -145,8 +147,8 @@ switch($action){
     case "getAdmins":
         getAdmins();
         break;     
-    case "getRecaudacionPelicula":
-        getRecaudacionPelicula($request);
+    case "getReporte":
+        getReporte($request);
         break;     
         
     

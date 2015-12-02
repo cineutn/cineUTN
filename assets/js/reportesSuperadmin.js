@@ -1,9 +1,8 @@
 $('title').html("Reportes");
 
     var URI = {        
- 
+       url : 'actions/actionTabla.php?action=getReporte',
        RECAUDACIONPELICULA : {
-            url : 'actions/actionTabla.php?action=getRecaudacionPelicula',
             columns : [
                 {   "data": "Titulo",
                     "render" : function(data, type, full, meta){
@@ -13,18 +12,29 @@ $('title').html("Reportes");
                 {   "data": "Formato" },
                 {   "data": "Estreno" },
                 {   "data": "Baja" },
-                {   "data": "Recaudado" },
+                {   "data": "Recaudacion"},
                 {   "data": "Espectadores" }
                  
             ]
-         }
+         },
+        RECAUDACIONCOMPLEJO : {
+            columns : [
+                {   "data": "Complejo"},
+                {   "data": "Recaudacion"},
+                {   "data": "CantPersona" }
+                 
+            ]
+        
+        }
     };
     var URISELECTED=[];
     var table;
     
     $(document).ready(function() {
-        $('#fechaDesde').val('2015-08-27');
-        $('#fechaHasta').val('2015-11-29');
+        $('#fechaDesde').val(obtenerFechaSemanaAnterior());
+        $('#fechaHasta').val(obtenerFechaActual());
+        
+
         $('#menuReportes .dropdown-menu a').on('click',function(e){
             llamaReporte(e);
         
@@ -32,24 +42,34 @@ $('title').html("Reportes");
     } );
 
 function llamaReporte(e){
-   
-    
-    switch(e.delegateTarget.id) {
-        case "recaudacionXPelicula":
-             URISELECTED.url=URI.RECAUDACIONPELICULA.url+"&fInicio="+$('#fechaDesde').val()+"&fFin=2015-11-29";
-             URISELECTED.columns=URI.RECAUDACIONPELICULA.columns;
-            armaTabla();
-            
-            break;
-    }
-    
-
+   if($('#fechaDesde').val()>$('#fechaHasta').val()){
+        alert("La 'fecha desde' debe ser menor o igual a la 'fecha hasta'");
+       
+       
+       
+   }else{
+        
+       URISELECTED.url=URI.url+"&fInicio="+$('#fechaDesde').val()+"&fFin="+$('#fechaHasta').val()+"&tipoReporte="+e.delegateTarget.id;
+       
+        switch(e.delegateTarget.id) {
+            case "recaudacionXPelicula":
+                URISELECTED.columns=URI.RECAUDACIONPELICULA.columns;
+                break;
+            case "recaudacionXComplejo":
+                URISELECTED.columns=URI.RECAUDACIONCOMPLEJO.columns;
+                break;
+                
+        }
+        armaTabla();
+   }
 }
 function armaTabla(){
-    $("#grid-basic thead tr th").remove();
+    
     
     if(table){
          table.destroy();
+         $("#grid-basic thead tr th").remove();
+         $("#grid-basic tbody").remove();
     }
    
     
@@ -79,4 +99,43 @@ function armaTabla(){
 
 
 }
-   
+function obtenerFechaActual(){
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if(dd<10) {
+        dd='0'+dd
+    } 
+
+    if(mm<10) {
+        mm='0'+mm
+    } 
+
+    today = yyyy+'-'+mm+'-'+dd;
+    return today;
+
+}
+function obtenerFechaSemanaAnterior(){
+    var today = new Date();
+    
+    
+    var semanaAnterior=new Date(today.getTime() - (24*60*60*1000)*7);
+    
+    var dd = semanaAnterior.getDate();
+    var mm = semanaAnterior.getMonth()+1; //January is 0!
+    var yyyy = semanaAnterior.getFullYear();
+
+    if(dd<10) {
+        dd='0'+dd
+    } 
+
+    if(mm<10) {
+        mm='0'+mm
+    } 
+
+    today = yyyy+'-'+mm+'-'+dd;
+    return today;
+
+}   

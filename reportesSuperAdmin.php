@@ -1,5 +1,5 @@
 <?php require("partials/header.php"); ?>
- <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+ <link rel="stylesheet" href="assets/css/dataTables.bootstrap.min.css">
  <link rel="stylesheet" href="assets/css/tabla.css">
 
     <div id="menuReportes" class="row">
@@ -12,7 +12,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a id="recaudacionXPelicula" href="#">Recaudacion por Peliculas</a></li>
-                    <li><a href="#">Another action</a></li>
+                    <li><a id="recaudacionXComplejo" href="#">Recaudacion por Complejo</a></li>
                 </ul>
             </li>
         </ul>

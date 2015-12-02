@@ -153,26 +153,52 @@ order by 'Total Reservas vencidas' desc,'Total Compras' desc";
     
     }
     
-    public function getRecaudacionPelicula($fechas){
+    public function getReporte($arr){
 
-        $fInicio = $this->connection->real_escape_string($fechas["fInicio"]);
-        $fFin = $this->connection->real_escape_string($fechas["fFin"]);
+        $fInicio = $this->connection->real_escape_string($arr["fInicio"]);
+        $fFin = $this->connection->real_escape_string($arr["fFin"]);
+        $tipoReporte= $this->connection->real_escape_string($arr["tipoReporte"]);
 
-        $query = "select pel.titulo Titulo ,
-        fm.descripcion as Formato,
-        DATE_FORMAT(pel.estreno,'%d-%m-%Y') Estreno,
-        DATE_FORMAT(fn.fechaBaja,'%d-%m-%Y') Baja,
-        sum(vd.precio) as Recaudado,
-        count(*) Espectadores
-        from pelicula pel 
-        inner join formato fm on pel.idformato=fm.idformato 
-        inner join funcion fn on fn.idpelicula=pel.idpelicula 
-        inner join sala_funcion sf on sf.idfuncion=fn.idFuncion
-        inner join ventadetalle vd on vd.idSalaFuncion=sf.idsalafuncion 
-        inner join venta v on v.idventa=vd.idventa
-        where v.tipoventa!='Reserva' and pel.estreno between '$fInicio'  and '$fFin'
-        group by pel.titulo ,fm.descripcion ,pel.estreno,fn.fechaBaja 
-        order by Recaudado desc";  
+        
+        
+        $query="";
+        
+        switch ($tipoReporte) {
+            case "recaudacionXPelicula":
+                $query = "select pel.titulo Titulo ,
+                fm.descripcion as Formato,
+                DATE_FORMAT(pel.estreno,'%d-%m-%Y') Estreno,
+                DATE_FORMAT(fn.fechaBaja,'%d-%m-%Y') Baja,
+                sum(vd.precio) as Recaudacion,
+                count(*) Espectadores
+                from pelicula pel 
+                inner join formato fm on pel.idformato=fm.idformato 
+                inner join funcion fn on fn.idpelicula=pel.idpelicula 
+                inner join sala_funcion sf on sf.idfuncion=fn.idFuncion
+                inner join ventadetalle vd on vd.idSalaFuncion=sf.idsalafuncion 
+                inner join venta v on v.idventa=vd.idventa
+                where v.tipoventa!='Reserva' and DATE_FORMAT(v.fecha,'%Y-%m-%d') between '$fInicio'  and '$fFin'
+                group by pel.titulo ,fm.descripcion ,pel.estreno,fn.fechaBaja";
+                break;
+            case "recaudacionXComplejo":
+                $query = "SELECT
+                    C.nombre AS Complejo, 
+                    SUM( VD.precio ) AS Recaudacion, 
+                    COUNT( VD.idVentaDetalle ) AS CantPersona
+                    FROM venta V
+                    INNER JOIN ventadetalle VD ON V.idVenta = VD.idVenta
+                    INNER JOIN sala_funcion SF ON VD.idSalaFuncion = SF.idSalaFuncion
+                    INNER JOIN funcion F ON SF.idFuncion = F.idFuncion
+                    INNER JOIN complejo C ON F.idComplejo = C.idComplejo
+                    WHERE V.tipoVenta <>  'Reserva'
+                    AND DATE_FORMAT(V.fecha,'%Y-%m-%d') BETWEEN '$fInicio'  and '$fFin'
+                    GROUP BY C.nombre";
+                break;
+        }
+    
+        
+        
+          
 
         $res = array();
         
