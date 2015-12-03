@@ -110,24 +110,19 @@ function obtenerSalas(){
         $idSala =$(this).parent().parent()[0].childNodes[0].children[0].value;
         $nombreSala =$(this).parent().parent()[0].childNodes[0].children[1].outerText;
         $("#idSalaEliminar").val($idSala); 
-      validarFuncionesExistntes($idSala);
-       // $('#modalEliminarSala').modal('show');
+      validarFuncionesExistntes($idSala);       
     });
 
-
-function validarFuncionesExistntes($idSala){
-    
+function validarFuncionesExistntes($idSala){    
       var validar =  $.ajax({
                 url: URI.VALIDAR,
                 type: 'POST',                
                 data: {
                         idSala:$idSala
 				  },
-                dataType: 'json',
-               
+                dataType: 'json',               
             })
-            validar.done(function(response){	
-               console.log(response.data.cant);
+            validar.done(function(response){	               
                 if(response.data.cant>0){
                 //no se puede eliminar noEliminarSala
                     $('#noEliminarSala').modal('show');
@@ -136,8 +131,6 @@ function validarFuncionesExistntes($idSala){
                 $('#modalEliminarSala').modal('show');
                 }
             });
-    
-
 };
 
 
@@ -168,8 +161,33 @@ $contenedorSalas.on("click",".botonAzul",function(event){
         event.preventDefault();        
         $idSala =$(this).parent().parent()[0].childNodes[0].children[0].value;
         $nombreSala =$(this).parent().parent()[0].childNodes[0].children[1].outerText;
-        location.href='esquemaSala.php?idSala='+$idSala;
+    validarDiagrama($idSala);
+    
+    
+        
     });
+
+function validarDiagrama($idSala){
+    
+      var validar =  $.ajax({
+                url: URI.VALIDAR,
+                type: 'POST',                
+                data: {
+                        idSala:$idSala
+				  },
+                dataType: 'json',               
+            })
+            validar.done(function(response){	
+               
+                if(response.data.cant>0){
+                //no se puede diagramar noEliminarSala
+                    $('#noDiagramarSala').modal('show');
+                }
+                else{
+                    location.href='esquemaSala.php?idSala='+$idSala;
+                }
+            });
+};
 
 
 //guarda la sala en sala detalle
