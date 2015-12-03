@@ -2,7 +2,7 @@ $('title').html("Reportes");
 
     var URI = {        
        url : 'actions/actionTabla.php?action=getReporte',
-       RECAUDACIONPELICULA : {
+        recaudacionXPelicula : {
             columns : [
                 {   "data": "Titulo",
                     "render" : function(data, type, full, meta){
@@ -15,15 +15,52 @@ $('title').html("Reportes");
                 {   "data": "Recaudacion"},
                 {   "data": "Espectadores" }
                  
-            ]
+            ],
+            order : [[ 4, 'desc' ]]
          },
-        RECAUDACIONCOMPLEJO : {
+        recaudacionXComplejo : {
             columns : [
                 {   "data": "Complejo"},
                 {   "data": "Recaudacion"},
                 {   "data": "CantPersona" }
                  
-            ]
+            ],
+            order : [[ 1, 'desc' ]]
+        
+        },
+        recaudacionTotal : {
+            columns : [
+                {   "data": "Recaudacion Total"},
+                {   "data": "Espectadores"},
+                {   "data": "Desde" },
+                {   "data": "Hasta" }
+            ],
+            order : [[ 0, 'desc' ]]
+        
+        },
+        topPeliculasXComplejo : {
+            columns : [
+                {   "data": "Titulo"},
+                {   "data": "Estreno"},
+                {   "data": "Baja" },
+                {   "data": "Recaudacion" },
+                {   "data": "Espectadores" },
+                {   "data": "Complejo" }
+            ],
+            order : [[ 3, 'desc' ]]
+        
+        },
+        pelisMasVistasPorDia : {
+            columns : [
+                {   "data": "Titulo"},
+                {   "data": "Fecha" },
+                {   "data": "Espectadores" },
+                {   "data": "Estreno"},
+                {   "data": "Baja" }             
+                
+                
+            ],
+            order : [[ 1, 'desc' ], [ 2, 'desc' ]]
         
         }
     };
@@ -50,17 +87,9 @@ function llamaReporte(e){
    }else{
         
        URISELECTED.url=URI.url+"&fInicio="+$('#fechaDesde').val()+"&fFin="+$('#fechaHasta').val()+"&tipoReporte="+e.delegateTarget.id;
-       
-        switch(e.delegateTarget.id) {
-            case "recaudacionXPelicula":
-                URISELECTED.columns=URI.RECAUDACIONPELICULA.columns;
-                break;
-            case "recaudacionXComplejo":
-                URISELECTED.columns=URI.RECAUDACIONCOMPLEJO.columns;
-                break;
-                
-        }
-        armaTabla();
+       URISELECTED.columns=eval("URI."+e.delegateTarget.id+".columns");
+       URISELECTED.order=eval("URI."+e.delegateTarget.id+".order");
+       armaTabla();
    }
 }
 function armaTabla(){
@@ -86,7 +115,8 @@ function armaTabla(){
                 "columns": URISELECTED.columns,
                 "language": {
                     "url": "assets/Spanish.json"
-                    }
+                    },
+                 "order": URISELECTED.order
                 })
              .on('xhr.dt', function ( e, settings, json, xhr ) {
                      //aca agrego los botones de fomra dinamica               

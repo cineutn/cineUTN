@@ -194,6 +194,56 @@ order by 'Total Reservas vencidas' desc,'Total Compras' desc";
                     AND DATE_FORMAT(V.fecha,'%Y-%m-%d') BETWEEN '$fInicio'  and '$fFin'
                     GROUP BY C.nombre";
                 break;
+            case "recaudacionTotal":
+                $query="
+                select sum(precio) as 'Recaudacion Total', count(idVentaDetalle) as Espectadores,'$fInicio' as Desde, '$fFin' as Hasta
+                from venta V
+                INNER JOIN ventadetalle VD ON V.idVenta = VD.idVenta
+                WHERE V.tipoVenta <>  'Reserva'
+                AND DATE_FORMAT(V.fecha,'%Y-%m-%d') BETWEEN '$fInicio'  and '$fFin'
+                ";
+                break;
+            case "topPeliculasXComplejo":
+                $query="
+                select pel.titulo Titulo ,
+                DATE_FORMAT(pel.estreno,'%d-%m-%Y') Estreno,
+                DATE_FORMAT(fn.fechaBaja,'%d-%m-%Y') Baja,
+                sum(vd.precio) as Recaudacion,
+                count(*) Espectadores,
+                c.nombre as Complejo
+                from pelicula pel 
+                inner join formato fm on pel.idformato=fm.idformato 
+                inner join funcion fn on fn.idpelicula=pel.idpelicula 
+                INNER JOIN complejo c ON fn.idComplejo = c.idComplejo
+                inner join sala_funcion sf on sf.idfuncion=fn.idFuncion
+                inner join ventadetalle vd on vd.idSalaFuncion=sf.idsalafuncion 
+                inner join venta v on v.idventa=vd.idventa
+                where v.tipoventa!='Reserva' and DATE_FORMAT(v.fecha,'%Y-%m-%d') between '$fInicio'  and '$fFin'
+                group by pel.titulo ,pel.estreno,fn.fechaBaja, c.nombre
+                ";
+                break;
+            case "pelisMasVistasPorDia":
+                $query="
+                    select 
+                    pel.titulo Titulo,
+                    DATE_FORMAT(sm.fecha,'%d-%m-%Y') Fecha,
+                    count(*) Espectadores,
+                    DATE_FORMAT(pel.estreno,'%d-%m-%Y') Estreno,
+                    DATE_FORMAT(fn.fechaBaja,'%d-%m-%Y') Baja             
+                    
+                    from pelicula pel 
+                    inner join formato fm on pel.idformato=fm.idformato 
+                    inner join funcion fn on fn.idpelicula=pel.idpelicula 
+                    inner join funcionhorario fh on fh.idFuncion=fn.idFuncion
+                    inner join semana sm on sm.idSemana=fh.idSemana
+                    INNER JOIN complejo c ON fn.idComplejo = c.idComplejo
+                    inner join sala_funcion sf on sf.idfuncion=fn.idFuncion
+                    inner join ventadetalle vd on vd.idSalaFuncion=sf.idsalafuncion 
+                    inner join venta v on v.idventa=vd.idventa
+                    where v.tipoventa!='Reserva' and DATE_FORMAT(sm.fecha,'%Y-%m-%d') between '$fInicio'  and '$fFin'
+                    group by pel.titulo ,pel.estreno,fn.fechaBaja, c.nombre,DATE_FORMAT(sm.fecha,'%d-%m-%Y')
+                ";
+                break;
         }
     
         
