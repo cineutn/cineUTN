@@ -220,6 +220,7 @@ function bajaFuncionesPorSemana($request){
     $funcion = array();  
     
 	$funcion["nroSemana"] = $request->numeroSemana;	
+	$funcion["idComplejo"] = $request->idComplejo;	
 					  
     if($nuevo = $f->bajaFuncionesPorSemana($funcion)){
         sendResponse(array(
@@ -230,7 +231,7 @@ function bajaFuncionesPorSemana($request){
     }else{
         sendResponse(array(
             "error" => true,
-            "mensaje" => "Error al obtener funciones"
+            "mensaje" => "Error al cerrar funciones"
         ));
     }
 }

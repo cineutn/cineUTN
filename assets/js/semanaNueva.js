@@ -16,7 +16,8 @@ $contenedorSemanas=$("#contenedorSemanas");
 $dias = ["Jueves","Viernes","Sabado","Domingo","Lunes","Martes","Miercoles"];
 $idComplejoUsuario = sessionStorage.getItem('idcomplejo');
 $tipoUsuarioLogueado = sessionStorage.getItem('tipoUsuario');
- 
+$idComplejoUsuario = sessionStorage.getItem('idcomplejo');
+$numeroSemana=0;
 
 $(document ).ready(function(){	   
         obtenerSemanas();
@@ -132,25 +133,34 @@ function generarSemana(ultimaFecha,ultimaSemana){
 
 $contenedorSemanas.on("click",".botonRojo",function(event){
     event.preventDefault();        
-    $numeroSemana= $(this).parent().parent()[0].childNodes[0].children[0].textContent;
-    
-    
-     var cerrarSemana =  $.ajax({
+    $numeroSemana= $(this).parent().parent()[0].childNodes[0].children[0].textContent;    
+     $('#modalEliminarFunciones').modal('show');    
+    });
+
+
+ $("#elinarFuncion").click(function() {       
+        borrarFuncion();
+        $('#modalEliminarFunciones').modal('hide');      
+    });
+
+
+function borrarFuncion(){
+    var cerrarSemana =  $.ajax({
             url: URI.CERRAR,
             async: false,
             type: 'POST',
             data: {                    
-                    numeroSemana:$numeroSemana                    
+                    numeroSemana:$numeroSemana,
+                    idComplejo:$idComplejoUsuario
               },
             dataType: 'json',
         });
         cerrarSemana.done(function(response){                
+            console.log(response);
         obtenerSemanas();
+            
         });
-    
-    });
-
-
+}
 
 function obtenerFunciones(numeroSemana){
 var nroFunciones ='0';   

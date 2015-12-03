@@ -173,9 +173,12 @@ class Funciones
     
  public function bajaFuncionesPorSemana($funcion){          
     $nroSemana =$this->connection->real_escape_string($funcion['nroSemana']); 
+    $idComplejo =$this->connection->real_escape_string($funcion['idComplejo']); 
     
      $query ="UPDATE funcion SET fechabaja=now()where idFuncion in(
-select fh.idFuncion from funcionhorario fh inner join semana se on fh.idsemana =se.idsemana   where se.numerosemana=$nroSemana)"; 
+select fh.idFuncion from funcionhorario fh inner join semana se on fh.idsemana =se.idsemana 
+ where se.numerosemana=$nroSemana)
+and idComplejo=$idComplejo"; 
 
     $funciones = array();      
       if( $result = $this->connection->query($query) ){
