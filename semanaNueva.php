@@ -2,8 +2,8 @@
 
 <div class="row" style="background-color:white">            
     <div class="col-md-1">              
-          <button type="button" class="btn btn-default btn-circle botonVerde" id="btnAddRow">
-             <span style="color:white;" class="glyphicon glyphicon-plus"></span>
+          <button type="button" class="btn btn-default btn-circle botonVerde esbirroSemana hide" id="btnAddRow">
+             <span style="color:white;" class="glyphicon glyphicon-plus "></span>
          </button>              
     </div>            
     <div class="col-md-11">
@@ -12,10 +12,10 @@
             <tr>
                <th>Semana número</th> 
                <th>Fecha Inicio</th> 
-               <th>Funciones Activas</th>                       
-               <th>Cargar funciones</th>
-               <th>Ver funciones</th>
-               <th>Cerrar funciones</th>
+               <th >Funciones Activas</th>                       
+               <th class="esbirroColumna">Cargar funciones</th>
+               <th class="esbirroColumna">Ver funciones</th>
+               <th class="esbirroColumna">Cerrar funciones</th>
             </tr>
           </thead>                    
           <tbody id="tablaSemana">              

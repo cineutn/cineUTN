@@ -20,8 +20,26 @@ $idComplejoUsuario = sessionStorage.getItem('idcomplejo');
 $numeroSemana=0;
 
 $(document ).ready(function(){	   
-        obtenerSemanas();
+        
+    obtenerSemanas();
     });
+
+
+  function ocultarBotones(){
+
+        var tipoUsuario;
+
+        $tipoUsuario = sessionStorage.getItem('tipoUsuario');
+
+        if ($tipoUsuario == "superAdministrador"){
+            $(".esbirroSemana").removeClass("hide");            
+            $(".esbirroColumna").addClass("hide");            
+        }else{
+            $(".esbirroSemana").addClass("hide");
+        }
+    };
+
+
 
 function obtenerSemanas(){       
     var obtener = $.ajax({
@@ -38,9 +56,10 @@ function obtenerSemanas(){
             res.data.forEach(function(item){                
                 $row=$row +
                 '<tr id="rowSala"><td class="form-group"><span>'+item.numeroSemana+'</span></td><td class="form-group"><span>'+item.nombreDia+' ' +obtenerFecha(item.fecha)+'</span></td><td class="form-group"><span>'+obtenerFunciones(item.numeroSemana)+'</span></td>'+
-                '<td><button  class="botonAzul" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button></td><td><button class="botonVerde" type="button"><i class="glyphicon glyphicon glyphicon-arrow-right textoBoton"></i></button></td><td><button class="botonRojo" type="button"><i class="glyphicon glyphicon glyphicon-remove textoBoton"></i></button></td></tr>';      
+                '<td><button  class="botonAzul esbirroColumna" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button></td><td><button class="botonVerde esbirroColumna" type="button"><i class="glyphicon glyphicon glyphicon-arrow-right textoBoton"></i></button></td><td><button class="botonRojo esbirroColumna" type="button"><i class="glyphicon glyphicon glyphicon-remove textoBoton"></i></button></td></tr>';      
             });
             $contenedorSemana.append($row);
+            ocultarBotones();
         }else{
             event.preventDefault();            
             $('#msgBoxTitulo').text('Nueva Semana');

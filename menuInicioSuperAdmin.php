@@ -7,6 +7,11 @@
             <label class="box-titulo">Complejos</label>
         </div>
         
+        <div class="box celeste" id="divFunciones">
+            <span id="iconAvatar" class="glyphicon glyphicon-time icon"></span>
+            <label class="box-titulo">Funciones</label>
+        </div>
+        
         <div class="box amarillo" id="divPeliculas">
             <span id="iconAvatar" class="glyphicon glyphicon-film icon"></span>
             <label class="box-titulo">Peliculas</label>
