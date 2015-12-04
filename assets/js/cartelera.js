@@ -80,16 +80,17 @@
                 var horarios = '';
 
                 $contenedorPeliculas.html("");
-                for (var iPelicula = 0; iPelicula <= res.data.length - 1; iPelicula++) {
+                for (var iPelicula = 0; iPelicula <= res.data.length -1 ; iPelicula++) {
                     var nombrePelicula;
-                    var bGuardar = false;
+                    var bUltimo = false;
+                    var bAgregar = false;
 
                     if (iPelicula == 0){
                         nombre = res.data[iPelicula].titulo;
                         formato = res.data[iPelicula].formato;
                         idioma = res.data[iPelicula].subtitulada;                        
-                    }else if(iPelicula == res.data.length - 1){
-                        bGuardar = true;
+                    }else if(iPelicula == res.data.length -1){
+                        bUltimo = true;
                     }
 
                     if (nombre == res.data[iPelicula].titulo && formato == res.data[iPelicula].formato && idioma == res.data[iPelicula].subtitulada){
@@ -98,20 +99,12 @@
                         }
                         if(horarios.indexOf(res.data[iPelicula].horario) == -1){
                             horarios = horarios + res.data[iPelicula].horario + ' - ';
-                        }                        
+                        }                       
                     }else{
-
-                         bGuardar = true;
+                        bAgregar = true;
                     }
 
-                    if (bGuardar){
-                        if (dias.length == 0 ){
-                            dias = dias + res.data[iPelicula-1].dia;
-                        }
-
-                        if (horarios.length == 0 ){
-                            horarios = horarios + res.data[iPelicula-1].horario;
-                        }
+                    if (bAgregar){
 
                         if (res.data[iPelicula-1].formato == "3D"){
                             nombrePelicula = res.data[iPelicula-1].titulo + " - 3D";
@@ -126,7 +119,15 @@
                             nombrePelicula = nombrePelicula + " (Cast)";
                             lenguaje = "Castellano";
                         }
-                       
+                        
+                        if(dias.endsWith(' - ')){
+                            dias = dias.substring(0,dias.length -3);
+                        }
+
+                        if(horarios.endsWith(' - ')){
+                            horarios = horarios.substring(0,horarios.length -3);
+                        }
+
                         $peliculas=$peliculas+                    
                         '<div class="app">'+
                             '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sombra"></div>'+   
@@ -134,6 +135,68 @@
                                 '<div class="avatar">'+
                                     '<div class="avatar-content">'+
                                         '<img src="'+res.data[iPelicula-1].imagen+'" id="vistaPrevia" class="imagen-avatar ">'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
+                            '<div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 datos">'+                            
+                                '<div class="form-group">'+
+                                    '<h2 id="tituloPelicula">'+nombrePelicula+'</h2>'+
+                                '</div>'+                            
+                                '<table class="table">'+
+                                '<tr><td style="width:25%"><span>Dias: </span></td><td class="datosTabla"><label>'+dias+'</label></td></tr>'+
+                                '<tr><td><span>Horarios: </span></td><td class="datosTabla"><label>'+horarios+'<label></td></tr>'+
+                                '<tr><td><span>Idioma: </span></td><td class="datosTabla"><label>'+lenguaje+'</label></td></tr>'+                           
+                                '</table>'+
+                            '</div>'+                            
+                        '</div>';
+
+                        dias = res.data[iPelicula].dia + ' - ';                      
+                        horarios = res.data[iPelicula].horario + ' - ';                       
+
+                        nombre = res.data[iPelicula].titulo;
+                        formato = res.data[iPelicula].formato;
+                        idioma = res.data[iPelicula].subtitulada;
+                    }
+                     
+                    if (bUltimo){
+
+                        if (dias.length == 0 ){
+                            dias = dias + res.data[iPelicula].dia;
+                        }
+
+                        if (horarios.length == 0 ){
+                            horarios = horarios + res.data[iPelicula].horario;
+                        }
+
+                        if (res.data[iPelicula-1].formato == "3D"){
+                            nombrePelicula = res.data[iPelicula].titulo + " - 3D";
+                        }else{
+                            nombrePelicula = res.data[iPelicula].titulo;
+                        }
+
+                        if (res.data[iPelicula-1].subtitulada == "1"){
+                            lenguaje = "Subtitulada";
+                            nombrePelicula = nombrePelicula + " (Subt)";
+                        }else{
+                            nombrePelicula = nombrePelicula + " (Cast)";
+                            lenguaje = "Castellano";
+                        }
+                        
+                        if(dias.endsWith(' - ')){
+                            dias = dias.substring(0,dias.length -3);
+                        }
+
+                        if(horarios.endsWith(' - ')){
+                            horarios = horarios.substring(0,horarios.length -3);
+                        }
+
+                        $peliculas=$peliculas+                    
+                        '<div class="app">'+
+                            '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sombra"></div>'+   
+                            '<div class="col-xs-9 col-sm-9 col-md-4 col-lg-4 uploadImagen">'+
+                                '<div class="avatar">'+
+                                    '<div class="avatar-content">'+
+                                        '<img src="'+res.data[iPelicula].imagen+'" id="vistaPrevia" class="imagen-avatar ">'+
                                     '</div>'+
                                 '</div>'+
                             '</div>'+
@@ -156,7 +219,6 @@
                         formato = res.data[iPelicula].formato;
                         idioma = res.data[iPelicula].subtitulada;
                     }
-                     
                 };
                
                 $contenedorPeliculas.append($peliculas);
