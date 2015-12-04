@@ -61,6 +61,9 @@
                     <a id="itemHome" href="index.php">Home</a>
                 </li>
                 <li class="itemMenu">
+                    <a href="cartelera.php">Cartelera</a>
+                </li>
+                <li class="itemMenu">
                     <a href="cines.php">Cines</a>
                 </li>
                 <li class="itemMenu">

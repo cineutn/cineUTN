@@ -108,7 +108,7 @@ class Peliculas
                         P.imagen 
                 FROM pelicula P
                 INNER JOIN funcion F ON F.idPelicula = P.idPelicula
-                WHERE P.fechaBaja = '0000-00-00 00:00:00'
+                WHERE F.fechaBaja = '0000-00-00 00:00:00'
                 ORDER BY P.fechaAlta";  
 
         $peliculas = array();
@@ -121,8 +121,38 @@ class Peliculas
         return $peliculas;
     }
 
+    public function getPeliculasCarteleraPorComplejo($id){
+        $query = "SELECT 
+                        P.titulo,
+                        P.imagen, 
+                        FH.dia,
+                        FH.horario,
+                        FO.descripcion as formato, 
+                        FO.subtitulada
+                    FROM pelicula P
+                    INNER JOIN funcion F ON P.idPelicula = F.idPelicula
+                    INNER JOIN funcionhorario FH ON F.idFuncion = FH.idFuncion
+                    INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion
+                    INNER JOIN complejo C on F.idComplejo = C.idComplejo
+                    WHERE F.fechaBaja = '0000-00-00 00:00:00'
+                    AND C.idComplejo = '$id'
+                    ORDER BY P.titulo, FH.dia, FH.horario,FO.descripcion, FO.subtitulada";  
+
+        $peliculas = array();
+        if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $peliculas[] = $fila;
+            }
+            $result->free();
+        }
+        return $peliculas;
+        
+    }
+
     public function getPeliculaByID($id){
-        $query = "SELECT * FROM pelicula where idPelicula='$id'";  
+        $query = "SELECT * 
+                    FROM pelicula 
+                    WHERE idPelicula = '$id'";  
        
         $peliculas = array();
         
@@ -142,10 +172,18 @@ class Peliculas
     }
     
     public function getPeliculaByNombre($id){
-        $query = "SELECT distinct titulo,imagen,sinopsis,genero,duracion,actores,director,clasificacion,trailer
-FROM pelicula where titulo='$id'";  
-       
-        
+        $query = "SELECT DISTINCT titulo,
+                        imagen,
+                        sinopsis,
+                        genero,
+                        duracion,
+                        actores,
+                        director,
+                        clasificacion,
+                        trailer
+                    FROM pelicula 
+                    WHERE titulo = '$id'";  
+               
         $peliculas = array();
         
         try{
@@ -419,7 +457,7 @@ FROM pelicula where titulo='$id'";
                     AND dia = '$dia'";*/
 
         $query = "SELECT FH.idFuncionDetalle,
-                         FH.horario
+                         FH.getHorariosxPeliculaxComplejo
                     FROM pelicula P
                     INNER JOIN funcion F ON P.idPelicula = F.idPelicula
                     INNER JOIN funcionhorario FH ON F.idFuncion = FH.idFuncion
