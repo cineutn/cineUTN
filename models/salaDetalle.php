@@ -7,29 +7,18 @@ class SalaDetalle
     
     public function __construct(){
         $this->connection = ConnectionCine::getInstance();
-    } 
-
-
+    }     
 
   public function createSalaDetalle($sala){        		
         
-		$idSala =$this->connection->real_escape_string($sala['idSala']);		
-		$fila =$this->connection->real_escape_string($sala['fila']);
-		$columna =$this->connection->real_escape_string($sala['columna']);      
-		$habilitada =$this->connection->real_escape_string($sala['habilitada']);      
-      
-       $query = "INSERT INTO saladetalle(IdSalaDetalle,idSala,fila,columna,habilitada) VALUES
-       (DEFAULT,$idSala,'$fila',$columna,$habilitada)";
-     
-      
-        if($this->connection->query($query)){
-              $sala['idSalaDetalle'] = $this->connection->insert_id;
-            return $sala;
+      $consulta =$this->connection->real_escape_string($sala['query']);			
+      $query =stripslashes($consulta);
+        if($this->connection->query($query)){             
+            return true;
         }else{
             return false;
         }
-    }
-    
+    }    
     
 public function eliminarSalaDetalle($sala){
     $idSala =$this->connection->real_escape_string($sala['idSala']);

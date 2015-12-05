@@ -4,8 +4,8 @@ $('title').html("Salas");
  var URI = {        
         ADD : 'actions/actionAltaSala.php?action=nueva',
         SALAS: 'actions/actionAltaSala.php?action=obtener',	
-        ELIMINAR: 'actions/actionAltaSala.php?action=eliminar',	
-        DIAGRAMAR: 'actions/actionEsquemaSala.php?action=nueva',	
+        ELIMINAR: 'actions/actionAltaSala.php?action=eliminar',	        	
+        DIAGRAMAR: 'actions/actionEsquemaSala.php?action=nuevaDetalle',	
         ELIMINARDIAGRAMA: 'actions/actionEsquemaSala.php?action=eliminar',
         VALIDAR: 'actions/actionAltaSala.php?action=validar'
     };
@@ -43,7 +43,7 @@ $btnAltaModificacion.on("click",function(){
      $nombreSala =$("#nombreSala");
      $fila =$("#fila");
      $columna =$("#columna");
-    
+   
      bValidar = validarDatos();      
       if (bValidar){          
            var addSala =  $.ajax({
@@ -189,32 +189,36 @@ function validarDiagrama($idSala){
             });
 };
 
-
 //guarda la sala en sala detalle
 function diagramarSalaDetalle(cantidadFilas,cantidadColumnas,id){     
-    var tope = 65+ parseInt(cantidadFilas); 
-    for(var j=65;j< tope;j++){                 
-        //String.fromCharCode(j)
+    var tope = 65+ parseInt(cantidadFilas);
+     var consulta='INSERT INTO saladetalle(IdSalaDetalle,idSala,fila,columna,habilitada) VALUES';
+        var condicion='';
+    for(var j=65;j< tope;j++){
         for(var i=1;i<=cantidadColumnas;i++){
-         //insertar par fila columna, primero paso fila de nro a letra con String.fromCharCode()             
-            var addSalaDetalle =  $.ajax({
+   
+            condicion =condicion+ "(DEFAULT,"+id+",'"+String.fromCharCode(j)+"',"+i+",1),";                               
+        }
+    }
+    condicion=condicion.substring(0,condicion.length - 1);
+    
+    consulta=consulta+condicion +";";    
+       var addSalaDetalle =  $.ajax({
                 url: URI.DIAGRAMAR,
                 type: 'POST',
                 data: {
-                        idSalaDetalle:0,
-                        idSala:id,                        
-                        fila: String.fromCharCode(j),				        
-                        columna:i,
-                        habilitada:1
-                  },
+                        query:consulta
+                },
                 dataType: 'json',
 
             })
-            addSalaDetalle.done(function(response){	                
-            });             
-        }        
-    }
+            addSalaDetalle.done(function(response){	 
+               
+            });    
 };
+
+
+
 
 //elimina el detalle de la sala, tabla salaDetalle
 function eliminarDetalleSala(idSala){

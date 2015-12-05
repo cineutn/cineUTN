@@ -11,15 +11,13 @@ function sendResponse($response){
     echo json_encode($response);
 }
 
+
 function nuevaSalaDetalle($request){
 	require("../models/salaDetalle.php");
     $s = new SalaDetalle();
     $sala = array();    
-	//$sala["idSalaDetalle"] = $request->idSalaDetalle;
-    $sala["idSala"] = $request->idSala;	
-	$sala["fila"] = $request->fila;  
-	$sala["columna"] = $request->columna;
-    $sala["habilitada"] = $request->habilitada;
+	
+    $sala["query"] = $request->query;
 					  
     if($nuevo = $s->createSalaDetalle($sala)){
         sendResponse(array(
@@ -103,7 +101,10 @@ $action = $request->action;
 switch($action){                  
     case "nueva":
         nuevaSalaDetalle($request);
-        break;      
+        break;     
+    case "nuevaDetalle":
+        nuevaSalaDetalle($request);
+        break;           
     case "eliminar":
         eliminarSalaDetalle($request);
         break; 
