@@ -450,14 +450,14 @@ class Peliculas
         $idComplejo = $this->connection->real_escape_string($datos['idComplejo']);
         $pelicula = $this->connection->real_escape_string($datos['pelicula']);
         $dia = $datos['dia'];
-        
+         
         /*$query = "SELECT idFuncionDetalle,horario 
                     FROM funcionhorario
                     WHERE idFuncion = $idFuncion 
                     AND dia = '$dia'";*/
 
         $query = "SELECT FH.idFuncionDetalle,
-                         FH.getHorariosxPeliculaxComplejo
+                         FH.horario
                     FROM pelicula P
                     INNER JOIN funcion F ON P.idPelicula = F.idPelicula
                     INNER JOIN funcionhorario FH ON F.idFuncion = FH.idFuncion

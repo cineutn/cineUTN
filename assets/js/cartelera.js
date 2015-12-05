@@ -89,7 +89,9 @@
                         nombre = res.data[iPelicula].titulo;
                         formato = res.data[iPelicula].formato;
                         idioma = res.data[iPelicula].subtitulada;                        
-                    }else if(iPelicula == res.data.length -1){
+                    }
+
+                    if(iPelicula == res.data.length -1){
                         bUltimo = true;
                     }
 
@@ -168,13 +170,13 @@
                             horarios = horarios + res.data[iPelicula].horario;
                         }
 
-                        if (res.data[iPelicula-1].formato == "3D"){
+                        if (res.data[iPelicula].formato == "3D"){
                             nombrePelicula = res.data[iPelicula].titulo + " - 3D";
                         }else{
                             nombrePelicula = res.data[iPelicula].titulo;
                         }
 
-                        if (res.data[iPelicula-1].subtitulada == "1"){
+                        if (res.data[iPelicula].subtitulada == "1"){
                             lenguaje = "Subtitulada";
                             nombrePelicula = nombrePelicula + " (Subt)";
                         }else{
