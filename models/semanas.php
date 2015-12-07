@@ -9,8 +9,24 @@ class Semanas
         $this->connection = ConnectionCine::getInstance();
     } 
     
-  public function getNumeroSemanas(){
-     $query ="SELECT numeroSemana,fecha,nombreDia FROM semana WHERE nombreDia='jueves'";
+  public function getNumeroSemanas($complejo){
+     $idComplejo=$this->connection->real_escape_string($complejo['idComplejo']); 
+     //$query ="SELECT numeroSemana,fecha,nombreDia FROM semana WHERE nombreDia='jueves'";
+     
+      
+      $query="SELECT a.numeroSemana,fecha,nombreDia,IFNULL(cantidad,0) cantidad
+FROM semana a
+left join (
+	SELECT count(*) cantidad,numeroSemana 
+    #select *
+    FROM semana se 
+    inner JOIN funcionhorario fh on se.idsemana=fh.idSemana 
+    inner join funcion f on f.idfuncion=fh.idfuncion 
+    where  (f.idComplejo=$idComplejo or $idComplejo is NULL) and f.fechaBaja ='0000-00-00 00:00:00'
+	group by numeroSemana
+) b on b.numeroSemana=a.numeroSemana
+WHERE nombreDia='jueves'";
+      
      $semanas= array();
       
        if( $result = $this->connection->query($query) ){

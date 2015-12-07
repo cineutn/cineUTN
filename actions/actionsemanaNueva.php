@@ -15,7 +15,11 @@ function sendResponse($response){
 function obtenerNumeroSemanas($request){
     require("../models/semanas.php");
      $s = new Semanas();
-    if($semanas = $s->getNumeroSemanas()){
+    
+     $complejo = array();    	
+     $complejo["idComplejo"] = $request->idComplejo;
+    
+    if($semanas = $s->getNumeroSemanas($complejo)){
         sendResponse(array(
             "error" => false,
             "mensaje" => "",

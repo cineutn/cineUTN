@@ -1,4 +1,5 @@
 <?php require("partials/header.php"); ?>
+<link rel="stylesheet" href="assets/css/menuInicioAdmin.css">
 
     <div class="row" id="contenedor">
         <div class="box celeste" id="divFunciones">
@@ -42,5 +43,5 @@
 	
 <?php require("partials/footer.php"); ?>
 
-<link rel="stylesheet" href="assets/css/menuInicioAdmin.css">
+
 <script src="assets/js/menuInicioAdmin.js"></script>

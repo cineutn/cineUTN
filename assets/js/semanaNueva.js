@@ -44,6 +44,9 @@ function obtenerSemanas(){
     var obtener = $.ajax({
         url : URI.SEMANAS,
         method : "GET",
+        data : {
+            idComplejo: sessionStorage.idcomplejo
+        },
         dataType : 'json',
         beforeSend: function(){
             $('#modalLoading').modal('show');
@@ -57,7 +60,7 @@ function obtenerSemanas(){
             
             res.data.forEach(function(item){                
                 $row=$row +
-                '<tr id="rowSala"><td class="form-group"><span>'+item.numeroSemana+'</span></td><td class="form-group"><span>'+item.nombreDia+' ' +obtenerFecha(item.fecha)+'</span></td><td class="form-group"><span>'+obtenerFunciones(item.numeroSemana)+'</span></td>'+
+                '<tr id="rowSala"><td class="form-group"><span>'+item.numeroSemana+'</span></td><td class="form-group"><span>'+item.nombreDia+' ' +obtenerFecha(item.fecha)+'</span></td><td class="form-group"><span>'+item.cantidad+'</span></td>'+
                 '<td><button  class="botonAzul esbirroColumna" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button></td><td><button class="botonVerde esbirroColumna" type="button"><i class="glyphicon glyphicon glyphicon-arrow-right textoBoton"></i></button></td><td><button class="botonRojo esbirroColumna" type="button"><i class="glyphicon glyphicon glyphicon-remove textoBoton"></i></button></td></tr>';      
             });
             $contenedorSemana.append($row);
