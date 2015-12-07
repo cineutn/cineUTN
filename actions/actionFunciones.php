@@ -68,13 +68,8 @@ function nuevaSalaFuncion($request){
     $f = new Funciones();
     $funcion = array();  
     
-	$funcion["idSalaFuncion"] = $request->idSalaFuncion;
-	$funcion["idFucnion"] = $request->idFucnion;
-	$funcion["columna"] = $request->columna;
-	$funcion["fila"] = $request->fila;
-	$funcion["habilitada"] = $request->habilitada;
-	$funcion["idSala"] = $request->idSala;
-	$funcion["idFuncionDetalle"] = $request->idFuncionDetalle;
+	$funcion["query"] = $request->query;
+	
 					  
     if($nuevo = $f->createSalaDetalle($funcion)){
         sendResponse(array(

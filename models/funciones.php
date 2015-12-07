@@ -52,27 +52,18 @@ class Funciones
   }
     
     
-    
-  public function createSalaDetalle($funcion){        
+public function createSalaDetalle($funcion){        
 
-    $idSalaFuncion =$this->connection->real_escape_string($funcion['idSalaFuncion']);
-    $idFucnion =$this->connection->real_escape_string($funcion['idFucnion']);
-    $columna =$this->connection->real_escape_string($funcion['columna']);
-    $fila=$this->connection->real_escape_string($funcion['fila']);
-    $habilitada =$this->connection->real_escape_string($funcion['habilitada']);
-    $idSala =$this->connection->real_escape_string($funcion['idSala']);
-    $idFuncionDetalle =$this->connection->real_escape_string($funcion['idFuncionDetalle']);
-      
-    $query ="INSERT INTO sala_funcion(idSalaFuncion,idFuncion,columna,fila,habilitada,idSala,idFuncionDetalle) VALUES 
-            (DEFAULT,$idFucnion,$columna,'$fila',$habilitada,$idSala,$idFuncionDetalle)";      
+    $consulta =$this->connection->real_escape_string($funcion['query']);			
+      $query =stripslashes($consulta);    
 
     if($this->connection->query($query)){
-          $funcion['idSalaFuncion'] = $this->connection->insert_id;
-        return $funcion;
+         
+        return true;
     }else{
         return false;
     }
-  }
+  } 
     
   public function obtenerFuncionesActivas($funcion){      
 
@@ -101,9 +92,7 @@ class Funciones
   public function borrarFuncion($funcion){    
 
     $idFuncion =$this->connection->real_escape_string($funcion['idFuncion']);
-    $query ="UPDATE funcion SET fechaBaja= NOW() WHERE idFuncion=$idFuncion";
-      
-      //$query ="DELETE FROM funcion where idFuncion=$idFuncion";          
+    $query ="UPDATE funcion SET fechaBaja= NOW() WHERE idFuncion=$idFuncion";              
       if( $result = $this->connection->query($query) ){
          return true;
         }else{

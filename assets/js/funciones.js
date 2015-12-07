@@ -239,7 +239,7 @@ function calcularHorarioFunciones(){
     $row='';   
     var duracionConTrailer=parseInt($duracionPelicula)+30;
     if( $("#dia_"+$idSemanaSeleccionada).val()=='Sabado' || $("#dia_"+$idSemanaSeleccionada).val() =='Domingo'){ 
-              console.log($("#dia_"+$idSemanaSeleccionada).val());    
+              
               var apertura = new Date("01/01/1985 00:00:00");
               var cierre = new Date("01/01/1985 04:00:00");  
               var peliculaCompleta = new Date("01/01/1985 00:00:00");
@@ -421,16 +421,15 @@ function generarSalaFuncion(idFuncionDetalle,idFuncion){
     obtener.done(function(res){
     if(!res.error){               
         if(res.data[0].fila!=null){                                     
-
-            res.data.forEach(function(item){                  
-                insertarSalaFuncion(idFuncion,item.columna,item.fila,item.habilitada,$idSalaSeleccionada,idFuncionDetalle);
-            });             
-            $('#modalLoading').modal('hide');            
-            $('#msgBoxTitulo').text('Funciones');
-            $('#msgBoxMensaje').text('Funcion Creada con Exito. ');
-            $('#modalMsgBox').modal('show');
-        }
-            buscarFuncionesActivas($idSemanaSeleccionada,$idSalaSeleccionada);
+            var consulta='INSERT INTO sala_funcion(idSalaFuncion,idFuncion,columna,fila,habilitada,idSala,idFuncionDetalle) VALUES';
+            var condicion='';
+            res.data.forEach(function(item){                                  
+                 condicion =condicion+ "(DEFAULT,"+idFuncion+","+item.columna+",'"+item.fila+"',"+item.habilitada+","+$idSalaSeleccionada+","+idFuncionDetalle+"),";
+            });   
+            condicion=condicion.substring(0,condicion.length - 1);
+            consulta=consulta+condicion +";";
+            insertarSalaFuncion(consulta);            
+        }           
       }
     });    
     obtener.fail(function(res){        
@@ -440,33 +439,30 @@ function generarSalaFuncion(idFuncionDetalle,idFuncion){
     });
 }
 
-function insertarSalaFuncion(idFucnion,columna,fila,habilitada,idSala,idFuncionDetalle){ 
-    
-var addSalaFuncion =  $.ajax({
+function insertarSalaFuncion(consulta){ 
+    var addSalaFuncion =  $.ajax({
         url: URI.ADDSALAFUNCION,
         type: 'POST',
         async: false,
         data: {
-                idSalaFuncion:0,
-                idFucnion:idFucnion,
-                columna:columna,
-                fila:fila,				        
-                habilitada:habilitada,
-                idSala:idSala,
-                idFuncionDetalle:idFuncionDetalle
+                query:consulta
           },
         dataType: 'json',
     })
-    addSalaFuncion.done(function(response){	 
+    addSalaFuncion.done(function(response){	        
           if(!response.error){  
-            
+            $('#modalLoading').modal('hide');            
+            $('#msgBoxTitulo').text('Funciones');
+            $('#msgBoxMensaje').text('Funcion Creada con Exito. ');
+            $('#modalMsgBox').modal('show');
           }        
     }); 
     addSalaFuncion.fail(function(response){        
         $('#msgBoxTitulo').text('Funciones');
-        $('#msgBoxMensaje').text(res.responseText);
+        $('#msgBoxMensaje').text(response.responseText);
         $('#modalMsgBox').modal('show');
     });
+     buscarFuncionesActivas($idSemanaSeleccionada,$idSalaSeleccionada);
 }
 
 function borrarFuncion(idFuncionActiva){    

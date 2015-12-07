@@ -5,8 +5,7 @@ class ConnectionCine extends MySQLi {
      const USER = 'sql393132';
      const PASSWORD = 'uW2!nJ9!';       
      const DATABASE = 'sql393132';
-  
-         
+   
      private function __construct($host, $user, $password, $database){ 
          parent::__construct($host, $user, $password, $database);
      }
