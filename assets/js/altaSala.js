@@ -17,7 +17,8 @@ $nombreSala =$("#nombreSala");
 $fila =$("#fila");
 $columna =$("#columna");
 $tablaSala= $("#tablaSala");
- $idComplejoUsuario = sessionStorage.getItem('idcomplejo');
+$idComplejoUsuario = sessionStorage.getItem('idcomplejo');
+$nombres=[''];
 
 $(document ).ready(function(){	   
         obtenerSalas();   
@@ -67,6 +68,7 @@ $btnAltaModificacion.on("click",function(){
                 obtenerSalas();
             }); 
       } 
+    $('#modalLoading').modal('hide');
  });
 
 function obtenerSalas(){   
@@ -81,9 +83,10 @@ function obtenerSalas(){
     obtener.done(function(res){
         if(!res.error){				            
             $row='';
-            $contenedorSalas.html("");
-            
-            res.data.forEach(function(item){                
+            $contenedorSalas.html("");            
+            res.data.forEach(function(item){  
+                //lo paso a mayusculas
+                $nombres.push(item.descripcion.toUpperCase().trim());
                 $row=$row +
                 '<tr><td><input type="hidden" id="idSala" value='+item.idSala+' ></input><span>'+item.descripcion+'</span></td>'+
                 '<td><span>'+item.filas+'</span></td>'+
@@ -217,9 +220,6 @@ function diagramarSalaDetalle(cantidadFilas,cantidadColumnas,id){
             });    
 };
 
-
-
-
 //elimina el detalle de la sala, tabla salaDetalle
 function eliminarDetalleSala(idSala){
          var eliminarSalaDetalle =  $.ajax({
@@ -264,7 +264,15 @@ function validarDatos(){
          $columna.closest(".form-group").removeClass("has-error");          
          $columna.siblings(".help-block").html("");    
      }  
+     if($nombreSala.val().length>0){          
+      if($.inArray($nombreSala.val().toUpperCase().trim(),$nombres)!== -1){
+          
+          $nombreSala.closest(".form-group").addClass("has-error");          
+          $nombreSala.siblings(".help-block").html("Nombre de sala ya existente");
+          bRetorno = false;      
+      }
      
+     }
      return bRetorno;
  }
 
