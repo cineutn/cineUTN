@@ -5,7 +5,6 @@ $('title').html("Funciones");
         SEMANAS : 'actions/actionsemanaNueva.php?action=obtenerNumerosemanas',       
         ULTIMA:'actions/actionsemanaNueva.php?action=obtenerUltima',
         ADD : 'actions/actionsemanaNueva.php?action=nueva',       
-        ADD2 : 'actions/actionsemanaNueva.php?action=nueva2',       
         FUNCIONES : 'actions/actionFunciones.php?action=obtenerPorSemana',  
         CERRAR: 'actions/actionFunciones.php?action=cerrar',  
         FUNCIONESCOMPLEJO: 'actions/actionFunciones.php?action=obtenerPorComplejo',  
@@ -20,8 +19,7 @@ $tipoUsuarioLogueado = sessionStorage.getItem('tipoUsuario');
 $idComplejoUsuario = sessionStorage.getItem('idcomplejo');
 $numeroSemana=0;
 
-$(document ).ready(function(){	   
-        
+$(document ).ready(function(){
     obtenerSemanas();
     });
 
@@ -96,8 +94,7 @@ $btnAddRow.click(function() {
                 ultimaFecha=item.fecha;
                 ultimaSemana=item.numeroSemana;
             });                
-            //generarSemana(ultimaFecha,ultimaSemana);
-            generarSemana2(ultimaFecha,ultimaSemana);
+            generarSemana(ultimaFecha,ultimaSemana);            
         }else{
             event.preventDefault();            
             $('#msgBoxTitulo').text('Nueva Semana');
@@ -116,38 +113,6 @@ function generarSemana(ultimaFecha,ultimaSemana){
     ultimaSemana=parseInt(ultimaSemana);
     ultimaSemana=ultimaSemana+1;    
    
-    
-    $.each( $dias, function( key, value ) {        
-            var addSemana =  $.ajax({
-            url: URI.ADD,
-            async: false,
-            type: 'POST',
-            data: {
-                    fecha:ultimaFecha,
-                    numeroSemana:ultimaSemana,
-                    dias:key,
-                    nombreDia:value
-              },
-            dataType: 'json',
-        });
-        addSemana.done(function(response){                
-        
-        });
-        
-        addSemana.fail(function(res){
-            
-            $('#msgBoxTitulo').text('Nueva Semana');
-            $('#msgBoxMensaje').text(res.responseText);
-            $('#modalMsgBox').modal('show');
-        });
-});
-    obtenerSemanas();
-} 
-
-function generarSemana2(ultimaFecha,ultimaSemana){
-    ultimaSemana=parseInt(ultimaSemana);
-    ultimaSemana=ultimaSemana+1;    
-   
     var consulta='INSERT INTO semana(idSemana,numeroSemana,fecha,nombreDia) VALUES';    
     var condicion='';
     
@@ -155,10 +120,9 @@ function generarSemana2(ultimaFecha,ultimaSemana){
         condicion =condicion+ "(DEFAULT,"+ultimaSemana+", ADDDATE('"+ultimaFecha+"', INTERVAL "+key+" DAY),'"+value+"'),";       
     });
     condicion=condicion.substring(0,condicion.length - 1);    
-    consulta=consulta+condicion +";";  
-    console.log(consulta);
+    consulta=consulta+condicion +";";      
       var addSemana =  $.ajax({
-            url: URI.ADD2,
+            url: URI.ADD,
             async: false,
             type: 'POST',
             data: {
@@ -170,8 +134,7 @@ function generarSemana2(ultimaFecha,ultimaSemana){
         
         });
         
-        addSemana.fail(function(res){
-            
+        addSemana.fail(function(res){            
             $('#msgBoxTitulo').text('Nueva Semana');
             $('#msgBoxMensaje').text(res.responseText);
             $('#modalMsgBox').modal('show');

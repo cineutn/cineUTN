@@ -50,33 +50,9 @@ function nuevaSemana($request){
     require("../models/semanas.php");
     $s = new Semanas();
     $semana = array();    	
-    $semana["fecha"] = $request->fecha;
-	$semana["numeroSemana"] = $request->numeroSemana;
-    $semana["dias"] = $request->dias;
-    $semana["nombreDia"] = $request->nombreDia;   
-	
-    if($nuevo = $s->addSemana($semana)){
-        sendResponse(array(
-            "error" => false,
-            "mensaje" => "",
-            "data" => $nuevo
-        ));
-     }else{
-        sendResponse(array(
-            "error" => true,
-            "mensaje" => "Error al insertar ultima semana. "
-        ));
-    }
-}
-
-
-function nuevaSemana2($request){
-    require("../models/semanas.php");
-    $s = new Semanas();
-    $semana = array();    	
     $semana["query"] = $request->query;
     
-    if($nuevo = $s->addSemana2($semana)){
+    if($nuevo = $s->addSemana($semana)){
         sendResponse(array(
             "error" => false,
             "mensaje" => "",
@@ -137,11 +113,9 @@ switch($action){
         break; 
     case "obtenerUltima":
         obtenerUltimaSemanas($request);
-        break;        
+        break;
    case "nueva":
         nuevaSemana($request);
-   case "nueva2":
-        nuevaSemana2($request);
         break;
   case "fechaInicioSemana":
         fechaInicioSemana($request);

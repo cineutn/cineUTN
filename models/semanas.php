@@ -34,27 +34,8 @@ class Semanas
         }
         return $semanas;  
   } 
-    
-    
+        
   public function addSemana($semana){        		
-
-       $fecha =$this->connection->real_escape_string($semana['fecha']);      
-       $numeroSemana =$this->connection->real_escape_string($semana['numeroSemana']);  
-       $dias =$this->connection->real_escape_string($semana['dias']);  
-       $nombreDia =$this->connection->real_escape_string($semana['nombreDia']);  
-          
-          
-       $query = " INSERT INTO semana(idSemana,numeroSemana,fecha,nombreDia) VALUES (DEFAULT,$numeroSemana,ADDDATE('$fecha', INTERVAL $dias DAY),'$nombreDia')";
-
-        if($this->connection->query($query)){
-            $semana['idSemana'] = $this->connection->insert_id;
-            return $semana;
-        }else{
-            return false;
-        }
-    }
-    
-  public function addSemana2($semana){        		
       $consulta =$this->connection->real_escape_string($semana['query']);
       		
       $query =stripslashes($consulta);
