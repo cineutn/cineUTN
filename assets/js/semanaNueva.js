@@ -246,7 +246,7 @@ function obtenerFecha(fecha){
 
   var date1 = new Date(fecha);
   var mes = date1.getMonth() + 1;
-  var dia = date1.getUTCDate();
+  var dia = date1.getDate();
 
   switch(mes) {
     case 1:

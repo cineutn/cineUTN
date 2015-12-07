@@ -44,9 +44,9 @@ var URI = {
         
         
         
-        $('<div class="form-group">					<label for="inputEmail3" class="col-sm-2 control-label">Complejo</label>					<div class="col-sm-10">						<select id="cmbComplejo" class="form-control"></select>					</div>				    </div>').insertAfter($('#modalSignup #generoMasculino').parent().parent().parent());
+        $('<div class="form-group">					<label for="inputEmail3" class="col-sm-2 control-label">Complejo</label>					<div class="col-sm-10">						<select id="cmbComplejo" class="form-control"  data-toggle="tooltip" data-placement="right" title="Debe Seleccionar un complejo" ></select>					</div>				    </div>').insertAfter($('#modalSignup #generoMasculino').parent().parent().parent());
         
-        $('<div class="form-group">					<label for="inputEmail3" class="col-sm-2 control-label">Complejo</label>					<div class="col-sm-10">						<select id="cmbComplejoEdit" class="form-control"></select>					</div>				    </div>').insertAfter($('#modalEdit #telefonoEdit').parent().parent());
+        $('<div class="form-group">					<label for="inputEmail3" class="col-sm-2 control-label">Complejo</label>					<div class="col-sm-10">						<select id="cmbComplejoEdit" class="form-control"   data-toggle="tooltip" data-placement="right" title="Debe Seleccionar un complejo"></select>					</div>				    </div>').insertAfter($('#modalEdit #telefonoEdit').parent().parent());
         
         
          var selectComplejos =  $.ajax({
@@ -57,7 +57,14 @@ var URI = {
             })
         
          selectComplejos.done(function(response){
-                
+                $('#cmbComplejo').append(
+                        $('<option/>',{
+                            value   :  0,
+                            selected : 'selected'
+                        }).append("Seleccione complejo")
+                    );
+             
+             
                 response.data.forEach(function(item){
                     $('#cmbComplejo').append(
                         $('<option/>',{

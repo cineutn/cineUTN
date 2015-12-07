@@ -231,11 +231,12 @@
     };
 
     function returnFormatfecha(){
+              
         var dfecha = new Date();
 
         var dMes = dfecha.getMonth() + 1;
         dMes = ("0" + dMes).slice(-2);
-        var dDia = dfecha.getUTCDate();
+        var dDia = dfecha.getDate();
         dDia = ("0" + dDia).slice(-2);
         var dHora = dfecha.getHours();
         dHora = ("0" + dHora).slice(-2);

@@ -10,14 +10,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   Reportes <span class="caret"></span>
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a id="recaudacionXPelicula" href="#">Recaudacion por Peliculas</a></li>
-                    <li><a id="recaudacionXComplejo" href="#">Recaudacion por Complejo</a></li>
-                    <li><a id="recaudacionTotal" href="#">Recaudacion Total</a></li>
-                    <li><a id="topPeliculasXComplejo" href="#">Top Peliculas por complejo</a></li>
-                    <li><a id="pelisMasVistasPorDia" href="#">Peliculas mas vistas por dia</a></li>
-                    
-                    
+                <ul class="dropdown-menu">             
                     
                 </ul>
             </li>
@@ -44,7 +37,7 @@
   
 <script src="assets/js/jquery.dataTables.min.js"></script>
 <script src="assets/js/dataTables.bootstrap.min.js"></script>
-<script src="assets/js/reportesSuperadmin.js"></script>
+<script src="assets/js/reportes.js"></script>
 
     
 	

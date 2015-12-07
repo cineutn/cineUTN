@@ -34,6 +34,10 @@
             <span id="iconAvatar" class="glyphicon glyphicon-globe icon"></span>
             <label class="box-titulo">Web</label>
         </div>
+        <div class="box azul" id="divReportes">
+            <span id="iconAvatar" class="glyphicon glyphicon-list-alt icon"></span>
+            <label class="box-titulo">Reportes</label>
+        </div>
     </div>
 	
 <?php require("partials/footer.php"); ?>

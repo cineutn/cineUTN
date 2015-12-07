@@ -31,7 +31,7 @@
                 <div class="form-group">
 					<label for="inputDni" class="col-sm-2 control-label">DNI</label>
 					<div class="col-sm-10">
-					  <input type="number" class="form-control" name="dni" id="dni" placeholder="DNI" required>
+					  <input max="99999999" type="number" class="form-control" name="dni" id="dni" placeholder="DNI" required>
 					</div>
 			    </div>
 				<div class="form-group">
@@ -49,19 +49,19 @@
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Password</label>
 					<div class="col-sm-10">
-					  <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+					  <input type="password" maxlength="12" minlength="6" name="password" id="password" class="form-control" placeholder="Password" required>
 					</div>
 			    </div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Confirme password</label>
 					<div class="col-sm-10">
-					  <input type="password" name="passwordConfirmation" id="passwordConfirmation" class="form-control" placeholder="Confirma el Password"  data-toggle="tooltip" data-placement="right" title="Los passwords no coinciden" >
+					  <input type="password" maxlength="12" minlength="6" name="passwordConfirmation" id="passwordConfirmation" class="form-control" placeholder="Confirma el Password"  data-toggle="tooltip" data-placement="right" title="Los passwords no coinciden" >
 					</div>
 			    </div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Telefono</label>
 					<div class="col-sm-10">
-					  <input type="number" maxlength="10" name="telefono" id="telefono" class="form-control" placeholder="Cod area + numero sin 11" required>
+					  <input type="number" max="9999999999" name="telefono" id="telefono" class="form-control" placeholder="Cod area sin 0 + numero sin 15" required>
 					</div>
 			    </div>
 				<div class="form-group">
@@ -120,7 +120,7 @@
                 <div class="form-group">
 					<label for="inputDni" class="col-sm-2 control-label">DNI</label>
 					<div class="col-sm-10">
-					  <input type="number" class="form-control" name="dniEdit" id="dniEdit" placeholder="DNI" required>
+					  <input type="number" max="99999999" class="form-control" name="dniEdit" id="dniEdit" placeholder="DNI" required>
 					</div>
 			    </div>
 				<div class="form-group">
@@ -132,19 +132,19 @@
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Password</label>
 					<div class="col-sm-10">
-					  <input type="password" name="passwordEdit" id="passwordEdit" class="form-control" placeholder="Password" required>
+					  <input type="password" maxlength="12" minlength="6" name="passwordEdit" id="passwordEdit" class="form-control" placeholder="Password" required>
 					</div>
 			    </div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Confirme password</label>
 					<div class="col-sm-10">
-					  <input type="password" name="passwordConfirmationEdit" id="passwordConfirmationEdit" class="form-control" placeholder="Confirma el Password"  data-toggle="tooltip" data-placement="right" title="Los passwords no coinciden" >
+					  <input type="password"  maxlength="12" minlength="6" name="passwordConfirmationEdit" id="passwordConfirmationEdit" class="form-control" placeholder="Confirma el Password"  data-toggle="tooltip" data-placement="right" title="Los passwords no coinciden" >
 					</div>
 			    </div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Telefono</label>
 					<div class="col-sm-10">
-					  <input type="number" maxlength="10" name="telefonoEdit" id="telefonoEdit" class="form-control" placeholder="Cod area + numero sin 11" required>
+					  <input type="number" max="9999999999" name="telefonoEdit" id="telefonoEdit" class="form-control" placeholder="Cod area + numero sin 11" required>
 					</div>
                 </div>	
                 

@@ -133,6 +133,18 @@
                     return true;
                 }
                 break;    
+             case 'cmbComplejoEdit':
+                if($('#cmbComplejoEdit').val()==0){
+                    return true;
+                }
+                break;
+             case 'cmbComplejo':
+                if($('#cmbComplejo').val()==0){
+                    return true;
+                }
+                break;    
+                
+                
         }
     }
     

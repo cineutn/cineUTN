@@ -158,7 +158,7 @@ order by 'Total Reservas vencidas' desc,'Total Compras' desc";
         $fInicio = $this->connection->real_escape_string($arr["fInicio"]);
         $fFin = $this->connection->real_escape_string($arr["fFin"]);
         $tipoReporte= $this->connection->real_escape_string($arr["tipoReporte"]);
-
+        $idcomplejo= $this->connection->real_escape_string($arr["idcomplejo"]);
         
         
         $query="";
@@ -178,7 +178,10 @@ order by 'Total Reservas vencidas' desc,'Total Compras' desc";
                 inner join ventadetalle vd on vd.idSalaFuncion=sf.idsalafuncion 
                 inner join venta v on v.idventa=vd.idventa
                 where v.tipoventa!='Reserva' and DATE_FORMAT(v.fecha,'%Y-%m-%d') between '$fInicio'  and '$fFin'
+                and (fn.idcomplejo='$idcomplejo' or $idcomplejo is null)
                 group by pel.titulo ,fm.descripcion ,pel.estreno,fn.fechaBaja";
+                
+                
                 break;
             case "recaudacionXComplejo":
                 $query = "SELECT
@@ -199,9 +202,29 @@ order by 'Total Reservas vencidas' desc,'Total Compras' desc";
                 select sum(precio) as 'Recaudacion Total', count(idVentaDetalle) as Espectadores,'$fInicio' as Desde, '$fFin' as Hasta
                 from venta V
                 INNER JOIN ventadetalle VD ON V.idVenta = VD.idVenta
+                INNER JOIN sala_funcion SF ON VD.idSalaFuncion = SF.idSalaFuncion
+                INNER JOIN funcion F ON SF.idFuncion = F.idFuncion
                 WHERE V.tipoVenta <>  'Reserva'
+                and (F.idcomplejo='$idcomplejo' or $idcomplejo is null)
                 AND DATE_FORMAT(V.fecha,'%Y-%m-%d') BETWEEN '$fInicio'  and '$fFin'
                 ";
+                break;
+            case "topPeliculas":
+                $query="
+                select pel.titulo Titulo ,
+                DATE_FORMAT(pel.estreno,'%d-%m-%Y') Estreno,
+                DATE_FORMAT(fn.fechaBaja,'%d-%m-%Y') Baja,
+                sum(vd.precio) as Recaudacion,
+                count(*) Espectadores
+                from pelicula pel 
+                inner join formato fm on pel.idformato=fm.idformato 
+                inner join funcion fn on fn.idpelicula=pel.idpelicula 
+                inner join sala_funcion sf on sf.idfuncion=fn.idFuncion
+                inner join ventadetalle vd on vd.idSalaFuncion=sf.idsalafuncion 
+                inner join venta v on v.idventa=vd.idventa
+                where v.tipoventa!='Reserva' and DATE_FORMAT(v.fecha,'%Y-%m-%d') between '$fInicio'  and '$fFin'
+                and (fn.idcomplejo='$idcomplejo' or $idcomplejo is null)
+                group by pel.titulo ,pel.estreno,fn.fechaBaja";
                 break;
             case "topPeliculasXComplejo":
                 $query="
@@ -221,7 +244,8 @@ order by 'Total Reservas vencidas' desc,'Total Compras' desc";
                 where v.tipoventa!='Reserva' and DATE_FORMAT(v.fecha,'%Y-%m-%d') between '$fInicio'  and '$fFin'
                 group by pel.titulo ,pel.estreno,fn.fechaBaja, c.nombre
                 ";
-                break;
+                break;    
+                
             case "pelisMasVistasPorDia":
                 $query="
                     select 
@@ -241,14 +265,30 @@ order by 'Total Reservas vencidas' desc,'Total Compras' desc";
                     inner join ventadetalle vd on vd.idSalaFuncion=sf.idsalafuncion 
                     inner join venta v on v.idventa=vd.idventa
                     where v.tipoventa!='Reserva' and DATE_FORMAT(sm.fecha,'%Y-%m-%d') between '$fInicio'  and '$fFin'
+                    and (fn.idcomplejo='$idcomplejo' or $idcomplejo is null)
                     group by pel.titulo ,pel.estreno,fn.fechaBaja, c.nombre,DATE_FORMAT(sm.fecha,'%d-%m-%Y')
                 ";
                 break;
-        }
+            case "recaudacionVendedores":
+                $query="
+                    select IFNULL(u.nombre,'Venta WEB') Nombre,
+                    IFNULL(u.apellido,'-') Apellido,
+                    sum(precio) as 'Recaudacion Total', 
+                    count(idVentaDetalle) as Espectadores,
+                    '$fInicio' as Desde, 
+                    '$fFin' as Hasta
+                    from venta V
+                    INNER JOIN ventadetalle VD ON V.idVenta = VD.idVenta
+                    INNER JOIN sala_funcion SF ON VD.idSalaFuncion = SF.idSalaFuncion
+                    INNER JOIN funcion F ON SF.idFuncion = F.idFuncion
+                    left join usuario u on u.idUsuario=V.idVendedor
+                    WHERE V.tipoVenta <>  'Reserva'
+                    and (F.idcomplejo='$idcomplejo' or $idcomplejo is null) AND DATE_FORMAT(V.fecha,'%Y-%m-%d') BETWEEN '$fInicio'  and '$fFin' 
+                    group by u.nombre,u.apellido";
     
-        
-        
-          
+                break;    
+        }
+            
 
         $res = array();
         

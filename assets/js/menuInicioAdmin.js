@@ -17,7 +17,12 @@
     $divWeb = $("#divWeb");
     $divUsuarios = $("#divUsuarios");
     $divPersonal = $("#divPersonal");
+    $divReportes = $("#divReportes");
 	
+    
+     $divReportes.on("click",function(){
+        window.location.href = "reportes.php";
+    });
     $divFunciones.on("click",function(){
         window.location.href = "semanaNueva.php";
     });

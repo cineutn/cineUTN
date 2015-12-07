@@ -91,6 +91,7 @@ function getReporte($request){
     $arr["fInicio"] = $request->fInicio;
     $arr["fFin"] = $request->fFin;
     $arr["tipoReporte"] = $request->tipoReporte;
+    $arr["idcomplejo"] = $request->idcomplejo;
     
     if($res = $s->getReporte($arr)){
         sendResponse(array(

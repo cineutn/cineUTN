@@ -50,6 +50,17 @@ $('title').html("Reportes");
             order : [[ 3, 'desc' ]]
         
         },
+        topPeliculas : {
+            columns : [
+                {   "data": "Titulo"},
+                {   "data": "Estreno"},
+                {   "data": "Baja" },
+                {   "data": "Recaudacion" },
+                {   "data": "Espectadores" }
+            ],
+            order : [[ 3, 'desc' ]]
+        
+        },
         pelisMasVistasPorDia : {
             columns : [
                 {   "data": "Titulo"},
@@ -62,12 +73,33 @@ $('title').html("Reportes");
             ],
             order : [[ 1, 'desc' ], [ 2, 'desc' ]]
         
-        }
+        },
+        recaudacionVendedores : {
+            columns : [
+                {   "data": "Nombre",
+                    "render" : function(data, type, full, meta){
+                        return data.toUpperCase();
+                    }   
+                },
+                {   "data": "Apellido",
+                    "render" : function(data, type, full, meta){
+                        return data.toUpperCase();
+                    }   
+                },
+                {   "data": "Recaudacion Total"},
+                {   "data": "Espectadores"},
+                {   "data": "Desde" },
+                {   "data": "Hasta" }
+            ],
+            order : [[ 2, 'desc' ]]
+        
+        },
     };
     var URISELECTED=[];
     var table;
     
     $(document).ready(function() {
+        armaDropDown();
         $('#fechaDesde').val(obtenerFechaSemanaAnterior());
         $('#fechaHasta').val(obtenerFechaActual());
         
@@ -86,7 +118,7 @@ function llamaReporte(e){
        
    }else{
         
-       URISELECTED.url=URI.url+"&fInicio="+$('#fechaDesde').val()+"&fFin="+$('#fechaHasta').val()+"&tipoReporte="+e.delegateTarget.id;
+       URISELECTED.url=URI.url+"&fInicio="+$('#fechaDesde').val()+"&fFin="+$('#fechaHasta').val()+"&tipoReporte="+e.delegateTarget.id+"&idcomplejo="+sessionStorage.idcomplejo;
        URISELECTED.columns=eval("URI."+e.delegateTarget.id+".columns");
        URISELECTED.order=eval("URI."+e.delegateTarget.id+".order");
        armaTabla();
@@ -168,4 +200,26 @@ function obtenerFechaSemanaAnterior(){
     today = yyyy+'-'+mm+'-'+dd;
     return today;
 
-}   
+}
+function armaDropDown(){
+    
+    if(sessionStorage.tipoUsuario=="superAdministrador"){
+        $('#menuReportes .dropdown-menu')
+            .append($('<li/>').append($('<a/>',{'id' : 'recaudacionXPelicula'}).append('Recaudacion por Peliculas')))
+            .append($('<li/>').append($('<a/>',{'id' : 'recaudacionXComplejo'}).append('Recaudacion por Complejo')))
+            .append($('<li/>').append($('<a/>',{'id' : 'recaudacionTotal'}).append('Recaudacion Total')))
+            .append($('<li/>').append($('<a/>',{'id' : 'topPeliculasXComplejo'}).append('Top Peliculas por complejo')))
+            .append($('<li/>').append($('<a/>',{'id' : 'pelisMasVistasPorDia'}).append('Peliculas mas vistas por dia')));
+    }else if(sessionStorage.tipoUsuario=="administrador"){
+        $('#menuReportes .dropdown-menu')
+            .append($('<li/>').append($('<a/>',{'id' : 'recaudacionXPelicula'}).append('Recaudacion por Peliculas')))
+            .append($('<li/>').append($('<a/>',{'id' : 'recaudacionTotal'}).append('Recaudacion Total')))
+            .append($('<li/>').append($('<a/>',{'id' : 'topPeliculas'}).append('Top Peliculas')))
+            .append($('<li/>').append($('<a/>',{'id' : 'pelisMasVistasPorDia'}).append('Peliculas mas vistas por dia')))
+            .append($('<li/>').append($('<a/>',{'id' : 'recaudacionVendedores'}).append('Recaudacion por vendedores')));
+    }
+    
+            
+
+
+}

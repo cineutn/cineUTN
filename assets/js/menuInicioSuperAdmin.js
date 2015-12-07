@@ -21,7 +21,7 @@
 	
     
     $divReportes.on("click",function(){
-        window.location.href = "reportesSuperAdmin.php";
+        window.location.href = "reportes.php";
     });
     
     $divFunciones.on("click",function(){
