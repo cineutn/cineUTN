@@ -256,6 +256,15 @@ function validarDatos(){
          $fila.siblings(".help-block").html("");    
      }    
      
+    if($fila.val()>26){
+          $fila.closest(".form-group").addClass("has-error");          
+          $fila.siblings(".help-block").html("debe cargar menos de 26 filas");
+          bRetorno = false;     
+     }else{
+         $fila.closest(".form-group").removeClass("has-error");          
+         $fila.siblings(".help-block").html("");    
+     }
+    
     if($columna.val().length==0){
           $columna.closest(".form-group").addClass("has-error");          
           $columna.siblings(".help-block").html("Debe completar este campo");
@@ -278,9 +287,14 @@ function validarDatos(){
 
   $fila.on("keypress", function(event){
     var keynum = window.event ? window.event.keyCode : e.which;
-    if ((keynum == 8) || (keynum == 46))
-    return true;               
-    return /\d/.test(String.fromCharCode(keynum));
+    console.log(/\d/.test(String.fromCharCode(keynum)));  
+    if ((keynum == 8) || (keynum == 46)){
+    
+        return true;               
+    }
+    
+    return /\d/.test(String.fromCharCode(keynum));     
+       
   });
 
  $columna.on("keypress", function(event){
@@ -290,4 +304,4 @@ function validarDatos(){
     return /\d/.test(String.fromCharCode(keynum));
   });
 
-     
+    

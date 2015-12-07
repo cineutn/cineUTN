@@ -24,7 +24,7 @@
                     <span class="help-block"></span>
                 </td>
                 <td class="form-group">
-                   <input name="fila" id="fila" placeholder="fila" type="text" class="form-control">
+                   <input name="fila" id="fila" placeholder="fila" type="text" class="form-control">                    
                     <span class="help-block"></span>
                 </td>          
                 <td class="form-group">     
