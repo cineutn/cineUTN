@@ -46,6 +46,9 @@ function obtenerSemanas(){
         url : URI.SEMANAS,
         method : "GET",
         dataType : 'json',
+        beforeSend: function(){
+            $('#modalLoading').modal('show');
+        }
     });
 
     obtener.done(function(res){
@@ -59,6 +62,7 @@ function obtenerSemanas(){
                 '<td><button  class="botonAzul esbirroColumna" type="button"><i class="glyphicon glyphicon-pencil textoBoton"></i></button></td><td><button class="botonVerde esbirroColumna" type="button"><i class="glyphicon glyphicon glyphicon-arrow-right textoBoton"></i></button></td><td><button class="botonRojo esbirroColumna" type="button"><i class="glyphicon glyphicon glyphicon-remove textoBoton"></i></button></td></tr>';      
             });
             $contenedorSemana.append($row);
+             $('#modalLoading').modal('hide');
             ocultarBotones();
         }else{
             event.preventDefault();            

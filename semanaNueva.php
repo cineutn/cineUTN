@@ -45,6 +45,8 @@
 	</div>
 </div>
 
+
+<?php require("partials/loading.php"); ?>
 <?php require("partials/footer.php"); ?>
 <!-- Modal forms-->
 <?php require("partials/login.php"); ?>	

@@ -192,11 +192,12 @@ and idComplejo=$idComplejo";
     $nroSemana =$this->connection->real_escape_string($funcion['nroSemana']);     
     $idComplejo=$this->connection->real_escape_string($funcion['idComplejo']); 
      $query ="SELECT count(*) cantidad FROM semana se inner JOIN funcionhorario fh on se.idsemana=fh.idSemana 
-    inner join funcion f on f.idfuncion=fh.idfuncion
+    #inner join funcion f on f.idfuncion=fh.idfuncion
     inner join complejo cl on cl.idComplejo=f.idcomplejo
     WHERE numeroSemana =$nroSemana 
     AND f.fechaBaja ='0000-00-00 00:00:00'
-    AND cl.idComplejo =$idComplejo";
+    #AND cl.idComplejo =$idComplejo
+     AND f.idComplejo =$idComplejo";
 
     $funciones = array();      
       if( $result = $this->connection->query($query) ){
