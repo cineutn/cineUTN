@@ -69,6 +69,27 @@ function nuevaSemana($request){
     }
 }
 
+
+function nuevaSemana2($request){
+    require("../models/semanas.php");
+    $s = new Semanas();
+    $semana = array();    	
+    $semana["query"] = $request->query;
+    
+    if($nuevo = $s->addSemana2($semana)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $nuevo
+        ));
+     }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al insertar ultima semana. "
+        ));
+    }
+}
+
 function fechaInicioSemana($request){
     require("../models/semanas.php");
     $s = new Semanas();       
@@ -119,6 +140,8 @@ switch($action){
         break;        
    case "nueva":
         nuevaSemana($request);
+   case "nueva2":
+        nuevaSemana2($request);
         break;
   case "fechaInicioSemana":
         fechaInicioSemana($request);

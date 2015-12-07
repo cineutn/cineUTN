@@ -54,6 +54,19 @@ class Semanas
         }
     }
     
+  public function addSemana2($semana){        		
+      $consulta =$this->connection->real_escape_string($semana['query']);
+      		
+      $query =stripslashes($consulta);
+      
+        if($this->connection->query($query)){
+            
+            return true;
+        }else{
+            return false;
+        }
+    }    
+    
   public function obtenerFechaInicioSemana($semana){
     $nro = (int) $this->connection->real_escape_string($semana);
     $query = "SELECT fecha FROM semana where numeroSemana=$nro order by fecha asc limit 1";

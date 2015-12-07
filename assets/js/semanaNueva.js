@@ -5,6 +5,7 @@ $('title').html("Funciones");
         SEMANAS : 'actions/actionsemanaNueva.php?action=obtenerNumerosemanas',       
         ULTIMA:'actions/actionsemanaNueva.php?action=obtenerUltima',
         ADD : 'actions/actionsemanaNueva.php?action=nueva',       
+        ADD2 : 'actions/actionsemanaNueva.php?action=nueva2',       
         FUNCIONES : 'actions/actionFunciones.php?action=obtenerPorSemana',  
         CERRAR: 'actions/actionFunciones.php?action=cerrar',  
         FUNCIONESCOMPLEJO: 'actions/actionFunciones.php?action=obtenerPorComplejo',  
@@ -95,7 +96,8 @@ $btnAddRow.click(function() {
                 ultimaFecha=item.fecha;
                 ultimaSemana=item.numeroSemana;
             });                
-            generarSemana(ultimaFecha,ultimaSemana);
+            //generarSemana(ultimaFecha,ultimaSemana);
+            generarSemana2(ultimaFecha,ultimaSemana);
         }else{
             event.preventDefault();            
             $('#msgBoxTitulo').text('Nueva Semana');
@@ -140,7 +142,43 @@ function generarSemana(ultimaFecha,ultimaSemana){
         });
 });
     obtenerSemanas();
-}  
+} 
+
+function generarSemana2(ultimaFecha,ultimaSemana){
+    ultimaSemana=parseInt(ultimaSemana);
+    ultimaSemana=ultimaSemana+1;    
+   
+    var consulta='INSERT INTO semana(idSemana,numeroSemana,fecha,nombreDia) VALUES';    
+    var condicion='';
+    
+    $.each( $dias, function( key, value ) {         
+        condicion =condicion+ "(DEFAULT,"+ultimaSemana+", ADDDATE('"+ultimaFecha+"', INTERVAL "+key+" DAY),'"+value+"'),";       
+    });
+    condicion=condicion.substring(0,condicion.length - 1);    
+    consulta=consulta+condicion +";";  
+    console.log(consulta);
+      var addSemana =  $.ajax({
+            url: URI.ADD2,
+            async: false,
+            type: 'POST',
+            data: {
+                    query:consulta
+              },
+            dataType: 'json',
+        });
+        addSemana.done(function(response){                
+        
+        });
+        
+        addSemana.fail(function(res){
+            
+            $('#msgBoxTitulo').text('Nueva Semana');
+            $('#msgBoxMensaje').text(res.responseText);
+            $('#modalMsgBox').modal('show');
+        });
+    obtenerSemanas();
+} 
+
 
   $contenedorSemanas.on("click",".botonAzul",function(event){
     event.preventDefault();        

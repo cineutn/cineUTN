@@ -192,8 +192,8 @@ function validarDiagrama($idSala){
 //guarda la sala en sala detalle
 function diagramarSalaDetalle(cantidadFilas,cantidadColumnas,id){     
     var tope = 65+ parseInt(cantidadFilas);
-     var consulta='INSERT INTO saladetalle(IdSalaDetalle,idSala,fila,columna,habilitada) VALUES';
-        var condicion='';
+    var consulta='INSERT INTO saladetalle(IdSalaDetalle,idSala,fila,columna,habilitada) VALUES';
+    var condicion='';
     for(var j=65;j< tope;j++){
         for(var i=1;i<=cantidadColumnas;i++){
    
