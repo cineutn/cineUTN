@@ -3,6 +3,7 @@
     var URI = {
         COMPLEJOS : 'actions/actionComplejos.php?action=obtener',
         PELICULASCARTELERA : 'actions/actionPeliculas.php?action=obtenerCartelera',
+        PELICULASCARTELERACOMPLEJO : 'actions/actionPeliculas.php?action=obtenerCarteleraByID',
         PELICULASXCOMPLEJO : 'actions/actionPeliculas.php?action=obtenerPeliculaxComplejo',
         DIASPELICULA : 'actions/actionPeliculas.php?action=obtenerDiasxPeliculaxComplejo',
         HORARIOSDIAPELICULA : 'actions/actionPeliculas.php?action=obtenerHorariosxPeliculaxComplejo'
@@ -230,8 +231,19 @@
                 //Borro el listado actual
                 $cmbComplejos.html("");
                 //Itero sobre la lista
+                var tipoUsuario = sessionStorage.getItem('tipoUsuario');
+                var idComplejo = sessionStorage.getItem('idcomplejo');
+
                 res.data.forEach(function(item){
-                    $complejos = $complejos + '<option value="'+item.idComplejo+'">'+item.nombre+'</option>';
+
+                    if (tipoUsuario == "vendedor" || tipoUsuario == "administrador"){
+                        if (idComplejo == item.idComplejo){
+                            $complejos = $complejos + '<option value="'+item.idComplejo+'">'+item.nombre+'</option>';  
+                        }
+                    }else{
+                        $complejos = $complejos + '<option value="'+item.idComplejo+'">'+item.nombre+'</option>';
+                    }
+                    
                 });
                 //lo agrego al listado
                 $cmbComplejos.append($complejos);
@@ -255,11 +267,23 @@
     //obtiene peliculas y completa la cartelera
     function otenerPeliculasCartelera(){
        
-        var obtener = $.ajax({
-            url : URI.PELICULASCARTELERA,
-            method : "GET",
-            dataType : 'json',
-        });
+        var tipoUsuario = sessionStorage.getItem('tipoUsuario');
+        var idComplejo = sessionStorage.getItem('idcomplejo');
+
+        if (tipoUsuario == "vendedor" || tipoUsuario == "administrador"){
+            var obtener = $.ajax({
+                url : URI.PELICULASCARTELERACOMPLEJO,
+                method : "GET",
+                dataType : 'json',
+                data:{idComplejo:idComplejo}
+            });
+        }else{           
+            var obtener = $.ajax({
+                url : URI.PELICULASCARTELERA,
+                method : "GET",
+                dataType : 'json'
+            });
+        }
         
          obtener.done(function(res){
             if(!res.error){
@@ -285,16 +309,24 @@
                     
                     $('#contenedorPeliculas').append(peliculaCartelera);
                 });
-                //inicializo tooltips de peliulas
+                //inicializo tooltips de peliculas
                  $('[data-toggle="tooltipCartelera"]').tooltip();
                 
                 
             }else{
                 event.preventDefault();
-                //alert(res.mensaje);
-                $('#msgBoxTitulo').text('UTN Cine');
-                $('#msgBoxMensaje').text(res.mensaje);
-                $('#modalMsgBox').modal('show');
+                if (tipoUsuario == "vendedor" || tipoUsuario == "administrador"){
+                    //alert(res.mensaje);
+                    $('#msgBoxTitulo').text('UTN Cine');
+                    $('#msgBoxMensaje').text('Su Complejo todavia no contiene funciones cargadas. \r Comunicarse con el administrador del sistema.');
+                    $('#modalMsgBox').modal('show');
+                }else{           
+                    //alert(res.mensaje);
+                    $('#msgBoxTitulo').text('UTN Cine');
+                    $('#msgBoxMensaje').text('No se encontraron funciones cargadas, intentarlo mas tarde.');
+                    $('#modalMsgBox').modal('show');
+                }               
+                
             }
         });
 

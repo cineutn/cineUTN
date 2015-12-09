@@ -227,15 +227,15 @@
 			}else{
 				event.preventDefault();
 				//alert(res.mensaje);
-                $('#msgBoxTitulo').text('Peliculas');
-                $('#msgBoxMensaje').text(res.mensaje);
+                $('#msgBoxTitulo').text('Cartelera');
+                $('#msgBoxMensaje').text("El Complejo seleccionado no contiene funciones cargardas.");
                 $('#modalMsgBox').modal('show');
 			}
 		});
 
 		obtener.fail(function(res){
 			//alert(res.responseText);
-            $('#msgBoxTitulo').text('Peliculas');
+            $('#msgBoxTitulo').text('Cartelera');
             $('#msgBoxMensaje').text(res.responseText);
             $('#modalMsgBox').modal('show');
 		});			   

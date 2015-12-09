@@ -3,7 +3,7 @@
         <div class="row cines">
             <iframe src="https://mapsengine.google.com/map/embed?mid=z0j6zZLgPLOA.kTuuiOfBYL9w" width="100%" height="300">    
             </iframe>
-            <div id="btnAdd" class="pull-right addComplejo">
+            <div id="btnAdd" class="pull-right addComplejo" data-toggle="tooltipCartelera" title="Crear Complejo">
                 <span class="glyphicon glyphicon-plus"></span>    
             </div>
             <div id="form-nuevoComplejo" class="form-nuevoComplejo hide">

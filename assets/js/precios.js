@@ -128,11 +128,11 @@
                                     '<span class="detalle-texto">Por Persona</span>'+
                                 '</li>'+
                                 '<li class="columna-footer">'+
-                                    '<div id="btnUpdate" class="updatePrecio lapiz">'+
+                                    '<div id="btnUpdate" class="updatePrecio lapiz" data-toggle="tooltipCartelera" title="Modificar Precio">'+
                                         '<span class="glyphicon glyphicon-pencil "></span>'+    
                                     '</div>'+
                                     '<div id="btnRemove" class="removePrecio cruz" data-toggle="confirmation-popout">'+
-                                        '<span class="glyphicon glyphicon-remove "></span>'+    
+                                        '<span data-toggle="tooltipCartelera" title="Eliminar Precio" class="glyphicon glyphicon-remove "></span>'+    
                                     '</div>'+                            
                                 '</li>'+
                             '</ul>'+                            
@@ -141,6 +141,9 @@
                 });
                 //lo agrego al listado
                 $contenedorPrecios.append($precios);
+
+                $('[data-toggle="tooltipCartelera"]').tooltip();
+                
             }else{
                 event.preventDefault();
                 //alert(res.mensaje);

@@ -83,17 +83,18 @@
                            '<h2 id="tituloComplejo" class="cine-titulo">'+item.nombre+'</h2>'+
                             '<h4 id="direccionComplejo">'+item.direccion+'</h4>'+
                             '<p id="descripcionComplejo">'+item.descripcion+'</p>'+
-                            '<div class="pull-right lapiz">'+
+                            '<div class="pull-right lapiz" data-toggle="tooltipCartelera" title="Modificar Complejo">'+
                                 '<span class="glyphicon glyphicon-pencil"></span>'+   
                             '</div>'+
                             '<div id="btnRemove" class="pull-right cruz" data-toggle="confirmation" data-singleton="true">'+
-                                '<span class="glyphicon glyphicon-remove"></span>'+                                    
+                                '<span data-toggle="tooltipCartelera" title="Eliminar Complejo" class="glyphicon glyphicon-remove"></span>'+                                    
                             '</div>'+                         
                         '</div>'+    
                     '</div>';
                 });
                 //lo agrego al listado
                 $contenedorCines.append($complejos);
+                $('[data-toggle="tooltipCartelera"]').tooltip();
             }else{
                 event.preventDefault();
                 //alert(res.mensaje);

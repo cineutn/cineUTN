@@ -18,3 +18,12 @@
     border-radius: 7px;
 }
 
+#grid-basic_filter{
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+#grid-basic_length {
+    margin-left: 10px;
+    margin-top: 10px;
+}

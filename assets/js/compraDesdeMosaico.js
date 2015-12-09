@@ -1,7 +1,8 @@
 (function($){
     var URI = {        
         PELICULA : 'actions/actionPeliculas.php?action=obtenerPeliculaByNombre',
-        PELICULAFUNCION : 'actions/actionPeliculas.php?action=obtenerPeliculaFuncionByNombre'
+        PELICULAFUNCION : 'actions/actionPeliculas.php?action=obtenerPeliculaFuncionByNombre',
+        PELICULAFUNCIONCOMPLEJO : 'actions/actionPeliculas.php?action=obtenerPeliculaFuncionByNombreAndComplejo'     
     }; 
     
     $( document ).ready(function(){  
@@ -60,16 +61,26 @@
     };
     function otenerPeliculaFuncionbyID(){
         
-        var obtener = $.ajax({
-            url : URI.PELICULAFUNCION,
-            method : "GET",
-            dataType : 'json',
-            data  :   {
-                'id' :  $('#idPelicula').val()
-            }
-        });
-        
-                        
+        var tipoUsuario = sessionStorage.getItem('tipoUsuario');
+        var idComplejo = sessionStorage.getItem('idcomplejo');
+
+        if (tipoUsuario == "vendedor" || tipoUsuario == "administrador"){
+            var obtener = $.ajax({
+                url : URI.PELICULAFUNCIONCOMPLEJO,
+                method : "GET",
+                dataType : 'json',
+                data  :   {'id' :  $('#idPelicula').val(),
+                           'idComplejo':idComplejo}
+            });
+        }else{           
+            var obtener = $.ajax({
+                url : URI.PELICULAFUNCION,
+                method : "GET",
+                dataType : 'json',
+                data  :   {'id' :  $('#idPelicula').val()}
+            });
+        }
+                
          obtener.done(function(res){
             if(!res.error){
                 $('#modalLoading').modal('hide');

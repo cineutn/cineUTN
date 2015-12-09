@@ -9,7 +9,7 @@
         <span class="glyphicon glyphicon-search"></span>
         <span>Buscar</span>
     </button>
-	<div id="btnAdd" class="pull-right addPelicula">
+	<div id="btnAdd" class="pull-right addPelicula" data-toggle="tooltipCartelera" title="Crear Pelicula">
 		<span class="glyphicon glyphicon-plus"/>   	
     </div>
     <div id="form-nuevaPelicula" class="contenedorPelicula hide">

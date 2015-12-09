@@ -3,7 +3,7 @@
         <div class="row precios">
             <h2 class="precios-Titulo">Valor de las Entradas</h2>
             <h4 class="precios-Descripcion">Horario de apertura de la Boletería es de 12:00hs y hasta la ultima función del día.</h4>
-            <div id="btnAdd" class="pull-right addPrecio">
+            <div id="btnAdd" class="pull-right addPrecio" data-toggle="tooltipCartelera" title="Crear Precio">
                 <span class="glyphicon glyphicon-plus"></span>    
             </div>
             <div id="form-Precio" class="hide">

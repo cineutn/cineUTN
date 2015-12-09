@@ -7,6 +7,7 @@
 		PELICULAS : 'actions/actionPeliculas.php?action=obtener',
         UPLOAD: 'actions/actionPeliculas.php?action=subir',
         REMOVE: 'actions/actionPeliculas.php?action=eliminar',
+        REMOVECARTELERA: 'actions/actionPeliculas.php?action=eliminarCartelera',
         UPDATE: 'actions/actionPeliculas.php?action=modificar',
         GETFORMATOS : 'actions/actionPeliculas.php?action=obtenerFormatos',
         VALIDAR : 'actions/actionPeliculas.php?action=validar',
@@ -295,16 +296,22 @@
                             '</table>'+
                         '</div>'+                            
                         '<div class="col-xs-12 col-sm-9 col-md-8 col-lg-1">'+
-                            '<div class="pull-right lapiz">'+
+                            '<div class="pull-right lapiz" data-toggle="tooltipCartelera" title="Modificar Pelicula">'+
                                 '<span class="glyphicon glyphicon-pencil"></span>'+
                             '</div>'+
                             '<div id="btnRemove" class="pull-right cruz" data-toggle="confirmation-singleton">'+
-                                '<span class="glyphicon glyphicon-remove"></span>'+
+                                '<span data-toggle="tooltipCartelera" title="Eliminar Pelicula" class="glyphicon glyphicon-remove"></span>'+
+                            '</div>'+
+                            '<div id="btnRemoveCartelera" class="pull-right menos" data-toggle="confirmation-singleton">'+
+                                '<span data-toggle="tooltipCartelera" title="Dar de Baja de la Cartelera" class="glyphicon glyphicon-minus"></span>'+
                             '</div>'+                            
                         '</div>'+
                     '</div>';
-                });
+                });                
                 $contenedorPeliculas.append($peliculas);
+
+                //$('[data-toggle="confirmation-singleton"]').confirmation();
+                $('[data-toggle="tooltipCartelera"]').tooltip();
 			}else{
 				event.preventDefault();
 				//alert(res.mensaje);
@@ -453,6 +460,10 @@
 
                         deletePelicula.done(function(response){
                             if(!response.error){
+                                //alert(res.mensaje);
+                                $('#msgBoxTitulo').text('Peliculas');
+                                $('#msgBoxMensaje').text(response.mensaje);
+                                $('#modalMsgBox').modal('show');
                                 $formPelicula.addClass("hide");
                                 obtenerPeliculas();
                             }else{
@@ -476,6 +487,60 @@
         }*/
     });
 	
+    $contenedorPeliculas.on("click",".menos",function(event){
+        event.preventDefault();
+       
+        $divPadre = $(this).closest('.app');
+        $peliculaID =  $divPadre.children('.datos').children('#idPelicula').text();    
+        
+        $(this).confirmation({
+                title: '¿Desea dar de baja la Pelicula seleccionada de la Cartelera?',
+                placement: 'bottom',
+                singleton: true,
+                popout: false,
+                btnOkClass: 'btn-success',
+                btnCancelClass: 'btn-danger',
+                href: '',
+                btnOkLabel: 'Si',
+                onConfirm: function() {
+                       
+                    var deletePelicula =  $.ajax({
+                        url: URI.REMOVECARTELERA,
+                        type: 'POST',
+                        data: {idPelicula:$peliculaID},
+                        dataType: 'json'
+                    })
+
+                    deletePelicula.done(function(response){
+                        if(!response.error){
+                            event.preventDefault();
+                            //alert(res.mensaje);
+                            $('#msgBoxTitulo').text('Peliculas');
+                            $('#msgBoxMensaje').text(response.mensaje);
+                            $('#modalMsgBox').modal('show');
+                            $formPelicula.addClass("hide");
+                            obtenerPeliculas();
+                        }else{
+                            event.preventDefault();
+                            //alert(res.mensaje);
+                            $('#msgBoxTitulo').text('Peliculas');
+                            $('#msgBoxMensaje').text(response.mensaje);
+                            $('#modalMsgBox').modal('show');
+                        }  
+                    });
+                }
+        });
+            
+        $(this).confirmation('show')
+        
+        /*if(confirm("¿Desea eliminar la Pelicula seleccionada?")){
+
+        }
+        else{
+            return false;
+        }*/
+    });
+
     $btnAltaModificacion.on("click",function(){
 
         var bCheck = $("#rbCrearPelicula").prop("checked");

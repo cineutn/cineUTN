@@ -65,6 +65,23 @@ function obtenerPeliculasCartelera($request){
     }
 }
 
+function obtenerPeliculasCarteleraById($request){
+    require("../models/peliculas.php");
+    $p = new Peliculas();
+    if($peliculas = $p->getPeliculasCarteleraById($request->idComplejo)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $peliculas
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener peliculas. "
+        ));
+    }
+}
+
 function obtenerPeliculasCarteleraPorComplejo($request){
     require("../models/peliculas.php");
     $p = new Peliculas();
@@ -222,11 +239,37 @@ function obtenerPeliculaFuncionById($request){
         ));
     }
 }
+
 function obtenerPeliculaFuncionByNombre($request){
     require("../models/peliculas.php");
     $p = new Peliculas();
     try{
         if($pelicula = $p->getPeliculaFuncionByNombre($request->id)){
+            sendResponse(array(
+                "error" => false,
+                "mensaje" => "",
+                "data" => $pelicula
+            ));
+        }else{
+            sendResponse(array(
+                "error" => true,
+                "mensaje" => 'Error al obtener la pelicula. '
+            ));
+        }
+    }
+    catch(Exception $e){
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => 'Error al obtener la pelicula. ' . $e->getMessage()
+        ));
+    }
+}
+
+function obtenerPeliculaFuncionByNombreAndComplejo($request){
+    require("../models/peliculas.php");
+    $p = new Peliculas();
+    try{
+        if($pelicula = $p->getPeliculaFuncionByNombreAndComplejo($request->id, $request->idComplejo)){
             sendResponse(array(
                 "error" => false,
                 "mensaje" => "",
@@ -362,12 +405,29 @@ function eliminarPelicula($request){
     if($p->removePelicula($peliculaId)){
         sendResponse(array(
             "error" => false,
-            "mensaje" => "Pelicula eliminada"
+            "mensaje" => "¡La Pelicula ha sido eliminada con exito!"
         ));
     }else{
         sendResponse(array(
             "error" => true,
-            "mensaje" => "Error ..."
+            "mensaje" => "Error al intentar eliminar la pelicula ..."
+        ));
+    }
+}
+
+function eliminarPeliculaCartelera($request){
+    require("../models/peliculas.php");
+    $p = new Peliculas();
+    $peliculaId = $request->idPelicula;
+    if($p->removePeliculaCartelera($peliculaId)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "¡La Pelicula ha sido eliminada de la cartelera con exito!"
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al intentar eliminar la pelicula de la cartelera."
         ));
     }
 }
@@ -442,6 +502,9 @@ switch($action){
     case "obtenerCartelera":
         obtenerPeliculasCartelera($request);
         break;
+    case "obtenerCarteleraByID":
+        obtenerPeliculasCarteleraById($request);
+        break;
     case "obtenerCarteleraComplejo":
         obtenerPeliculasCarteleraPorComplejo($request);
         break;
@@ -456,7 +519,10 @@ switch($action){
         break;
     case "obtenerPeliculaFuncionByNombre":
         obtenerPeliculaFuncionByNombre($request);
-        break;    
+        break;
+     case "obtenerPeliculaFuncionByNombreAndComplejo":
+        obtenerPeliculaFuncionByNombreAndComplejo($request);
+        break;
     case "obtenerPeliculaxComplejo":
         obtenerPeliculaxComplejo($request);
         break;    
@@ -471,5 +537,8 @@ switch($action){
         break;
     case "validar":
         validarTitulo($request);
+        break;
+    case "eliminarCartelera":
+        eliminarPeliculaCartelera($request);
         break;
 }

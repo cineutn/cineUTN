@@ -2,7 +2,7 @@
 
         <div class="row tarjetas">
             <h2 class="tarjeta-Titulo">TARJETAS</h2>
-            <div id="btnAdd" class="pull-right addTarjeta">
+            <div id="btnAdd" class="pull-right addTarjeta" data-toggle="tooltipCartelera" title="Crear Tarjeta">
                 <span class="glyphicon glyphicon-plus"></span>    
             </div>
             <div id="form-Tarjeta" class="hide">

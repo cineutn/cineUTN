@@ -102,13 +102,41 @@ class Peliculas
     }
 
     public function getPeliculasCartelera(){
-        $query = "
-                  SELECT DISTINCT 
+        $query = "SELECT DISTINCT 
                         P.titulo,
                         P.imagen 
                 FROM pelicula P
                 INNER JOIN funcion F ON F.idPelicula = P.idPelicula
+                INNER JOIN funcionhorario FH ON F.idFuncion = FH.idFuncion
+                INNER JOIN semana S ON FH.idSemana = S.idSemana
                 WHERE F.fechaBaja = '0000-00-00 00:00:00'
+                AND ((S.fecha > CURDATE())
+                OR (S.fecha = CURDATE() AND FH.horario > DATE_FORMAT(NOW(),'%H:%i')) )
+                ORDER BY P.fechaAlta";  
+
+        $peliculas = array();
+        if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $peliculas[] = $fila;
+            }
+            $result->free();
+        }
+        return $peliculas;
+    }
+
+    public function getPeliculasCarteleraById($id){
+        $query = "SELECT DISTINCT 
+                        P.titulo,
+                        P.imagen 
+                FROM pelicula P
+                INNER JOIN funcion F ON F.idPelicula = P.idPelicula
+                INNER JOIN funcionhorario FH ON F.idFuncion = FH.idFuncion
+                INNER JOIN semana S ON FH.idSemana = S.idSemana
+                INNER JOIN complejo C on F.idComplejo = C.idComplejo
+                WHERE F.fechaBaja = '0000-00-00 00:00:00'
+                AND C.idComplejo = '$id'
+                AND ((S.fecha > CURDATE())
+                OR (S.fecha = CURDATE() AND FH.horario > DATE_FORMAT(NOW(),'%H:%i')) )
                 ORDER BY P.fechaAlta";  
 
         $peliculas = array();
@@ -132,10 +160,13 @@ class Peliculas
                     FROM pelicula P
                     INNER JOIN funcion F ON P.idPelicula = F.idPelicula
                     INNER JOIN funcionhorario FH ON F.idFuncion = FH.idFuncion
+                    INNER JOIN semana S ON FH.idSemana = S.idSemana
                     INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion
                     INNER JOIN complejo C on F.idComplejo = C.idComplejo
                     WHERE F.fechaBaja = '0000-00-00 00:00:00'
                     AND C.idComplejo = '$id'
+                    AND ((S.fecha > CURDATE())
+                    OR (S.fecha = CURDATE() AND FH.horario > DATE_FORMAT(NOW(),'%H:%i')) )
                     ORDER BY P.titulo, FH.dia, FH.horario,FO.descripcion, FO.subtitulada";  
 
         $peliculas = array();
@@ -272,9 +303,56 @@ class Peliculas
                     INNER JOIN complejo C on F.idComplejo = C.idComplejo
                     INNER JOIN pelicula P on F.idPelicula = P.idPelicula
                     INNER JOIN funcionhorario FH on F.idFuncion = FH.idFuncion
+                    INNER JOIN semana S ON FH.idSemana = S.idSemana
                     INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion 
                     WHERE P.titulo='$id'
-                    and F.fechaBaja ='0000-00-00 00:00:00'"; 
+                    and F.fechaBaja ='0000-00-00 00:00:00'
+                    AND ((S.fecha > CURDATE())
+                    OR (S.fecha = CURDATE() AND FH.horario > DATE_FORMAT(NOW(),'%H:%i')) )"; 
+
+        $peliculas = array();
+        
+        try{
+            if( $result = $this->connection->query($query) ){
+                while($fila = $result->fetch_assoc()){
+                    $peliculas[] = $fila;
+                }
+                $result->free();
+            }
+            else {
+                    throw new Exception ($e->getMessage());
+           }
+        }
+        catch(Exception $e) {
+            throw new Exception ($e->getMessage());
+        }
+       
+        return $peliculas;
+    }
+
+     public function getPeliculaFuncionByNombreAndComplejo($id, $idComplejo){
+              
+        $query = "SELECT 
+                    F.idComplejo,
+                    C.nombre as nombreComplejo, 
+                    F.idTipoFuncion,
+                    FH.dia,
+                    FH.horario,
+                    FO.idFormato,
+                    FO.descripcion as formato, 
+                    FO.subtitulada,
+                    FH.idFuncionDetalle    
+                    FROM funcion F
+                    INNER JOIN complejo C on F.idComplejo = C.idComplejo
+                    INNER JOIN pelicula P on F.idPelicula = P.idPelicula
+                    INNER JOIN funcionhorario FH on F.idFuncion = FH.idFuncion
+                    INNER JOIN semana S ON FH.idSemana = S.idSemana
+                    INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion 
+                    WHERE P.titulo='$id'
+                    AND C.idComplejo = '$idComplejo'
+                    and F.fechaBaja ='0000-00-00 00:00:00'
+                    AND ((S.fecha > CURDATE())
+                    OR (S.fecha = CURDATE() AND FH.horario > DATE_FORMAT(NOW(),'%H:%i')) )"; 
 
         $peliculas = array();
         
@@ -337,6 +415,14 @@ class Peliculas
         return $this->connection->query($query);
     }
 
+    public function removePeliculaCartelera($peliculaId){
+        $id = (int) $this->connection->real_escape_string($peliculaId);
+        $query = "UPDATE pelicula
+                    SET fechaBaja = NOW()
+                    WHERE idPelicula = $id";
+        return $this->connection->query($query);
+    }
+
     public function createPelicula($pelicula){        
 		$id = $this->connection->real_escape_string($pelicula['idPelicula']);
         $tituloPelicula = $this->connection->real_escape_string($pelicula['tituloPelicula']);
@@ -387,12 +473,17 @@ class Peliculas
         $query = "SELECT 
                         DISTINCT CONCAT(P.titulo ,' - ' ,FO.descripcion,' - ',case FO.subtitulada when 0 then 'Español' else 'Subtitulada' end ) AS titulo
                     FROM funcion F
+                    INNER JOIN funcionhorario FH ON F.idFuncion = FH.idFuncion
+                    INNER JOIN semana S ON FH.idSemana = S.idSemana
                     INNER JOIN complejo C on F.idComplejo = C.idComplejo
                     INNER JOIN pelicula P on F.idPelicula = P.idPelicula
                     INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion 
                     WHERE C.idComplejo = '$idComplejo' 
-                    AND (P.fechaBaja = 0 or P.fechaBaja>now())
-                    AND (F.fechaBaja = 0 or F.fechaBaja>now()) ";
+                    AND F.fechaBaja = '0000-00-00 00:00:00'                    
+                    AND ((S.fecha > CURDATE())
+                    OR (S.fecha = CURDATE() AND FH.horario > DATE_FORMAT(NOW(),'%H:%i')) )";
+
+                   
              
                    
         $peliculas = array();
@@ -424,10 +515,14 @@ class Peliculas
                     FROM pelicula P
                     INNER JOIN funcion F ON P.idPelicula = F.idPelicula
                     INNER JOIN funcionhorario FH ON F.idFuncion = FH.idFuncion
+                    INNER JOIN semana S ON FH.idSemana = S.idSemana
                     INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion
                     INNER JOIN complejo C on F.idComplejo = C.idComplejo
                     WHERE CONCAT(P.titulo ,' - ' ,FO.descripcion,' - ',case FO.subtitulada when 0 then 'Español' else 'Subtitulada' end ) = '$pelicula'
-                    AND C.idComplejo = '$idComplejo' ";
+                    AND C.idComplejo = '$idComplejo' 
+                    AND F.fechaBaja = '0000-00-00 00:00:00'                    
+                    AND ((S.fecha > CURDATE())
+                    OR (S.fecha = CURDATE() AND FH.horario > DATE_FORMAT(NOW(),'%H:%i')) )";
 
         $peliculas = array();
         
@@ -461,11 +556,15 @@ class Peliculas
                     FROM pelicula P
                     INNER JOIN funcion F ON P.idPelicula = F.idPelicula
                     INNER JOIN funcionhorario FH ON F.idFuncion = FH.idFuncion
+                    INNER JOIN semana S ON FH.idSemana = S.idSemana
                     INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion
                     INNER JOIN complejo C on F.idComplejo = C.idComplejo
                     WHERE CONCAT(P.titulo ,' - ' ,FO.descripcion,' - ',case FO.subtitulada when 0 then 'Español' else 'Subtitulada' end ) = '$pelicula'
                     AND FH.dia = '$dia'
-                    AND C.idComplejo = '$idComplejo' ";
+                    AND C.idComplejo = '$idComplejo' 
+                    AND F.fechaBaja = '0000-00-00 00:00:00'                    
+                    AND ((S.fecha > CURDATE())
+                    OR (S.fecha = CURDATE() AND FH.horario > DATE_FORMAT(NOW(),'%H:%i')) )";
 
         $peliculas = array();
         
@@ -486,7 +585,13 @@ class Peliculas
         
     public function getPeliculasDetalle($fechaSemana){    
       
-        $query ="SELECT pel.idPelicula,pel.titulo,pel.duracion,frm.descripcion,frm.subtitulada,frm.idTipoFuncion 
+        $query ="SELECT 
+                    pel.idPelicula,
+                    pel.titulo,
+                    pel.duracion,
+                    frm.descripcion,
+                    frm.subtitulada,
+                    frm.idTipoFuncion 
                     FROM pelicula pel
                     INNER JOIN formato frm ON pel.idFormato = frm.idFormato
                     WHERE pel.fechaBaja='0000-00-00 00:00:00'

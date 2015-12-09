@@ -75,11 +75,11 @@
                                     '<span id="iconAvatar" class="glyphicon glyphicon-credit-card"></span>'+
                                 '</li>'+
                                 '<li class="columna-footer">'+
-                                    '<div id="btnUpdate" class="updateTarjeta lapiz">'+
+                                    '<div id="btnUpdate" class="updateTarjeta lapiz" data-toggle="tooltipCartelera" title="Modificar Tarjeta">'+
                                         '<span class="glyphicon glyphicon-pencil"></span>'+    
                                     '</div>'+
                                     '<div id="btnRemove" class="removeTarjeta cruz" data-toggle="confirmation-singleton">'+
-                                        '<span class="glyphicon glyphicon-remove"></span>'+    
+                                        '<span data-toggle="tooltipCartelera" title="Eliminar Tarjeta" class="glyphicon glyphicon-remove"></span>'+    
                                     '</div>'+                            
                                 '</li>'+
                             '</ul>'+                            
@@ -88,6 +88,8 @@
                 });
                 //lo agrego al listado
                 $contenedorTarjetas.append($tarjetas);
+                 $('[data-toggle="tooltipCartelera"]').tooltip();
+                
             }else{
                 event.preventDefault();
                 //alert(res.mensaje);
