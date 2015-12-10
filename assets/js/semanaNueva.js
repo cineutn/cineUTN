@@ -119,8 +119,10 @@ function generarSemana(ultimaFecha,ultimaSemana){
     var consulta='INSERT INTO semana(idSemana,numeroSemana,fecha,nombreDia) VALUES';    
     var condicion='';
     
-    $.each( $dias, function( key, value ) {         
-        condicion =condicion+ "(DEFAULT,"+ultimaSemana+", ADDDATE('"+ultimaFecha+"', INTERVAL "+key+" DAY),'"+value+"'),";       
+    $.each( $dias, function( key, value ) {        
+        var intervlao= parseInt(key)+1;
+        console.log(intervlao);
+        condicion =condicion+ "(DEFAULT,"+ultimaSemana+", ADDDATE('"+ultimaFecha+"', INTERVAL "+intervlao+" DAY),'"+value+"'),";       
     });
     condicion=condicion.substring(0,condicion.length - 1);    
     consulta=consulta+condicion +";";      
