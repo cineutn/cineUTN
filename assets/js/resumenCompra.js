@@ -20,6 +20,7 @@
     $inputVentaID = $("#ventaID");
 
     $( document ).ready(function(){
+        sessionStorage.setItem('fechaTermino', 'Operacion Realizada');
         updateQrCode();
         obtenerVenta();
         $miCanvas = $divContenedor.children('canvas');        

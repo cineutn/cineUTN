@@ -7,7 +7,14 @@
     $btnVolver = $("#btnVolver");
 
     $( document ).ready(function(){
-        actualizarButacas();
+        var fechaTermino = sessionStorage.getItem('fechaTermino');
+
+        if (fechaTermino == "Operacion Realizada"){
+            $("#lblMensaje").text("La operación se ha realizado con existo. Usted puede volver al Inicio haciendo click en el botón de abajo.")
+        }else{
+            actualizarButacas();
+        }
+        
     });
 
     function actualizarButacas(){
