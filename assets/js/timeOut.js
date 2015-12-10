@@ -10,7 +10,7 @@
         var fechaTermino = sessionStorage.getItem('fechaTermino');
 
         if (fechaTermino == "Operacion Realizada"){
-            $("#lblMensaje").text("La operación se ha realizado con existo. Usted puede volver al Inicio haciendo click en el botón de abajo.")
+            $("#lblMensaje").text("La operación se ha realizado con exito. Usted puede volver al Inicio haciendo click en el botón de abajo.")
         }else{
             actualizarButacas();
         }
