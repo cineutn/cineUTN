@@ -134,6 +134,7 @@
             var cine = $complejo.text();
             var sala= $sala.text();
             var pelicula= $pelicula.text();
+            $("#detalleCompra").text(pelicula);
             var fecha= $fecha.text();
             var horario= $horario.text();
             var entradas= $entradas.text();

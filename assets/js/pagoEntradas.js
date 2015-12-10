@@ -163,7 +163,7 @@
                 $("#diaFuncion").text(res.data[0].dia);
                 $("#horarioFuncion").text(res.data[0].horario);
                 $("#sala").text(res.data[0].sala);               
-                $("#detalleCompra").text(res.data[0].titulo+' '+res.data[0].idioma+' ('+res.data[0].clasificacion+')');                
+                $("#detalleCompra").text(res.data[0].titulo +' ('+res.data[0].clasificacion+')');
                 $("#idTipoFuncion").val(res.data[0].idTipoFuncion);                
                 $imagenPelicula.attr("src" , res.data[0].imagen);                
                                

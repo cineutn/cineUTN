@@ -8,7 +8,7 @@
 
        <div class="row paginaCompra">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 path">
-               <div>TITULO PELICULA</div>
+               <div id="detalleCompra">TITULO PELICULA</div>
                	> DETALLE DE COMPRA >
                 	<a href="paginaCompra.php">1. ENTRADAS</a>
                	>               

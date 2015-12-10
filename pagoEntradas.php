@@ -8,10 +8,11 @@
     $varIdFuncionDetalle=$request->idFuncionDetalle;
 
  ?>
+<link rel="stylesheet" href="assets/css/paginaCompra.css">  
 
        <div class="row paginaCompra">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 path">
-               	<div>TITULO PELICULA</div>
+               	<div id="detalleCompra">TITULO PELICULA</div>
                	> DETALLE DE COMPRA >
                 	<a href="paginaCompra.php">1. ENTRADAS</a>
                	>               
@@ -192,7 +193,6 @@
 		
 <?php require("partials/footer.php"); ?>
 <?php require("partials/msgBox.php"); ?>
-
-<link rel="stylesheet" href="assets/css/paginaCompra.css">     
+  
 <script src="assets/js/reloj.js"></script>
 <script src="assets/js/pagoEntradas.js"></script>

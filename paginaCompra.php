@@ -11,7 +11,7 @@
 <input type='hidden' id='idFuncionDetalle' value= <?php echo $idFuncionDetalle ?> ></input>
       <div class="row paginaCompra">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 path">
-               <div id="detalleCompra">EL CLAN CASTELLANO (P16)</div>
+               <div id="detalleCompra">TITULO PELICULA</div>
                > DETALLE DE COMPRA >
                <b>1. ENTRADAS</b>
             </div>

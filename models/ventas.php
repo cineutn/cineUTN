@@ -54,7 +54,16 @@ class Ventas
 
     public function getVenta($codigo){
 
-        $query = "SELECT V.tipoVenta, V.idVenta, V.codigo, C.nombre AS Complejo, P.titulo AS pelicula, S.descripcion AS Sala, FH.dia AS Fecha, FH.horario, V.monto AS precioTotal
+        $query = "SELECT 
+                    V.tipoVenta, 
+                    V.idVenta, 
+                    V.codigo, 
+                    C.nombre AS Complejo, 
+                    CONCAT(P.titulo , ' ' , case FO.descripcion when '2D' then '' else FO.descripcion end ,case FO.subtitulada when 0 then ' (Cast) ' else ' (Subt) ' end ) AS pelicula, 
+                    S.descripcion AS Sala, 
+                    FH.dia AS Fecha, 
+                    FH.horario, 
+                    V.monto AS precioTotal
                     FROM venta V
                     INNER JOIN ventadetalle VD ON V.idVenta = VD.idVenta
                     INNER JOIN sala_funcion SF ON VD.idSalaFuncion = SF.idSalaFuncion
@@ -63,6 +72,7 @@ class Ventas
                     INNER JOIN pelicula P ON F.idPelicula = P.idPelicula
                     INNER JOIN complejo C ON C.idComplejo = F.idComplejo
                     INNER JOIN funcionhorario FH ON SF.idFuncionDetalle = FH.idFuncionDetalle
+                    INNER JOIN formato FO on F.idTipoFuncion = FO.idTipoFuncion
                     WHERE V.codigo =  '$codigo'";
 
         $venta = array();

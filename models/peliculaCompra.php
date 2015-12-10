@@ -14,7 +14,7 @@ class PeliculaCompra
         $query = "select fh.dia,
                     fh.horario,
                     sl.descripcion as sala,
-                    pl.titulo,
+                    CONCAT(pl.titulo , ' ' , case fo.descripcion when '2D' then '' else fo.descripcion end ,case fo.subtitulada when 0 then ' (Cast) ' else ' (Subt) ' end ) AS titulo,
                     pl.clasificacion,
                     pl.imagen,
                     il.descripcion as idioma,
