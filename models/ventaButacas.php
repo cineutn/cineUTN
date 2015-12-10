@@ -42,7 +42,13 @@ class VentaButacas
     public function updateButaca($salaFuncionID,$habilitada){
         $id = (int) $this->connection->real_escape_string($salaFuncionID);
         $estado = (int) $this->connection->real_escape_string($habilitada);
-        $query ="UPDATE sala_funcion SET habilitada=$estado WHERE idSalaFuncion=$id";
+        if($estado==1){
+            $query ="UPDATE sala_funcion SET habilitada=$estado, FechaPreCompra ='0000-00-00 00:00:00' WHERE idSalaFuncion=$id";
+        }
+        else{
+            $query ="UPDATE sala_funcion SET habilitada=$estado, FechaPreCompra =NOW() WHERE idSalaFuncion=$id";
+        }
+        
     
     if($this->connection->query($query)){
         return true;
