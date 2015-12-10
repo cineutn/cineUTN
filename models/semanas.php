@@ -25,7 +25,8 @@ left join (
     where  (f.idComplejo=$idComplejo or $idComplejo is NULL) and f.fechaBaja ='0000-00-00 00:00:00'
 	group by numeroSemana
 ) b on b.numeroSemana=a.numeroSemana
-WHERE nombreDia='jueves'";
+WHERE nombreDia='jueves'
+and a.fecha >= now()";
       
      $semanas= array();
       
