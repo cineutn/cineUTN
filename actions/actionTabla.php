@@ -16,16 +16,11 @@ function getUsuarios(){
     require("../models/tabla.php");
     $c = new Tabla();
    
-    if($usuarios = $c->getUsuarios()){
+    $usuarios = $c->getUsuarios();
 		 sendResponse(array(
             "data" => $usuarios
         ));
-    }else{
-        sendResponse(array(
-            "error" => true,
-            "mensaje" => "Error al obtener peliculas. "
-        ));
-    }  
+    
 }
 function getPersonal($request){
     require("../models/tabla.php");
@@ -34,32 +29,22 @@ function getPersonal($request){
      $ar = array();
     $ar["idComplejo"] = $request->idComplejo;
    
-    if($usuarios = $c->getPersonal($ar)){
+    $usuarios = $c->getPersonal($ar);
 		 sendResponse(array(
             "data" => $usuarios
         ));
-    }else{
-        sendResponse(array(
-            "error" => true,
-            "mensaje" => "Error al obtener peliculas. "
-        ));
-    }  
+    
 }
 function getAdmins(){
     require("../models/tabla.php");
     $c = new Tabla();
     
        
-    if($usuarios = $c->getAdmins()){
+    $usuarios = $c->getAdmins();
 		 sendResponse(array(
             "data" => $usuarios
         ));
-    }else{
-        sendResponse(array(
-            "error" => true,
-            "mensaje" => "Error al obtener Administradores. "
-        ));
-    }  
+      
 }
 
 function setState($request){

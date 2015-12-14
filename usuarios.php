@@ -1,5 +1,5 @@
 <?php require("partials/header.php"); ?>
- <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+ <link rel="stylesheet" href="assets/css/dataTables.bootstrap.min.css">
  <link rel="stylesheet" href="assets/css/tabla.css">
 
  
@@ -20,8 +20,8 @@
 	
 <?php require("partials/footer.php"); ?>
 
-<script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
-<script src="//cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script>
+<script src="assets/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/dataTables.bootstrap.min.js"></script>
 
 <script src="assets/js/usuarios.js"></script>
 

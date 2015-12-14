@@ -148,16 +148,20 @@ function armaTabla(){
                 "language": {
                     "url": "assets/Spanish.json"
                     },
-                 "order": URISELECTED.order
+                "order": URISELECTED.order,
+                buttons: [
+                        'excel',
+                        'print'
+                    ],
+                "initComplete": function(settings, json) {
+                         table.buttons().container()
+                            .appendTo( $('#botonesTabla a' ) );
+                        $('.dt-buttons.btn-group a').addClass("btn-sm");
+                    }
+             
                 })
-             .on('xhr.dt', function ( e, settings, json, xhr ) {
-                     //aca agrego los botones de fomra dinamica               
-                        
-                    //aca bindeo las funciones a los botones    
-                    
-                    
-                    
-                } );
+            
+            
 
 
 }

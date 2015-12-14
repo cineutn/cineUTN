@@ -17,6 +17,10 @@
     margin-bottom: 1px;
     border-radius: 7px;
 }
+#menuReportes .dropdown-toggle
+{
+    top: 3px;
+}
 
 #grid-basic_filter{
     margin-right: 10px;

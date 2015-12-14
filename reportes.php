@@ -1,5 +1,6 @@
 <?php require("partials/header.php"); ?>
  <link rel="stylesheet" href="assets/css/dataTables.bootstrap.min.css">
+ <link rel="stylesheet" href="assets/css/buttons.bootstrap.min.css">
  <link rel="stylesheet" href="assets/css/tabla.css">
 
     <div id="menuReportes" class="row">
@@ -13,6 +14,10 @@
                 <ul class="dropdown-menu">             
                     
                 </ul>
+            </li>
+            <li role="presentation" id="botonesTabla">
+                <a>
+                                  </a>
             </li>
         </ul>
     </div>
@@ -37,6 +42,17 @@
   
 <script src="assets/js/jquery.dataTables.min.js"></script>
 <script src="assets/js/dataTables.bootstrap.min.js"></script>
+<script src="assets/js/dataTables.buttons.min.js"></script>
+<script src="assets/js/buttons.bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/jszip.min.js"></script>
+
+
+<script src="assets/js/buttons.html5.min.js"></script>
+<script src="assets/js/buttons.print.min.js"></script>
+
+
+
+
 <script src="assets/js/reportes.js"></script>
 
     
