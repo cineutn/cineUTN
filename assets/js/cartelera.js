@@ -69,8 +69,10 @@
 		});
 		   
 		obtener.done(function(res){
-			if(!res.error){				
-                $peliculas = '';
+			if(!res.error){			
+                var complejo = $("#cmbComplejo option:selected").text();
+
+                $peliculas = '<h2 class="peliculas-Titulo" style="text-align: center;">'+ complejo +'</h2>';
                 
                 var nombre = '';
                 var formato = '';
