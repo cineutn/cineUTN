@@ -100,7 +100,13 @@ class Usuario
 
 
     public function validateUser($id,$password){
-        $query = "SELECT U.idUsuario, U.nombre, U.apellido, TU.detalle AS tipoUsuario, U.email,idComplejo 
+        $query = "SELECT 
+                        U.idUsuario,
+                        U.nombre, 
+                        U.apellido, 
+                        U.estado,
+                        TU.detalle AS tipoUsuario, 
+                        U.email,idComplejo 
                     FROM usuario U 
                     INNER JOIN tipousuario TU ON U.tipoUsuario = TU.id
                     WHERE  U.usuario = '".$id."' AND U.contraseña = '". $password . "'";  

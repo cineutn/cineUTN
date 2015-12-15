@@ -5,10 +5,12 @@
         UPDATE: 'actions/actions.php?action=actualizarEstado'
     };
 
+    $bOnload = true;
+
     $formLogin = $("#login_form");
 
     $formLogin.on("submit",function(e){
-        
+
         var loginUser = $.ajax({
             url : URI.LOGIN,
             method : "GET",
@@ -19,29 +21,29 @@
 
         loginUser.done(function(res){
             if(!res.error){
-                sessionStorage.setItem('idUser', res.data.idUsuario);
-                sessionStorage.setItem('tipoUsuario', res.data.tipoUsuario);
-                sessionStorage.setItem('nombre', res.data.nombre);
-                sessionStorage.setItem('apellido', res.data.apellido);
-                sessionStorage.setItem('email', res.data.email);
-                sessionStorage.setItem('idcomplejo', res.data.idComplejo);
+                
+                    sessionStorage.setItem('idUser', res.data.idUsuario);
+                    sessionStorage.setItem('tipoUsuario', res.data.tipoUsuario);
+                    sessionStorage.setItem('nombre', res.data.nombre);
+                    sessionStorage.setItem('apellido', res.data.apellido);
+                    sessionStorage.setItem('email', res.data.email);
+                    sessionStorage.setItem('idcomplejo', res.data.idComplejo);
 
-                var updateEstado =  $.ajax({
-                    url: URI.UPDATE,
-                    type: 'POST',
-                    data: {idUsuario:res.data.idUsuario,
-                           estado:"online"},
-                    dataType: 'json',
-                    async:false
-                });
+                    var updateEstado =  $.ajax({
+                        url: URI.UPDATE,
+                        type: 'POST',
+                        data: {idUsuario:res.data.idUsuario,
+                               estado:"online"},
+                        dataType: 'json',
+                        async:false
+                    });
 
-                updateEstado.done(function(response){
-                    if(response.error){
-                        sessionStorage.clear();
-                        window.location.href='index.php'; 
-                    }
-                });
-
+                    updateEstado.done(function(response){
+                        if(response.error){
+                            sessionStorage.clear();
+                            window.location.href='index.php'; 
+                        }
+                    });              
                 
             }else{
                 alert(res.mensaje);
@@ -54,4 +56,5 @@
 
     });
     
+
 })(jQuery)

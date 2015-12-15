@@ -10,7 +10,7 @@
         
     };
 
-    $cmbComplejos = $("#cmbComplejos");
+    $cmbComplejos = $("#cmbComplejos");     
 
     $cmbComplejos = $("#cmbComplejos");
     $( document ).ready(function(){
@@ -339,11 +339,5 @@
         });
     
     };
-    
-    
-    
-    
-    
-    
-    
+   
 })(jQuery)

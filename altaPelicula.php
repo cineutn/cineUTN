@@ -202,4 +202,3 @@
 <script src="assets/js/vendor/bootstrap-confirmation.min.js"></script>
 <script src="assets/js/uploadImage.js"></script>
 <script src="assets/js/altaPelicula.js"></script>
-

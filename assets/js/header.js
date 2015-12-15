@@ -46,6 +46,7 @@
         }
            
     };
+   
 
     $btnCerrarSesion.on("click", function(){
         $idUsuario = sessionStorage.getItem('idUser');
