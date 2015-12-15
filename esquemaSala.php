@@ -17,7 +17,7 @@
            <div class="row col-md-12" style="margin-top:10px;">              
            		<div class="col-md-12 compraPelicula sombra">
                 <div class="col-md-9 explicacion">
-                  <span id="lblExplicacion">Para seleccionar su butaca, haga click sobre una ubicación disponible. Esta pantalla es un indicador de la disposición de las ubicaciones en la sala, y no representa distancias reales.</span>
+                  <span id="lblExplicacion">Para excluir una butaca, haga click sobre una ubicación. Esta pantalla es un indicador de la disposición de las ubicaciones en la sala, y no representa distancias reales.</span>
                 </div>                
            			<div class="col-xs-8 col-md-4">
            				<img src="assets/img/butacaOcupada.png" />
