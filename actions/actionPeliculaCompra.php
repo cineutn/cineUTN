@@ -49,6 +49,24 @@ function obtenerPrecioFuncion($request){
     }
 }
 
+function obtenerButacasLibres($request){
+    require("../models/peliculaCompra.php");
+    $p = new PeliculaCompra();
+    $idFuncionDetalle=$request->idFuncionDetalle;
+    if($pagina = $p->getButacasLibres($idFuncionDetalle)){
+        sendResponse(array(
+            "error" => false,
+            "mensaje" => "",
+            "data" => $pagina
+        ));
+    }else{
+        sendResponse(array(
+            "error" => true,
+            "mensaje" => "Error al obtener butacas libres. "
+        ));
+    }
+}
+
 
 $request = new Request();
 $action = $request->action;
@@ -59,4 +77,9 @@ switch($action){
     case "obtenerPrecios":
         obtenerPrecioFuncion($request);
         break;
+    case "obtenerButacasLibres":
+        obtenerButacasLibres($request);
+        break;        
+        
+        
 }

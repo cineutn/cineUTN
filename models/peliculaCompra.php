@@ -61,6 +61,24 @@ class PeliculaCompra
         return $precioFormato;
     } 
     
+    public function getButacasLibres($idFuncionDetalle){
+        $id = (int) $this->connection->real_escape_string($idFuncionDetalle);
+        $query = "select count(*) as cantidad from funcionhorario fh inner join funcion fn on fh.idfuncion = fn.idfuncion
+                    inner join sala_funcion sf on sf.idfuncion=fn.idfuncion
+                    where fh.idFuncionDetalle =$id
+                    and sf.habilitada=1";                    
+       
+        $precioFormato = array();
+        if( $result = $this->connection->query($query) ){
+            while($fila = $result->fetch_assoc()){
+                $precioFormato[] = $fila;
+            }
+            $result->free();
+        }
+        return $precioFormato;
+    } 
+    
+    
 
 }
 

@@ -3,6 +3,7 @@
     var URI = {        
         FUNCION : 'actions/actionPeliculaCompra.php?action=obtener',
 		PRECIOS : 'actions/actionPeliculaCompra.php?action=obtenerPrecios',
+		BUTACASSALA : 'actions/actionPeliculaCompra.php?action=obtenerButacasLibres',
     };
     
 	$idFuncionDetalle = $("#idFuncionDetalle").val();
@@ -129,6 +130,7 @@
         var precioTotal=0;
         var idPrecio=[];
         var ids=[];
+        var cantidadDisponible =0;
 
         $( ".comboCantidad option:selected" ).each(function() {
             
@@ -153,8 +155,21 @@
             }
             
         };
-
-        if(cantidad>6){
+        
+        cantidadDisponible=validarCantidadDisponible();
+        if(cantidad > parseInt(cantidadDisponible)){
+        $('#msgBoxTitulo').text('UTN Cines');
+            if(parseInt(cantidadDisponible)==0){
+            $('#msgBoxMensaje').text('No quedan butacas disponibles');
+            }
+            else{
+                $('#msgBoxMensaje').text('Solo quedan '+cantidadDisponible+' butacas');
+            }
+            
+            $('#modalMsgBox').modal('show');
+            return;
+            
+        }else if(cantidad>6){
             //alert('Debe elegir menos de 6 entradas');
             $('#msgBoxTitulo').text('UTN Cines');
             $('#msgBoxMensaje').text('Debe elegir menos de 6 entradas');
@@ -169,5 +184,28 @@
         }
 
     }
+    
+    function validarCantidadDisponible(){
+        var cantidadDisponible=0;
+        
+         var obtener = $.ajax({
+                url : URI.BUTACASSALA,
+                method : "GET",
+                async:false,
+                 data: {
+                     idFuncionDetalle:$idFuncionDetalle
+                 },
+                dataType : 'json',
+            });        
+
+            obtener.done(function(res){
+                if(!res.error){	                    
+                    cantidadDisponible=res.data[0].cantidad;
+                }
+            });
+        console.log(cantidadDisponible);
+        return cantidadDisponible;
+        }
+    
 
 })(jQuery)
