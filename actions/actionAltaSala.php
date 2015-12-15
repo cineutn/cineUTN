@@ -52,7 +52,7 @@ function obtenerSalas($request){
      }else{
         sendResponse(array(
             "error" => true,
-            "mensaje" => "Error al obtener salas. "
+            "mensaje" => "No hay salas disponibles"
         ));
     }
 }
