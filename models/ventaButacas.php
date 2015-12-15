@@ -11,7 +11,9 @@ class VentaButacas
     
      public function getFuncionSala($idFuncionDetalle){
         $id = (int) $this->connection->real_escape_string($idFuncionDetalle);
-        $query = "SELECT * FROM sala_funcion WHERE idFuncionDetalle= $id  order by fila,columna";                    
+        //$query = "SELECT * FROM sala_funcion WHERE idFuncionDetalle= $id  order by fila,columna";                    
+        $query = "SELECT idSalaFuncion,idFuncion,columna,fila,(case when habilitada=2 and DATE_ADD(FechaPreCompra, INTERVAL 12 MINUTE)<now() then 3 else                                     habilitada end) as habilitada ,idSala,IdFuncionDetalle,FechaPreCompra
+                FROM sala_funcion WHERE idFuncionDetalle= $id  order by fila,columna";                    
        
         $sala = array();
         if( $result = $this->connection->query($query) ){

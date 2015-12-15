@@ -119,7 +119,7 @@ var URI = {
     function obtenerDetalleSala(){
 
          //$id = $idFuncion.val();
-        $funcionID= $idFuncionDetalle;//cambiarrrrr hay que pasarle el id de la funcion elegida en la pantalla anterior
+        $funcionID= $idFuncionDetalle;
         var obtener = $.ajax({
             url : URI.SALA,
             method : "GET",
