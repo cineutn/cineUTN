@@ -86,6 +86,7 @@
                     error=1;
                 }
                     switch(e.currentTarget.id) {
+                        
                         case 'cmbComplejos':
                             
                             $('#cmbPeliculas option:selected')[0].remove();
@@ -114,7 +115,7 @@
                             $('#cmbDias option:selected')[0].remove();
                             
                             if(error==1){
-                                $('#cmbPeliculas').prepend(
+                                $('#cmbDias').prepend(
                                     $('<option/>',{
                                         value   :  1,
                                         selected:''
@@ -136,7 +137,7 @@
                             $('#cmbHorarios option:selected')[0].remove();
                             
                             if(error==1){
-                                $('#cmbPeliculas').prepend(
+                                $('#cmbHorarios').prepend(
                                     $('<option/>',{
                                         value   :   1,
                                         selected:''

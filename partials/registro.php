@@ -37,7 +37,7 @@
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Fecha de nacimiento</label>
 					<div class="col-sm-10">
-					  <input type="date" name="fechaNacimiento" id="fechaNacimiento" class="form-control" placeholder="Fecha de nacimiento" required>
+					  <input type="date" Onkeydown="return false" name="fechaNacimiento" id="fechaNacimiento" class="form-control" placeholder="Fecha de nacimiento" required>
 					</div>
 			    </div>
 				<div class="form-group">
