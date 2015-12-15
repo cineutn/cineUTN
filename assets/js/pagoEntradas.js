@@ -467,6 +467,8 @@
   });
 
   $btnComprar.on("click", function(){
+     
+       
       bValidar = false;
 
       bValidar = validarDatos(); 
@@ -513,7 +515,7 @@
             url : URI.VENDER,
             method : "POST",
             dataType : 'json',
-            async:false,
+            
             data: {
                     idVenta:0,
                     monto:monto,
@@ -522,10 +524,16 @@
                     idCliente:idCliente,
                     fecha:fecha,
                     codigo:codigo
-                  } 
+                  },
+            beforeSend : function(){
+                $('#modalLoading').modal('show');
+                
+            }
+           
         });
        
         comprar.done(function(res){
+            
             if(!res.error){
               var idVenta;
               idVenta = res.data.idVenta;
@@ -533,6 +541,7 @@
             }else{
                 event.preventDefault();
                 //alert(res.mensaje);
+                $('#modalLoading').modal('hide');
                 $('#msgBoxTitulo').text('UTN Cine');
                 $('#msgBoxMensaje').text(res.mensaje);
                 $('#modalMsgBox').modal('show');
@@ -593,7 +602,7 @@
             url : URI.DETALLEVENTA,
             method : "POST",
             dataType : 'json',
-            async:false,
+            
             data: {
                     idVenta:ventaId,
                     idButaca:idButaca,
@@ -605,6 +614,7 @@
             if(!res.error){
                 actualizarButaca(idButaca);
             }else{
+                $('#modalLoading').modal('hide');
                 sMensaje = res.mensaje;
             }
         });
@@ -626,7 +636,7 @@
 
     var updateButaca = $.ajax({
         url : URI.UPDATEBUTACA,
-        async: false,
+       
         method : "POST",
         data: {idSalaFuncion:idButaca,
                hanilitada:2},
@@ -634,6 +644,7 @@
     });
 
     updateButaca.done(function(res){
+        $('#modalLoading').modal('hide');
         if(!res.error){   
                           
         }else{                
