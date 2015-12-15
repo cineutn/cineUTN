@@ -526,8 +526,8 @@
                     codigo:codigo
                   },
             beforeSend : function(){
-                $('#modalLoading').modal('show');
-                
+              $('#tituloLoading').text('Realizando Operación, por favor espere un momento...');
+              $('#modalLoading').modal('show');                
             }
            
         });

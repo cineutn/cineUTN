@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Cargando...</h4>
+                <h4 class="modal-title" id="tituloLoading">Cargando...</h4>
             </div>
             <div class="modal-body">
                 <div class="progress">
